@@ -1,0 +1,13 @@
+diff --git a/src/api/java/Model.java b/src/api/java/Model.java
+index ffc4dd47f..267368fb3 100644
+--- a/src/api/java/Model.java
++++ b/src/api/java/Model.java
+@@ -91,7 +91,7 @@ public class Model extends Z3Object {
+                 {
+                     if (Native.isAsArray(getContext().nCtx(), n)) {
+                       long fd = Native.getAsArrayFuncDecl(getContext().nCtx(), n);
+-                      return getFuncInterp(new FuncDecl<>(getContext(), fd));
++                      return getFuncInterp(new FuncDecl<R>(getContext(), fd));
+                     }
+ 		    return null;
+                 }

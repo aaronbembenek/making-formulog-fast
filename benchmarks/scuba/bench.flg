@@ -1,0 +1,2004 @@
+(*******************************************************************************
+
+UTILITIES
+
+*******************************************************************************)
+
+type ('k, 'v) map = ('k * 'v) list.
+fun get(K: 'k, M: ('k, 'v) map) : 'v option =
+  match M with
+  | [] => none
+  | (X, V) :: M => if X = K then some(V) else get(K, M)
+  end.
+fun put(K: 'k, V: 'v, M: ('k, 'v) map) : ('k, 'v) map = (K, V) :: M.
+
+fun rev_helper(Xs: 'a list, Ys: 'a list) : 'a list =
+  match Xs with
+  | [] => Ys
+  | X :: Xs => rev_helper(Xs, X :: Ys)
+  end.
+fun rev(Xs: 'a list) : 'a list = rev_helper(Xs, []).
+
+fun append_helper(Xs: 'a list, Ys: 'a list) : 'a list =
+  match Xs with
+  | [] => Ys
+  | X :: Xs => append_helper(Xs, X :: Ys)
+  end.
+fun append(Xs: 'a list, Ys: 'a list) : 'a list = append_helper(rev(Xs), Ys).
+
+fun length(Xs: 'a list) : i32 =
+  match Xs with
+  | [] => 0
+  | _ :: Xs => 1 + length(Xs)
+  end.
+
+fun member(X: 'a, Xs: 'a list) : bool =
+  match Xs with
+  | [] => false
+  | Y :: Rest => X = Y || member(X, Rest)
+  end.
+
+fun nth(N: i32, Xs: 'a list) : 'a option =
+  match Xs with
+  | [] => none
+  | Hd :: Tl =>
+    if N < 0 then none
+    else if N = 0 then some(Hd)
+    else nth(N - 1, Tl)
+  end.
+
+fun hd_exn(Xs: 'a list) : 'a =
+  match Xs with
+  | H :: _ => H
+  end
+
+fun fail(Msg: 'a) : 'b =
+  match true with false => fail(Msg) end
+
+fun last(Xs: 'a list) : 'a =
+  match Xs with
+  | [X] => X
+  | _H :: T => last(T)
+  | _ => fail("Empty list")
+  end
+
+(*******************************************************************************
+
+  PROGRAM REPRESENTATION
+
+*******************************************************************************)
+
+type java_binary =
+  | java_binary_add
+  | java_binary_sub
+  | java_binary_div
+  | java_binary_rem
+  | java_binary_mul
+  | java_binary_and
+  | java_binary_or
+  | java_binary_xor
+  | java_binary_shl
+  | java_binary_shr
+  | java_binary_ushr
+
+type java_unary =
+  | java_unary_neg
+
+type java_prim_type =
+  | java_prim_type_boolean
+  | java_prim_type_byte
+  | java_prim_type_short
+  | java_prim_type_char
+  | java_prim_type_int
+  | java_prim_type_long
+  | java_prim_type_float
+  | java_prim_type_double
+
+type java_type =
+  | java_type_ref(string)
+  | java_type_array(java_type)
+  | java_type_prim(java_prim_type)
+
+type java_constant =
+  | java_constant_null
+  | java_constant_int(i32)
+  | java_constant_long(i64)
+  | java_constant_float(fp32)
+  | java_constant_double(fp64)
+  | java_constant_string(string)
+
+type java_conditional =
+  | java_conditional_eq
+  | java_conditional_ne
+  | java_conditional_lt
+  | java_conditional_le
+  | java_conditional_gt
+  | java_conditional_ge
+
+type java_comparison =
+  | java_comparison_cmp
+  | java_comparison_cmpl
+  | java_comparison_cmpg
+
+type selector = string
+
+type method = string
+
+type field = string
+
+type basic_block = string 
+
+type iindex = i32
+
+type var = i32
+
+type symb_tab = (var, java_constant) map
+
+(*******************************************************************************
+
+  INPUT RELATIONS
+
+*******************************************************************************)
+
+(* Classes *)
+@disk
+@edb rel application_class(java_type)
+@disk
+@edb rel has_field(java_type, field)
+@disk
+@edb rel declares_method(java_type, method)
+@disk
+@edb rel implements_interface(java_type, java_type)
+@disk
+@edb rel is_direct_superclass_of(java_type, java_type)
+@disk
+@edb rel interface(java_type)
+
+(* Fields *)
+@disk
+@edb rel instance_field(field)
+@disk
+@edb rel static_field(field)
+@disk
+@edb rel field_has_type(field, java_type)
+
+(* Methods *)
+@disk
+@edb rel application_entry(method)
+@disk
+@edb rel method_parameter(method, i32, var)
+@disk
+@edb rel selector_of_method(method, selector)
+@disk
+@edb rel clinit_method(method)
+@disk
+@edb rel init_method(method)
+@disk
+@edb rel native_method(method)
+@disk
+@edb rel static_method(method)
+@disk
+@edb rel local_var_type(method, var, java_type)
+
+(* Basic blocks *)
+@disk
+@edb rel entry_block(method, basic_block)
+@disk
+@edb rel exit_block(method, basic_block)
+@disk
+@edb rel is_intra_block_pred_of(method, basic_block, iindex, iindex)
+@disk
+@edb rel block_first_instr(method, basic_block, iindex)
+@disk
+@edb rel block_last_instr(method, basic_block, iindex)
+@disk
+@edb rel block_has_instr(method, basic_block, iindex)
+@disk
+@edb rel is_normal_pred_of(method, basic_block, basic_block)
+@disk
+@edb rel phi_node(method, basic_block, var, (basic_block, var) map)
+
+(* Instructions *)
+@disk
+@edb rel instr_array_load(method, iindex, var, var, var)
+@disk
+@edb rel instr_array_store(method, iindex, var, var, var)
+@disk
+@edb rel instr_check_cast(method, iindex, var, var, java_type)
+@disk
+@edb rel instr_get(method, iindex, var, var, field)
+@disk
+@edb rel instr_invoke_dispatch(method, iindex, var option, method, var list)
+@disk
+@edb rel instr_invoke_special(method, iindex, var option, method, var list)
+@disk
+@edb rel instr_invoke_static(method, iindex, var option, method, var list)
+@disk
+@edb rel instr_new(method, iindex, var, java_type)
+@disk
+@edb rel instr_phi_node(method, iindex)
+@disk
+@edb rel instr_put(method, iindex, var, field, var)
+@disk
+@edb rel instr_return(method, iindex, var option)
+
+(******************************************************************************
+
+ABSTRACT DOMAIN
+
+*******************************************************************************)
+
+fun empty_field : field = "ε"
+
+fun array_field : field = "item"
+
+type loc = (method * iindex)
+
+fun method_of_loc(L: loc) : method = match L with (M, _) => M end
+
+type context = loc list
+
+(* η *)
+type field_selector_item =
+  | fs_field(field)
+  | fs_star(field list)
+
+type field_selector = field_selector_item list
+
+fun empty_fs : field_selector = [fs_field(empty_field)]
+
+type base =
+  | b_arg(i32)
+  | b_field(field)
+
+(* ο *)
+type heap_obj =
+  | ho_path(base, field_selector)
+  | ho_alloc(java_type, context)
+
+(* π *)
+type abs_loc =
+  | al_heap(heap_obj)
+  | al_non_local(base)
+  | al_local((var * method), context)
+  | al_param(method, i32, context)
+
+(* φ *)
+type constraint = (heap_obj * java_type) list
+fun tru : constraint = []
+
+(* Shouldn't run into primitives... *)
+fun cmp_java_type(T1: java_type, T2: java_type) : cmp =
+  if T1 = T2 then cmp_eq
+  else
+    match (T1, T2) with
+    | (java_type_ref(_), java_type_array(_)) => cmp_lt
+    | (java_type_array(_), java_type_ref(_)) => cmp_gt
+    | (java_type_ref(X), java_type_ref(Y)) => string_cmp(X, Y)
+    | (java_type_array(X), java_type_array(Y)) => cmp_java_type(X, Y)
+    end
+
+fun cmp_base(B1: base, B2: base) : cmp =
+  if B1 = B2 then cmp_eq
+  else
+    match (B1, B2) with
+    | (b_arg(_), b_field(_)) => cmp_lt
+    | (b_field(_), b_arg(_)) => cmp_gt
+    | (b_arg(X), b_arg(Y)) => i32_scmp(X, Y)
+    | (b_field(X), b_field(Y)) => string_cmp(X, Y)
+    end
+
+fun cmp_fields(F1: field list, F2: field list) : cmp =
+  if F1 = F2 then cmp_eq
+  else
+    match (F1, F2) with
+    | ([], _) => cmp_lt
+    | (_, []) => cmp_gt
+    | (X :: Rest1, Y :: Rest2) =>
+      let Res = string_cmp(X, Y) in
+      match Res with
+      | cmp_eq => cmp_fields(Rest1, Rest2)
+      | _ => Res
+      end
+    end
+
+fun cmp_field_selector_item(F1: field_selector_item, F2: field_selector_item) :
+    cmp =
+  if F1 = F2 then cmp_eq
+  else
+    match (F1, F2) with
+    | (fs_field(_), fs_star(_)) => cmp_lt
+    | (fs_star(_), fs_field(_)) => cmp_gt
+    | (fs_field(X), fs_field(Y)) => string_cmp(X, Y)
+    | (fs_star(X), fs_star(Y)) => cmp_fields(X, Y)
+    end
+
+fun cmp_field_selector(Fs1: field_selector, Fs2: field_selector) : cmp =
+  if Fs1 = Fs2 then cmp_eq
+  else
+    match (Fs1, Fs2) with
+    | ([], _) => cmp_lt
+    | (_, []) => cmp_gt
+    | (X :: Rest1, Y :: Rest2) =>
+      let Res = cmp_field_selector_item(X, Y) in
+      match Res with
+      | cmp_eq => cmp_field_selector(Rest1, Rest2)
+      | _ => Res
+      end
+    end
+
+fun cmp_loc(L1: loc, L2: loc) : cmp =
+  if L1 = L2 then cmp_eq
+  else
+    match (L1, L2) with
+    | ((M1, I1), (M2, I2)) =>
+      let Res = i32_scmp(I1, I2) in
+      match Res with
+      | cmp_eq => string_cmp(M1, M2)
+      | _ => Res
+      end
+    end
+
+fun cmp_context(C1: context, C2: context) : cmp =
+  if C1 = C2 then cmp_eq
+  else
+    match (C1, C2) with
+    | ([], _) => cmp_lt
+    | (_, []) => cmp_gt
+    | (H1 :: Rest1, H2 :: Rest2) =>
+      let Res = cmp_loc(H1, H2) in
+      match Res with
+      | cmp_eq => cmp_context(Rest1, Rest2)
+      | _ => Res
+      end
+    end
+
+fun cmp_heap_obj(O1: heap_obj, O2: heap_obj) : cmp =
+  if O1 = O2 then cmp_eq
+  else
+    match (O1, O2) with
+    | (ho_path(_, _), ho_alloc(_, _)) => cmp_lt
+    | (ho_alloc(_, _), ho_path(_, _)) => cmp_gt
+    | (ho_path(B1, Fs1), ho_path(B2, Fs2)) =>
+      let Res = cmp_base(B1, B2) in
+      match Res with
+      | cmp_eq => cmp_field_selector(Fs1, Fs2)
+      | _ => Res
+      end
+    | (ho_alloc(T1, C1), ho_alloc(T2, C2)) =>
+      let Res = cmp_java_type(T1, T2) in
+      match Res with
+      | cmp_eq => cmp_context(C1, C2)
+      | _ => Res
+      end
+    end
+
+fun cmp_constraint_pair(O1: heap_obj, T1: java_type, O2: heap_obj,
+    T2: java_type) : cmp =
+  let Res = cmp_heap_obj(O1, O2) in
+  match Res with
+  | cmp_eq => cmp_java_type(T1, T2)
+  | _ => Res
+  end
+
+fun conjoin(Phi1: constraint, Phi2: constraint) : constraint =
+  match (Phi1, Phi2) with
+  | ([], X) | (X, []) => X
+  | ((O1, T1) :: Rest1, (O2, T2) :: Rest2) =>
+    match cmp_constraint_pair(O1, T1, O2, T2) with
+    | cmp_lt => (O1, T1) :: conjoin(Rest1, Phi2)
+    | cmp_eq => (O1, T1) :: conjoin(Rest1, Rest2)
+    | cmp_gt => (O2, T2) :: conjoin(Phi1, Rest2)
+    end
+  end
+
+(******************************************************************************
+
+ENCODING CONSTRAINTS
+
+*******************************************************************************)
+
+uninterpreted fun typeof_(heap_obj smt) : java_type smt.
+
+fun fs_has_starred_selector(Fs: field_selector) : bool =
+  match Fs with
+  | [] => false
+  | fs_star(_) :: _ => true
+  | fs_field(_) :: Rest => fs_has_starred_selector(Rest)
+  end
+
+fun obj_has_starred_selector(O: heap_obj) : bool =
+  match O with
+  | ho_path(_, Fs) => fs_has_starred_selector(Fs)
+  end
+
+fun encode_constraint(Cs: constraint) : bool smt =
+  match Cs with
+  | [] => `true`
+  | (O, T) :: Cs =>
+    let Rest = encode_constraint(Cs) in
+    if obj_has_starred_selector(O) then Rest
+    else `typeof_(O) #= T /\ Rest`
+  end
+
+(*******************************************************************************
+
+METHOD RESOLUTION
+
+*******************************************************************************)
+
+@topdown
+rel is_strict_subtype_of(java_type, java_type)
+
+is_strict_subtype_of(Sub, Super) :-
+  is_direct_superclass_of(Super, Sub).
+
+is_strict_subtype_of(X, Y) :-
+  is_direct_superclass_of(Z, X),
+  is_strict_subtype_of(Z, Y).
+
+is_strict_subtype_of(X, Y) :-
+  implements_interface(X, Y).
+
+is_strict_subtype_of(java_type_array(_), java_type_ref("<Primordial,Ljava/lang/Object>")).
+
+@topdown
+rel is_subtype_of(java_type, java_type)
+
+is_subtype_of(X, X).
+
+is_subtype_of(Sub, Super) :-
+  is_direct_superclass_of(Super, Sub).
+
+is_subtype_of(X, Y) :-
+  is_direct_superclass_of(Z, X),
+  is_subtype_of(Z, Y).
+
+is_subtype_of(X, Y) :-
+  implements_interface(X, Y).
+
+is_subtype_of(java_type_array(_), java_type_ref("<Primordial,Ljava/lang/Object>")).
+
+@bottomup
+rel type_defines_method(java_type, selector, method)
+
+type_defines_method(T, N, M) :-
+  declares_method(T, M),
+  selector_of_method(M, N).
+
+@topdown
+rel resolves_to(java_type, selector, method)
+
+resolves_to(T, N, M) :-
+  type_defines_method(T, N, M).
+
+resolves_to(T, N, M) :-
+  !type_defines_method(T, N, _),
+  is_direct_superclass_of(Super, T),
+  resolves_to(Super, N, M).
+
+resolves_to(java_type_array(_), N, M) :-
+  type_defines_method(java_type_ref("<Primordial,Ljava/lang/Object>"), N, M).
+
+rel invoke_special_has_resolved_type(method, iindex, java_type)
+
+invoke_special_has_resolved_type(Caller, P, Super) :-
+  instr_invoke_special(Caller, P, _, Callee, _),
+  !init_method(Callee),
+  declares_method(Callee_type, Callee),
+  declares_method(Caller_type, Caller),
+  !interface(Callee_type),
+  is_strict_subtype_of(Caller_type, Callee_type),
+  is_direct_superclass_of(Super, Caller_type).
+
+invoke_special_has_resolved_type(Caller, P, Super) :-
+  instr_invoke_special(Caller, P, _, Callee, _),
+  !init_method(Callee),
+  declares_method(Callee_type, Callee),
+  declares_method(Caller_type, Caller),
+  interface(Callee_type),
+  is_direct_superclass_of(Super, Caller_type).
+
+invoke_special_has_resolved_type(Caller, P, Callee_type) :-
+  instr_invoke_special(Caller, P, _, Callee, _),
+  init_method(Callee),
+  declares_method(Callee_type, Callee).
+
+invoke_special_has_resolved_type(Caller, P, Callee_type) :-
+  instr_invoke_special(Caller, P, _, Callee, _),
+  declares_method(Callee_type, Callee),
+  declares_method(Caller_type, Caller),
+  !is_strict_subtype_of(Caller_type, Callee_type).
+
+(******************************************************************************
+
+CONTEXT-INSENSITIVE POINTS-TO ANALYSIS
+
+*******************************************************************************)
+
+@bottomup
+rel not_exceptional_bb(method, basic_block)
+
+@bottomup
+rel not_exceptional_iindex(method, iindex)
+
+@bottomup
+rel cipa_reach_method(method)
+
+@bottomup
+rel cipa_reach_class(java_type)
+
+@bottomup
+rel relevant_clinit(method)
+
+@bottomup
+rel cipa_vptsto(method, var, loc)
+
+@bottomup
+rel cipa_hptsto(loc, field, loc)
+
+@bottomup
+rel cipa_sptsto(field, loc)
+
+@bottomup
+rel cipa_invocation(method, iindex, java_type option, method)
+
+@bottomup
+rel cipa_invocation_arg(method, iindex, i32, var)
+
+@bottomup
+rel cipa_invocation_ret(method, iindex, var)
+
+@bottomup
+rel cipa_allocation_type(loc, java_type)
+
+@bottomup
+rel main_entry_args_loc(method, loc)
+
+@bottomup
+rel main_entry_args_item_loc(method, loc)
+
+@bottomup
+rel main_entry(method)
+
+@bottomup
+rel phi_def(method, iindex, var, basic_block, var, (basic_block, var) map)
+
+@bottomup
+rel call_site_ret_and_args(method, iindex, var option, var list)
+
+@bottomup
+rel call_site_nth_arg(method, iindex, i32, var, var list)
+
+@bottomup
+rel cipa_receiver_can_have_type(method, iindex, java_type)
+
+fun string_type : java_type = java_type_ref("<Primordial,Ljava/lang/String>") 
+
+(* Entry points *)
+
+fun main_arg : loc = ("main", -1)
+
+fun main_arg_item : loc = ("main", -2)
+
+cipa_allocation_type(main_arg, java_type_array(string_type)).
+
+cipa_allocation_type(main_arg_item, string_type).
+
+main_entry(M) :-
+  application_entry(M),
+  static_method(M),
+  selector_of_method(M, "main([Ljava/lang/String;)V").
+
+cipa_reach_method(M) :-
+  main_entry(M).
+
+cipa_vptsto(M, 1, main_arg) :-
+  main_entry(M).
+
+cipa_hptsto(main_arg, array_field, main_arg_item).
+
+cipa_reach_method(M) :-
+  relevant_clinit(M).
+
+relevant_clinit(M) :-
+  cipa_reach_class(T),
+  declares_method(T, M),
+  clinit_method(M).
+
+(* Rules for when a class is reachable; these are consistent with the logic
+that Chord uses, except that we do not handle objects created through
+reflection. *)
+
+cipa_reach_class(T) :-
+  cipa_reach_method(M),
+  instr_new(M, _, _, T).
+
+cipa_reach_class(T) :-
+  cipa_reach_method(M),
+  instr_get(M, _, _, _, F),
+  static_field(F),
+  has_field(T, F).
+
+cipa_reach_class(T) :-
+  cipa_reach_method(M),
+  instr_put(M, _, _, F, _),
+  static_field(F),
+  has_field(T, F).
+
+cipa_reach_class(T) :-
+  cipa_invocation(_, _, _, M),
+  static_method(M),
+  declares_method(T, M).
+
+cipa_reach_class(Super) :-
+  cipa_reach_class(Sub),
+  is_direct_superclass_of(Super, Sub).
+
+(* Allocations *)
+
+cipa_vptsto(M, X, (M, P)) :-
+  cipa_reach_method(M),
+  instr_new(M, P, X, _),
+  not_exceptional_iindex(M, P).
+
+cipa_allocation_type((M, P), Ty) :-
+  cipa_reach_method(M),
+  instr_new(M, P, _, Ty),
+  not_exceptional_iindex(M, P).
+
+(* Loads *)
+
+cipa_vptsto(M, X, H2) :-
+  instr_get(M, P, X, Y, F),
+  not_exceptional_iindex(M, P),
+  instance_field(F),
+  cipa_vptsto(M, Y, H1),
+  cipa_hptsto(H1, F, H2),
+  cipa_allocation_type(H2, Ty1),
+  local_var_type(M, X, Ty2),
+  is_subtype_of(Ty1, Ty2).
+
+cipa_vptsto(M, X, H) :-
+  instr_get(M, P, X, _, F),
+  not_exceptional_iindex(M, P),
+  static_field(F),
+  cipa_sptsto(F, H),
+  cipa_allocation_type(H, Ty1),
+  local_var_type(M, X, Ty2),
+  is_subtype_of(Ty1, Ty2).
+
+(* Stores *)
+
+(* XXX Could also filter types here *)
+
+cipa_hptsto(H1, F, H2) :-
+  instr_put(M, P, X, F, Y),
+  not_exceptional_iindex(M, P),
+  instance_field(F),
+  cipa_vptsto(M, X, H1),
+  cipa_vptsto(M, Y, H2).
+
+cipa_sptsto(F, H) :-
+  instr_put(M, P, _, F, Y),
+  not_exceptional_iindex(M, P),
+  static_field(F),
+  cipa_vptsto(M, Y, H).
+
+(* Arrays *)
+
+cipa_vptsto(M, X, H2) :-
+  instr_array_load(M, P, X, A, _),
+  not_exceptional_iindex(M, P),
+  cipa_vptsto(M, A, H1),
+  cipa_hptsto(H1, array_field, H2),
+  cipa_allocation_type(H2, Ty1),
+  local_var_type(M, X, Ty2),
+  is_subtype_of(Ty1, Ty2).
+
+cipa_hptsto(H1, array_field, H2) :-
+  instr_array_store(M, P, A, _, X),
+  not_exceptional_iindex(M, P),
+  cipa_vptsto(M, A, H1),
+  cipa_allocation_type(H1, java_type_array(Ty1)),
+  cipa_vptsto(M, X, H2),
+  cipa_allocation_type(H2, Ty2),
+  is_subtype_of(Ty2, Ty1).
+
+(* Phi nodes *)
+
+phi_def(M, P, Def, B, Val, Rest) :-
+  cipa_reach_method(M),
+  instr_phi_node(M, P),
+  block_has_instr(M, Cur_block, P),
+  phi_node(M, Cur_block, Def, (B, Val) :: Rest).
+
+phi_def(M, P, Def, B, Val, Rest) :-
+  phi_def(M, P, Def, _, _, (B, Val) :: Rest).
+
+cipa_vptsto(M, X, H) :-
+  phi_def(M, P, X, _B, Y, _),
+  not_exceptional_iindex(M, P),
+  cipa_vptsto(M, Y, H),
+  cipa_allocation_type(H, Ty1),
+  local_var_type(M, X, Ty2),
+  is_subtype_of(Ty1, Ty2).
+
+(* Check cast *)
+
+cipa_vptsto(M, X, H) :-
+  instr_check_cast(M, P, X, Y, Ty1),
+  not_exceptional_iindex(M, P),
+  cipa_vptsto(M, Y, H),
+  cipa_allocation_type(H, Ty2),
+  is_subtype_of(Ty2, Ty1).
+
+(* Method calls *)
+
+call_site_ret_and_args(M, P, R, Args) :-
+  cipa_reach_method(M),
+  instr_invoke_dispatch(M, P, R, _, Args).
+
+call_site_ret_and_args(M, P, R, Args) :-
+  cipa_reach_method(M),
+  instr_invoke_special(M, P, R, _, Args).
+
+call_site_ret_and_args(M, P, R, Args) :-
+  cipa_reach_method(M),
+  instr_invoke_static(M, P, R, _, Args).
+
+call_site_nth_arg(M, P, 0, X, Rest) :-
+  call_site_ret_and_args(M, P, _, X :: Rest).
+
+call_site_nth_arg(M, P, N + 1, X, Rest) :-
+  call_site_nth_arg(M, P, N, _, X :: Rest).
+
+cipa_invocation_ret(M, P, X) :-
+  call_site_ret_and_args(M, P, some(X), _).
+
+cipa_vptsto(Callee, N + 1, H) :-
+  cipa_invocation(Caller, P, Rec_ty, Callee),
+  call_site_nth_arg(Caller, P, N, Actual, _), 
+  (Rec_ty = none) || (N != 0),
+  cipa_vptsto(Caller, Actual, H),
+  cipa_allocation_type(H, Ty1),
+  local_var_type(Callee, N + 1, Ty2),
+  is_subtype_of(Ty1, Ty2).
+
+cipa_vptsto(Callee, 1, H) :-
+  cipa_invocation(Caller, P, some(Ty), Callee),
+  call_site_nth_arg(Caller, P, 0, Actual, _),
+  cipa_vptsto(Caller, Actual, H),
+  cipa_allocation_type(H, Ty).
+
+cipa_receiver_can_have_type(M, P, Ty) :-
+  cipa_reach_method(M),
+  instr_invoke_dispatch(M, P, _, _, Receiver :: _),
+  cipa_vptsto(M, Receiver, H),
+  cipa_allocation_type(H, Ty).
+
+cipa_invocation(M, P, some(Ty), Tgt) :-
+  cipa_reach_method(M),
+  instr_invoke_dispatch(M, P, _, Static_tgt, _),
+  not_exceptional_iindex(M, P),
+  cipa_receiver_can_have_type(M, P, Ty),
+  selector_of_method(Static_tgt, Selector),
+  resolves_to(Ty, Selector, Tgt).
+
+cipa_invocation(M, P, none, Tgt) :-
+  cipa_reach_method(M),
+  instr_invoke_special(M, P, _, Static_tgt, _),
+  not_exceptional_iindex(M, P),
+  invoke_special_has_resolved_type(M, P, Ty),
+  selector_of_method(Static_tgt, Selector),
+  resolves_to(Ty, Selector, Tgt).
+
+cipa_invocation(M, P, none, Tgt) :-
+  cipa_reach_method(M),
+  instr_invoke_static(M, P, _, Tgt, _),
+  not_exceptional_iindex(M, P).
+
+cipa_vptsto(Caller, X, H) :-
+  cipa_invocation(Caller, P, _, Callee),
+  cipa_invocation_ret(Caller, P, X),
+  instr_return(Callee, _, some(Y)),
+  cipa_vptsto(Callee, Y, H),
+  cipa_allocation_type(H, Ty1),
+  local_var_type(Caller, X, Ty2),
+  is_subtype_of(Ty1, Ty2).
+
+cipa_reach_method(M) :-
+  cipa_invocation(_, _, _, M).
+
+not_exceptional_bb(M, B) :-
+  cipa_reach_method(M),
+  entry_block(M, B).
+
+not_exceptional_bb(M, B2) :-
+  not_exceptional_bb(M, B1),
+  is_normal_pred_of(M, B1, B2).
+
+not_exceptional_iindex(M, P) :-
+  not_exceptional_bb(M, B),
+  block_has_instr(M, B, P).
+
+(******************************************************************************
+
+METHOD CATEGORIZATION
+
+*******************************************************************************)
+
+rel application_method(method)
+
+rel s1_method(method)
+
+rel s2_method(method)
+
+application_method(M) :-
+  application_class(T),
+  declares_method(T, M).
+
+fun has_side_effect(M: method) : bool =
+  let [N] = selector_of_method(M, ??) in
+  !string_starts_with(N, "equals(") && !string_starts_with(N, "hashCode")
+
+s1_method(M) :-
+  cipa_reach_method(M),
+  application_method(M).
+
+s2_method(M) :-
+  s1_method(Caller),
+  cipa_invocation(Caller, _, _, M),
+  !s1_method(M),
+  has_side_effect(M).
+
+s2_method(Clinit) :-
+  relevant_clinit(Clinit),
+  declares_method(T, Clinit),
+  !application_class(T),
+  T = java_type_ref(N),
+  !string_starts_with(N, "<Primordial,Lsun/security"),
+  !string_starts_with(N, "<Primordial,Ljava/security").
+
+(******************************************************************************
+
+PROGRAM TRANSFORMATION
+
+*******************************************************************************)
+
+(*
+  Construct an exploded control flow graph (i.e., each basic block is a single
+  instruction). We create a synthetic entry so that every instruction has a
+  predecessor. We ignore exceptional flow.
+*)
+
+rel next_instr_forwards(method, basic_block, iindex)
+rel next_instr_backwards(method, basic_block, iindex)
+rel cfg_entry(method, iindex)
+rel cfg_is_pred_of(method, iindex, iindex)
+rel cfg_exit(method, iindex)
+rel cfg_is_transitive_pred_of(method, iindex, iindex)
+
+next_instr_forwards(M, B, I) :-
+  s1_method(M),
+  block_first_instr(M, B, I).
+
+next_instr_forwards(M, B1, I) :-
+  s1_method(M),
+  is_normal_pred_of(M, B1, B2),
+  !block_first_instr(M, B1, _),
+  next_instr_forwards(M, B2, I).
+
+next_instr_backwards(M, B, I) :-
+  s1_method(M),
+  block_last_instr(M, B, I).
+
+next_instr_backwards(M, B2, I) :-
+  s1_method(M),
+  is_normal_pred_of(M, B1, B2),
+  !block_last_instr(M, B2, _),
+  next_instr_backwards(M, B1, I).
+
+fun synthetic_entry : iindex = -1
+
+cfg_entry(M, synthetic_entry) :-
+  s1_method(M),
+  entry_block(M, _).
+
+cfg_is_pred_of(M, synthetic_entry, I) :-
+  s1_method(M),
+  entry_block(M, B),
+  next_instr_forwards(M, B, I).
+
+cfg_is_pred_of(M, I, J) :-
+  s1_method(M),
+  is_intra_block_pred_of(M, _, I, J).
+
+cfg_is_pred_of(M, I, J) :-
+  s1_method(M),
+  block_last_instr(M, B1, I),
+  is_normal_pred_of(M, B1, B2),
+  next_instr_forwards(M, B2, J).
+
+cfg_exit(M, I) :-
+  s1_method(M),
+  instr_return(M, I, _).
+
+cfg_is_transitive_pred_of(M, I, J) :-
+  cfg_is_pred_of(M, I, J).
+
+cfg_is_transitive_pred_of(M, I, K) :-
+  cfg_is_pred_of(M, I, J),
+  cfg_is_transitive_pred_of(M, J, K).
+
+(******************************************************************************
+
+PROGRAM RECURSION DIAGNOSTICS
+
+*******************************************************************************)
+
+@bottomup
+rel call_graph_tc(method, method)
+
+call_graph_tc(Caller, Callee) :-
+  cipa_invocation(Caller, _, _, Callee).
+
+call_graph_tc(M1, M3) :-
+  cipa_invocation(M1, _, _, M2),
+  call_graph_tc(M2, M3).
+
+@bottomup
+rel trans_recursive_method(method)
+
+trans_recursive_method(M) :-
+  call_graph_tc(M, M).
+
+(******************************************************************************
+
+BOTTOM-UP POINTS-TO ANALYSIS
+
+*******************************************************************************)
+
+rel ptsto(method, iindex, abs_loc, field, heap_obj, constraint)
+
+rel summary(method, abs_loc, field, heap_obj, constraint)
+
+@topdown
+rel field_lookup(method, iindex, abs_loc, field, heap_obj, constraint)
+
+(*******************************************************************************
+CONTEXTS
+*******************************************************************************)
+
+fun heap_ctx_limit : i32 = 2
+
+fun local_ctx_limit : i32 = 0 
+
+fun anywhere : loc = ("any", 0)
+
+fun pad_cipa_ctx(N: i32, Ctx: context) : context =
+  if N >= heap_ctx_limit then Ctx else anywhere :: pad_cipa_ctx(N + 1, Ctx) 
+
+fun exception : loc = ("exception", 0)
+
+fun pad_exn_ctx(N: i32, Ctx: context) : context =
+  if N >= heap_ctx_limit then Ctx else exception :: pad_cipa_ctx(N + 1, Ctx)
+
+rel has_alloc(method, java_type, loc, context)
+
+has_alloc(M, Ty, last(Ctx), Ctx) :-
+  s1_method(M),
+  summary(M, al_heap(ho_alloc(Ty, Ctx)), _, _, _).
+
+has_alloc(M, Ty, last(Ctx), Ctx) :-
+  s1_method(M),
+  summary(M, _, _, ho_alloc(Ty, Ctx), _).
+
+@topdown
+rel instantiate_cipa(method, loc, heap_obj)
+
+instantiate_cipa(_M, L, ho_alloc(Ty, pad_cipa_ctx(1, [L]))) :-
+  cipa_allocation_type(L, Ty).
+
+instantiate_cipa(M, L, ho_alloc(Ty2, Ctx2)) :-
+  has_alloc(M, Ty2, L, Ctx2).
+
+(*******************************************************************************
+FIELD LOOKUP
+*******************************************************************************)
+
+fun merge_field_lists(Fs: field list, Gs: field list) : field list =
+  match (Fs, Gs) with
+  | ([], X) | (X, []) => X
+  | (F :: F_rest, G :: G_rest) =>
+    match string_cmp(F, G) with
+    | cmp_lt => F :: merge_field_lists(F_rest, Gs)
+    | cmp_eq => F :: merge_field_lists(F_rest, G_rest)
+    | cmp_gt => G :: merge_field_lists(Fs, G_rest)
+    end
+  end
+
+fun insert_field(F: field, Gs: field list) : field list =
+  match Gs with
+  | [] => [F]
+  | G :: G_rest =>
+    match string_cmp(F, G) with
+    | cmp_lt => F :: Gs
+    | cmp_eq => Gs
+    | cmp_gt => G :: insert_field(F, G_rest)
+    end
+  end
+
+fun fs_to_list(Fs: field_selector) : field list =
+  match Fs with
+  | [] => []
+  | fs_star(Fields) :: Rest => merge_field_lists(Fields, fs_to_list(Rest))
+  | fs_field(F) :: Rest => insert_field(F, fs_to_list(Rest))
+  end
+
+fun extend_fs_rec(Fs: field_selector, F: field, Acc: field_selector) : field_selector =
+  match Fs with
+  | [] => fs_field(F) :: rev(Acc)
+  | fs_field(G) :: Rest =>
+    if F = G
+    then fs_star(insert_field(F, fs_to_list(Acc))) :: Rest
+    else extend_fs_rec(Rest, F, fs_field(G) :: Acc)
+  | fs_star(Fields) :: Rest =>
+    if member(F, Fields)
+    then fs_star(merge_field_lists(Fields, fs_to_list(Acc))) :: Rest
+    else extend_fs_rec(Rest, F, fs_star(Fields) :: Acc)
+  end
+
+fun extend_fs(Fs: field_selector, F: field) : field_selector =
+  extend_fs_rec(Fs, F, [])
+
+field_lookup(M, Q, A, F, O, C) :-
+  cfg_is_transitive_pred_of(M, P, Q),
+  ptsto(M, P, A, F, O, C).
+
+field_lookup(M, _P, al_heap(ho_alloc(_Ty, anywhere :: Rest)), F, H, tru) :-
+  cipa_hptsto(last(Rest), F, L),
+  instantiate_cipa(M, L, H).
+
+(*
+  These get default targets for arguments and static fields.
+ 
+  TODO Can make these more precise by ignoring primitive fields and using CIPA
+  information.
+*)
+
+field_lookup(_M, _L, al_non_local(X), F, ho_path(X, [fs_field(F)]), tru).
+
+field_lookup(_M, _L, al_heap(ho_path(X, Fs)), F, ho_path(X, Fs2), tru) :-
+  extend_fs(Fs, F) = Fs2.
+
+rel field_has_reference_type(field)
+
+field_has_reference_type(F) :-
+  field_has_type(F, T),
+  T not java_type_prim.
+
+(*******************************************************************************
+INTRAPROCEDURAL POINTS-TO RULES
+*******************************************************************************)
+
+fun abs_loc_of_var(X: var, M: method) : abs_loc =
+  if !cipa_vptsto(M, X, _) then al_local((-1, "nowhere"), [])
+  else if method_parameter(M, _, X) then al_non_local(b_arg(X))
+  else al_local((X, M), [])
+
+@bottomup
+rel subtype_of_exn_or_err(java_type)
+
+subtype_of_exn_or_err(java_type_ref("<Primordial,Ljava/lang/Exception>")).
+
+subtype_of_exn_or_err(java_type_ref("<Primordial,Ljava/lang/Error>")).
+
+subtype_of_exn_or_err(Sub) :-
+  subtype_of_exn_or_err(Super),
+  is_direct_superclass_of(Super, Sub).
+
+(* Allocation *)
+ptsto(M, P, al_local((X, M), []), empty_field, ho_alloc(T, [(M, P)]) , tru) :-
+  s1_method(M),
+  instr_new(M, P, X, T),
+  not_exceptional_iindex(M, P),
+  !subtype_of_exn_or_err(T).
+
+ptsto(M, P, al_local((X, M), []), empty_field, ho_alloc(T, pad_exn_ctx(1, [(M, P)])) , tru) :-
+  s1_method(M),
+  instr_new(M, P, X, T),
+  not_exceptional_iindex(M, P),
+  subtype_of_exn_or_err(T).
+  
+(* Load *)
+
+(* Instance field *)
+ptsto(M, P, al_local((X, M), []), empty_field, Obj2, conjoin(Phi1, Phi2)) :-
+  s1_method(M),
+  instr_get(M, P, X, Y, F),
+  not_exceptional_iindex(M, P),
+  field_has_reference_type(F),
+  instance_field(F),
+  field_lookup(M, P, abs_loc_of_var(Y, M), empty_field, Obj1, Phi1),
+  field_lookup(M, P, al_heap(Obj1), F, Obj2, Phi2).
+
+(* Static field *)
+ptsto(M, P, al_local((X, M), []), empty_field, ho_path(b_field(F), [fs_field(empty_field)]), tru) :-
+  s1_method(M),
+  instr_get(M, P, X, _, F),
+  not_exceptional_iindex(M, P),
+  field_has_reference_type(F),
+  static_field(F).
+
+(* Store *)
+
+(* Instance field *)
+ptsto(M, P, al_heap(Obj1), F, Obj2, conjoin(Phi1, Phi2)) :-
+  s1_method(M),
+  instr_put(M, P, X, F, Y),
+  not_exceptional_iindex(M, P),
+  field_has_reference_type(F),
+  instance_field(F),
+  field_lookup(M, P, abs_loc_of_var(X, M), empty_field, Obj1, Phi1),
+  field_lookup(M, P, abs_loc_of_var(Y, M), empty_field, Obj2, Phi2).
+
+(* Static field *)
+ptsto(M, P, al_non_local(b_field(F)), empty_field, Obj, Phi) :-
+  s1_method(M),
+  instr_put(M, P, _, F, Y),
+  not_exceptional_iindex(M, P),
+  field_has_reference_type(F),
+  static_field(F),
+  field_lookup(M, P, abs_loc_of_var(Y, M), empty_field, Obj, Phi).
+
+(* Arrays *)
+
+(* X = A[_] *)
+ptsto(M, P, al_local((X, M), []), empty_field, Obj2, conjoin(Phi1, Phi2)) :-
+  s1_method(M),
+  instr_array_load(M, P, X, A, _),
+  not_exceptional_iindex(M, P),
+  field_lookup(M, P, abs_loc_of_var(A, M), empty_field, Obj1, Phi1),
+  field_lookup(M, P, al_heap(Obj1), array_field, Obj2, Phi2).
+
+(* A[_] = X *)
+ptsto(M, P, al_heap(Obj1), array_field, Obj2, conjoin(Phi1, Phi2)) :-
+  s1_method(M),
+  instr_array_store(M, P, A, _, X),
+  not_exceptional_iindex(M, P),
+  field_lookup(M, P, abs_loc_of_var(A, M), empty_field, Obj1, Phi1),
+  field_lookup(M, P, abs_loc_of_var(X, M), empty_field, Obj2, Phi2).
+
+(* Phi nodes *)
+
+ptsto(M, Q, al_local((X, M), []), empty_field, O, Phi) :-
+  s1_method(M),
+  instr_phi_node(M, Q),
+  not_exceptional_iindex(M, Q),
+  phi_def(M, Q, X, Pred_block, Y, _),
+  next_instr_backwards(M, Pred_block, P),
+  field_lookup(M, P, abs_loc_of_var(Y, M), empty_field, O, Phi).
+
+ptsto(M, Q, al_local((X, M), []), empty_field, O, Phi) :-
+  s1_method(M),
+  instr_phi_node(M, Q),
+  not_exceptional_iindex(M, Q),
+  phi_def(M, Q, X, Pred_block, Y, _),
+  next_instr_backwards(M, Pred_block, P),
+  ptsto(M, P, abs_loc_of_var(Y, M), empty_field, O, Phi).
+
+(* Check cast *)
+
+(* Could potentially filter here by types. *)
+ptsto(M, P, al_local((X, M), []), empty_field, O, Phi) :-
+  s1_method(M),
+  instr_check_cast(M, P, X, Y, _T),
+  not_exceptional_iindex(M, P),
+  field_lookup(M, P, abs_loc_of_var(Y, M), empty_field, O, Phi).
+
+(*******************************************************************************
+INTERPROCEDURAL POINTS-TO RULES
+*******************************************************************************)
+
+@bottomup
+rel is_bad_call(loc, method)
+
+is_bad_call((Caller, P), Callee) :-
+  cipa_invocation(Caller, P, _, Callee),
+  trans_recursive_method(Caller).
+
+type resolved_call = {
+  caller: method;
+  iindex_of_call: iindex;
+  dispatched_method: method;
+  is_bad: bool;
+}
+
+fun make_resolved_call(M: method, P: iindex, Dispatched: method) : resolved_call =
+  {
+    caller=M;
+    iindex_of_call=P;
+    dispatched_method=Dispatched;
+    is_bad=is_bad_call((M, P), Dispatched);
+  }
+
+fun loc_of_call(Call : resolved_call) : loc =
+  (caller(Call), iindex_of_call(Call))
+
+fun philter(Call: resolved_call, Phi: constraint) : constraint =
+  if is_bad(Call) then tru else Phi
+
+(*
+  The paper says this should return a points-to set, which means it should have
+  the signature resolved_call * abs_loc * heap_obj * constraint...
+*)
+@topdown
+rel instantiate_loc(resolved_call, abs_loc, abs_loc, constraint)
+
+@topdown
+rel field_lookup_at_call(resolved_call, abs_loc, field, bool, heap_obj, constraint)
+
+@topdown
+rel instantiate_constraint(resolved_call, constraint, constraint).
+
+rel instantiate_heap(resolved_call, abs_loc, field, heap_obj, constraint)
+
+@topdown
+rel instantiate_ptsto(resolved_call, heap_obj, constraint, heap_obj, constraint)
+
+rel summary_ret(method, heap_obj, constraint)
+
+(*******************************************************************************
+  Instantiating locations
+*******************************************************************************)
+
+fun new_ctx(Ctx: context, L: loc, Limit: i32) : context =
+  if length(Ctx) < Limit then L :: Ctx else Ctx
+
+fun new_heap_ctx(Ctx: context, L: loc) : context =
+  let (M, _) = L in
+  if application_method(M) then new_ctx(Ctx, L, heap_ctx_limit) else Ctx
+
+fun new_local_ctx(Ctx: context, L: loc) : context =
+  new_ctx(Ctx, L, local_ctx_limit)
+
+@topdown
+rel fs_member(field, field list).
+fs_member(X, X :: _).
+fs_member(X, _ :: Xs) :- fs_member(X, Xs).
+
+instantiate_loc(Call, al_heap(ho_alloc(T, Ctx)), al_heap(ho_alloc(T, Ctx2)), tru) :-
+  Ctx2 = new_heap_ctx(Ctx, loc_of_call(Call)).
+
+instantiate_loc(Call, al_heap(ho_alloc(_Ty, anywhere :: Ctx)), al_heap(O), tru) :-
+  instantiate_cipa(caller(Call), last(Ctx), O).
+
+(*
+  Suppress this rule to avoid pushing local variables from callees to callers.
+*)
+(*
+instantiate_loc(Call, al_local(X, Ctx), al_local(X, Ctx2), tru) :-
+  (_, M) = X,
+  application_method(M),
+  Ctx2 = new_local_ctx(Ctx, loc_of_call(Call)).
+*)
+
+instantiate_loc(Call,
+                al_param(M, N, Ctx),
+                al_param(M, N, new_local_ctx(Ctx, loc_of_call(Call))),
+                tru).
+
+(*
+  The original rule in the paper doesn't have this lookup; however, a bunch of
+  other rules that use `instantiate_loc` expect the third argument to be a heap
+  location.
+*)
+instantiate_loc(Call, al_non_local(b_arg(X)), al_heap(O), philter(Call, Phi)) :-
+  call_site_nth_arg(caller(Call), iindex_of_call(Call), X - 1, Y, _), 
+  field_lookup_at_call(Call, abs_loc_of_var(Y, caller(Call)), empty_field, true, O, Phi).
+
+instantiate_loc(Call, al_non_local(b_field(X)), al_heap(O), philter(Call, Phi)) :-
+  field_lookup_at_call(Call, al_non_local(b_field(X)), empty_field, true, O, Phi).
+
+instantiate_loc(Call, al_heap(ho_path(X, empty_fs)), A, philter(Call, Phi)) :-
+  instantiate_loc(Call, al_non_local(X), A, Phi).
+
+instantiate_loc(Call, al_heap(ho_path(X, Fs)), al_heap(O), philter(Call, conjoin(Phi1, Phi2))) :-
+  fs_field(F) :: Fs2 = Fs,
+  Fs2 != [],
+  instantiate_loc(Call, al_heap(ho_path(X, Fs2)), A, Phi1),
+  field_lookup_at_call(Call, A, F, true, O, Phi2).
+
+instantiate_loc(Call, al_heap(ho_path(X, Fs)), A, philter(Call, Phi)) :-
+  fs_star(_) :: Fs2 = Fs,
+  instantiate_loc(Call, al_heap(ho_path(X, Fs2)), A, Phi),
+  A = al_heap(ho_alloc(_, _)).
+
+fun extend_with_starred_fields2(Fields: field list, Fs: field_selector) : field_selector =
+  match Fields with
+  | [] => Fs
+  | F :: Fields => extend_with_starred_fields2(Fields, extend_fs(Fs, F))
+  end
+
+fun extend_with_starred_fields(Fields: field list, Fs: field_selector) : field_selector =
+  let New_fs = extend_with_starred_fields2(Fields, Fs) in
+  extend_fs(New_fs, hd_exn(Fields))
+
+instantiate_loc(Call, al_heap(ho_path(X, Fs)), al_heap(ho_path(Y, New_fs)), philter(Call, Phi)) :-
+  fs_star(Z) :: Fs2 = Fs,
+  instantiate_loc(Call, al_heap(ho_path(X, Fs2)), al_heap(ho_path(Y, Fs3)), Phi),
+  New_fs = extend_with_starred_fields(Z, Fs3).
+
+instantiate_loc(Call, al_heap(ho_path(X, Fs)), al_heap(O), philter(Call, conjoin(Phi1, Phi2))) :-
+  fs_star(Fs3) :: _ = Fs,
+  instantiate_loc(Call, al_heap(ho_path(X, Fs)), A, Phi1),
+  fs_member(F, Fs3),
+  field_lookup_at_call(Call, A, F, false, O, Phi2).
+
+(*******************************************************************************
+  Field lookup 
+*******************************************************************************)
+
+field_lookup_at_call(Call, A, F, _, O, philter(Call, C)) :-
+  cfg_is_transitive_pred_of(caller(Call), P, iindex_of_call(Call)),
+  ptsto(caller(Call), P, A, F, O, C).
+
+field_lookup_at_call(Call, A, F, _, O, philter(Call, C)) :-
+  instantiate_heap(Call, A, F, O, C).
+
+field_lookup_at_call(Call, al_heap(ho_alloc(_Ty, anywhere :: Rest)), F, _, O, tru) :-
+  cipa_hptsto(last(Rest), F, L),
+  instantiate_cipa(caller(Call), L, O).
+
+field_lookup_at_call(_Call, al_non_local(X), F, true, ho_path(X, [fs_field(F)]), tru). 
+
+field_lookup_at_call(_Call, al_heap(ho_path(X, Fs)), F, true, ho_path(X, Fs2), tru) :-
+  extend_fs(Fs, F) = Fs2.
+
+(*******************************************************************************
+  Instantiating constraints
+*******************************************************************************)
+
+fun constrain(O: heap_obj, T: java_type) : constraint option =
+  match O with
+  | ho_alloc(T2, _Ctx) => if T = T2 then some([]) else none 
+  | _ => some([(O, T)])
+  end
+
+instantiate_constraint(_Call, [], tru).
+
+instantiate_constraint(Call, (O, T) :: As, conjoin(Bs, Cs)) :-
+  !is_bad(Call),
+  instantiate_loc(Call, al_heap(O), al_heap(O2), Phi),
+  some(New_phi) = constrain(O2, T),
+  Cs = conjoin(New_phi, Phi),
+  instantiate_constraint(Call, As, Bs).
+
+instantiate_constraint(Call, _, tru) :-
+  is_bad(Call).
+
+(*******************************************************************************
+  Instantiating points-to edges
+*******************************************************************************)
+
+instantiate_ptsto(Call, O, Phi, O2, philter(Call, conjoin(Phi2, Phi3))) :-
+  instantiate_loc(Call, al_heap(O), al_heap(O2), Phi2),
+  instantiate_constraint(Call, Phi, Phi3).
+
+(*******************************************************************************
+  S1 summaries
+*******************************************************************************)
+
+summary(M, A, F, O, C) :-
+  s1_method(M),
+  ptsto(M, _P, A, F, O, C).
+
+summary(M, al_param(M, N, []), empty_field, ho_path(b_arg(X), [fs_field(empty_field)]), tru) :-
+  s1_method(M),
+  method_parameter(M, N, X),
+  cipa_vptsto(M, X, _).
+
+summary_ret(M, O, Phi) :-
+  s1_method(M),
+  instr_return(M, P, some(X)),
+  field_lookup(M, P, abs_loc_of_var(X, M), empty_field, O, Phi).
+
+rel has_summary(method)
+
+has_summary(M) :-
+  summary(M, _, _, _, _).
+
+(*******************************************************************************
+  S2 summaries 
+*******************************************************************************)
+
+summary_ret(M, ho_alloc(Ty, pad_cipa_ctx(1, [L])), tru) :-
+  s2_method(M),
+  instr_return(M, _, some(X)),
+  cipa_vptsto(M, X, L),
+  cipa_allocation_type(L, Ty).
+
+summary(M, al_non_local(b_arg(X)), F, ho_alloc(T, pad_cipa_ctx(1, [L2])), tru) :-
+  s2_method(M),
+  method_parameter(M, _, X),
+  cipa_vptsto(M, X, L1),
+  cipa_hptsto(L1, F, L2),
+  cipa_allocation_type(L2, T).
+
+(*******************************************************************************
+  Handling call sites
+*******************************************************************************)
+
+@bottomup
+rel resolves_to_multiple_targets(method, iindex)
+
+resolves_to_multiple_targets(M, P) :-
+  cipa_invocation(M, P, _, Callee1),
+  cipa_invocation(M, P, _, Callee2),
+  Callee1 != Callee2.
+
+rel invocation(method, iindex, var option, resolved_call, constraint)
+
+invocation(M, P, R, Call, conjoin(Phi1, Phi2)) :-
+  s1_method(M),
+  resolves_to_multiple_targets(M, P),
+  cipa_invocation(M, P, some(Ty), Callee),
+  call_site_ret_and_args(M, P, R, _),
+  !is_bad_call((M, P), Callee),
+  Call = make_resolved_call(M, P, Callee),
+  call_site_nth_arg(M, P, 0, X, _),
+  field_lookup(M, P, abs_loc_of_var(X, M), empty_field, Rec_obj, Phi1),
+  some(Phi2) = constrain(Rec_obj, Ty).
+
+invocation(M, P, R, Call, tru) :-
+  s1_method(M),
+  cipa_invocation(M, P, _, Callee),
+  is_bad_call((M, P), Callee) || !resolves_to_multiple_targets(M, P),
+  call_site_ret_and_args(M, P, R, _),
+  Call = make_resolved_call(M, P, Callee).
+
+ptsto(M, P, A, F, O, Phi) :-
+  s1_method(M),
+  invocation(M, P, _, Call, _),
+  instantiate_heap(Call, A, F, O, Phi).
+
+@topdown
+rel constraint_is_sat(bool smt)
+
+constraint_is_sat(X) :- is_sat(X).
+
+(* Handle return value. *)
+ptsto(M, P, al_local((X, M), []), empty_field, O2, Phi_all) :-
+  s1_method(M),
+  invocation(M, P, some(X), Call, Invoke_phi),
+  summary_ret(dispatched_method(Call), O1, Phi1),
+  instantiate_ptsto(Call, O1, Phi1, O2, Phi2),
+  Phi_all = conjoin(Invoke_phi, Phi2),
+  constraint_is_sat(encode_constraint(Phi_all)).
+
+(*******************************************************************************
+  Instantiating the heap
+*******************************************************************************)
+
+instantiate_heap(Call, A2, F, O2, Phi_all) :-
+  invocation(_, _, _, Call, Phi_invoke),
+  summary(dispatched_method(Call), A1, F, O1, Phi),
+  instantiate_loc(Call, A1, A2, Phi2),
+  (match A2 with
+  | al_heap(ho_alloc(Ty, _)) => has_field(Ty, F)
+  | _ => true
+  end),
+  instantiate_ptsto(Call, O1, Phi, O2, Phi1),
+  Phi_all = philter(Call, conjoin(Phi_invoke, conjoin(Phi1, Phi2))),
+  constraint_is_sat(encode_constraint(Phi_all)).
+
+(*******************************************************************************
+CONCLUSION
+*******************************************************************************)
+
+rel conclusion(abs_loc, field, heap_obj)
+
+@topdown
+rel concl_instantiate_loc(abs_loc, abs_loc)
+
+@topdown
+rel concl_instantiate_obj(heap_obj, heap_obj)
+
+@topdown
+rel concl_instantiate_phi(constraint)
+
+rel root(method)
+
+root(M) :-
+  main_entry(M).
+
+root(M) :-
+  relevant_clinit(M).
+
+concl_instantiate_loc(A, A) :-
+  A = al_param(_, _, _).
+
+concl_instantiate_loc(al_heap(O1), al_heap(O2)) :-
+  concl_instantiate_obj(O1, O2).
+
+concl_instantiate_loc(A, A) :-
+  A = al_non_local(b_arg(_)).
+
+concl_instantiate_loc(al_non_local(b_field(F)), al_heap(O)) :-
+  root(M),
+  cipa_sptsto(F, L),
+  instantiate_cipa(M, L, O).
+
+concl_instantiate_obj(O, O) :-
+  O not ho_path.
+
+concl_instantiate_obj(ho_alloc(_Ty, anywhere :: Ctx), O) :-
+  root(M),
+  instantiate_cipa(M, last(Ctx), O).
+
+concl_instantiate_obj(O, O) :-
+  O = ho_path(b_arg(_), _). 
+
+concl_instantiate_obj(O, O2) :-
+  O = ho_path(b_field(F), _),
+  root(M),
+  cipa_sptsto(F, L),
+  instantiate_cipa(M, L, O2).
+
+concl_instantiate_phi((O1, Ty) :: Rest) :-
+  concl_instantiate_obj(O1, O2),
+  constrain(O2, Ty) = some(_),
+  concl_instantiate_phi(Rest).
+
+concl_instantiate_phi([]).
+
+conclusion(A2, F, O2) :-
+  root(M),
+  summary(M, A1, F, O1, Phi),
+  concl_instantiate_loc(A1, A2),
+  concl_instantiate_obj(O1, O2),
+  concl_instantiate_phi(Phi).
+
+rel main_summary_edge(abs_loc, field, heap_obj)
+
+main_summary_edge(A, F, O) :-
+  main_entry(M),
+  summary(M, A, F, O, _).
+
+rel main_summary_node(abs_loc)
+
+main_summary_node(A) :-
+  main_entry(M),
+  summary(M, A, _, _, _).
+
+main_summary_node(al_heap(O)) :-
+  main_entry(M),
+  summary(M, _, _, O, _).
+
+(* For debugging... *)
+
+(*
+summary("conclusion", A, F, O, tru) :-
+  conclusion(A, F, O).
+*)
+
+(*******************************************************************************
+DIAGNOSTICS
+*******************************************************************************)
+
+(*
+rel diagnostic_synth_entry_summary(abs_loc, field, heap_obj, constraint)
+
+diagnostic_synth_entry_summary(A, F, O, Phi) :-
+  synth_entry(_, Synth),
+  summary(Synth, A, F, O, Phi).
+
+rel diagnostic_local_ptsto_pair(abs_loc, field, heap_obj)
+
+diagnostic_local_ptsto_pair(A, F, O) :-
+  synth_entry(_, Synth),
+  summary(Synth, A, F, O, _),
+  A = al_local(_, _).
+
+rel diagnostic_static_ptsto_pair(abs_loc, field, heap_obj)
+
+diagnostic_static_ptsto_pair(A, F, O) :-
+  synth_entry(_, Synth),
+  summary(Synth, A, F, O, _),
+  A = al_non_local(b_field(_)).
+
+rel diagnostic_alloc_ptsto_pair(abs_loc, field, heap_obj)
+
+diagnostic_alloc_ptsto_pair(A, F, O) :-
+  synth_entry(_, Synth),
+  summary(Synth, A, F, O, _),
+  A = al_heap(ho_alloc(_, _)).
+
+rel diagnostic_path_ptsto_pair(abs_loc, field, heap_obj)
+
+diagnostic_path_ptsto_pair(A, F, O) :-
+  synth_entry(_, Synth),
+  summary(Synth, A, F, O, _),
+  A = al_heap(ho_path(_, _)).
+
+rel diagnostic_static_path_ptsto_pair(abs_loc, field, heap_obj)
+
+diagnostic_static_path_ptsto_pair(A, F, O) :-
+  synth_entry(_, Synth),
+  summary(Synth, A, F, O, _),
+  A = al_heap(ho_path(b_field(_), _)).
+
+rel diagnostic_arg_ptsto_pair(abs_loc, field, heap_obj)
+
+diagnostic_arg_ptsto_pair(A, F, O) :-
+  synth_entry(_, Synth),
+  summary(Synth, A, F, O, _),
+  A = al_non_local(b_arg(_)).
+
+rel diagnostic_alloc(abs_loc)
+
+diagnostic_alloc(A) :-
+  synth_entry(_, Synth),
+  summary(Synth, A, _, _, _),
+  A = al_heap(ho_alloc(_, _)).
+*)
+
+(*******************************************************************************
+STUBS
+*******************************************************************************)
+
+fun next_var(X: var) : var = X + 1
+fun t0 : var = 1000 (* An arbitrary number greater than max # of parameters *)
+fun t1 : var = next_var(t0)
+fun t2 : var = next_var(t1)
+fun t3 : var = next_var(t2)
+fun a0 : var = 1
+fun a1 : var = 2
+fun a2 : var = 3
+
+rel size1_stub(method)
+rel size2_stub(method)
+rel size3_stub(method)
+rel size4_stub(method)
+rel size5_stub(method)
+
+not_exceptional_iindex(M, 0),
+cfg_entry(M, synthetic_entry),
+cfg_is_pred_of(M, synthetic_entry, 0),
+cfg_exit(M, 0) :-
+  size1_stub(M),
+  cipa_reach_method(M).
+
+not_exceptional_iindex(M, 0),
+not_exceptional_iindex(M, 1),
+cfg_entry(M, synthetic_entry),
+cfg_is_pred_of(M, synthetic_entry, 0),
+cfg_is_pred_of(M, 0, 1),
+cfg_exit(M, 1) :-
+  size2_stub(M),
+  cipa_reach_method(M).
+
+not_exceptional_iindex(M, 0),
+not_exceptional_iindex(M, 1),
+not_exceptional_iindex(M, 2),
+cfg_entry(M, synthetic_entry),
+cfg_is_pred_of(M, synthetic_entry, 0),
+cfg_is_pred_of(M, 0, 1),
+cfg_is_pred_of(M, 1, 2),
+cfg_exit(M, 2) :-
+  size3_stub(M),
+  cipa_reach_method(M).
+
+not_exceptional_iindex(M, 0),
+not_exceptional_iindex(M, 1),
+not_exceptional_iindex(M, 2),
+not_exceptional_iindex(M, 3),
+cfg_entry(M, synthetic_entry),
+cfg_is_pred_of(M, synthetic_entry, 0),
+cfg_is_pred_of(M, 0, 1),
+cfg_is_pred_of(M, 1, 2),
+cfg_is_pred_of(M, 2, 3),
+cfg_exit(M, 3) :-
+  size4_stub(M),
+  cipa_reach_method(M).
+
+not_exceptional_iindex(M, 0),
+not_exceptional_iindex(M, 1),
+not_exceptional_iindex(M, 2),
+not_exceptional_iindex(M, 3),
+not_exceptional_iindex(M, 4),
+cfg_entry(M, synthetic_entry),
+cfg_is_pred_of(M, synthetic_entry, 0),
+cfg_is_pred_of(M, 0, 1),
+cfg_is_pred_of(M, 1, 2),
+cfg_is_pred_of(M, 2, 3),
+cfg_is_pred_of(M, 3, 4),
+cfg_exit(M, 4) :-
+  size5_stub(M),
+  cipa_reach_method(M).
+
+(*******************************************************************************
+  Return-string stubs: These just create a new string and return it.
+*******************************************************************************)
+
+@edb rel return_string_stub(method)
+
+return_string_stub("< Primordial, Ljava/util/AbstractCollection, toString()Ljava/lang/String; >").
+return_string_stub("< Primordial, Ljava/util/AbstractMap, toString()Ljava/lang/String; >").
+return_string_stub("< Primordial, Ljava/security/PermissionCollection, toString()Ljava/lang/String; >").
+return_string_stub("< Primordial, Ljava/math/BigInteger, toString(I)Ljava/lang/String; >").
+return_string_stub("< Primordial, Ljava/lang/Double, toString(D)Ljava/lang/String; >").
+return_string_stub("< Primordial, Ljava/security/Provider, toString()Ljava/lang/String; >").
+return_string_stub("< Primordial, Ljava/text/AttributeEntry, toString()Ljava/lang/String; >").
+return_string_stub("< Primordial, Ljava/lang/String, toString()Ljava/lang/String; >").
+return_string_stub("< Primordial, Ljava/util/Hashtable, toString()Ljava/lang/String; >").
+return_string_stub("< Primordial, Ljava/lang/String, valueOf(Ljava/lang/Object;)Ljava/lang/String; >").
+return_string_stub("< Primordial, Ljava/security/cert/TrustAnchor, toString()Ljava/lang/String; >").
+return_string_stub("< Primordial, Ljava/util/Hashtable$Entry, toString()Ljava/lang/String; >").
+return_string_stub("< Primordial, Ljava/util/Collections$UnmodifiableMap$UnmodifiableEntrySet$UnmodifiableEntry, toString()Ljava/lang/String; >").
+return_string_stub("< Primordial, Ljava/text/Format, format(Ljava/lang/Object;)Ljava/lang/String; >").
+return_string_stub("< Primordial, Ljava/text/DateFormat, format(Ljava/util/Date;)Ljava/lang/String; >").
+return_string_stub("< Primordial, Ljava/text/MessageFormat, format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; >").
+
+size2_stub(M) :- return_string_stub(M).
+
+instr_new("< Primordial, Ljava/util/AbstractCollection, toString()Ljava/lang/String; >", 0, t0, java_type_ref("<Primordial,Ljava/lang/String>")).
+instr_new("< Primordial, Ljava/util/AbstractMap, toString()Ljava/lang/String; >", 0, t0, java_type_ref("<Primordial,Ljava/lang/String>")).
+instr_new("< Primordial, Ljava/security/PermissionCollection, toString()Ljava/lang/String; >", 0, t0, java_type_ref("<Primordial,Ljava/lang/String>")).
+instr_new("< Primordial, Ljava/math/BigInteger, toString(I)Ljava/lang/String; >", 0, t0, java_type_ref("<Primordial,Ljava/lang/String>")).
+instr_new("< Primordial, Ljava/lang/Double, toString(D)Ljava/lang/String; >", 0, t0, java_type_ref("<Primordial,Ljava/lang/String>")).
+instr_new("< Primordial, Ljava/security/Provider, toString()Ljava/lang/String; >", 0, t0, java_type_ref("<Primordial,Ljava/lang/String>")).
+instr_new("< Primordial, Ljava/text/AttributeEntry, toString()Ljava/lang/String; >", 0, t0, java_type_ref("<Primordial,Ljava/lang/String>")).
+instr_new("< Primordial, Ljava/lang/String, toString()Ljava/lang/String; >", 0, t0, java_type_ref("<Primordial,Ljava/lang/String>")).
+instr_new("< Primordial, Ljava/util/Hashtable, toString()Ljava/lang/String; >", 0, t0, java_type_ref("<Primordial,Ljava/lang/String>")).
+instr_new("< Primordial, Ljava/lang/String, valueOf(Ljava/lang/Object;)Ljava/lang/String; >", 0, t0, java_type_ref("<Primordial,Ljava/lang/String>")).
+instr_new("< Primordial, Ljava/security/cert/TrustAnchor, toString()Ljava/lang/String; >", 0, t0, java_type_ref("<Primordial,Ljava/lang/String>")).
+instr_new("< Primordial, Ljava/util/Hashtable$Entry, toString()Ljava/lang/String; >", 0, t0, java_type_ref("<Primordial,Ljava/lang/String>")).
+instr_new("< Primordial, Ljava/util/Collections$UnmodifiableMap$UnmodifiableEntrySet$UnmodifiableEntry, toString()Ljava/lang/String; >", 0, t0, java_type_ref("<Primordial,Ljava/lang/String>")).
+instr_new("< Primordial, Ljava/text/Format, format(Ljava/lang/Object;)Ljava/lang/String; >", 0, t0, java_type_ref("<Primordial,Ljava/lang/String>")).
+instr_new("< Primordial, Ljava/text/DateFormat, format(Ljava/util/Date;)Ljava/lang/String; >", 0, t0, java_type_ref("<Primordial,Ljava/lang/String>")).
+instr_new("< Primordial, Ljava/text/MessageFormat, format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; >", 0, t0, java_type_ref("<Primordial,Ljava/lang/String>")).
+
+instr_return("< Primordial, Ljava/util/AbstractCollection, toString()Ljava/lang/String; >", 1, some(t0)).
+instr_return("< Primordial, Ljava/util/AbstractMap, toString()Ljava/lang/String; >", 1, some(t0)).
+instr_return("< Primordial, Ljava/security/PermissionCollection, toString()Ljava/lang/String; >", 1, some(t0)).
+instr_return("< Primordial, Ljava/math/BigInteger, toString(I)Ljava/lang/String; >", 1, some(t0)).
+instr_return("< Primordial, Ljava/lang/Double, toString(D)Ljava/lang/String; >", 1, some(t0)).
+instr_return("< Primordial, Ljava/security/Provider, toString()Ljava/lang/String; >", 1, some(t0)).
+instr_return("< Primordial, Ljava/text/AttributeEntry, toString()Ljava/lang/String; >", 1, some(t0)).
+instr_return("< Primordial, Ljava/lang/String, toString()Ljava/lang/String; >", 1, some(t0)).
+instr_return("< Primordial, Ljava/util/Hashtable, toString()Ljava/lang/String; >", 1, some(t0)).
+instr_return("< Primordial, Ljava/lang/String, valueOf(Ljava/lang/Object;)Ljava/lang/String; >", 1, some(t0)).
+instr_return("< Primordial, Ljava/security/cert/TrustAnchor, toString()Ljava/lang/String; >", 1, some(t0)).
+instr_return("< Primordial, Ljava/util/Hashtable$Entry, toString()Ljava/lang/String; >", 1, some(t0)).
+instr_return("< Primordial, Ljava/util/Collections$UnmodifiableMap$UnmodifiableEntrySet$UnmodifiableEntry, toString()Ljava/lang/String; >", 1, some(t0)).
+instr_return("< Primordial, Ljava/text/Format, format(Ljava/lang/Object;)Ljava/lang/String; >", 1, some(t0)).
+instr_return("< Primordial, Ljava/text/DateFormat, format(Ljava/util/Date;)Ljava/lang/String; >", 1, some(t0)).
+instr_return("< Primordial, Ljava/text/MessageFormat, format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; >", 1, some(t0)).
+
+(*******************************************************************************
+  Return-this stubs: These just return `this`.
+*******************************************************************************)
+
+@edb rel return_this_stub(method)
+
+return_this_stub("< Primordial, Ljava/lang/String, toLowerCase()Ljava/lang/String; >").
+return_this_stub("< Primordial, Ljava/lang/String, toLowerCase(Ljava/util/Locale;)Ljava/lang/String; >").
+return_this_stub("< Primordial, Ljava/lang/String, replace(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Ljava/lang/String; >").
+
+size1_stub(M) :- return_this_stub(M).
+
+instr_return("< Primordial, Ljava/lang/String, toLowerCase()Ljava/lang/String; >", 0, some(a0)).
+instr_return("< Primordial, Ljava/lang/String, toLowerCase(Ljava/util/Locale;)Ljava/lang/String; >", 0, some(a0)).
+instr_return("< Primordial, Ljava/lang/String, replace(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Ljava/lang/String; >", 0, some(a0)).
+
+(*******************************************************************************
+  HashMap stubs
+*******************************************************************************)
+
+(*
+(* putForCreate
+
+  0: t0 = a0.table;
+  1: t2 = t0[t1];
+  2: t2.value = a2;
+  3: return;
+*)
+
+fun hm_table_field : field = "< Primordial, Ljava/util/HashMap, table, <Primordial,[Ljava/util/HashMap$Entry> >"
+fun hm_entry_value_field : field = "< Primordial, Ljava/util/HashMap$Entry, value, <Primordial,Ljava/lang/Object> >"
+
+fun hm_putForCreate : method = "< Primordial, Ljava/util/HashMap, putForCreate(Ljava/lang/Object;Ljava/lang/Object;)V >"
+
+size4_stub(hm_putForCreate).
+
+instr_get(hm_putForCreate, 0, t0, a0, hm_table_field).
+instr_array_load(hm_putForCreate, 1, t2, t0, t1).
+instr_put(hm_putForCreate, 2, t2, hm_entry_value_field, a2).
+instr_return(hm_putForCreate, 3, none).
+
+(* put
+
+  0: t0 = a0.addEntry(t1, a1, a2, t1);
+  1: return a2;
+*)
+
+fun hm_put : method = "< Primordial, Ljava/util/HashMap, put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; >"
+
+size2_stub(hm_put).
+
+instr_invoke_dispatch(hm_put, 0, none, "< Primordial, Ljava/util/HashMap, addEntry(ILjava/lang/Object;Ljava/lang/Object;I)V >", [a0, t1, a1, a2, t1]).
+instr_return(hm_put, 1, some(a2)).
+*)
+
+(*******************************************************************************
+  TreeMap stubs
+*******************************************************************************)
+
+(*
+(* put
+
+  0: t0 = a0.root;
+  1: t0.setValue(a2);
+  2: return a2;
+*)
+
+fun tm_root_field : field = "< Primordial, Ljava/util/TreeMap, root, <Primordial,Ljava/util/TreeMap$Entry> >"
+
+fun tm_put : method = "< Primordial, Ljava/util/TreeMap, put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; >"
+
+size3_stub(tm_put).
+
+instr_get(tm_put, 0, t0, a0, tm_root_field).
+instr_invoke_dispatch(tm_put, 1, none, "< Primordial, Ljava/util/TreeMap$Entry, setValue(Ljava/lang/Object;)Ljava/lang/Object; >", [t0, a2]).
+instr_return(hm_put, 2, some(a2)).
+
+(* get
+
+  0: t0 = a0.root;
+  1: t1 = t0.getValue();
+  2: return t1;
+*)
+
+fun tm_get : method = "< Primordial, Ljava/util/TreeMap, get(Ljava/lang/Object;)Ljava/lang/Object; >"
+
+size3_stub(tm_get).
+
+instr_get(tm_get, 0, t0, a0, tm_root_field).
+instr_invoke_dispatch(tm_get, 1, some(t1), "< Primordial, Ljava/util/TreeMap$Entry, getValue()Ljava/lang/Object; >", [t0]).
+instr_return(tm_get, 2, some(t1)).
+*)
+
+(*******************************************************************************
+  Hashtable stubs
+*******************************************************************************)
+
+(* put
+
+  0: t0 = a0.table;
+  1: t1 = new Entry;
+  2: t1.value = a2;
+  3: t0[t2] = t1;
+  4: return a2;
+*)
+
+fun ht_table_field : field = "< Primordial, Ljava/util/Hashtable, table, <Primordial,[Ljava/util/Hashtable$Entry> >"
+fun ht_entry_value_field : field = "< Primordial, Ljava/util/Hashtable$Entry, value, <Primordial,Ljava/lang/Object> >"
+
+fun ht_put : method = "< Primordial, Ljava/util/Hashtable, put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; >"
+
+size5_stub(ht_put).
+
+instr_get(ht_put, 0, t0, a0, ht_table_field).
+instr_new(ht_put, 1, t1, java_type_ref("<Primordial,Ljava/util/Hashtable$Entry>")).
+instr_put(ht_put, 2, t1, ht_entry_value_field, a2).
+instr_array_store(ht_put, 3, t0, t2, t1).
+instr_return(ht_put, 4, some(a2)).
+
+(* get
+
+  0: t0 = a0.table;
+  1: t1 = t0[t2];
+  2: t3 = t1.value;
+  3: return t3;
+*)
+
+fun ht_get : method = "< Primordial, Ljava/util/Hashtable, get(Ljava/lang/Object;)Ljava/lang/Object; >"
+
+size4_stub(ht_get).
+
+instr_get(ht_get, 0, t0, a0, ht_table_field).
+instr_array_load(ht_get, 1, t1, t0, t2).
+instr_get(ht_get, 2, t3, t1, ht_entry_value_field).
+instr_return(ht_get, 3, some(t3)).
+
+(*******************************************************************************
+  Native stubs
+*******************************************************************************)
+
+fun object_array_type : java_type = java_type_array(java_type_ref("<Primordial,Ljava/lang/Object>"))
+
+(* void java.lang.reflect.Array::set(Object array, int index, Object value)
+  
+  0: t0 = (Object[]) a0;
+  1: t0[t1] = a2;
+  2: return;
+*)
+
+fun array_set : method = "< Primordial, Ljava/lang/reflect/Array, set(Ljava/lang/Object;ILjava/lang/Object;)V >"
+
+size3_stub(array_set).
+
+instr_check_cast(array_set, 0, t0, a0, object_array_type).
+instr_array_store(array_set, 1, t0, t1, a2).
+instr_return(array_set, 2, none).
+
+(* Object java.security.AccessController::doPrivileged (of various flavors)
+  
+  0: t0 = a0.run();
+  1: return t0;
+*)
+
+fun ac_dp1 : method = "< Primordial, Ljava/security/AccessController, doPrivileged(Ljava/security/PrivilegedAction;)Ljava/lang/Object; >"
+fun ac_dp2 : method = "< Primordial, Ljava/security/AccessController, doPrivileged(Ljava/security/PrivilegedExceptionAction;)Ljava/lang/Object; >"
+fun ac_dp3 : method = "< Primordial, Ljava/security/AccessController, doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; >"
+fun ac_dp4 : method = "< Primordial, Ljava/security/AccessController, doPrivileged(Ljava/security/PrivilegedExceptionAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; >"
+
+size2_stub(ac_dp1).
+size2_stub(ac_dp2).
+size2_stub(ac_dp3).
+size2_stub(ac_dp4).
+
+instr_invoke_dispatch(ac_dp1, 0, some(t0), "< Primordial, Ljava/security/PrivilegedAction, run()Ljava/lang/Object; >", [a0]). 
+instr_invoke_dispatch(ac_dp3, 0, some(t0), "< Primordial, Ljava/security/PrivilegedAction, run()Ljava/lang/Object; >", [a0]). 
+instr_invoke_dispatch(ac_dp2, 0, some(t0), "< Primordial, Ljava/security/PrivilegedExceptionAction, run()Ljava/lang/Object; >", [a0]). 
+instr_invoke_dispatch(ac_dp4, 0, some(t0), "< Primordial, Ljava/security/PrivilegedExceptionAction, run()Ljava/lang/Object; >", [a0]).
+
+instr_return(ac_dp1, 1, some(t0)).
+instr_return(ac_dp2, 1, some(t0)).
+instr_return(ac_dp3, 1, some(t0)).
+instr_return(ac_dp4, 1, some(t0)).
+
+(* Object java.lang.Object.clone()
+  
+  0: return a0;
+*)
+
+fun object_clone : method = "< Primordial, Ljava/lang/Object, clone()Ljava/lang/Object; >"
+
+size1_stub(object_clone).
+
+instr_return(object_clone, 0, some(a0)).
+
+(* void java.lang.System::arraycopy(Object src, int srcPos, Object dest, int destPos, int length)
+
+  0: t0 = (Object[]) a0;
+  1: t1 = (Object[]) a2;
+  2: t2 = t0[t3];
+  3: t1[t3] = t2;
+  4: return;
+*)
+
+fun system_arrcp : method = "< Primordial, Ljava/lang/System, arraycopy(Ljava/lang/Object;ILjava/lang/Object;II)V >"
+
+size5_stub(system_arrcp).
+
+instr_check_cast(system_arrcp, 0, t0, a0, object_array_type).
+instr_check_cast(system_arrcp, 1, t1, a2, object_array_type).
+instr_array_load(system_arrcp, 2, t2, t0, t3).
+instr_array_store(system_arrcp, 3, t1, t3, t2).
+instr_return(system_arrcp, 4, none).
+
+(* void java.lang.Thread.start()
+
+  0: a0.run();
+  return;
+*)
+
+fun thread_start : method = "< Primordial, Ljava/lang/Thread, start()V >"
+
+size2_stub(thread_start).
+
+instr_invoke_dispatch(thread_start, 0, none, "< Primordial, Ljava/lang/Thread, run()V >", [a0]).
+instr_return(thread_start, 1, none).

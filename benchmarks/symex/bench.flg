@@ -1,0 +1,1201 @@
+type ('k, 'v) map = ('k * 'v) list
+
+fun get(K:'k, Map:('k, 'v) map) : 'v option =
+  match Map with
+  | [] => none
+  | (K2, V) :: Rest => if K = K2 then some(V) else get(K, Rest)
+  end
+
+fun put(K:'k, V:'v, Map:('k, 'v) map) : ('k, 'v) map = (K, V) :: Map
+
+fun fail(Msg: 'a) : 'b =
+  let _ = print(Msg) in match true with false => fail(Msg) end
+
+fun assert(B: bool, Msg: 'a) : bool = B || fail(Msg)
+
+(******************************************************************************)
+
+type condition =
+  | cond_ne
+  | cond_eq
+  | cond_slt
+  | cond_sle
+  | cond_sgt
+  | cond_sge
+  | cond_ult
+  | cond_ule
+  | cond_ugt
+  | cond_uge
+
+type const_ =
+  | c_i1(i32)
+  | c_i8(i32)
+  | c_i16(i32)
+  | c_i32(i32)
+  | c_i64(i64)
+  | c_func(string)
+
+(******************************************************************************)
+
+@disk
+@edb rel add_instruction(string)
+
+@disk
+@edb rel add_instruction_first_operand(string, string)
+
+@disk
+@edb rel add_instruction_second_operand(string, string)
+
+@disk
+@edb rel and_instruction(string)
+
+@disk
+@edb rel and_instruction_first_operand(string, string)
+
+@disk
+@edb rel and_instruction_second_operand(string, string)
+
+@disk
+@edb rel alloca_instruction(string)
+
+@disk
+@edb rel alloca_instruction_type(string, string)
+
+@disk
+@edb rel array_type(string)
+
+@disk
+@edb rel array_type_has_component(string, string)
+
+@disk
+@edb rel array_type_has_size(string, i32)
+
+@disk
+@edb rel basicblock_preds(string, string)
+
+@disk
+@edb rel bitcast_instruction(string)
+
+@disk
+@edb rel bitcast_instruction_from_operand(string, string)
+
+@disk
+@edb rel br_cond_instruction_condition(string, string)
+
+@disk
+@edb rel br_cond_instruction(string)
+
+@disk
+@edb rel br_cond_instruction_iffalse_label(string, string)
+
+@disk
+@edb rel br_cond_instruction_iftrue_label(string, string)
+
+@disk 
+@edb rel br_uncond_instruction(string)
+
+@disk
+@edb rel br_uncond_instruction_dest_label(string, string)
+
+@disk
+@edb rel call_instruction(string)
+
+@disk
+@edb rel call_instruction_arg(string, i32, string)
+
+@disk
+@edb rel call_instruction_fn_operand(string, string)
+
+@disk
+@edb rel constant(string)
+
+@disk
+@edb rel constant_has_value(string, const_)
+
+@disk
+@edb rel function_has_name(string, string)
+
+@disk
+@edb rel getelementptr_instruction_base(string, string)
+
+@disk
+@edb rel getelementptr_instruction(string)
+
+@disk
+@edb rel getelementptr_instruction_index(string, i32, string)
+
+@disk
+@edb rel getelementptr_instruction_is_inbounds(string)
+
+@disk
+@edb rel getelementptr_instruction_nindices(string, i32)
+
+@disk
+@edb rel icmp_instruction(string)
+
+@disk
+@edb rel icmp_instruction_condition(string, condition)
+
+@disk
+@edb rel icmp_instruction_first_operand(string, string)
+
+@disk
+@edb rel icmp_instruction_second_operand(string, string)
+
+@disk
+@edb rel instruction_assigns_to(string, string)
+
+@disk
+@edb rel instruction_bb_entry(string, string)
+
+@disk
+@edb rel instruction_in_function(string, string)
+
+@disk
+@edb rel load_instruction(string)
+
+@disk
+@edb rel load_instruction_address(string, string)
+
+@disk
+@edb rel lshr_instruction(string)
+
+@disk
+@edb rel lshr_instruction_first_operand(string, string)
+
+@disk
+@edb rel lshr_instruction_second_operand(string, string)
+
+@disk
+@edb rel mul_instruction(string)
+
+@disk
+@edb rel mul_instruction_first_operand(string, string)
+
+@disk
+@edb rel mul_instruction_second_operand(string, string)
+
+@disk
+@edb rel next_instruction(string, string)
+
+@disk
+@edb rel phi_instruction(string)
+
+@disk
+@edb rel phi_instruction_pair_label(string, i32, string)
+
+@disk
+@edb rel phi_instruction_pair_value(string, i32, string)
+
+@disk
+@edb rel pointer_type(string)
+
+@disk
+@edb rel ret_instruction(string)
+
+@disk
+@edb rel sdiv_instruction(string)
+
+@disk
+@edb rel sdiv_instruction_first_operand(string, string)
+
+@disk
+@edb rel sdiv_instruction_second_operand(string, string)
+
+@disk
+@edb rel shl_instruction(string)
+
+@disk
+@edb rel shl_instruction_first_operand(string, string)
+
+@disk
+@edb rel shl_instruction_second_operand(string, string)
+
+@disk
+@edb rel srem_instruction(string)
+
+@disk
+@edb rel srem_instruction_first_operand(string, string)
+
+@disk
+@edb rel srem_instruction_second_operand(string, string)
+
+@disk
+@edb rel select_instruction(string)
+
+@disk
+@edb rel select_instruction_condition(string, string)
+
+@disk
+@edb rel select_instruction_first_operand(string, string)
+
+@disk
+@edb rel select_instruction_second_operand(string, string)
+
+@disk
+@edb rel sext_instruction(string)
+
+@disk
+@edb rel sext_instruction_from_operand(string, string)
+
+@disk
+@edb rel store_instruction(string)
+
+@disk
+@edb rel store_instruction_address(string, string)
+
+@disk
+@edb rel store_instruction_value(string, string)
+
+@disk
+@edb rel sub_instruction(string)
+
+@disk
+@edb rel sub_instruction_first_operand(string, string)
+
+@disk
+@edb rel sub_instruction_second_operand(string, string)
+
+@disk
+@edb rel type_has_size(string, i32)
+
+@disk
+@edb rel unreachable_instruction(string)
+
+@disk
+@edb rel udiv_instruction(string)
+
+@disk
+@edb rel udiv_instruction_first_operand(string, string)
+
+@disk
+@edb rel udiv_instruction_second_operand(string, string)
+
+@disk
+@edb rel urem_instruction(string)
+
+@disk
+@edb rel urem_instruction_first_operand(string, string)
+
+@disk
+@edb rel urem_instruction_second_operand(string, string)
+
+@disk
+@edb rel variable(string)
+
+@disk
+@edb rel xor_instruction(string)
+
+@disk
+@edb rel xor_instruction_first_operand(string, string)
+
+@disk
+@edb rel xor_instruction_second_operand(string, string)
+
+@disk
+@edb rel zext_instruction(string)
+
+@disk
+@edb rel zext_instruction_from_operand(string, string)
+
+(******************************************************************************)
+
+type 'a conc_or_symb =
+  | c('a)
+  | s('a smt)
+
+fun coerce_symbolic(X: i32 conc_or_symb) : i32 smt =
+  match X with
+  | c(X) => `X`
+  | s(X) => X
+  end
+
+type scalar = i32 conc_or_symb
+
+type addr = i32 sym
+
+type ref = addr * scalar
+
+type val =
+  | v_int(scalar)
+  | v_ref(ref)
+
+type region = (i32, i32) array
+
+type alloc =
+  | conc_alloc(scalar, (i32, val) map)
+  | symb_alloc(i32 smt, region smt)
+
+type state = {
+  store : (string, val) map;
+  mem : (addr, alloc) map;
+  path_condition : bool smt list;
+}
+
+fun assume_condition(X: bool smt, St: state) : state option =
+  let Pc = path_condition(St) in
+  let Pc = X :: Pc in
+  if is_sat_opt(Pc, none) = some(true)
+  then some({ St with path_condition=Pc })
+  else none
+
+fun assume_not_zero(X: scalar, St: state) : state option =
+  match X with
+  | c(I) => if I = 0 then none else some(St)
+  | s(S) => assume_condition(`~(S #= 0)`, St)
+  end
+
+fun lookup_store(X: string, St: state) : val option =
+  get(X, store(St))
+
+fun update_store(X: string, V: val, St: state) : state =
+  { St with store=put(X, V, store(St)) }
+
+fun lookup_mem(X: addr, St: state) : alloc option = get(X, mem(St))
+
+fun update_mem(X: addr, A: alloc, St: state) : state =
+  { St with mem=put(X, A, mem(St)) }
+
+fun update_path_condition(Phi: bool smt, St: state) : state =
+  let Old_pc = path_condition(St) in
+  { St with path_condition=Phi :: Old_pc }
+
+fun flip_scalar(X: scalar, St: state) : (scalar * state) =
+  match X with
+  | c(I) =>
+    (if I = 0 then c(1) else c(0), St)
+  | s(S) =>
+    (s(`#if S #= 0 then 1 else 0`), St)
+  end
+
+(* This will fail if it tries to encode an allocation containing pointers *)
+fun encode_region(A: (i32, val) map, Base: region smt) : region smt =
+  match A with
+  | [] => Base
+  | (K, v_int(V)) :: Rest =>
+    let Rest = encode_region(Rest, Base) in
+    let V = coerce_symbolic(V) in
+    `array_store(Rest, K, V)`
+  end
+
+fun coerce_symbolic_alloc(Addr: addr, Alloc: alloc, St: state) : i32 smt * region smt * state =
+  match Alloc with
+  | symb_alloc(N, Region) => (N, Region, St)
+  | conc_alloc(N, A) =>
+    let Base = `#{St}[region]` in
+    let Region = encode_region(A, Base) in
+    let Handle = `#{(St, Base)}[region]` in
+    let N = coerce_symbolic(N) in
+    let St = update_path_condition(`Handle #= Region`, St) in
+    let St = update_mem(Addr, symb_alloc(N, Handle), St) in
+    (N, Handle, St)
+  end
+
+fun in_bounds(Idx: i32 smt, Size: i32 smt) : bool smt =
+   `bv_sge(Idx, 0) /\ bv_slt(Idx, Size)`
+
+fun check_in_bounds(Off: i32, N: scalar, St: state) : state option =
+  if Off < 0 then none
+  else
+    match N with
+    | c(N) => if Off >= N then none else some(St)
+    | s(N) => assume_condition(`bv_slt(Off, N)`, St)
+    end
+
+fun lookup_mem_cell(X: addr, Off: scalar, St: state) : (val * state) option =
+  match lookup_mem(X, St) with
+  | none => none
+  | some(Alloc) =>
+    match (Alloc, Off) with
+    | (conc_alloc(N, A), c(Off)) =>
+      if Off < 0 then none
+      else
+        match check_in_bounds(Off, N, St) with
+        | none => none
+        | some(St) =>
+          match get(Off, A) with
+          | none => none (* uninitialized memory *)
+          | some(V) => some((V, St))
+          end
+        end
+    | (_, _) =>
+      let (N, Region, St) = coerce_symbolic_alloc(X, Alloc, St) in
+      let Off = coerce_symbolic(Off) in
+      match assume_condition(in_bounds(Off, N), St) with
+      | some(St) =>
+        let V = s(`array_select(Region, Off)`) in
+        some((v_int(V), St))
+      | none => none
+      end
+    end
+  end
+
+fun update_mem_cell(X: addr, Off: scalar, V: val, St: state) : state option =
+  match lookup_mem(X, St) with
+  | none => none
+  | some(Alloc) =>
+    match (Alloc, Off) with
+    | (conc_alloc(N, A), c(Off)) =>
+      if Off < 0 then none
+      else
+        match check_in_bounds(Off, N, St) with
+        | none => none
+        | some(St) => some(update_mem(X, conc_alloc(N, put(Off, V, A)), St))
+        end
+    | (_, _) =>
+      let (N, Region, St) = coerce_symbolic_alloc(X, Alloc, St) in
+      let Off = coerce_symbolic(Off) in
+      (* This will fail if trying to put a pointer in a symbolic array *)
+      let v_int(V) = V in
+      let V = coerce_symbolic(V) in
+      let Handle = `#{St}[region]` in
+      let St = update_path_condition(`Handle #= array_store(Region, Off, V)`, St) in
+      let St = update_mem(X, symb_alloc(N, Handle), St) in
+      assume_condition(in_bounds(Off, N), St)
+    end
+  end
+
+fun allocate(Nwords: scalar, St: state) : (addr * state) =
+  let Addr = #{St}[i32] in  
+  let Alloc = conc_alloc(Nwords, []) in
+  let St = update_mem(Addr, Alloc, St) in
+  (Addr, St)
+
+fun new_state : state = {
+  store = [];
+  mem = [];
+  path_condition = [];
+}
+
+(******************************************************************************)
+
+fun malloc_name : string = "@malloc"
+fun symexec_assert_name : string = "@symexec_assert"
+fun symexec_assume_name : string = "@symexec_assume"
+fun symexec_new_int_name : string = "@symexec_new_int"
+
+@edb rel is_special_function(string)
+
+is_special_function(malloc_name).
+is_special_function(symexec_assert_name).
+is_special_function(symexec_assume_name).
+is_special_function(symexec_new_int_name).
+
+fun max_steps : i32 = 10000
+
+type path = string list
+
+rel stepping(string, state, i32, path)
+
+rel stepped(string, state, i32, path)
+
+stepped(Instr, St, D + 1, Instr :: P) :-
+  stepping(Instr, St, D, P),
+  D < max_steps.
+
+rel no_fall_thru(string)
+
+no_fall_thru(Instr) :-
+  stepped(Instr, _, _, _),
+  next_instruction(Instr, Next),
+  !stepped(Next, _, _, _).
+
+(*******************************************************************************
+  Value lookup 
+*******************************************************************************)
+
+fun has_value_opt(X: string, St: state) : val option =
+  if variable(X) then lookup_store(X, St)
+  else
+    let [C] = constant_has_value(X, ??) in
+    let V =
+      match C with
+      | c_i1(I) => v_int(c(I & 0x1))
+      | c_i8(I) => v_int(c(I))
+      | c_i16(I) => v_int(c(I))
+      | c_i32(I) => v_int(c(I))
+      | c_i64(I) => v_int(c(i64_to_i32(I)))
+      end in
+    some(V)
+
+@topdown
+rel has_value(string, state, val)
+
+has_value(X, St, V) :- has_value_opt(X, St) = some(V). 
+
+(*******************************************************************************
+  Entry 
+*******************************************************************************)
+
+@bottomup
+rel has_same_bb_pred(string)
+
+has_same_bb_pred(Instr) :-
+  next_instruction(Pred, Instr),
+  instruction_bb_entry(Pred, Bb),
+  instruction_bb_entry(Instr, Bb).
+
+@bottomup
+rel bb_has_first_instruction(string, string)
+
+bb_has_first_instruction(Bb, Instr) :-
+  instruction_bb_entry(Instr, Bb),
+  !unreachable_instruction(Instr),
+  !has_same_bb_pred(Instr).
+
+@bottomup
+rel function_has_first_instruction(string, string)
+
+function_has_first_instruction(Func, Instr) :-
+  bb_has_first_instruction(Bb, Instr),
+  instruction_in_function(Instr, Func),
+  !basicblock_preds(Bb, _).
+
+stepping(Instr, new_state, 0, []) :-
+  function_has_name(Func, "@main"),
+  function_has_first_instruction(Func, Instr).
+
+(*******************************************************************************
+  Alloca 
+*******************************************************************************)
+
+(*
+  Here we assume that all stack allocations are either for a 4-byte pointer or
+  an array of ints.
+*)
+
+rel alloca_nwords(string, i32)
+
+alloca_nwords(Instr, 1) :-
+  alloca_instruction_type(Instr, Ty),
+  !array_type(Ty).
+
+alloca_nwords(Instr, N) :-
+  alloca_instruction_type(Instr, Ty),
+  array_type(Ty),
+  array_type_has_size(Ty, N).
+
+stepping(Next, St2, D, P) :-
+  next_instruction(Instr, Next),
+  alloca_instruction(Instr),
+  stepped(Instr, St, D, P),
+  alloca_nwords(Instr, N),
+  instruction_assigns_to(Instr, Def),
+  St2 =
+    let (Addr, St) = allocate(c(N), St) in
+    let Ref = (Addr, c(0)) in
+    update_store(Def, v_ref(Ref), St).
+
+(*******************************************************************************
+  Malloc 
+*******************************************************************************)
+
+fun compute_udiv(X: scalar, Y: scalar, St: state) : (scalar * state) =
+  match (X, Y) with
+  | (c(X), c(Y)) => (c(i32_udiv(X, Y)), St)
+  | (_, _) =>
+    let X = coerce_symbolic(X) in
+    let Y = coerce_symbolic(Y) in
+    (s(`bv_udiv(X, Y)`), St)
+  end
+
+stepping(Next, St2, D, P) :-
+  next_instruction(Instr, Next),
+  call_instruction_fn_operand(Instr, F),
+  stepped(Instr, St, D, P),
+  constant_has_value(F, c_func(malloc_name)),
+  call_instruction_arg(Instr, 0, N),
+  has_value(N, St, v_int(V)),
+  instruction_assigns_to(Instr, Def),
+  St2 =
+    let (N, St) = compute_udiv(V, c(4), St) in
+    let (Addr, St) = allocate(N, St) in
+    update_store(Def, v_ref((Addr, c(0))), St).
+
+(*******************************************************************************
+  Addition 
+*******************************************************************************)
+
+fun compute_add(X: scalar, Y: scalar, St: state) : (scalar * state) =
+  match (X, Y) with
+  | (c(X), c(Y)) => (c(X + Y), St)
+  | (_, _) =>
+    let X = coerce_symbolic(X) in
+    let Y = coerce_symbolic(Y) in
+    (s(`bv_add(X, Y)`), St)
+  end
+
+stepping(Next, St2, D, P) :-
+  next_instruction(Instr, Next),
+  add_instruction_first_operand(Instr, Y),
+  stepped(Instr, St, D, P),
+  add_instruction_second_operand(Instr, Z),
+  has_value(Y, St, V1),
+  has_value(Z, St, V2),
+  instruction_assigns_to(Instr, X),
+  St2 =
+    let v_int(V1) = V1 in
+    let v_int(V2) = V2 in
+    let (V, Tmp) = compute_add(V1, V2, St) in
+    update_store(X, v_int(V), Tmp).
+
+(*******************************************************************************
+  Subtraction 
+*******************************************************************************)
+
+fun negate_scalar(X: scalar) : scalar =
+  match X with
+  | c(X) => c(-X)
+  | s(X) => s(`bv_neg(X)`)
+  end
+
+stepping(Next, St2, D, P) :-
+  next_instruction(Instr, Next),
+  sub_instruction_first_operand(Instr, Y),
+  stepped(Instr, St, D, P),
+  sub_instruction_second_operand(Instr, Z),
+  has_value(Y, St, v_int(V1)),
+  has_value(Z, St, v_int(V2)),
+  instruction_assigns_to(Instr, X),
+  St2 =
+    let (V, Tmp) = compute_add(V1, negate_scalar(V2), St) in
+    update_store(X, v_int(V), Tmp).
+
+(*******************************************************************************
+  Multiplication 
+*******************************************************************************)
+
+fun compute_mul(X: scalar, Y: scalar, St: state) : (scalar * state) =
+  match (X, Y) with
+  | (c(X), c(Y)) => (c(X * Y), St)
+  | (_, _) =>
+    let X = coerce_symbolic(X) in
+    let Y = coerce_symbolic(Y) in
+    (s(`bv_mul(X, Y)`), St)
+  end
+
+stepping(Next, St2, D, P) :-
+  next_instruction(Instr, Next),
+  mul_instruction_first_operand(Instr, Y),
+  stepped(Instr, St, D, P),
+  mul_instruction_second_operand(Instr, Z),
+  has_value(Y, St, v_int(V1)),
+  has_value(Z, St, v_int(V2)),
+  instruction_assigns_to(Instr, X),
+  St2 =
+    let (V, Tmp) = compute_mul(V1, V2, St) in
+    update_store(X, v_int(V), Tmp).
+
+(*******************************************************************************
+  Signed division 
+*******************************************************************************)
+
+fun compute_sdiv(X: scalar, Y: scalar, St: state) : (scalar * state) =
+  match (X, Y) with
+  | (c(X), c(Y)) => (c(X / Y), St)
+  | (_, _) =>
+    let X = coerce_symbolic(X) in
+    let Y = coerce_symbolic(Y) in
+    (s(`bv_sdiv(X, Y)`), St)
+  end
+
+stepping(Next, St2, D, P) :-
+  next_instruction(Instr, Next),
+  sdiv_instruction_first_operand(Instr, Y),
+  stepped(Instr, St, D, P),
+  sdiv_instruction_second_operand(Instr, Z),
+  has_value(Y, St, v_int(V1)),
+  has_value(Z, St, v_int(V2)),
+  instruction_assigns_to(Instr, X),
+  St2 =
+    let (V, Tmp) = compute_sdiv(V1, V2, St) in
+    update_store(X, v_int(V), Tmp).
+
+(*******************************************************************************
+  Unsigned division 
+*******************************************************************************)
+
+stepping(Next, St2, D, P) :-
+  next_instruction(Instr, Next),
+  udiv_instruction_first_operand(Instr, Y),
+  stepped(Instr, St, D, P),
+  udiv_instruction_second_operand(Instr, Z),
+  has_value(Y, St, v_int(V1)),
+  has_value(Z, St, v_int(V2)),
+  instruction_assigns_to(Instr, X),
+  St2 =
+    let (V, Tmp) = compute_udiv(V1, V2, St) in
+    update_store(X, v_int(V), Tmp).
+
+(*******************************************************************************
+  Signed remainder
+*******************************************************************************)
+
+fun compute_srem(X: scalar, Y: scalar, St: state) : (scalar * state) =
+  match (X, Y) with
+  | (c(X), c(Y)) => (c(X / Y), St)
+  | (_, _) =>
+    let X = coerce_symbolic(X) in
+    let Y = coerce_symbolic(Y) in
+    (s(`bv_srem(X, Y)`), St)
+  end
+
+stepping(Next, St2, D, P) :-
+  next_instruction(Instr, Next),
+  srem_instruction_first_operand(Instr, Y),
+  stepped(Instr, St, D, P),
+  srem_instruction_second_operand(Instr, Z),
+  has_value(Y, St, v_int(V1)),
+  has_value(Z, St, v_int(V2)),
+  instruction_assigns_to(Instr, X),
+  St2 =
+    let (V, Tmp) = compute_srem(V1, V2, St) in
+    update_store(X, v_int(V), Tmp).
+
+(*******************************************************************************
+  Unsigned remainder 
+*******************************************************************************)
+
+fun compute_urem(X: scalar, Y: scalar, St: state) : (scalar * state) =
+  match (X, Y) with
+  | (c(X), c(Y)) => (c(i32_urem(X, Y)), St)
+  | (_, _) =>
+    let X = coerce_symbolic(X) in
+    let Y = coerce_symbolic(Y) in
+    (s(`bv_urem(X, Y)`), St)
+  end
+
+stepping(Next, St2, D, P) :-
+  next_instruction(Instr, Next),
+  urem_instruction_first_operand(Instr, Y),
+  stepped(Instr, St, D, P),
+  urem_instruction_second_operand(Instr, Z),
+  has_value(Y, St, v_int(V1)),
+  has_value(Z, St, v_int(V2)),
+  instruction_assigns_to(Instr, X),
+  St2 =
+    let (V, Tmp) = compute_urem(V1, V2, St) in
+    update_store(X, v_int(V), Tmp).
+
+(*******************************************************************************
+  Bitwise and
+*******************************************************************************)
+
+fun compute_bitwise_and(X: scalar, Y: scalar, St: state) : scalar * state =
+  match (X, Y) with
+  | (c(X), c(Y)) => (c(X & Y), St)
+  | (_, _) =>
+    let X = coerce_symbolic(X) in
+    let Y = coerce_symbolic(Y) in
+    (s(`bv_and(X, Y)`), St)
+  end
+
+stepping(Next, St2, D, P) :-
+  next_instruction(Instr, Next),
+  and_instruction_first_operand(Instr, Y),
+  stepped(Instr, St, D, P),
+  and_instruction_second_operand(Instr, Z),
+  has_value(Y, St, v_int(V1)),
+  has_value(Z, St, v_int(V2)),
+  instruction_assigns_to(Instr, X),
+  St2 =
+    let (V, Tmp) = compute_bitwise_and(V1, V2, St) in
+    update_store(X, v_int(V), Tmp).
+
+(*******************************************************************************
+  Bitwise xor 
+*******************************************************************************)
+
+fun compute_xor(X: scalar, Y: scalar, St: state) : (scalar * state) =
+  match (X, Y) with
+  | (c(X), c(Y)) => (c(X ^ Y), St)
+  | (_, _) =>
+    let X = coerce_symbolic(X) in
+    let Y = coerce_symbolic(Y) in
+    (s(`bv_xor(X, Y)`), St)
+  end
+
+stepping(Next, St2, D, P) :-
+  next_instruction(Instr, Next),
+  xor_instruction_first_operand(Instr, Y),
+  stepped(Instr, St, D, P),
+  xor_instruction_second_operand(Instr, Z),
+  has_value(Y, St, v_int(V1)),
+  has_value(Z, St, v_int(V2)),
+  instruction_assigns_to(Instr, X),
+  St2 =
+    let (V, Tmp) = compute_xor(V1, V2, St) in
+    update_store(X, v_int(V), Tmp).
+
+(*******************************************************************************
+  Logical shift right 
+*******************************************************************************)
+
+fun compute_lshr(X: scalar, Y: scalar, St: state) : (scalar * state) =
+  match (X, Y) with
+  | (c(X), c(Y)) => (c(i32_lshr(X, Y)), St)
+  | (_, _) =>
+    let X = coerce_symbolic(X) in
+    let Y = coerce_symbolic(Y) in
+    (s(`bv_lshr(X, Y)`), St)
+  end
+
+stepping(Next, St2, D, P) :-
+  next_instruction(Instr, Next),
+  lshr_instruction_first_operand(Instr, Y),
+  stepped(Instr, St, D, P),
+  lshr_instruction_second_operand(Instr, Z),
+  has_value(Y, St, v_int(V1)),
+  has_value(Z, St, v_int(V2)),
+  instruction_assigns_to(Instr, X),
+  St2 =
+    let (V, Tmp) = compute_lshr(V1, V2, St) in
+    update_store(X, v_int(V), Tmp).
+
+(*******************************************************************************
+  Shift left 
+*******************************************************************************)
+
+fun compute_shl(X: scalar, Y: scalar, St: state) : (scalar * state) =
+  match (X, Y) with
+  | (c(X), c(Y)) => (c(i32_shl(X, Y)), St)
+  | (_, _) =>
+    let X = coerce_symbolic(X) in
+    let Y = coerce_symbolic(Y) in
+    (s(`bv_shl(X, Y)`), St)
+  end
+
+stepping(Next, St2, D, P) :-
+  next_instruction(Instr, Next),
+  shl_instruction_first_operand(Instr, Y),
+  stepped(Instr, St, D, P),
+  shl_instruction_second_operand(Instr, Z),
+  has_value(Y, St, v_int(V1)),
+  has_value(Z, St, v_int(V2)),
+  instruction_assigns_to(Instr, X),
+  St2 =
+    let (V, Tmp) = compute_shl(V1, V2, St) in
+    update_store(X, v_int(V), Tmp).
+
+(*******************************************************************************
+  Store 
+*******************************************************************************)
+
+rel memory_access_error(path)
+
+stepping(Next, St2, D, P) :-
+  next_instruction(Instr, Next),
+  store_instruction_address(Instr, X),
+  stepped(Instr, St, D, P),
+  has_value(X, St, v_ref((Addr, Off))),
+  store_instruction_value(Instr, Y),
+  has_value(Y, St, V),
+  some(St2) = update_mem_cell(Addr, Off, V, St).
+
+memory_access_error(P) :-
+  store_instruction_address(Instr, X),
+  stepped(Instr, St, _D, P),
+  has_value(X, St, v_ref((Addr, Off))),
+  store_instruction_value(Instr, Y),
+  has_value(Y, St, V),
+  none = update_mem_cell(Addr, Off, V, St).
+
+(*******************************************************************************
+  Load 
+*******************************************************************************)
+
+stepping(Next, update_store(Def, X, St2), D, P) :-
+  next_instruction(Instr, Next),
+  load_instruction_address(Instr, Y),
+  stepped(Instr, St, D, P),
+  has_value(Y, St, v_ref((Addr, Off))),
+  some((X, St2)) = lookup_mem_cell(Addr, Off, St),
+  instruction_assigns_to(Instr, Def).
+
+memory_access_error(P) :-
+  load_instruction_address(Instr, Y),
+  stepped(Instr, St, _D, P),
+  has_value(Y, St, v_ref((Addr, Off))),
+  none = lookup_mem_cell(Addr, Off, St).
+
+(*******************************************************************************
+  GEP
+*******************************************************************************)
+
+(* This is sort of a hack. *)
+stepping(Next, St2, D, P) :-
+  next_instruction(Instr, Next),
+  getelementptr_instruction_base(Instr, A),
+  stepped(Instr, St, D, P),
+  getelementptr_instruction_nindices(Instr, Num_idxs),
+  getelementptr_instruction_index(Instr, Num_idxs - 1, I),
+  has_value(A, St, v_ref((Addr, Off))),
+  has_value(I, St, v_int(V)),
+  instruction_assigns_to(Instr, Def),
+  St2 =
+    let (Offset, St) = compute_add(Off, V, St) in
+    update_store(Def, v_ref((Addr, Offset)), St).
+
+(*******************************************************************************
+  Signed extension 
+*******************************************************************************)
+
+(*
+  We treat this basically as a nop, since we coerce everything to 32-bit ints.
+*)
+stepping(Next, St2, D, P) :-
+  next_instruction(Instr, Next),
+  sext_instruction_from_operand(Instr, Y),
+  stepped(Instr, St, D, P),
+  has_value(Y, St, V),
+  instruction_assigns_to(Instr, X),
+  St2 = update_store(X, V, St).
+
+(*******************************************************************************
+  Unsigned extension 
+*******************************************************************************)
+
+(*
+  We treat this basically as a nop, since we coerce everything to 32-bit ints.
+*)
+stepping(Next, St2, D, P) :-
+  next_instruction(Instr, Next),
+  zext_instruction_from_operand(Instr, Y),
+  stepped(Instr, St, D, P),
+  has_value(Y, St, V),
+  instruction_assigns_to(Instr, X),
+  St2 = update_store(X, V, St).
+
+(*******************************************************************************
+  Bitcast
+*******************************************************************************)
+
+stepping(Next, St2, D, P) :-
+  next_instruction(Instr, Next),
+  bitcast_instruction_from_operand(Instr, Y),
+  stepped(Instr, St, D, P),
+  has_value(Y, St, V),
+  instruction_assigns_to(Instr, X),
+  St2 = update_store(X, V, St).
+
+(*******************************************************************************
+  Int comparison
+*******************************************************************************)
+
+fun compute_comparison(X: scalar, Y: scalar, Cond: condition, St: state) : (scalar * state) =
+  match (X, Y) with
+  | (c(X), c(Y)) =>
+    let Cmp = 
+      match Cond with
+      | cond_eq => X = Y
+      | cond_ne => X != Y
+      | cond_slt => X < Y
+      | cond_sle => X <= Y
+      | cond_sgt => X > Y
+      | cond_sge => X >= Y
+      | cond_ult => i32_ucmp(X, Y) = cmp_lt
+      | cond_ule => X = Y || i32_ucmp(X, Y) = cmp_lt
+      | cond_ugt => i32_ucmp(X, Y) = cmp_gt 
+      | cond_uge => X = Y || i32_ucmp(X, Y) = cmp_gt 
+      end in
+    (c(if Cmp then 1 else 0), St)
+  | (_, _) =>
+    let X = coerce_symbolic(X) in
+    let Y = coerce_symbolic(Y) in
+    let Cmp =
+      match Cond with
+      | cond_eq => `X #= Y`
+      | cond_ne => `~(X #= Y)`
+      | cond_slt => `bv_slt(X, Y)`
+      | cond_sle => `bv_sle(X, Y)`
+      | cond_sgt => `bv_sgt(X, Y)`
+      | cond_sge => `bv_sge(X, Y)`
+      | cond_ult => `bv_ult(X, Y)`
+      | cond_ule => `bv_ule(X, Y)`
+      | cond_ugt => `bv_ugt(X, Y)`
+      | cond_uge => `bv_uge(X, Y)`
+      end in
+    (s(`#if Cmp then 1 else 0`), St)
+  end
+
+stepping(Next, St2, D, P) :-
+  next_instruction(Instr, Next),
+  icmp_instruction_condition(Instr, Cond),
+  stepped(Instr, St, D, P),
+  icmp_instruction_first_operand(Instr, Op1),
+  icmp_instruction_second_operand(Instr, Op2),
+  has_value(Op1, St, v_int(V1)),
+  has_value(Op2, St, v_int(V2)),
+  instruction_assigns_to(Instr, X),
+  St2 =
+    let (V, St) = compute_comparison(V1, V2, Cond, St) in
+    update_store(X, v_int(V), St).
+
+(*******************************************************************************
+  Conditional jumps
+*******************************************************************************)
+
+stepping(Next, St2, D, P) :-
+  br_cond_instruction_condition(Instr, X),
+  br_cond_instruction_iftrue_label(Instr, Lab),
+  bb_has_first_instruction(Lab, Next),
+  stepped(Instr, St, D, P),
+  has_value(X, St, v_int(V)),
+  assume_not_zero(V, St) = some(St2).
+
+stepping(Next, St2, D, P) :-
+  br_cond_instruction_condition(Instr, X),
+  br_cond_instruction_iffalse_label(Instr, Lab),
+  bb_has_first_instruction(Lab, Next),
+  stepped(Instr, St, D, P),
+  has_value(X, St, v_int(V)),
+  some(St2) =
+    let (V, St) = flip_scalar(V, St) in
+    assume_not_zero(V, St).
+
+(*******************************************************************************
+  Unconditional jumps 
+*******************************************************************************)
+
+stepping(Next, St, D, P) :-
+  br_uncond_instruction_dest_label(Instr, Lab),
+  bb_has_first_instruction(Lab, Next),
+  stepped(Instr, St, D, P).
+
+(*******************************************************************************
+  Phi instruction 
+*******************************************************************************)
+
+stepping(Next, update_store(Def, Val, St), D, P) :-
+  next_instruction(Instr, Next),
+  phi_instruction(Instr),
+  stepped(Instr, St, D, P),
+  phi_instruction_pair_label(Instr, N, Block),
+  instruction_bb_entry(match P with _ :: Pred :: _ => Pred end, Block),
+  phi_instruction_pair_value(Instr, N, Op),
+  has_value(Op, St, Val),
+  instruction_assigns_to(Instr, Def).
+
+(*******************************************************************************
+  Select
+*******************************************************************************)
+
+@topdown
+rel compute_select(scalar, val, val, state, val, state)
+
+compute_select(c(0), _, V2, St, V2, St).
+compute_select(c(X), V1, _, St, V1, St) :-
+  X != 0.
+compute_select(s(C), v_int(I1), v_int(I2), St, v_int(s(`#if C #= 0 then V2 else V1`)), St) :-
+  V1 = coerce_symbolic(I1),
+  V2 = coerce_symbolic(I2).
+compute_select(s(C), v_ref(R), _, St, v_ref(R), St2) :-
+  some(St2) = assume_not_zero(s(C), St).
+compute_select(s(C), _, v_ref(R), St, v_ref(R), St2) :-
+  some(St2) =
+    let (S, St) = flip_scalar(s(C), St) in assume_not_zero(S, St).
+
+stepping(Next, update_store(Def, Vres, St2), D, P) :-
+  next_instruction(Instr, Next),
+  select_instruction_condition(Instr, Cond),
+  stepped(Instr, St, D, P),
+  select_instruction_first_operand(Instr, Op1),
+  select_instruction_second_operand(Instr, Op2),
+  has_value(Cond, St, v_int(Vcond)),
+  has_value(Op1, St, V1),
+  has_value(Op2, St, V2),
+  instruction_assigns_to(Instr, Def),
+  compute_select(Vcond, V1, V2, St, Vres, St2).
+
+(*******************************************************************************
+  Return 
+*******************************************************************************)
+
+rel completed_path(path, state)
+
+completed_path(P, St) :-
+  ret_instruction(Instr),
+  stepped(Instr, St, _, P).
+
+(*******************************************************************************
+  New val
+*******************************************************************************)
+
+stepping(Next, St2, D, P) :-
+  next_instruction(Instr, Next),
+  call_instruction_fn_operand(Instr, F),
+  stepped(Instr, St, D, P),
+  constant_has_value(F, c_func(symexec_new_int_name)),
+  instruction_assigns_to(Instr, Def),
+  St2 =
+    let X = `#{St}[i32]` in
+    update_store(Def, v_int(s(X)), St).
+
+(*******************************************************************************
+  Assert
+*******************************************************************************)
+
+rel assert_instruction(string, string)
+
+assert_instruction(Instr, X) :-
+  call_instruction_fn_operand(Instr, F),
+  constant_has_value(F, c_func(symexec_assert_name)),
+  call_instruction_arg(Instr, 0, X).
+
+fun assert_not_zero(V: scalar, St: state) : bool =
+  match V with
+  | c(I) => I != 0
+  | s(I) =>
+    let Pc = path_condition(St) in
+    is_sat_opt(`I #= 0` :: Pc, none) = some(false)
+  end
+
+rel failed_assert(path, state)
+
+failed_assert(P, St) :-
+  assert_instruction(Instr, X),
+  stepped(Instr, St, _, P),
+  has_value(X, St, v_int(V)),
+  !assert_not_zero(V, St).
+
+stepping(Next, St2, D, P) :-
+  next_instruction(Instr, Next),
+  assert_instruction(Instr, X),
+  stepped(Instr, St, D, P),
+  has_value(X, St, v_int(V)),
+  assume_not_zero(V, St) = some(St2).
+
+(*******************************************************************************
+  Assume
+*******************************************************************************)
+
+rel assume_instruction(string, string)
+
+assume_instruction(Instr, X) :-
+  call_instruction_fn_operand(Instr, F),
+  constant_has_value(F, c_func(symexec_assume_name)),
+  call_instruction_arg(Instr, 0, X).
+
+rel failed_assume(path, state)
+
+failed_assume(P, St) :-
+  assume_instruction(Instr, X),
+  stepped(Instr, St, _, P),
+  has_value(X, St, v_int(V)),
+  assume_not_zero(V, St) = none.
+
+stepping(Next, St2, D, P) :-
+  next_instruction(Instr, Next),
+  assume_instruction(Instr, X),
+  stepped(Instr, St, D, P),
+  has_value(X, St, v_int(V)),
+  assume_not_zero(V, St) = some(St2).
+
+(*******************************************************************************
+  Broken invariants 
+*******************************************************************************)
+
+rel broken_invariant
+
+broken_invariant :- failed_assert(_, _).
+broken_invariant :- failed_assume(_, _).
