@@ -45,7 +45,7 @@ We have tested the "kick-the-tires" phase on these machines:
 
 For the full evaluation of the artifact, a more powerful machine is necessary (~40 vCPUs, ~200 GB of memory).
 We will give artifact reviewers SSH access to an AWS EC2 with the correct specs.
-Access will be coordinated by the AEC chairs.
+Access will be coordinated via the AEC chairs.
 
 ## Getting Started Guide (Phase 1)
 
@@ -53,7 +53,10 @@ You should be able to run these experiments on a moderately powerful laptop that
 In the `vms/` directory, there are two archived Docker images, one for x86 and one for ARM; we recommend using whichever one matches your architecture.
 These Ubuntu-based images contain all the software (and scripts) needed to run the experiments we report on in the paper.
 
-To load the x86 image and start an interactive Docker container named `mff` based on it, run these commands:
+Make sure Docker is configured to give containers at least 4 CPUs and 8 GB RAM; to see what the current setting is, grep for "CPUs" and "Total Memory" in the output of the command `docker info`.
+If you are using Docker Desktop on Mac, you can increase the resource limits following [these instructions](https://docs.docker.com/desktop/settings/mac/#advanced).
+
+To load the x86 image and start an interactive Docker container based on it named `mff` (for "Making Formulog Fast"), run these commands:
 
 ```bash
 docker load < vms/mff-amd64.tar.gz
@@ -76,6 +79,7 @@ Once you are in the Docker container, you can run a script that will run a set o
 ```
 
 This will populate the directory `~/phase1_results` with output files from the experiment.
+On a 2023 M2 MacBook Pro with 10 vCPUS and 16GB RAM this takes 8.5 minutes; XXX.
 Each file is named according to this convention:
 
 ```
