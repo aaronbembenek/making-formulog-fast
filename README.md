@@ -15,7 +15,7 @@ docker build --platform linux/arm64 -t mff-arm64 .
 To distribute the images, save them as archives:
 
 ```bash
-docker save mff-amd64 | gzip > mff-amd64.tar.gz
-docker save mff-arm64 | gzip > mff-arm64.tar.gz
+docker save mff-amd64 | gzip > vms/mff-amd64.tar.gz
+docker save mff-arm64 | gzip > vms/mff-arm64.tar.gz
 ```
 

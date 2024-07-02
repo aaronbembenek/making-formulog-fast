@@ -43,8 +43,6 @@ RUN apt-get update && apt-get install -y \
     llvm-13-dev \
     llvm-13-tools \
     bash-completion \
-    tmux \
-    sloccount \
     # Install Java 7
     && wget "https://cdn.azul.com/zulu/bin/$JAVA_VERSION.tar.gz" -O java7.tar.gz \
     && tar -xf java7.tar.gz \
@@ -105,6 +103,10 @@ RUN apt-get update && apt-get install -y \
     clang-13 \
     maven \
     time \
+    tmux \
+    sloccount \
+    zip \
+    clang-format \
     # Install TBB
     && git clone --depth 1 --branch v2021.13.0 https://github.com/oneapi-src/oneTBB.git \
     && cd oneTBB \
