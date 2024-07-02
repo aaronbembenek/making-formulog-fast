@@ -78,18 +78,19 @@ Once you are in the Docker container, you can run a script that will run a set o
 ./scripts/kicktires.sh phase1_results
 ```
 
-This will populate the directory `~/phase1_results` with output files from the experiment.
-On a 2023 M2 MacBook Pro with 10 vCPUS and 16GB RAM this takes 8.5 minutes; XXX.
+On a 2023 M2 MacBook Pro with 10 vCPUS and 16 GB RAM this takes 8.5 minutes; XXX.
+
+The previous command will populate the directory `~/phase1_results` with output files from the experiment.
 Each file is named according to this convention:
 
 ```
-[case study]__[benchmark]__[SMT mode]__[eval mode]__[trial num].txt
+[case-study]__[benchmark]__[SMT-mode]__[eval-mode]__[trial-num].txt
 ```
 
 We use two SMT modes in our experiments, `csa` (short for `check-sat-assuming`) and `pp` (short for `push-pop`).
-These determine the incremental SMT solving encoding used by the Formulog runtime (for more details, see [an ICLP'20 extended abstract](https://aaronbembenek.github.io/papers/datalog-incr-smt-iclp2020.pdf)).
+These determine the encoding the Formulog runtime uses for incremental SMT solving (see [an ICLP'20 extended abstract](https://aaronbembenek.github.io/papers/datalog-incr-smt-iclp2020.pdf) for more details).
 
-The possible values for `[eval mode]` are:
+The possible values for `[eval-mode]` are:
 
 - `interpret`: use Formulog interpreter in semi-naive mode
 - `interpret-reorder`: reorder each rule body so delta atom is first, and then use Formulog interpreter in semi-naive mode
@@ -114,7 +115,7 @@ To demonstrate this, we have provided a script to count the number of lines of c
 ./scripts/count_sloc
 ```
 
-This should print out some statistics about lines of code using the `cloc` utility; in particular, that our eager evaluation implementation in the Formulog interpreter consists of 481 SLOC Java, and our extensions to Souffle consist of 59 SLOC modifications, 558 SLOC additions, and 2 SLOC removals.
+This should print out some statistics about lines of code using the `cloc` utility; in particular, that our eager evaluation implementation in the Formulog interpreter consists of 481 SLOC Java, and our extensions to Souffle required modifying 59 SLOC, adding 558 SLOC, and removing 2 SLOC (all in C++).
 
 ### Exploring the Artifact
 
