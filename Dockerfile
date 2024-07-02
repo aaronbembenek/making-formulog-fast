@@ -107,6 +107,7 @@ RUN apt-get update && apt-get install -y \
     sloccount \
     zip \
     clang-format \
+    nano \
     # Install TBB
     && git clone --depth 1 --branch v2021.13.0 https://github.com/oneapi-src/oneTBB.git \
     && cd oneTBB \
