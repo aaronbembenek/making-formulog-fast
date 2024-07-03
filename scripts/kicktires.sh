@@ -25,7 +25,7 @@ python3 -u scripts/bench.py -o --output-dir "$1" \
     --benchmark-dirs benchmarks/symex/bms/shuffle-4
 
 python3 -u scripts/bench.py -o --output-dir "$1" \
-    --modes interpret compile scuba \
+    --modes compile compile-unbatched scuba \
     --ntrials 1 -j $ncores --smt-solver-modes check-sat-assuming \
     --record-work --timeout $timeout \
     --benchmark-dirs benchmarks/scuba/bms/polyglot
