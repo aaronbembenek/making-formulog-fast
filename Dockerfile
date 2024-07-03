@@ -121,8 +121,8 @@ RUN apt-get update && apt-get install -y \
     && tar -xf boost_1_81_0.tar.gz \
     && cd boost_1_81_0 \
     && ./bootstrap.sh \
-    && ./b2 \
-    && ./b2 install \
+    && ./b2 --with-program_options --with-filesystem --with-system \
+    && ./b2 install --with-program_options --with-filesystem --with-system \
     && cd .. \
     && rm -rf boost_1_81_0 boost_1_81_0.tar.gz \
     # Install modified Souffle
