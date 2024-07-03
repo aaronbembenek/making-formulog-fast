@@ -143,6 +143,11 @@ XXX Running an example Formulog program, interpreter and compiled, eager and non
 - Run experiment script
 - Run analysis script
 - What to expect
+- Note about scuba/luindex
+
+```bash
+grep non-zero phase2-results/raw/scuba__luindex*scuba*
+```
 
 To use Jupyter Notebook, need
 - notebook
