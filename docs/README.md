@@ -34,6 +34,8 @@ More details about evaluating each claim are given in the instructions below.
 
 ### Unsupported Claims
 
+Our experimental setup does not run the original (non-Formulog) version of the Dminor type checker; as noted in Section 6.1 of our paper, the original Dminor implementation can run only on an old, resource-constrained version of .NET, and so we just report the performance numbers given for it in the original Formulog paper.
+
 The paper reviewers have requested that we include some limited scalability experiments in the final version of the paper; these experiments have not been designed yet and so are not part of this artifact.
 
 ## Hardware Dependencies
@@ -52,6 +54,8 @@ Access will be coordinated via the AEC chairs.
 You should be able to run these experiments on a moderately powerful laptop that has Docker.
 In the `vms/` directory, there are two archived Docker images, one for x86 and one for ARM; we recommend using whichever one matches your architecture.
 These Ubuntu-based images contain all the software (and scripts) needed to run the experiments we report on in the paper.
+
+XXX Clarify that ARM one is not complete
 
 Make sure Docker is configured to give containers at least 4 CPUs and 8 GB RAM; to see what the current setting is, grep for "CPUs" and "Total Memory" in the output of the command `docker info`.
 If you are using Docker Desktop on Mac, you can increase the resource limits following [these instructions](https://docs.docker.com/desktop/settings/mac/#advanced).
@@ -75,12 +79,12 @@ docker run --name mff -it mff-arm64
 Once you are in the Docker container, you can run a script that will run a set of relatively small experiments:
 
 ```
-./scripts/kicktires.sh phase1_results
+./scripts/kicktires.sh phase1-results
 ```
 
-On a 2023 M2 MacBook Pro with 10 vCPUS and 16 GB RAM this takes 8.5 minutes; XXX.
+On a 2023 M2 MacBook Pro with 10 vCPUS and 16 GB RAM this takes XXX minutes; XXX.
 
-The previous command will populate the directory `~/phase1_results` with output files from the experiment.
+The previous command will populate the directory `~/phase1-results` with output files from the experiment.
 Each file is named according to this convention:
 
 ```
@@ -101,10 +105,13 @@ The possible values for `[eval-mode]` are:
 
 XXX
 
-- Turn into CSV
-- Run analysis script on it
-- Expected results
-- Reference impls
+The raw data logs can be turned into a CSV using the script `scripts/process_logs.py`, and the CSV values can be summarized using the script `scripts/summarize_kicktires.py`:
+
+```bash
+./scripts/process_logs.py phase1-results/* | ./scripts/summarize_kicktires.py
+```
+
+This is the output we received on XXX
 
 ### Experiment #2: Count SLOC for Eager Evaluation Implementations
 
@@ -119,15 +126,29 @@ This should print out some statistics about lines of code using the `cloc` utili
 
 ### Exploring the Artifact
 
-- Layout
-- Where to find various modifications
-- Running an example Formulog program, interpreter and compiled, eager and non-eager
+The artifact has the following layout:
+
+- `formulog/`: the Formulog source code
+    - `formulog/src/main/java/edu/harvard/seas/pl/formulog/codegen/`: the code for the compiler
+    - `formulog/src/main/java/edu/harvard/seas/pl/formulog/eval/EagerStratumEvaluator`: the implementation of eager evaluation in the Formulog interpreter
+- `souffle/`: our eager evaluation extension to Soufflé (see `souffle/README.md` for more details)
+- `lib/`: various libraries used during the experiments
+- `scripts/`: scripts for running the experiments and analyzing results
+- `results/`: the logs from the experiments we report on in the paper
+
+XXX Running an example Formulog program, interpreter and compiled, eager and non-eager
 
 ## Step-by-Step Instructions (Phase 2)
 
 - Run experiment script
 - Run analysis script
 - What to expect
+
+To use Jupyter Notebook, need
+- notebook
+- matplotlib
+- pandas
+- seaborn
 
 ## Reusability Guide
 
