@@ -1,0 +1,39 @@
+\documentclass{article}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{color}
+\usepackage{booktabs}
+\definecolor{Gray}{gray}{0.9}
+\begin{document}
+\begin{tabular}{ll rr rrr rr}
+\toprule
+& & \multicolumn{2}{c}{Formulog interp. (s)} && \multicolumn{2}{c}{Formulog compile (s)} && Reference \\\\
+\cline{3-4} \cline{6-7}
+Case study & Benchmark & semi-naive & eager && semi-naive & eager && impl. (s) \\
+\midrule
+\rowcolor{Gray} dminor & all-1 & 4.76 & 2.46 && 4.10 & {\bf {\em 0.60}} && 1.50\\
+\rowcolor{Gray} dminor & all-10 & 17.05 & 4.19 && 5.38 & {\bf {\em 1.40}} && 68.00\\
+\rowcolor{Gray} dminor & all-100 & 128.00 & 94.56 && 102.02 & {\bf {\em 74.05}} && TO\\
+scuba & antlr & 310.38 & TO && {\bf {\em 93.89}} & 1015.10 && 95.11\\
+scuba & avrora & 387.19 & TO && {\em 137.79} & TO && {\bf 85.16}\\
+scuba & hedc & 249.55 & TO && {\bf {\em 65.00}} & 272.36 && 81.01\\
+scuba & hsqldb & 244.84 & TO && {\bf {\em 64.38}} & 431.53 && 68.37\\
+scuba & luindex & 1338.49 & TO && {\bf {\em 1045.64}} & TO && error\\
+scuba & polyglot & 243.34 & 1246.84 && {\bf {\em 56.66}} & 164.78 && 75.15\\
+scuba & sunflow & 1041.81 & TO && {\em 495.98} & TO && {\bf 279.81}\\
+scuba & toba-s & 257.02 & TO && {\bf {\em 75.21}} & 312.01 && 76.63\\
+scuba & weblech & 286.23 & TO && {\bf {\em 77.66}} & 799.52 && 97.22\\
+scuba & xalan & 285.88 & TO && {\em 84.56} & 1057.24 && {\bf 72.64}\\
+\rowcolor{Gray} symex & interp-5 & 117.64 & 6.80 && 121.24 & {\bf {\em 4.18}} && 46.81\\
+\rowcolor{Gray} symex & interp-6 & 541.73 & 16.93 && 523.55 & {\bf {\em 14.23}} && 176.50\\
+\rowcolor{Gray} symex & numbrix-sat & 19.84 & 28.72 && {\bf {\em 11.87}} & 26.79 && 302.25\\
+\rowcolor{Gray} symex & numbrix-unsat & 16.79 & 23.02 && {\bf {\em 10.13}} & 22.84 && 160.03\\
+\rowcolor{Gray} symex & prioqueue-5 & 39.72 & 7.89 && 39.81 & {\bf {\em 5.33}} && 41.11\\
+\rowcolor{Gray} symex & prioqueue-6 & 128.35 & 24.48 && 114.72 & {\bf {\em 19.91}} && 199.34\\
+\rowcolor{Gray} symex & shuffle-4 & 3.06 & 2.25 && 1.62 & {\bf {\em 0.64}} && 49.80\\
+\rowcolor{Gray} symex & shuffle-5 & 6.30 & 3.79 && 4.46 & {\bf {\em 2.06}} && TO\\
+\rowcolor{Gray} symex & sort-6 & 15.04 & 9.62 && 10.80 & {\bf {\em 9.11}} && 140.20\\
+\rowcolor{Gray} symex & sort-7 & 112.56 & {\bf {\em 76.25}} && 76.77 & 82.02 && 1607.07\\
+\bottomrule
+\end{tabular}
+\end{document}

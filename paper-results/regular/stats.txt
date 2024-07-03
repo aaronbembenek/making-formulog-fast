@@ -1,0 +1,775 @@
+
+################################################################################
+Speedup of best compile mode over interpret (used in Table 1)
+
+all:
+mean       6.351372
+min        0.735114
+median     3.417365
+max       38.069571
+dtype: float64
+
+dminor:
+mean       7.242347
+min        1.728746
+median     7.859504
+max       12.138790
+dtype: float64
+
+scuba:
+mean      3.191712
+min       1.280072
+median    3.398950
+max       4.295120
+dtype: float64
+
+symex:
+mean       9.243739
+min        0.735114
+median     3.916049
+max       38.069571
+dtype: float64
+
+################################################################################
+Speedup of compile over interpret on SMT-heavy benchmarks (used in Table 1)
+
+all:
+mean      1.476971
+min       0.970307
+median    1.393056
+max       3.173023
+dtype: float64
+
+dminor:
+mean      1.862495
+min       1.159756
+median    1.254705
+max       3.173023
+dtype: float64
+
+scuba:
+mean     NaN
+min      NaN
+median   NaN
+max      NaN
+dtype: float64
+
+symex:
+mean      1.361313
+min       0.970307
+median    1.403598
+max       1.888889
+dtype: float64
+
+################################################################################
+Speedup of compile (SMT-light benchmarks) or interpret-eager (SMT-heavy benchmarks) over interpret (used in Table 1)
+
+all:
+mean       4.622883
+min        0.690982
+median     3.305607
+max       31.998228
+dtype: float64
+
+dminor:
+mean      2.451034
+min       1.353691
+median    1.929006
+max       4.070406
+dtype: float64
+
+scuba:
+mean      3.191712
+min       1.280072
+median    3.398950
+max       4.295120
+dtype: float64
+
+symex:
+mean       6.705609
+min        0.690982
+median     1.611598
+max       31.998228
+dtype: float64
+
+################################################################################
+Speedup of interpret-eager over interpret on SMT-heavy benchmarks (used in Table 1)
+
+all:
+mean       5.723784
+min        0.690982
+median     1.660079
+max       31.998228
+dtype: float64
+
+dminor:
+mean      2.451034
+min       1.353691
+median    1.929006
+max       4.070406
+dtype: float64
+
+scuba:
+mean     NaN
+min      NaN
+median   NaN
+max      NaN
+dtype: float64
+
+symex:
+mean       6.705609
+min        0.690982
+median     1.611598
+max       31.998228
+dtype: float64
+
+################################################################################
+Speedup of compile over interpret (used in Table 1)
+
+all:
+mean      2.222510
+min       0.970307
+median    1.671862
+max       4.295120
+dtype: float64
+
+dminor:
+mean      1.862495
+min       1.159756
+median    1.254705
+max       3.173023
+dtype: float64
+
+scuba:
+mean      3.191712
+min       1.280072
+median    3.398950
+max       4.295120
+dtype: float64
+
+symex:
+mean      1.361313
+min       0.970307
+median    1.403598
+max       1.888889
+dtype: float64
+
+################################################################################
+Memory usage of interpret over compile
+
+all:
+mean       37.990933
+min         6.749459
+median     20.432258
+max       108.125473
+dtype: float64
+
+dminor:
+mean      36.238415
+min       26.111639
+median    39.440456
+max       43.163151
+dtype: float64
+
+scuba:
+mean       62.602557
+min         7.759086
+median     66.286075
+max       108.125473
+dtype: float64
+
+symex:
+mean      13.905064
+min        6.749459
+median    13.010602
+max       20.432258
+dtype: float64
+
+################################################################################
+Speedup of interpret-eager over interpret on SMT-heavy benchmarks (used in Table 1)
+
+all:
+mean       5.723784
+min        0.690982
+median     1.660079
+max       31.998228
+dtype: float64
+
+dminor:
+mean      2.451034
+min       1.353691
+median    1.929006
+max       4.070406
+dtype: float64
+
+scuba:
+mean     NaN
+min      NaN
+median   NaN
+max      NaN
+dtype: float64
+
+symex:
+mean       6.705609
+min        0.690982
+median     1.611598
+max       31.998228
+dtype: float64
+
+################################################################################
+Speedup of interpret-eager over compile on SMT-heavy benchmarks
+
+all:
+mean       5.183699
+min        0.413301
+median     1.173913
+max       30.924395
+dtype: float64
+
+dminor:
+mean      1.341665
+min       1.078892
+median    1.282816
+max       1.663286
+dtype: float64
+
+scuba:
+mean     NaN
+min      NaN
+median   NaN
+max      NaN
+dtype: float64
+
+symex:
+mean       6.336310
+min        0.413301
+median     1.147995
+max       30.924395
+dtype: float64
+
+################################################################################
+Speedup of compile-eager over interpret-eager on SMT-heavy benchmarks
+
+all:
+mean      1.790618
+min       0.929651
+median    1.277061
+max       4.074380
+dtype: float64
+
+dminor:
+mean      2.777883
+min       1.277061
+median    2.982206
+max       4.074380
+dtype: float64
+
+scuba:
+mean     NaN
+min      NaN
+median   NaN
+max      NaN
+dtype: float64
+
+symex:
+mean      1.494438
+min       0.929651
+median    1.209665
+max       3.515625
+dtype: float64
+
+################################################################################
+Speedup of compile-eager vs compile on SMT-heavy benchmarks
+
+all:
+mean       7.592252
+min        0.443158
+median     2.531250
+max       36.791989
+dtype: float64
+
+dminor:
+mean      3.993431
+min       1.377811
+median    3.825623
+max       6.776860
+dtype: float64
+
+scuba:
+mean     NaN
+min      NaN
+median   NaN
+max      NaN
+dtype: float64
+
+symex:
+mean       8.671898
+min        0.443158
+median     2.344317
+max       36.791989
+dtype: float64
+
+################################################################################
+Memory usage of interpret-eager over interpret on SMT-heavy benchmarks
+
+all:
+mean      1.592720
+min       0.961789
+median    1.133289
+max       5.211651
+dtype: float64
+
+dminor:
+mean      1.006173
+min       0.961789
+median    1.007816
+max       1.048913
+dtype: float64
+
+scuba:
+mean     NaN
+min      NaN
+median   NaN
+max      NaN
+dtype: float64
+
+symex:
+mean      1.768684
+min       1.006421
+median    1.175523
+max       5.211651
+dtype: float64
+
+################################################################################
+Memory usage of compile-eager over compile on SMT-heavy benchmarks
+
+all:
+mean      1.137282
+min       0.923739
+median    1.068240
+max       1.480786
+dtype: float64
+
+dminor:
+mean      1.120370
+min       0.923739
+median    1.078305
+max       1.359065
+dtype: float64
+
+scuba:
+mean     NaN
+min      NaN
+median   NaN
+max      NaN
+dtype: float64
+
+symex:
+mean      1.142355
+min       0.974475
+median    1.049220
+max       1.480786
+dtype: float64
+
+################################################################################
+CPU usage of interpret-eager over interpret on SMT-heavy benchmarks
+
+all:
+mean       3.900008
+min        0.932584
+median     1.894315
+max       12.262712
+dtype: float64
+
+dminor:
+mean      2.808618
+min       1.343905
+median    2.268600
+max       4.813350
+dtype: float64
+
+scuba:
+mean     NaN
+min      NaN
+median   NaN
+max      NaN
+dtype: float64
+
+symex:
+mean       4.227424
+min        0.932584
+median     1.862280
+max       12.262712
+dtype: float64
+
+################################################################################
+CPU usage of compile-eager over compile on SMT-heavy benchmarks
+
+all:
+mean      1.596687
+min       0.185869
+median    1.090552
+max       7.101463
+dtype: float64
+
+dminor:
+mean      0.884868
+min       0.583383
+median    1.006769
+max       1.064454
+dtype: float64
+
+scuba:
+mean     NaN
+min      NaN
+median   NaN
+max      NaN
+dtype: float64
+
+symex:
+mean      1.810233
+min       0.185869
+median    1.130454
+max       7.101463
+dtype: float64
+
+################################################################################
+Extra work done by interpret-eager over interpret on SMT-heavy benchmarks
+
+all:
+mean      1.005902
+min       1.000883
+median    1.006434
+max       1.009558
+dtype: float64
+
+dminor:
+mean      1.006602
+min       1.000883
+median    1.009366
+max       1.009558
+dtype: float64
+
+scuba:
+mean     NaN
+min      NaN
+median   NaN
+max      NaN
+dtype: float64
+
+symex:
+mean      1.005692
+min       1.001465
+median    1.006085
+max       1.009137
+dtype: float64
+
+################################################################################
+Extra work done by compile over compile-eager on SMT-heavy benchmarks
+
+all:
+mean      1.088267
+min       1.070007
+median    1.078262
+max       1.158982
+dtype: float64
+
+dminor:
+mean      1.123810
+min       1.096852
+median    1.115597
+max       1.158982
+dtype: float64
+
+scuba:
+mean     NaN
+min      NaN
+median   NaN
+max      NaN
+dtype: float64
+
+symex:
+mean      1.077604
+min       1.070007
+median    1.076432
+max       1.084137
+dtype: float64
+
+################################################################################
+Extra SMT cache misses by compile over interpret-eager on SMT-heavy benchmarks
+
+all:
+mean      2.197102
+min       0.337818
+median    1.236668
+max       5.655026
+dtype: float64
+
+dminor:
+mean      1.155915
+min       0.968521
+median    1.236668
+max       1.262555
+dtype: float64
+
+scuba:
+mean     NaN
+min      NaN
+median   NaN
+max      NaN
+dtype: float64
+
+symex:
+mean      2.509458
+min       0.337818
+median    1.423925
+max       5.655026
+dtype: float64
+
+################################################################################
+Extra SMT caches by compile over compile-eager on SMT-heavy benchmarks
+
+all:
+mean       4.584957
+min        0.292701
+median     1.078182
+max       18.249724
+dtype: float64
+
+dminor:
+mean      0.943934
+min       0.796725
+median    1.002897
+max       1.032179
+dtype: float64
+
+scuba:
+mean     NaN
+min      NaN
+median   NaN
+max      NaN
+dtype: float64
+
+symex:
+mean       5.677264
+min        0.292701
+median     3.648963
+max       18.249724
+dtype: float64
+
+################################################################################
+SMT solving time speedup of interpret-eager over compile
+
+all:
+mean      1.316540
+min       0.280009
+median    1.150022
+max       2.735215
+dtype: float64
+
+dminor:
+mean      1.077737
+min       1.035053
+median    1.048136
+max       1.150022
+dtype: float64
+
+scuba:
+mean     NaN
+min      NaN
+median   NaN
+max      NaN
+dtype: float64
+
+symex:
+mean      1.388181
+min       0.280009
+median    1.532784
+max       2.735215
+dtype: float64
+
+################################################################################
+SMT solving time speedup of compile-eager over compile
+
+all:
+mean      1.305949
+min       0.246782
+median    1.193457
+max       2.584454
+dtype: float64
+
+dminor:
+mean      0.970026
+min       0.758444
+median    0.958178
+max       1.193457
+dtype: float64
+
+scuba:
+mean     NaN
+min      NaN
+median   NaN
+max      NaN
+dtype: float64
+
+symex:
+mean      1.406726
+min       0.246782
+median    1.555624
+max       2.584454
+dtype: float64
+
+################################################################################
+Speedup of scuba (reference implementation) over compile
+
+all:
+mean      1.091137
+min       0.753892
+median    0.981469
+max       1.772528
+dtype: float64
+
+dminor:
+mean     NaN
+min      NaN
+median   NaN
+max      NaN
+dtype: float64
+
+scuba:
+mean      1.091137
+min       0.753892
+median    0.981469
+max       1.772528
+dtype: float64
+
+symex:
+mean     NaN
+min      NaN
+median   NaN
+max      NaN
+dtype: float64
+
+################################################################################
+Speedup of scuba (reference implementation) over interpret
+
+all:
+mean      3.518544
+min       2.944299
+median    3.354039
+max       4.546826
+dtype: float64
+
+dminor:
+mean     NaN
+min      NaN
+median   NaN
+max      NaN
+dtype: float64
+
+scuba:
+mean      3.518544
+min       2.944299
+median    3.354039
+max       4.546826
+dtype: float64
+
+symex:
+mean     NaN
+min      NaN
+median   NaN
+max      NaN
+dtype: float64
+
+################################################################################
+Speedup of compile-eager over klee
+
+all:
+mean      104.406429
+min         7.006786
+median     11.843919
+max       871.670702
+dtype: float64
+
+dminor:
+mean     NaN
+min      NaN
+median   NaN
+max      NaN
+dtype: float64
+
+scuba:
+mean     NaN
+min      NaN
+median   NaN
+max      NaN
+dtype: float64
+
+symex:
+mean      104.406429
+min         7.006786
+median     11.843919
+max       871.670702
+dtype: float64
+
+################################################################################
+Speedup of interpret over klee
+
+all:
+mean       35.365796
+min         0.325817
+median      9.425305
+max       285.714286
+dtype: float64
+
+dminor:
+mean     NaN
+min      NaN
+median   NaN
+max      NaN
+dtype: float64
+
+scuba:
+mean     NaN
+min      NaN
+median   NaN
+max      NaN
+dtype: float64
+
+symex:
+mean       35.365796
+min         0.325817
+median      9.425305
+max       285.714286
+dtype: float64
+
+################################################################################
+Speedup of cbmc over compile-eager
+
+all:
+mean      198.640607
+min         0.262678
+median      9.189803
+max       892.833333
+dtype: float64
+
+dminor:
+mean     NaN
+min      NaN
+median   NaN
+max      NaN
+dtype: float64
+
+scuba:
+mean     NaN
+min      NaN
+median   NaN
+max      NaN
+dtype: float64
+
+symex:
+mean      198.640607
+min         0.262678
+median      9.189803
+max       892.833333
+dtype: float64
