@@ -1,0 +1,37 @@
+LOG:Benchmark directory: /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/sort-6
+LOG:Timeout: 1800
+LOG:Eval repo commit: 8bbdb9a
+LOG:Formulog commit: 4bb3cbb
+LOG:Z3 version: Z3 version 4.12.2 - 64 bit - build hashcode f7c9c9ef72fde0e00ef9409e6c24456effb8b930
+LOG:Java version start
+openjdk version "17.0.7" 2023-04-18
+OpenJDK Runtime Environment (build 17.0.7+7-Ubuntu-0ubuntu122.04.2)
+OpenJDK 64-Bit Server VM (build 17.0.7+7-Ubuntu-0ubuntu122.04.2, mixed mode, sharing)
+
+LOG:Java version end
+LOG:Mode: klee
+LOG:Solver mode: NA
+LOG:Parallelism: 40
+LOG:KLEE info start
+KLEE 3.0 (https://klee.github.io)
+  Build mode: Release (Asserts: ON)
+  Build revision: dfa53ed4f5711ee2d378abb267bff1da8623f7e7
+
+Ubuntu LLVM version 13.0.1
+  
+  Optimized build.
+  Default target: x86_64-pc-linux-gnu
+  Host CPU: skylake-avx512
+LOG:KLEE info end
+LOG:Compile command: clang-13 /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/sort-6/bench.c -DSYMEXEC -DKLEE -emit-llvm -c -S -o /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/sort-6/../../klee-tmp/bench.bc
+LOG:Execute command: timeout 1800 /usr/bin/time -f LOG:EXECUTE;ELAPSED=%es;USER=%Us;SYSTEM=%Ss;CPU=%P;MEM=%Mkb klee -write-no-tests -solver-backend=z3 /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/sort-6/../../klee-tmp/bench.bc
+KLEE: output directory is "/home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/sort-6/../../klee-tmp/klee-out-0"
+KLEE: Using Z3 solver backend
+KLEE: WARNING ONCE: Alignment of memory from call "malloc" is not modelled. Using alignment of 8.
+
+KLEE: done: total instructions = 496991
+KLEE: done: completed paths = 2718
+KLEE: done: partially completed paths = 0
+KLEE: done: generated tests = 0
+LOG:EXECUTE;ELAPSED=140.89s;USER=140.82s;SYSTEM=0.06s;CPU=99%;MEM=130584kb
+LOG:Success!

@@ -1,0 +1,19 @@
+LOG:Benchmark directory: /home/ubuntu/formulog-compiler-eval/benchmarks/scuba/bms/hedc
+LOG:Timeout: 1800
+LOG:Eval repo commit: 8bbdb9a
+LOG:Formulog commit: 4bb3cbb
+LOG:Z3 version: Z3 version 4.12.2 - 64 bit - build hashcode f7c9c9ef72fde0e00ef9409e6c24456effb8b930
+LOG:Java version start
+openjdk version "17.0.7" 2023-04-18
+OpenJDK Runtime Environment (build 17.0.7+7-Ubuntu-0ubuntu122.04.2)
+OpenJDK 64-Bit Server VM (build 17.0.7+7-Ubuntu-0ubuntu122.04.2, mixed mode, sharing)
+
+LOG:Java version end
+LOG:Mode: scuba
+LOG:Solver mode: NA
+LOG:Parallelism: 40
+LOG:Execute command: timeout 1800 /usr/bin/time -f LOG:EXECUTE;ELAPSED=%es;USER=%Us;SYSTEM=%Ss;CPU=%P;MEM=%Mkb java -Xmx180G -Xss256m -Djava.library.path=/home/ubuntu/formulog-compiler-eval/lib/z3/build -Dchord.work.dir=/home/ubuntu/formulog-compiler-eval/benchmarks/scuba/scuba-tmp -Dchord.props.file=/home/ubuntu/formulog-compiler-eval/benchmarks/scuba/scuba-tmp/chord.properties -cp /home/ubuntu/formulog-compiler-eval/lib/scuba/chord.jar chord.project.Boot
+Redirecting stdout to file: /home/ubuntu/formulog-compiler-eval/benchmarks/scuba/scuba-tmp/log.txt
+Redirecting stderr to file: /home/ubuntu/formulog-compiler-eval/benchmarks/scuba/scuba-tmp/log.txt
+LOG:EXECUTE;ELAPSED=81.03s;USER=163.50s;SYSTEM=16.08s;CPU=221%;MEM=6696572kb
+LOG:Success!

@@ -1,0 +1,183 @@
+LOG:Benchmark directory: /home/ubuntu/formulog-compiler-eval/benchmarks/scuba/bms/weblech
+LOG:Timeout: 1800
+LOG:Eval repo commit: fbfa2e6
+LOG:Formulog commit: 8862fc1
+LOG:Z3 version: Z3 version 4.12.2 - 64 bit - build hashcode f7c9c9ef72fde0e00ef9409e6c24456effb8b930
+LOG:Java version start
+openjdk version "17.0.7" 2023-04-18
+OpenJDK Runtime Environment (build 17.0.7+7-Ubuntu-0ubuntu122.04.2)
+OpenJDK 64-Bit Server VM (build 17.0.7+7-Ubuntu-0ubuntu122.04.2, mixed mode, sharing)
+
+LOG:Java version end
+LOG:Mode: compile
+LOG:Solver mode: check-sat-assuming
+LOG:Parallelism: 40
+LOG:Souffle info start
+----------------------------------------------------------------------------
+Version: 2.4-41-g93b082dc7
+Word size: 32 bits
+Options enabled: ffi openmp ncurses sqlite zlib
+----------------------------------------------------------------------------
+Copyright (c) 2016-22 The Souffle Developers.
+Copyright (c) 2013-16 Oracle and/or its affiliates.
+All rights reserved.
+============================================================================
+
+LOG:Souffle info end
+LOG:Execute command: timeout 1800 /usr/bin/time -f LOG:EXECUTE;ELAPSED=%es;USER=%Us;SYSTEM=%Ss;CPU=%P;MEM=%Mkb /home/ubuntu/formulog-compiler-eval/benchmarks/scuba/bms/weblech/../../codegen/build/flg --dump-sizes --smt-stats --smt-solver-mode=check-sat-assuming -j 40 -D /home/ubuntu/formulog-compiler-eval/benchmarks/scuba/bms/weblech/out -F /home/ubuntu/formulog-compiler-eval/benchmarks/scuba/bms/weblech/facts -F /home/ubuntu/formulog-compiler-eval/benchmarks/scuba/lib_facts --no-smt-double-check
+Parsing...
+Finished parsing (9.913s)
+Evaluating...
+Finished evaluating (66.875s)
+
+==================== SMT STATS ====================
+SMT calls: 25
+SMT time (ms): 341.833
+SMT wait time (ms): 0
+SMT cache hits: 0
+SMT cache misses: 25
+SMT cache clears: 0
+SMT calls per solver: 1,2,1,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+SMT time per solver (ms): 4.82407,39.7019,19.4288,8.93592,26.1256,49.4109,5.48405,20.4406,3.52803,5.50988,20.1792,5.71414,22.39,8.59493,7.17342,24.0919,7.42018,22.2871,9.30861,7.37568,23.9077
+
+==================== RELATION SIZES ====================
+size5_stub: 2
+size3_stub: 1
+size4_stub: 1
+size2_stub: 21
+main_entry: 1
+field_has_reference_type: 50907
+type_defines_method: 172280
+size1_stub: 4
+application_method: 882
+subtype_of_exn_or_err: 793
+sup_123_0: 33939
+sup_125_0: 147222
+input_is_strict_subtype_of_bb: 101686
+sup_178_0: 87826
+is_strict_subtype_of: 18220
+invoke_special_has_resolved_type: 147222
+call_site_nth_arg: 38024
+call_site_ret_and_args: 20799
+cipa_allocation_type: 14667
+cipa_hptsto: 346749
+cipa_invocation: 25361
+cipa_invocation_ret: 12730
+cipa_reach_class: 3540
+cipa_reach_method: 5706
+cipa_receiver_can_have_type: 14949
+cipa_sptsto: 2021
+cipa_vptsto: 594792
+input_is_subtype_of_bb: 9327
+input_resolves_to_bbf: 4856
+is_subtype_of: 2664
+not_exceptional_bb: 133430
+not_exceptional_iindex: 135729
+phi_def: 9697
+relevant_clinit: 752
+resolves_to: 4856
+sup_153_0: 7691
+sup_159_0: 1069
+sup_30_0: 12655
+sup_49_0: 32125
+sup_50_0: 450146
+sup_52_0: 77893
+sup_53_0: 42909
+sup_54_0: 3324
+sup_55_0: 6050
+sup_56_0: 28424
+sup_58_0: 14876
+sup_59_0: 6406
+resolves_to_multiple_targets: 540
+call_graph_tc: 1245031
+s1_method: 291
+root: 753
+trans_recursive_method: 258
+sup_113_0: 16
+sup_105_0: 11
+sup_116_0: 320
+sup_114_0: 41
+sup_109_0: 124
+next_instr_forwards: 4579
+cfg_exit: 412
+next_instr_backwards: 4683
+cfg_entry: 308
+sup_117_0: 49
+sup_140_0: 192
+s2_method: 830
+is_bad_call: 5383
+cfg_is_pred_of: 5018
+sup_108_0: 220
+sup_86_0: 51
+cfg_is_transitive_pred_of: 110318
+concl_instantiate_loc: 1395
+concl_instantiate_obj: 2867
+constraint_is_sat: 1
+field_lookup: 10655
+field_lookup_at_call: 92539
+fs_member: 2
+has_alloc: 101938
+input_concl_instantiate_loc_bf: 1216
+input_concl_instantiate_obj_bf: 2516
+input_concl_instantiate_phi_b: 1
+input_constraint_is_sat_b: 26
+input_field_lookup_at_call_bbbbff: 10720
+input_field_lookup_bbbbff: 1472
+input_fs_member_fb: 3
+input_instantiate_cipa_bbf: 1702152
+input_instantiate_constraint_bbf: 1507
+input_instantiate_loc_bbff: 288423
+input_instantiate_ptsto_bbbff: 236551
+instantiate_cipa: 1704156
+instantiate_constraint: 1507
+instantiate_heap: 809710
+instantiate_loc: 395719
+instantiate_ptsto: 255706
+invocation: 1625
+ptsto: 896331
+summary: 426368
+summary_ret: 6667
+sup_104_0: 17298
+sup_104_1: 17521
+sup_104_2: 17718
+sup_105_1: 25
+sup_109_1: 123
+sup_111_0: 76376
+sup_111_1: 84829
+sup_113_1: 16
+sup_116_1: 330
+sup_144_0: 819398
+sup_144_1: 800495
+sup_144_2: 820639
+sup_162_0: 664
+sup_165_0: 821
+sup_167_0: 18072
+sup_169_0: 1603137
+sup_172_0: 40662
+sup_174_0: 0
+sup_174_1: 0
+sup_175_0: 236551
+sup_175_1: 255706
+sup_182_0: 87
+sup_183_0: 87
+sup_183_1: 101
+sup_183_2: 101
+sup_184_0: 269569
+sup_185_0: 87
+sup_186_0: 2263
+sup_188_0: 1469
+sup_189_0: 559
+sup_190_0: 1469
+sup_190_1: 7831
+sup_194_0: 24
+sup_194_1: 24
+sup_196_0: 2
+sup_199_0: 520
+main_summary_edge: 5461
+has_summary: 431
+main_summary_node: 1364
+concl_instantiate_phi: 1
+conclusion: 17718
+[WORK] 10071763298
+LOG:EXECUTE;ELAPSED=76.96s;USER=2200.68s;SYSTEM=31.92s;CPU=2900%;MEM=1830880kb
+LOG:Success!

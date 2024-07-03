@@ -1,0 +1,111 @@
+LOG:Benchmark directory: /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/interp-5
+LOG:Timeout: 1800
+LOG:Eval repo commit: e651af0
+LOG:Formulog commit: 8862fc1
+LOG:Z3 version: Z3 version 4.12.2 - 64 bit - build hashcode f7c9c9ef72fde0e00ef9409e6c24456effb8b930
+LOG:Java version start
+openjdk version "17.0.7" 2023-04-18
+OpenJDK Runtime Environment (build 17.0.7+7-Ubuntu-0ubuntu122.04.2)
+OpenJDK 64-Bit Server VM (build 17.0.7+7-Ubuntu-0ubuntu122.04.2, mixed mode, sharing)
+
+LOG:Java version end
+LOG:Mode: compile-unbatched
+LOG:Solver mode: check-sat-assuming
+LOG:Parallelism: 40
+LOG:Souffle info start
+----------------------------------------------------------------------------
+Version: 2.4-41-g93b082dc7
+Word size: 32 bits
+Options enabled: ffi openmp ncurses sqlite zlib
+----------------------------------------------------------------------------
+Copyright (c) 2016-22 The Souffle Developers.
+Copyright (c) 2013-16 Oracle and/or its affiliates.
+All rights reserved.
+============================================================================
+
+LOG:Souffle info end
+LOG:Execute command: timeout 1800 /usr/bin/time -f LOG:EXECUTE;ELAPSED=%es;USER=%Us;SYSTEM=%Ss;CPU=%P;MEM=%Mkb /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/interp-5/../../codegen/build/flg --dump-sizes --smt-stats --smt-solver-mode=check-sat-assuming -j 40 -D /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/interp-5/out -F /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/interp-5/facts --no-smt-double-check
+Parsing...
+Finished parsing (0.003s)
+Evaluating...
+Finished evaluating (4.516s)
+
+==================== SMT STATS ====================
+SMT calls: 7183
+SMT time (ms): 83068.7
+SMT wait time (ms): 16808.7
+SMT cache hits: 339617
+SMT cache misses: 42301
+SMT cache clears: 338
+SMT calls per solver: 159,188,173,177,227,137,203,215,165,220,185,128,213,176,174,178,152,177,213,168,193,173,156,153,148,162,183,184,181,208,155,199,160,186,217,177,182,178,178,182
+SMT time per solver (ms): 2516.67,2133.92,1874.73,2300.63,1959.96,2108.01,1927.94,2192.16,2180.22,1959.18,2008.2,2156.61,1829.41,1866.67,2421.85,1721.84,2077.59,2414.99,2047.65,1847.63,1966.64,1922.54,2088.83,2279.17,2466.35,1897.82,1962.89,1901.88,1804.96,2328.98,2699.95,2139.56,1943.95,2301.79,1985.39,2024.7,1835.66,2257.7,1696.4,2017.65
+
+==================== RELATION SIZES ====================
+alloca_nwords: 17
+has_same_bb_pred: 212
+assert_instruction: 1
+assume_instruction: 0
+bb_has_first_instruction: 79
+function_has_first_instruction: 1
+compute_select: 0
+has_value: 42781
+input_compute_select_bbbbff: 0
+input_has_value_bbf: 42781
+stepped: 36368
+stepping: 36368
+sup_11_0: 5539
+sup_12_0: 9983
+sup_14_0: 5869
+sup_14_1: 5869
+sup_15_0: 1216
+sup_16_0: 591
+sup_17_0: 0
+sup_17_1: 0
+sup_18_0: 2
+sup_19_0: 0
+sup_19_1: 0
+sup_20_0: 628
+sup_21_0: 0
+sup_22_0: 0
+sup_22_1: 0
+sup_24_0: 0
+sup_24_1: 0
+sup_25_0: 0
+sup_25_1: 0
+sup_26_0: 0
+sup_27_0: 2493
+sup_27_1: 2493
+sup_28_0: 2
+sup_29_0: 0
+sup_29_1: 0
+sup_29_2: 0
+sup_29_3: 0
+sup_30_0: 5539
+sup_31_0: 1216
+sup_31_1: 1216
+sup_32_0: 0
+sup_32_1: 0
+sup_33_0: 15
+sup_33_1: 15
+sup_35_0: 0
+sup_35_1: 0
+sup_36_0: 0
+sup_36_1: 0
+sup_37_0: 2817
+sup_37_1: 2817
+sup_38_0: 0
+sup_38_1: 0
+sup_3_0: 0
+sup_43_0: 2817
+sup_43_1: 2817
+sup_44_0: 9983
+sup_4_0: 0
+failed_assert: 0
+memory_access_error: 0
+completed_path: 994
+no_fall_thru: 1
+failed_assume: 0
+broken_invariant: 0
+[WORK] 2622144
+LOG:EXECUTE;ELAPSED=4.61s;USER=119.69s;SYSTEM=2.47s;CPU=2650%;MEM=161296kb
+LOG:Success!

@@ -1,0 +1,216 @@
+LOG:Benchmark directory: /home/ubuntu/formulog-compiler-eval/benchmarks/scuba/bms/avrora
+LOG:Timeout: 1800
+LOG:Eval repo commit: e651af0
+LOG:Formulog commit: 8862fc1
+LOG:Z3 version: Z3 version 4.12.2 - 64 bit - build hashcode f7c9c9ef72fde0e00ef9409e6c24456effb8b930
+LOG:Java version start
+openjdk version "17.0.7" 2023-04-18
+OpenJDK Runtime Environment (build 17.0.7+7-Ubuntu-0ubuntu122.04.2)
+OpenJDK 64-Bit Server VM (build 17.0.7+7-Ubuntu-0ubuntu122.04.2, mixed mode, sharing)
+
+LOG:Java version end
+LOG:Mode: interpret
+LOG:Solver mode: check-sat-assuming
+LOG:Parallelism: 40
+LOG:Interpret command: timeout 1800 /usr/bin/time -f LOG:INTERPRET;ELAPSED=%es;USER=%Us;SYSTEM=%Ss;CPU=%P;MEM=%Mkb java -Xmx180g -Xss256m -DmemoizeThreshold=0 -DsmtDoubleCheckUnknowns=false -DrecordWork -jar /home/ubuntu/formulog-compiler-eval/formulog/target/formulog-0.7.0-SNAPSHOT-jar-with-dependencies.jar bench.flg --dump-sizes --smt-stats --smt-solver-mode=check-sat-assuming -j 40 -D /home/ubuntu/formulog-compiler-eval/benchmarks/scuba/bms/avrora/out -F /home/ubuntu/formulog-compiler-eval/benchmarks/scuba/bms/avrora/facts -F /home/ubuntu/formulog-compiler-eval/benchmarks/scuba/lib_facts 
+Parsing...
+Finished parsing (28.263s)
+Type checking...
+Finished type checking (8.097s)
+Rewriting and validating...
+Finished rewriting and validating (3.266s)
+Evaluating...
+Finished evaluating (341.551s)
+
+==================== SMT STATS ====================
+SMT calls: 6
+SMT time (ms): 86
+SMT wait time (ms): 0.018575
+SMT cache hits: 0
+SMT cache misses: 6
+SMT cache clears: 0
+SMT calls per solver: 4,2
+SMT time per solver (ms): 52,34
+
+==================== RELATION SIZES ====================
+application_class: 1702
+application_entry: 1
+application_method: 9033
+block_first_instr: 2132885
+block_has_instr: 2448405
+block_last_instr: 2132885
+call_graph_tc: 527459
+call_site_nth_arg: 38408
+call_site_ret_and_args: 20906
+cfg_entry: 544
+cfg_exit: 787
+cfg_is_pred_of: 9324
+cfg_is_transitive_pred_of: 331344
+cipa_allocation_type: 15220
+cipa_hptsto: 410788
+cipa_invocation: 26401
+cipa_invocation_arg: 0
+cipa_invocation_ret: 12626
+cipa_reach_class: 3963
+cipa_reach_method: 5939
+cipa_receiver_can_have_type: 15329
+cipa_sptsto: 2879
+cipa_vptsto: 932726
+clinit_method: 4620
+concl_instantiate_loc: 2446
+concl_instantiate_obj: 3727
+concl_instantiate_phi: 1
+conclusion: 137522
+constraint_is_sat: 1
+declares_method: 180431
+entry_block: 162668
+exit_block: 162668
+field_has_reference_type: 53764
+field_has_type: 87655
+field_lookup: 38712
+field_lookup_at_call: 229917
+fs_member: 1
+has_alloc: 284363
+has_field: 265819
+has_summary: 709
+implements_interface: 26580
+init_method: 25526
+input_concl_instantiate_loc_bf: 2170
+input_concl_instantiate_obj_bf: 3153
+input_concl_instantiate_phi_b: 1
+input_constraint_is_sat_b: 7
+input_field_lookup_at_call_bbbbff: 25341
+input_field_lookup_bbbbff: 5077
+input_fs_member_fb: 2
+input_instantiate_cipa_bbf: 2448047
+input_instantiate_constraint_bbf: 2389
+input_instantiate_loc_bbff: 903465
+input_instantiate_ptsto_bbbff: 720416
+input_is_strict_subtype_of_bb: 108630
+input_is_subtype_of_bb: 11034
+input_resolves_to_bbf: 5289
+instance_field: 42170
+instantiate_cipa: 2451551
+instantiate_constraint: 2389
+instantiate_heap: 2585606
+instantiate_loc: 1201180
+instantiate_ptsto: 797757
+instr_array_load: 37372
+instr_array_store: 305545
+instr_check_cast: 36357
+instr_get: 326509
+instr_invoke_dispatch: 416336
+instr_invoke_special: 156043
+instr_invoke_static: 87746
+instr_new: 168150
+instr_phi_node: 56500
+instr_put: 112199
+instr_return: 196928
+interface: 2497
+invocation: 2631
+invoke_special_has_resolved_type: 156043
+is_bad_call: 5319
+is_direct_superclass_of: 21710
+is_intra_block_pred_of: 315520
+is_normal_pred_of: 2530111
+is_strict_subtype_of: 19741
+is_subtype_of: 2599
+local_var_type: 2037226
+main_entry: 1
+main_entry_args_item_loc: 0
+main_entry_args_loc: 0
+main_summary_edge: 125579
+main_summary_node: 3647
+method_parameter: 319462
+native_method: 1588
+next_instr_backwards: 8208
+next_instr_forwards: 7965
+not_exceptional_bb: 140145
+not_exceptional_iindex: 142959
+phi_def: 9886
+phi_node: 73620
+ptsto: 2792468
+relevant_clinit: 858
+resolves_to: 5289
+resolves_to_multiple_targets: 542
+return_string_stub: 16
+return_this_stub: 3
+root: 859
+s1_method: 526
+s2_method: 989
+selector_of_method: 182227
+size1_stub: 4
+size2_stub: 21
+size3_stub: 1
+size4_stub: 1
+size5_stub: 2
+static_field: 45485
+static_method: 26450
+subtype_of_exn_or_err: 835
+summary: 1633081
+summary_ret: 14553
+sup_107_0: 456
+sup_111_0: 156043
+sup_112_0: 36945
+sup_140_0: 404
+sup_140_1: 407
+sup_144_0: 499
+sup_144_1: 1982
+sup_145_0: 186391
+sup_145_1: 192103
+sup_147_0: 70
+sup_148_0: 75
+sup_148_1: 74
+sup_149_0: 743
+sup_150_0: 155
+sup_150_1: 642
+sup_151_0: 154
+sup_154_0: 1483
+sup_156_0: 26
+sup_164_0: 9435
+sup_166_0: 1283
+sup_167_0: 55835
+sup_170_0: 99644
+sup_172_0: 2136333
+sup_173_0: 0
+sup_173_1: 0
+sup_175_0: 2895
+sup_175_1: 21746
+sup_176_0: 523
+sup_177_0: 93
+sup_179_0: 2014
+sup_180_0: 93
+sup_181_0: 93
+sup_181_1: 184
+sup_181_2: 184
+sup_182_0: 3219
+sup_184_0: 864052
+sup_185_0: 720416
+sup_185_1: 797757
+sup_190_0: 93393
+sup_195_0: 267
+sup_198_0: 1
+sup_202_0: 0
+sup_202_1: 0
+sup_23_0: 6912
+sup_24_0: 15297
+sup_41_0: 150
+sup_50_0: 114881
+sup_51_0: 3811
+sup_52_0: 26840
+sup_55_0: 67654
+sup_56_0: 729151
+sup_57_0: 9571
+sup_59_0: 59494
+sup_68_0: 132628
+sup_68_1: 130644
+sup_68_2: 137522
+sup_72_0: 2708103
+sup_72_1: 2464906
+sup_72_2: 2585728
+sup_98_0: 34319
+trans_recursive_method: 240
+type_defines_method: 180431
+[WORK] 14044836996
+LOG:INTERPRET;ELAPSED=386.78s;USER=12875.86s;SYSTEM=159.18s;CPU=3370%;MEM=142217356kb
+LOG:Success!

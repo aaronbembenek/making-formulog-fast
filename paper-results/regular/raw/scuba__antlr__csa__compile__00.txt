@@ -1,0 +1,957 @@
+LOG:Benchmark directory: /home/ubuntu/formulog-compiler-eval/benchmarks/scuba/bms/antlr
+LOG:Timeout: 1800
+LOG:Eval repo commit: 90b700b
+LOG:Formulog commit: 8862fc1
+LOG:Z3 version: Z3 version 4.12.2 - 64 bit - build hashcode f7c9c9ef72fde0e00ef9409e6c24456effb8b930
+LOG:Java version start
+openjdk version "17.0.7" 2023-04-18
+OpenJDK Runtime Environment (build 17.0.7+7-Ubuntu-0ubuntu122.04.2)
+OpenJDK 64-Bit Server VM (build 17.0.7+7-Ubuntu-0ubuntu122.04.2, mixed mode, sharing)
+
+LOG:Java version end
+LOG:Mode: compile
+LOG:Solver mode: check-sat-assuming
+LOG:Parallelism: 40
+LOG:Souffle info start
+----------------------------------------------------------------------------
+Version: 2.4-41-g93b082dc7
+Word size: 32 bits
+Options enabled: ffi openmp ncurses sqlite zlib
+----------------------------------------------------------------------------
+Copyright (c) 2016-22 The Souffle Developers.
+Copyright (c) 2013-16 Oracle and/or its affiliates.
+All rights reserved.
+============================================================================
+
+LOG:Souffle info end
+LOG:Transpile command: /usr/bin/time -f LOG:TRANSPILE;ELAPSED=%es;USER=%Us;SYSTEM=%Ss;CPU=%P;MEM=%Mkb java -Xmx180g -Xss256m -DmemoizeThreshold=0 -DsmtDoubleCheckUnknowns=false -jar /home/ubuntu/formulog-compiler-eval/formulog/target/formulog-0.7.0-SNAPSHOT-jar-with-dependencies.jar bench.flg --dump-sizes --smt-stats --smt-solver-mode=check-sat-assuming -j 40 -D /home/ubuntu/formulog-compiler-eval/benchmarks/scuba/bms/antlr/out -F /home/ubuntu/formulog-compiler-eval/benchmarks/scuba/bms/antlr/facts -F /home/ubuntu/formulog-compiler-eval/benchmarks/scuba/lib_facts -c --codegen-dir /home/ubuntu/formulog-compiler-eval/benchmarks/scuba/bms/antlr/../../codegen
+WARNING: relation query cipa_vptsto<BOUND,BOUND,IGNORED>? has ignored attribute; this might lead to slow performance
+WARNING: relation query method_parameter<BOUND,IGNORED,BOUND>? has ignored attribute; this might lead to slow performance
+LOG:TRANSPILE;ELAPSED=0.87s;USER=5.81s;SYSTEM=0.35s;CPU=708%;MEM=344628kb
+LOG:Compile command: /usr/bin/time -f LOG:COMPILE;ELAPSED=%es;USER=%Us;SYSTEM=%Ss;CPU=%P;MEM=%Mkb bash -c cmake -B /home/ubuntu/formulog-compiler-eval/benchmarks/scuba/bms/antlr/../../codegen/build -S /home/ubuntu/formulog-compiler-eval/benchmarks/scuba/bms/antlr/../../codegen -DCMAKE_BUILD_TYPE=Release      -DFLG_RECORD_WORK=On && cmake --build /home/ubuntu/formulog-compiler-eval/benchmarks/scuba/bms/antlr/../../codegen/build -j
+-- The C compiler identification is GNU 11.3.0
+-- The CXX compiler identification is GNU 11.3.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found Boost: /usr/local/lib/cmake/Boost-1.81.0/BoostConfig.cmake (found suitable version "1.81.0", minimum required is "1.79") found components: filesystem system program_options 
+-- Found OpenMP_C: -fopenmp (found version "4.5") 
+-- Found OpenMP_CXX: -fopenmp (found version "4.5") 
+-- Found OpenMP: TRUE (found version "4.5")  
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/ubuntu/formulog-compiler-eval/benchmarks/scuba/codegen/build
+[  7%] Generating formulog.cpp
+Warning: Variable x46 only occurs once in file formulog.dl at line 527
+	instr_invoke_special_(Caller, P, x46, Callee, x47), 
+----------------------------------^-------------------
+Warning: Variable x47 only occurs once in file formulog.dl at line 527
+	instr_invoke_special_(Caller, P, x46, Callee, x47), 
+-----------------------------------------------^------
+Warning: Variable x52 only occurs once in file formulog.dl at line 533
+	instr_invoke_special_(Caller, P, x52, Callee, x53), 
+----------------------------------^-------------------
+Warning: Variable x53 only occurs once in file formulog.dl at line 533
+	instr_invoke_special_(Caller, P, x52, Callee, x53), 
+-----------------------------------------------^------
+Warning: Variable Caller only occurs once in file formulog.dl at line 536
+input_is_strict_subtype_of_bb_(Caller_type, Callee_type) :- sup_125_0_(Callee_type, Caller, Caller_type, P).
+------------------------------------------------------------------------------------^------------------------
+Warning: Variable P only occurs once in file formulog.dl at line 536
+input_is_strict_subtype_of_bb_(Caller_type, Callee_type) :- sup_125_0_(Callee_type, Caller, Caller_type, P).
+---------------------------------------------------------------------------------------------------------^---
+Warning: Variable Caller only occurs once in file formulog.dl at line 537
+input_is_strict_subtype_of_bb_(Caller_type, Callee_type) :- sup_123_0_(Callee_type, Caller, Caller_type, P).
+------------------------------------------------------------------------------------^------------------------
+Warning: Variable P only occurs once in file formulog.dl at line 537
+input_is_strict_subtype_of_bb_(Caller_type, Callee_type) :- sup_123_0_(Callee_type, Caller, Caller_type, P).
+---------------------------------------------------------------------------------------------------------^---
+Warning: Variable X only occurs once in file formulog.dl at line 538
+input_is_strict_subtype_of_bb_(Z, Y) :- sup_178_0_(X, Y, Z).
+---------------------------------------------------^---------
+Warning: Variable x50 only occurs once in file formulog.dl at line 559
+	instr_invoke_special_(Caller, P, x50, Callee, x51), 
+----------------------------------^-------------------
+Warning: Variable x51 only occurs once in file formulog.dl at line 559
+	instr_invoke_special_(Caller, P, x50, Callee, x51), 
+-----------------------------------------------^------
+Warning: Variable x48 only occurs once in file formulog.dl at line 567
+	instr_invoke_special_(Caller, P, x48, Callee, x49), 
+----------------------------------^-------------------
+Warning: Variable x49 only occurs once in file formulog.dl at line 567
+	instr_invoke_special_(Caller, P, x48, Callee, x49), 
+-----------------------------------------------^------
+Warning: Variable x77 only occurs once in file formulog.dl at line 578
+	instr_invoke_static_(M, P, R, x77, Args).
+-------------------------------^-----------
+Warning: Variable x76 only occurs once in file formulog.dl at line 581
+	instr_invoke_special_(M, P, R, x76, Args).
+--------------------------------^-----------
+Warning: Variable x75 only occurs once in file formulog.dl at line 584
+	instr_invoke_dispatch_(M, P, R, x75, Args).
+---------------------------------^-----------
+Warning: Variable x70 only occurs once in file formulog.dl at line 586
+	instr_array_store_(M, P, A, x70, X), 
+-----------------------------^---------
+Warning: Variable x67 only occurs once in file formulog.dl at line 653
+	instr_get_(M, P, X, x67, F), 
+---------------------^---------
+Warning: Variable x92 only occurs once in file formulog.dl at line 665
+	cipa_invocation_(Caller, P, x92, Callee), 
+-----------------------------^--------------
+Warning: Variable x93 only occurs once in file formulog.dl at line 667
+	instr_return_(Callee, x93, x347), 
+-----------------------^------------
+Warning: Variable x94 only occurs once in file formulog.dl at line 677
+cipa_reach_method_(M) :- cipa_invocation_(x94, x95, x96, M).
+------------------------------------------^------------------
+Warning: Variable x95 only occurs once in file formulog.dl at line 677
+cipa_reach_method_(M) :- cipa_invocation_(x94, x95, x96, M).
+-----------------------------------------------^-------------
+Warning: Variable x96 only occurs once in file formulog.dl at line 677
+cipa_reach_method_(M) :- cipa_invocation_(x94, x95, x96, M).
+----------------------------------------------------^--------
+Warning: Variable x88 only occurs once in file formulog.dl at line 680
+	instr_invoke_special_(M, P, x88, Static_tgt, x89), 
+-----------------------------^-----------------------
+Warning: Variable x89 only occurs once in file formulog.dl at line 680
+	instr_invoke_special_(M, P, x88, Static_tgt, x89), 
+----------------------------------------------^------
+Warning: Variable x79 only occurs once in file formulog.dl at line 695
+	call_site_nth_arg_(M, P, N, x79, x352), 
+-----------------------------^------------
+Warning: Variable x78 only occurs once in file formulog.dl at line 702
+	call_site_ret_and_args_(M, P, x78, x358), 
+-------------------------------^------------
+Warning: Variable x66 only occurs once in file formulog.dl at line 712
+	instr_new_(M, P, x66, Ty), 
+------------------^----------
+Warning: Variable x83 only occurs once in file formulog.dl at line 716
+	instr_invoke_dispatch_(M, P, x83, x84, x364), 
+------------------------------^-----------------
+Warning: Variable x84 only occurs once in file formulog.dl at line 716
+	instr_invoke_dispatch_(M, P, x83, x84, x364), 
+-----------------------------------^------------
+Warning: Variable x366 only occurs once in file formulog.dl at line 721
+	x366 = @nth(1, x367, x369), 
+-^----------------------------
+Warning: Variable x80 only occurs once in file formulog.dl at line 725
+	call_site_ret_and_args_(M, P, x370, x80), 
+-------------------------------------^------
+Warning: Variable x90 only occurs once in file formulog.dl at line 736
+	instr_invoke_static_(M, P, x90, Tgt, x91), 
+----------------------------^----------------
+Warning: Variable x91 only occurs once in file formulog.dl at line 736
+	instr_invoke_static_(M, P, x90, Tgt, x91), 
+--------------------------------------^------
+Warning: Variable x82 only occurs once in file formulog.dl at line 753
+	call_site_nth_arg_(Caller, P, @expr_882(), Actual, x82), 
+----------------------------------------------------^------
+Warning: Variable x65 only occurs once in file formulog.dl at line 761
+	instr_new_(M, P, X, x65), 
+---------------------^------
+Warning: Variable x68 only occurs once in file formulog.dl at line 790
+	instr_put_(M, P, x68, F, Y), 
+------------------^------------
+Warning: Variable M only occurs once in file formulog.dl at line 794
+input_resolves_to_bbf_(Ty, Selector) :- sup_48_0_(M, P, Selector, Ty).
+--------------------------------------------------^--------------------
+Warning: Variable P only occurs once in file formulog.dl at line 794
+input_resolves_to_bbf_(Ty, Selector) :- sup_48_0_(M, P, Selector, Ty).
+-----------------------------------------------------^-----------------
+Warning: Variable M only occurs once in file formulog.dl at line 795
+input_resolves_to_bbf_(Ty, Selector) :- sup_49_0_(M, P, Selector, Ty).
+--------------------------------------------------^--------------------
+Warning: Variable P only occurs once in file formulog.dl at line 795
+input_resolves_to_bbf_(Ty, Selector) :- sup_49_0_(M, P, Selector, Ty).
+-----------------------------------------------------^-----------------
+Warning: Variable T only occurs once in file formulog.dl at line 796
+input_resolves_to_bbf_(Super, N) :- sup_159_0_(N, Super, T).
+---------------------------------------------------------^---
+Warning: Variable x71 only occurs once in file formulog.dl at line 813
+	phi_def_(M, P, Def, x71, x72, x391), 
+---------------------^-----------------
+Warning: Variable x72 only occurs once in file formulog.dl at line 813
+	phi_def_(M, P, Def, x71, x72, x391), 
+--------------------------^------------
+Warning: Variable x73 only occurs once in file formulog.dl at line 848
+	phi_def_(M, P, X, x73, Y, x74), 
+-------------------^--------------
+Warning: Variable x74 only occurs once in file formulog.dl at line 848
+	phi_def_(M, P, X, x73, Y, x74), 
+---------------------------^------
+Warning: Variable x81 only occurs once in file formulog.dl at line 868
+	call_site_nth_arg_(Caller, P, N, Actual, x81), 
+------------------------------------------^------
+Warning: Variable x69 only occurs once in file formulog.dl at line 874
+	instr_array_load_(M, P, X, A, x69), 
+-------------------------------^------
+Warning: Variable x86 only occurs once in file formulog.dl at line 882
+	instr_invoke_dispatch_(M, P, x86, Static_tgt, x87), 
+------------------------------^-----------------------
+Warning: Variable x87 only occurs once in file formulog.dl at line 882
+	instr_invoke_dispatch_(M, P, x86, Static_tgt, x87), 
+-----------------------------------------------^------
+Warning: Variable H only occurs once in file formulog.dl at line 886
+input_is_subtype_of_bb_(Ty2, Ty1) :- sup_55_0_(H, M, Ty1, Ty2, X).
+-----------------------------------------------^-------------------
+Warning: Variable M only occurs once in file formulog.dl at line 886
+input_is_subtype_of_bb_(Ty2, Ty1) :- sup_55_0_(H, M, Ty1, Ty2, X).
+--------------------------------------------------^----------------
+Warning: Variable X only occurs once in file formulog.dl at line 886
+input_is_subtype_of_bb_(Ty2, Ty1) :- sup_55_0_(H, M, Ty1, Ty2, X).
+---------------------------------------------------------------^---
+Warning: Variable H2 only occurs once in file formulog.dl at line 887
+input_is_subtype_of_bb_(Ty1, Ty2) :- sup_59_0_(H2, M, Ty1, Ty2, X).
+-----------------------------------------------^--------------------
+Warning: Variable M only occurs once in file formulog.dl at line 887
+input_is_subtype_of_bb_(Ty1, Ty2) :- sup_59_0_(H2, M, Ty1, Ty2, X).
+---------------------------------------------------^----------------
+Warning: Variable X only occurs once in file formulog.dl at line 887
+input_is_subtype_of_bb_(Ty1, Ty2) :- sup_59_0_(H2, M, Ty1, Ty2, X).
+----------------------------------------------------------------^---
+Warning: Variable X only occurs once in file formulog.dl at line 888
+input_is_subtype_of_bb_(Z, Y) :- sup_153_0_(X, Y, Z).
+--------------------------------------------^---------
+Warning: Variable H1 only occurs once in file formulog.dl at line 889
+input_is_subtype_of_bb_(Ty2, Ty1) :- sup_30_0_(H1, H2, Ty1, Ty2).
+-----------------------------------------------^------------------
+Warning: Variable H2 only occurs once in file formulog.dl at line 889
+input_is_subtype_of_bb_(Ty2, Ty1) :- sup_30_0_(H1, H2, Ty1, Ty2).
+---------------------------------------------------^--------------
+Warning: Variable Caller only occurs once in file formulog.dl at line 890
+input_is_subtype_of_bb_(Ty1, Ty2) :- sup_53_0_(Caller, H, Ty1, Ty2, X).
+-----------------------------------------------^------------------------
+Warning: Variable H only occurs once in file formulog.dl at line 890
+input_is_subtype_of_bb_(Ty1, Ty2) :- sup_53_0_(Caller, H, Ty1, Ty2, X).
+-------------------------------------------------------^----------------
+Warning: Variable X only occurs once in file formulog.dl at line 890
+input_is_subtype_of_bb_(Ty1, Ty2) :- sup_53_0_(Caller, H, Ty1, Ty2, X).
+--------------------------------------------------------------------^---
+Warning: Variable H only occurs once in file formulog.dl at line 891
+input_is_subtype_of_bb_(Ty1, Ty2) :- sup_58_0_(H, M, Ty1, Ty2, X).
+-----------------------------------------------^-------------------
+Warning: Variable M only occurs once in file formulog.dl at line 891
+input_is_subtype_of_bb_(Ty1, Ty2) :- sup_58_0_(H, M, Ty1, Ty2, X).
+--------------------------------------------------^----------------
+Warning: Variable X only occurs once in file formulog.dl at line 891
+input_is_subtype_of_bb_(Ty1, Ty2) :- sup_58_0_(H, M, Ty1, Ty2, X).
+---------------------------------------------------------------^---
+Warning: Variable H only occurs once in file formulog.dl at line 892
+input_is_subtype_of_bb_(Ty1, Ty2) :- sup_57_0_(H, M, Ty1, Ty2, X).
+-----------------------------------------------^-------------------
+Warning: Variable M only occurs once in file formulog.dl at line 892
+input_is_subtype_of_bb_(Ty1, Ty2) :- sup_57_0_(H, M, Ty1, Ty2, X).
+--------------------------------------------------^----------------
+Warning: Variable X only occurs once in file formulog.dl at line 892
+input_is_subtype_of_bb_(Ty1, Ty2) :- sup_57_0_(H, M, Ty1, Ty2, X).
+---------------------------------------------------------------^---
+Warning: Variable Callee only occurs once in file formulog.dl at line 893
+input_is_subtype_of_bb_(Ty1, Ty2) :- sup_56_0_(Callee, H, N, Ty1, Ty2).
+-----------------------------------------------^------------------------
+Warning: Variable H only occurs once in file formulog.dl at line 893
+input_is_subtype_of_bb_(Ty1, Ty2) :- sup_56_0_(Callee, H, N, Ty1, Ty2).
+-------------------------------------------------------^----------------
+Warning: Variable N only occurs once in file formulog.dl at line 893
+input_is_subtype_of_bb_(Ty1, Ty2) :- sup_56_0_(Callee, H, N, Ty1, Ty2).
+----------------------------------------------------------^-------------
+Warning: Variable H2 only occurs once in file formulog.dl at line 894
+input_is_subtype_of_bb_(Ty1, Ty2) :- sup_52_0_(H2, M, Ty1, Ty2, X).
+-----------------------------------------------^--------------------
+Warning: Variable M only occurs once in file formulog.dl at line 894
+input_is_subtype_of_bb_(Ty1, Ty2) :- sup_52_0_(H2, M, Ty1, Ty2, X).
+---------------------------------------------------^----------------
+Warning: Variable X only occurs once in file formulog.dl at line 894
+input_is_subtype_of_bb_(Ty1, Ty2) :- sup_52_0_(H2, M, Ty1, Ty2, X).
+----------------------------------------------------------------^---
+Warning: Variable x59 only occurs once in file formulog.dl at line 900
+	instr_put_(M, x59, x60, F, x61), 
+---------------^-------------------
+Warning: Variable x60 only occurs once in file formulog.dl at line 900
+	instr_put_(M, x59, x60, F, x61), 
+--------------------^--------------
+Warning: Variable x61 only occurs once in file formulog.dl at line 900
+	instr_put_(M, x59, x60, F, x61), 
+----------------------------^------
+Warning: Variable x54 only occurs once in file formulog.dl at line 905
+	instr_new_(M, x54, x55, T).
+---------------^-------------
+Warning: Variable x55 only occurs once in file formulog.dl at line 905
+	instr_new_(M, x54, x55, T).
+--------------------^--------
+Warning: Variable x56 only occurs once in file formulog.dl at line 908
+	instr_get_(M, x56, x57, x58, F), 
+---------------^-------------------
+Warning: Variable x57 only occurs once in file formulog.dl at line 908
+	instr_get_(M, x56, x57, x58, F), 
+--------------------^--------------
+Warning: Variable x58 only occurs once in file formulog.dl at line 908
+	instr_get_(M, x56, x57, x58, F), 
+-------------------------^---------
+Warning: Variable x62 only occurs once in file formulog.dl at line 912
+	cipa_invocation_(x62, x63, x64, M), 
+------------------^-------------------
+Warning: Variable x63 only occurs once in file formulog.dl at line 912
+	cipa_invocation_(x62, x63, x64, M), 
+-----------------------^--------------
+Warning: Variable x64 only occurs once in file formulog.dl at line 912
+	cipa_invocation_(x62, x63, x64, M), 
+----------------------------^---------
+Warning: Variable x162 only occurs once in file formulog.dl at line 916
+	cipa_invocation_(M, P, x162, Callee1), 
+------------------------^----------------
+Warning: Variable x163 only occurs once in file formulog.dl at line 917
+	cipa_invocation_(M, P, x163, Callee2), 
+------------------------^----------------
+Warning: Variable x104 only occurs once in file formulog.dl at line 919
+call_graph_tc_(Caller, Callee) :- cipa_invocation_(Caller, x104, x105, Callee).
+-----------------------------------------------------------^--------------------
+Warning: Variable x105 only occurs once in file formulog.dl at line 919
+call_graph_tc_(Caller, Callee) :- cipa_invocation_(Caller, x104, x105, Callee).
+-----------------------------------------------------------------^--------------
+Warning: Variable x106 only occurs once in file formulog.dl at line 921
+	cipa_invocation_(M1, x106, x107, M2), 
+----------------------^-----------------
+Warning: Variable x107 only occurs once in file formulog.dl at line 921
+	cipa_invocation_(M1, x106, x107, M2), 
+----------------------------^-----------
+Warning: Variable x130 only occurs once in file formulog.dl at line 933
+	instr_array_store_(M, P, A, x130, X), 
+-----------------------------^----------
+Warning: Variable x129 only occurs once in file formulog.dl at line 937
+	instr_array_load_(M, P, X, A, x129), 
+-------------------------------^-------
+Warning: Variable x128 only occurs once in file formulog.dl at line 947
+	instr_put_(M, P, x128, F, Y), 
+------------------^-------------
+Warning: Variable x103 only occurs once in file formulog.dl at line 970
+	instr_return_(M, I, x103).
+---------------------^------
+Warning: Variable x101 only occurs once in file formulog.dl at line 1002
+	entry_block_(M, x101).
+-----------------^------
+Warning: Variable x133 only occurs once in file formulog.dl at line 1011
+	instr_check_cast_(M, P, X, Y, x133), 
+-------------------------------^-------
+Warning: Variable x97 only occurs once in file formulog.dl at line 1022
+	cipa_invocation_(Caller, x97, x98, M), 
+--------------------------^--------------
+Warning: Variable x98 only occurs once in file formulog.dl at line 1022
+	cipa_invocation_(Caller, x97, x98, M), 
+-------------------------------^---------
+Warning: Variable x134 only occurs once in file formulog.dl at line 1036
+	cipa_invocation_(Caller, P, x134, Callee), 
+-----------------------------^---------------
+Warning: Variable x102 only occurs once in file formulog.dl at line 1064
+	is_intra_block_pred_of_(M, x102, I, J).
+----------------------------^------------
+Warning: Variable x131 only occurs once in file formulog.dl at line 1099
+	phi_def_(M, Q, X, Pred_block, Y, x131), 
+----------------------------------^-------
+Warning: Variable x164 only occurs once in file formulog.dl at line 1109
+	call_site_ret_and_args_(M, P, R, x164), 
+----------------------------------^-------
+Warning: Variable x165 only occurs once in file formulog.dl at line 1111
+	call_site_nth_arg_(M, P, @expr_882(), X, x165).
+------------------------------------------^------
+Warning: Variable x451 only occurs once in file formulog.dl at line 1156
+	x451 = @nth(0, x456, x458), 
+-^----------------------------
+Warning: Variable x452 only occurs once in file formulog.dl at line 1157
+	x452 = @nth(1, x456, x458).
+-^---------------------------
+Warning: Variable x484 only occurs once in file formulog.dl at line 1211
+	x484 = @nth(1, x492, x494), 
+-^----------------------------
+Warning: Variable Fs only occurs once in file formulog.dl at line 1216
+input_field_lookup_at_call_bbbbff_(Call, A, F, @expr_862()) :- sup_190_1_(A, Call, F, Fs, Phi1, X).
+--------------------------------------------------------------------------------------^-------------
+Warning: Variable Phi1 only occurs once in file formulog.dl at line 1216
+input_field_lookup_at_call_bbbbff_(Call, A, F, @expr_862()) :- sup_190_1_(A, Call, F, Fs, Phi1, X).
+------------------------------------------------------------------------------------------^---------
+Warning: Variable X only occurs once in file formulog.dl at line 1216
+input_field_lookup_at_call_bbbbff_(Call, A, F, @expr_862()) :- sup_190_1_(A, Call, F, Fs, Phi1, X).
+------------------------------------------------------------------------------------------------^---
+Warning: Variable X only occurs once in file formulog.dl at line 1217
+input_field_lookup_at_call_bbbbff_(Call, @expr_930(Y, Call), @expr_924(), @expr_862()) :- sup_186_0_(Call, X, Y).
+-----------------------------------------------------------------------------------------------------------^------
+Warning: Variable Fs only occurs once in file formulog.dl at line 1218
+input_field_lookup_at_call_bbbbff_(Call, A, F, @expr_904()) :- sup_183_2_(A, Call, F, Fs, Phi1, X).
+--------------------------------------------------------------------------------------^-------------
+Warning: Variable Phi1 only occurs once in file formulog.dl at line 1218
+input_field_lookup_at_call_bbbbff_(Call, A, F, @expr_904()) :- sup_183_2_(A, Call, F, Fs, Phi1, X).
+------------------------------------------------------------------------------------------^---------
+Warning: Variable X only occurs once in file formulog.dl at line 1218
+input_field_lookup_at_call_bbbbff_(Call, A, F, @expr_904()) :- sup_183_2_(A, Call, F, Fs, Phi1, X).
+------------------------------------------------------------------------------------------------^---
+Warning: Variable x111 only occurs once in file formulog.dl at line 1249
+	summary_(M, x111, x112, x503, x113), 
+-------------^-------------------------
+Warning: Variable x112 only occurs once in file formulog.dl at line 1249
+	summary_(M, x111, x112, x503, x113), 
+-------------------^-------------------
+Warning: Variable x113 only occurs once in file formulog.dl at line 1249
+	summary_(M, x111, x112, x503, x113), 
+-------------------------------^-------
+Warning: Variable x108 only occurs once in file formulog.dl at line 1257
+	summary_(M, x509, x108, x109, x110), 
+-------------------^-------------------
+Warning: Variable x109 only occurs once in file formulog.dl at line 1257
+	summary_(M, x509, x108, x109, x110), 
+-------------------------^-------------
+Warning: Variable x110 only occurs once in file formulog.dl at line 1257
+	summary_(M, x509, x108, x109, x110), 
+-------------------------------^-------
+Warning: Variable O only occurs once in file formulog.dl at line 1317
+input_instantiate_constraint_bbf_(Call, Phi) :- sup_175_1_(Call, O, O2, Phi, Phi2).
+-----------------------------------------------------------------^------------------
+Warning: Variable O2 only occurs once in file formulog.dl at line 1317
+input_instantiate_constraint_bbf_(Call, Phi) :- sup_175_1_(Call, O, O2, Phi, Phi2).
+--------------------------------------------------------------------^---------------
+Warning: Variable Phi2 only occurs once in file formulog.dl at line 1317
+input_instantiate_constraint_bbf_(Call, Phi) :- sup_175_1_(Call, O, O2, Phi, Phi2).
+-----------------------------------------------------------------------------^------
+Warning: Variable Cs only occurs once in file formulog.dl at line 1318
+input_instantiate_constraint_bbf_(Call, As) :- sup_194_1_(As, Call, Cs, O, T).
+--------------------------------------------------------------------^----------
+Warning: Variable O only occurs once in file formulog.dl at line 1318
+input_instantiate_constraint_bbf_(Call, As) :- sup_194_1_(As, Call, Cs, O, T).
+------------------------------------------------------------------------^------
+Warning: Variable T only occurs once in file formulog.dl at line 1318
+input_instantiate_constraint_bbf_(Call, As) :- sup_194_1_(As, Call, Cs, O, T).
+---------------------------------------------------------------------------^---
+Warning: Variable x139 only occurs once in file formulog.dl at line 1362
+	call_site_nth_arg_(@expr_927(Call), @expr_953(Call), @expr_954(x581), Y, x139).
+--------------------------------------------------------------------------^------
+Warning: Variable x618 only occurs once in file formulog.dl at line 1401
+	x618 = @nth(0, x619, x621).
+-^---------------------------
+Warning: Variable F only occurs once in file formulog.dl at line 1402
+input_concl_instantiate_loc_bf_(A1) :- sup_104_0_(A1, F, O1, Phi).
+------------------------------------------------------^------------
+Warning: Variable O1 only occurs once in file formulog.dl at line 1402
+input_concl_instantiate_loc_bf_(A1) :- sup_104_0_(A1, F, O1, Phi).
+---------------------------------------------------------^---------
+Warning: Variable Phi only occurs once in file formulog.dl at line 1402
+input_concl_instantiate_loc_bf_(A1) :- sup_104_0_(A1, F, O1, Phi).
+-------------------------------------------------------------^-----
+Warning: Variable x138 only occurs once in file formulog.dl at line 1403
+input_instantiate_cipa_bbf_(@expr_927(Call), @expr_928(Ctx)) :- sup_184_0_(x138, Call, Ctx).
+---------------------------------------------------------------------------^-----------------
+Warning: Variable O only occurs once in file formulog.dl at line 1404
+input_instantiate_cipa_bbf_(M, L) :- sup_172_0_(L, M, O).
+------------------------------------------------------^---
+Warning: Variable x115 only occurs once in file formulog.dl at line 1405
+input_instantiate_cipa_bbf_(M, L) :- sup_162_0_(x115, x116, F, L, M, Rest).
+------------------------------------------------^---------------------------
+Warning: Variable x116 only occurs once in file formulog.dl at line 1405
+input_instantiate_cipa_bbf_(M, L) :- sup_162_0_(x115, x116, F, L, M, Rest).
+------------------------------------------------------^---------------------
+Warning: Variable F only occurs once in file formulog.dl at line 1405
+input_instantiate_cipa_bbf_(M, L) :- sup_162_0_(x115, x116, F, L, M, Rest).
+------------------------------------------------------------^---------------
+Warning: Variable Rest only occurs once in file formulog.dl at line 1405
+input_instantiate_cipa_bbf_(M, L) :- sup_162_0_(x115, x116, F, L, M, Rest).
+---------------------------------------------------------------------^------
+Warning: Variable F only occurs once in file formulog.dl at line 1406
+input_instantiate_cipa_bbf_(M, L) :- sup_167_0_(F, L, M).
+------------------------------------------------^---------
+Warning: Variable x146 only occurs once in file formulog.dl at line 1407
+input_instantiate_cipa_bbf_(@expr_927(Call), L) :- sup_199_0_(x146, x147, Call, F, L, Rest).
+--------------------------------------------------------------^------------------------------
+Warning: Variable x147 only occurs once in file formulog.dl at line 1407
+input_instantiate_cipa_bbf_(@expr_927(Call), L) :- sup_199_0_(x146, x147, Call, F, L, Rest).
+--------------------------------------------------------------------^------------------------
+Warning: Variable F only occurs once in file formulog.dl at line 1407
+input_instantiate_cipa_bbf_(@expr_927(Call), L) :- sup_199_0_(x146, x147, Call, F, L, Rest).
+--------------------------------------------------------------------------------^------------
+Warning: Variable Rest only occurs once in file formulog.dl at line 1407
+input_instantiate_cipa_bbf_(@expr_927(Call), L) :- sup_199_0_(x146, x147, Call, F, L, Rest).
+--------------------------------------------------------------------------------------^------
+Warning: Variable x185 only occurs once in file formulog.dl at line 1408
+input_instantiate_cipa_bbf_(M, @expr_928(Ctx)) :- sup_169_0_(x185, Ctx, M).
+-------------------------------------------------------------^--------------
+Warning: Variable x154 only occurs once in file formulog.dl at line 1411
+	ptsto_(M, x154, A, F, O, C).
+-----------^------------------
+Warning: Variable x161 only occurs once in file formulog.dl at line 1414
+	method_parameter_(M, x161, X), 
+----------------------^----------
+Warning: Variable x155 only occurs once in file formulog.dl at line 1421
+	cipa_vptsto_(M, X, x155).
+--------------------^------
+Warning: Variable Fs only occurs once in file formulog.dl at line 1422
+input_instantiate_loc_bbff_(Call, @expr_919(X, Fs2)) :- sup_182_0_(Call, Fs, Fs2, X, Z).
+-------------------------------------------------------------------------^---------------
+Warning: Variable Z only occurs once in file formulog.dl at line 1422
+input_instantiate_loc_bbff_(Call, @expr_919(X, Fs2)) :- sup_182_0_(Call, Fs, Fs2, X, Z).
+-------------------------------------------------------------------------------------^---
+Warning: Variable Fs only occurs once in file formulog.dl at line 1423
+input_instantiate_loc_bbff_(Call, @expr_919(X, Fs2)) :- sup_185_0_(Call, Fs, Fs2, X).
+-------------------------------------------------------------------------^------------
+Warning: Variable F only occurs once in file formulog.dl at line 1424
+input_instantiate_loc_bbff_(Call, @expr_919(X, Fs2)) :- sup_190_0_(Call, F, Fs, Fs2, X).
+-------------------------------------------------------------------------^---------------
+Warning: Variable Fs only occurs once in file formulog.dl at line 1424
+input_instantiate_loc_bbff_(Call, @expr_919(X, Fs2)) :- sup_190_0_(Call, F, Fs, Fs2, X).
+----------------------------------------------------------------------------^------------
+Warning: Variable F only occurs once in file formulog.dl at line 1425
+input_instantiate_loc_bbff_(Call, A1) :- sup_144_0_(A1, Call, F, O1, Phi, Phi_invoke).
+--------------------------------------------------------------^------------------------
+Warning: Variable O1 only occurs once in file formulog.dl at line 1425
+input_instantiate_loc_bbff_(Call, A1) :- sup_144_0_(A1, Call, F, O1, Phi, Phi_invoke).
+-----------------------------------------------------------------^---------------------
+Warning: Variable Phi only occurs once in file formulog.dl at line 1425
+input_instantiate_loc_bbff_(Call, A1) :- sup_144_0_(A1, Call, F, O1, Phi, Phi_invoke).
+---------------------------------------------------------------------^-----------------
+Warning: Variable Phi_invoke only occurs once in file formulog.dl at line 1425
+input_instantiate_loc_bbff_(Call, A1) :- sup_144_0_(A1, Call, F, O1, Phi, Phi_invoke).
+--------------------------------------------------------------------------^------------
+Warning: Variable As only occurs once in file formulog.dl at line 1426
+input_instantiate_loc_bbff_(Call, @expr_913(O)) :- sup_194_0_(As, Call, O, T).
+--------------------------------------------------------------^----------------
+Warning: Variable T only occurs once in file formulog.dl at line 1426
+input_instantiate_loc_bbff_(Call, @expr_913(O)) :- sup_194_0_(As, Call, O, T).
+---------------------------------------------------------------------------^---
+Warning: Variable Phi only occurs once in file formulog.dl at line 1427
+input_instantiate_loc_bbff_(Call, @expr_913(O)) :- sup_175_0_(Call, O, Phi).
+-----------------------------------------------------------------------^-----
+Warning: Variable Fs3 only occurs once in file formulog.dl at line 1429
+input_instantiate_loc_bbff_(Call, @expr_912(Fs, X)) :- sup_183_0_(Call, Fs, Fs3, X).
+----------------------------------------------------------------------------^--------
+Warning: Variable Rest only occurs once in file formulog.dl at line 1430
+input_concl_instantiate_obj_bf_(O1) :- sup_174_0_(O1, Rest, Ty).
+------------------------------------------------------^----------
+Warning: Variable Ty only occurs once in file formulog.dl at line 1430
+input_concl_instantiate_obj_bf_(O1) :- sup_174_0_(O1, Rest, Ty).
+------------------------------------------------------------^----
+Warning: Variable A2 only occurs once in file formulog.dl at line 1431
+input_concl_instantiate_obj_bf_(O1) :- sup_104_1_(A2, F, O1, Phi).
+--------------------------------------------------^----------------
+Warning: Variable F only occurs once in file formulog.dl at line 1431
+input_concl_instantiate_obj_bf_(O1) :- sup_104_1_(A2, F, O1, Phi).
+------------------------------------------------------^------------
+Warning: Variable Phi only occurs once in file formulog.dl at line 1431
+input_concl_instantiate_obj_bf_(O1) :- sup_104_1_(A2, F, O1, Phi).
+-------------------------------------------------------------^-----
+Warning: Variable x632 only occurs once in file formulog.dl at line 1455
+	x632 = @nth(0, x636, x638).
+-^---------------------------
+Warning: Variable x639 only occurs once in file formulog.dl at line 1461
+	x639 = @nth(0, x642, x644), 
+-^----------------------------
+Warning: Variable x640 only occurs once in file formulog.dl at line 1462
+	x640 = @nth(1, x642, x644), 
+-^----------------------------
+Warning: Variable x641 only occurs once in file formulog.dl at line 1463
+	x641 = @nth(2, x642, x644).
+-^---------------------------
+Warning: Variable x166 only occurs once in file formulog.dl at line 1476
+	cipa_invocation_(M, P, x166, Callee), 
+------------------------^---------------
+Warning: Variable x167 only occurs once in file formulog.dl at line 1478
+	call_site_ret_and_args_(M, P, R, x167).
+----------------------------------^------
+Warning: Variable X only occurs once in file formulog.dl at line 1479
+input_field_lookup_bbbbff_(M, P, @expr_966(M, A), @expr_924()) :- sup_113_0_(A, M, P, X).
+--------------------------------------------------------------------------------------^---
+Warning: Variable Call only occurs once in file formulog.dl at line 1480
+input_field_lookup_bbbbff_(M, P, @expr_942(X, M), @expr_924()) :- sup_86_0_(Call, M, P, R, Ty, X).
+----------------------------------------------------------------------------^----------------------
+Warning: Variable R only occurs once in file formulog.dl at line 1480
+input_field_lookup_bbbbff_(M, P, @expr_942(X, M), @expr_924()) :- sup_86_0_(Call, M, P, R, Ty, X).
+----------------------------------------------------------------------------------------^----------
+Warning: Variable Ty only occurs once in file formulog.dl at line 1480
+input_field_lookup_bbbbff_(M, P, @expr_942(X, M), @expr_924()) :- sup_86_0_(Call, M, P, R, Ty, X).
+-------------------------------------------------------------------------------------------^-------
+Warning: Variable F only occurs once in file formulog.dl at line 1481
+input_field_lookup_bbbbff_(M, P, @expr_967(Y, M), @expr_924()) :- sup_109_1_(F, M, Obj1, P, Phi1, Y).
+-----------------------------------------------------------------------------^------------------------
+Warning: Variable Obj1 only occurs once in file formulog.dl at line 1481
+input_field_lookup_bbbbff_(M, P, @expr_967(Y, M), @expr_924()) :- sup_109_1_(F, M, Obj1, P, Phi1, Y).
+-----------------------------------------------------------------------------------^------------------
+Warning: Variable Phi1 only occurs once in file formulog.dl at line 1481
+input_field_lookup_bbbbff_(M, P, @expr_967(Y, M), @expr_924()) :- sup_109_1_(F, M, Obj1, P, Phi1, Y).
+--------------------------------------------------------------------------------------------^---------
+Warning: Variable Obj1 only occurs once in file formulog.dl at line 1483
+input_field_lookup_bbbbff_(M, P, @expr_942(X, M), @expr_924()) :- sup_113_1_(M, Obj1, P, Phi1, X).
+--------------------------------------------------------------------------------^------------------
+Warning: Variable Phi1 only occurs once in file formulog.dl at line 1483
+input_field_lookup_bbbbff_(M, P, @expr_942(X, M), @expr_924()) :- sup_113_1_(M, Obj1, P, Phi1, X).
+-----------------------------------------------------------------------------------------^---------
+Warning: Variable Phi1 only occurs once in file formulog.dl at line 1484
+input_field_lookup_bbbbff_(M, P, @expr_968(Obj1), @expr_886()) :- sup_105_1_(M, Obj1, P, Phi1, X).
+-----------------------------------------------------------------------------------------^---------
+Warning: Variable X only occurs once in file formulog.dl at line 1484
+input_field_lookup_bbbbff_(M, P, @expr_968(Obj1), @expr_886()) :- sup_105_1_(M, Obj1, P, Phi1, X).
+-----------------------------------------------------------------------------------------------^---
+Warning: Variable Q only occurs once in file formulog.dl at line 1485
+input_field_lookup_bbbbff_(M, P, @expr_967(Y, M), @expr_924()) :- sup_108_0_(M, P, Q, X, Y).
+-----------------------------------------------------------------------------------^---------
+Warning: Variable X only occurs once in file formulog.dl at line 1485
+input_field_lookup_bbbbff_(M, P, @expr_967(Y, M), @expr_924()) :- sup_108_0_(M, P, Q, X, Y).
+--------------------------------------------------------------------------------------^------
+Warning: Variable F only occurs once in file formulog.dl at line 1486
+input_field_lookup_bbbbff_(M, P, @expr_942(X, M), @expr_924()) :- sup_109_0_(F, M, P, X, Y).
+-----------------------------------------------------------------------------^---------------
+Warning: Variable Y only occurs once in file formulog.dl at line 1486
+input_field_lookup_bbbbff_(M, P, @expr_942(X, M), @expr_924()) :- sup_109_0_(F, M, P, X, Y).
+-----------------------------------------------------------------------------------------^---
+Warning: Variable F only occurs once in file formulog.dl at line 1487
+input_field_lookup_bbbbff_(M, P, @expr_967(Y, M), @expr_924()) :- sup_114_0_(F, M, P, Y).
+-----------------------------------------------------------------------------^------------
+Warning: Variable X only occurs once in file formulog.dl at line 1488
+input_field_lookup_bbbbff_(M, P, @expr_966(M, A), @expr_924()) :- sup_105_0_(A, M, P, X).
+--------------------------------------------------------------------------------------^---
+Warning: Variable X only occurs once in file formulog.dl at line 1489
+input_field_lookup_bbbbff_(M, P, @expr_967(Y, M), @expr_924()) :- sup_117_0_(M, P, X, Y).
+-----------------------------------------------------------------------------------^------
+Warning: Variable F only occurs once in file formulog.dl at line 1490
+input_field_lookup_bbbbff_(M, P, @expr_967(Y, M), @expr_924()) :- sup_116_0_(F, M, P, X, Y).
+-----------------------------------------------------------------------------^---------------
+Warning: Variable X only occurs once in file formulog.dl at line 1490
+input_field_lookup_bbbbff_(M, P, @expr_967(Y, M), @expr_924()) :- sup_116_0_(F, M, P, X, Y).
+--------------------------------------------------------------------------------------^------
+Warning: Variable Phi1 only occurs once in file formulog.dl at line 1491
+input_field_lookup_bbbbff_(M, P, @expr_968(Obj1), F) :- sup_116_1_(F, M, Obj1, P, Phi1, X).
+----------------------------------------------------------------------------------^---------
+Warning: Variable X only occurs once in file formulog.dl at line 1491
+input_field_lookup_bbbbff_(M, P, @expr_968(Obj1), F) :- sup_116_1_(F, M, Obj1, P, Phi1, X).
+----------------------------------------------------------------------------------------^---
+Warning: Variable x655 only occurs once in file formulog.dl at line 1511
+	x655 = @nth(0, x665, x667).
+-^---------------------------
+Warning: Variable x132 only occurs once in file formulog.dl at line 1535
+	phi_def_(M, Q, X, Pred_block, Y, x132), 
+----------------------------------^-------
+Warning: Variable x168 only occurs once in file formulog.dl at line 1540
+	invocation_(M, P, x168, Call, x169), 
+-------------------^-------------------
+Warning: Variable x169 only occurs once in file formulog.dl at line 1540
+	invocation_(M, P, x168, Call, x169), 
+-------------------------------^-------
+Warning: Variable x127 only occurs once in file formulog.dl at line 1556
+	instr_get_(M, P, X, x127, F), 
+---------------------^----------
+Warning: Variable x669 only occurs once in file formulog.dl at line 1575
+	x669 = @nth(1, x671, x673), 
+-^----------------------------
+Warning: Variable x670 only occurs once in file formulog.dl at line 1579
+	x670 = @nth(0, x674, x676).
+-^---------------------------
+Warning: Variable Invoke_phi only occurs once in file formulog.dl at line 1615
+input_instantiate_ptsto_bbbff_(Call, O1, Phi1) :- sup_111_0_(Call, Invoke_phi, M, O1, P, Phi1, X).
+-------------------------------------------------------------------^-------------------------------
+Warning: Variable M only occurs once in file formulog.dl at line 1615
+input_instantiate_ptsto_bbbff_(Call, O1, Phi1) :- sup_111_0_(Call, Invoke_phi, M, O1, P, Phi1, X).
+-------------------------------------------------------------------------------^-------------------
+Warning: Variable P only occurs once in file formulog.dl at line 1615
+input_instantiate_ptsto_bbbff_(Call, O1, Phi1) :- sup_111_0_(Call, Invoke_phi, M, O1, P, Phi1, X).
+--------------------------------------------------------------------------------------^------------
+Warning: Variable X only occurs once in file formulog.dl at line 1615
+input_instantiate_ptsto_bbbff_(Call, O1, Phi1) :- sup_111_0_(Call, Invoke_phi, M, O1, P, Phi1, X).
+-----------------------------------------------------------------------------------------------^---
+Warning: Variable A2 only occurs once in file formulog.dl at line 1616
+input_instantiate_ptsto_bbbff_(Call, O1, Phi) :- sup_144_1_(A2, Call, F, O1, Phi, Phi2, Phi_invoke).
+------------------------------------------------------------^----------------------------------------
+Warning: Variable F only occurs once in file formulog.dl at line 1616
+input_instantiate_ptsto_bbbff_(Call, O1, Phi) :- sup_144_1_(A2, Call, F, O1, Phi, Phi2, Phi_invoke).
+----------------------------------------------------------------------^------------------------------
+Warning: Variable Phi2 only occurs once in file formulog.dl at line 1616
+input_instantiate_ptsto_bbbff_(Call, O1, Phi) :- sup_144_1_(A2, Call, F, O1, Phi, Phi2, Phi_invoke).
+----------------------------------------------------------------------------------^------------------
+Warning: Variable Phi_invoke only occurs once in file formulog.dl at line 1616
+input_instantiate_ptsto_bbbff_(Call, O1, Phi) :- sup_144_1_(A2, Call, F, O1, Phi, Phi2, Phi_invoke).
+----------------------------------------------------------------------------------------^------------
+Warning: Variable x170 only occurs once in file formulog.dl at line 1618
+	invocation_(x170, x171, x172, Call, Phi_invoke), 
+-------------^-------------------------------------
+Warning: Variable x171 only occurs once in file formulog.dl at line 1618
+	invocation_(x170, x171, x172, Call, Phi_invoke), 
+-------------------^-------------------------------
+Warning: Variable x172 only occurs once in file formulog.dl at line 1618
+	invocation_(x170, x171, x172, Call, Phi_invoke), 
+-------------------------^-------------------------
+Warning: Variable M only occurs once in file formulog.dl at line 1664
+input_constraint_is_sat_b_(@expr_973(Phi_all)) :- sup_111_1_(M, O2, P, Phi_all, X).
+-------------------------------------------------------------^----------------------
+Warning: Variable O2 only occurs once in file formulog.dl at line 1664
+input_constraint_is_sat_b_(@expr_973(Phi_all)) :- sup_111_1_(M, O2, P, Phi_all, X).
+----------------------------------------------------------------^-------------------
+Warning: Variable P only occurs once in file formulog.dl at line 1664
+input_constraint_is_sat_b_(@expr_973(Phi_all)) :- sup_111_1_(M, O2, P, Phi_all, X).
+--------------------------------------------------------------------^---------------
+Warning: Variable X only occurs once in file formulog.dl at line 1664
+input_constraint_is_sat_b_(@expr_973(Phi_all)) :- sup_111_1_(M, O2, P, Phi_all, X).
+--------------------------------------------------------------------------------^---
+Warning: Variable A2 only occurs once in file formulog.dl at line 1665
+input_constraint_is_sat_b_(@expr_973(Phi_all)) :- sup_144_2_(A2, Call, F, O2, Phi_all).
+-------------------------------------------------------------^--------------------------
+Warning: Variable Call only occurs once in file formulog.dl at line 1665
+input_constraint_is_sat_b_(@expr_973(Phi_all)) :- sup_144_2_(A2, Call, F, O2, Phi_all).
+-----------------------------------------------------------------^----------------------
+Warning: Variable F only occurs once in file formulog.dl at line 1665
+input_constraint_is_sat_b_(@expr_973(Phi_all)) :- sup_144_2_(A2, Call, F, O2, Phi_all).
+-----------------------------------------------------------------------^----------------
+Warning: Variable O2 only occurs once in file formulog.dl at line 1665
+input_constraint_is_sat_b_(@expr_973(Phi_all)) :- sup_144_2_(A2, Call, F, O2, Phi_all).
+--------------------------------------------------------------------------^-------------
+Warning: Variable x160 only occurs once in file formulog.dl at line 1671
+	instr_return_(M, x160, x717), 
+------------------^-------------
+Warning: Variable A2 only occurs once in file formulog.dl at line 1701
+input_concl_instantiate_phi_b_(Phi) :- sup_104_2_(A2, F, O2, Phi).
+--------------------------------------------------^----------------
+Warning: Variable F only occurs once in file formulog.dl at line 1701
+input_concl_instantiate_phi_b_(Phi) :- sup_104_2_(A2, F, O2, Phi).
+------------------------------------------------------^------------
+Warning: Variable O2 only occurs once in file formulog.dl at line 1701
+input_concl_instantiate_phi_b_(Phi) :- sup_104_2_(A2, F, O2, Phi).
+---------------------------------------------------------^---------
+Warning: Variable O1 only occurs once in file formulog.dl at line 1702
+input_concl_instantiate_phi_b_(Rest) :- sup_174_1_(O1, Rest, Ty).
+---------------------------------------------------^--------------
+Warning: Variable Ty only occurs once in file formulog.dl at line 1702
+input_concl_instantiate_phi_b_(Rest) :- sup_174_1_(O1, Rest, Ty).
+-------------------------------------------------------------^----
+Warning: Variable x738 only occurs once in file formulog.dl at line 1712
+	x738 = @nth(1, x740, x742), 
+-^----------------------------
+Warning: Variable A only occurs once in file formulog.dl at line 1730
+input_fs_member_fb_(Fs3) :- sup_183_1_(A, Call, Fs, Fs3, Phi1, X).
+---------------------------------------^---------------------------
+Warning: Variable Call only occurs once in file formulog.dl at line 1730
+input_fs_member_fb_(Fs3) :- sup_183_1_(A, Call, Fs, Fs3, Phi1, X).
+------------------------------------------^------------------------
+Warning: Variable Fs only occurs once in file formulog.dl at line 1730
+input_fs_member_fb_(Fs3) :- sup_183_1_(A, Call, Fs, Fs3, Phi1, X).
+------------------------------------------------^------------------
+Warning: Variable Phi1 only occurs once in file formulog.dl at line 1730
+input_fs_member_fb_(Fs3) :- sup_183_1_(A, Call, Fs, Fs3, Phi1, X).
+---------------------------------------------------------^---------
+Warning: Variable X only occurs once in file formulog.dl at line 1730
+input_fs_member_fb_(Fs3) :- sup_183_1_(A, Call, Fs, Fs3, Phi1, X).
+---------------------------------------------------------------^---
+Warning: Variable x137 only occurs once in file formulog.dl at line 1731
+input_fs_member_fb_(Xs) :- sup_196_0_(x137, Xs).
+--------------------------------------^----------
+Warning: Variable x190 only occurs once in file formulog.dl at line 1786
+	summary_(M, A, F, O, x190).
+----------------------^------
+Warning: Variable x156 only occurs once in file formulog.dl at line 1787
+has_summary_(M) :- summary_(M, x156, x157, x158, x159).
+-------------------------------^------------------------
+Warning: Variable x157 only occurs once in file formulog.dl at line 1787
+has_summary_(M) :- summary_(M, x156, x157, x158, x159).
+-------------------------------------^------------------
+Warning: Variable x158 only occurs once in file formulog.dl at line 1787
+has_summary_(M) :- summary_(M, x156, x157, x158, x159).
+-------------------------------------------^------------
+Warning: Variable x159 only occurs once in file formulog.dl at line 1787
+has_summary_(M) :- summary_(M, x156, x157, x158, x159).
+-------------------------------------------------^------
+Warning: Variable x191 only occurs once in file formulog.dl at line 1790
+	summary_(M, A, x191, x192, x193).
+----------------^------------------
+Warning: Variable x192 only occurs once in file formulog.dl at line 1790
+	summary_(M, A, x191, x192, x193).
+----------------------^------------
+Warning: Variable x193 only occurs once in file formulog.dl at line 1790
+	summary_(M, A, x191, x192, x193).
+----------------------------^------
+Warning: Variable x194 only occurs once in file formulog.dl at line 1793
+	summary_(M, x194, x195, O, x196).
+-------------^---------------------
+Warning: Variable x195 only occurs once in file formulog.dl at line 1793
+	summary_(M, x194, x195, O, x196).
+-------------------^---------------
+Warning: Variable x196 only occurs once in file formulog.dl at line 1793
+	summary_(M, x194, x195, O, x196).
+----------------------------^------
+Warning: Variable x2 only occurs once in file formulog.dl at line 1803
+CODEGEN_PROJECT_block_last_instr_110(x0, x1) :- block_last_instr_(x0, x1, x2).
+--------------------------------------------------------------------------^----
+Warning: Variable x2 only occurs once in file formulog.dl at line 1804
+CODEGEN_PROJECT_block_first_instr_110(x0, x1) :- block_first_instr_(x0, x1, x2).
+----------------------------------------------------------------------------^----
+Warning: Variable x2 only occurs once in file formulog.dl at line 1805
+CODEGEN_PROJECT_type_defines_method_110(x0, x1) :- type_defines_method_(x0, x1, x2).
+--------------------------------------------------------------------------------^----
+[ 15%] Building CXX object CMakeFiles/flg.dir/src/functors.cpp.o
+[ 23%] Building CXX object CMakeFiles/flg.dir/src/main.cpp.o
+[ 30%] Building CXX object CMakeFiles/flg.dir/src/parser.cpp.o
+[ 38%] Building CXX object CMakeFiles/flg.dir/src/Symbol.cpp.o
+[ 46%] Building CXX object CMakeFiles/flg.dir/src/Term.cpp.o
+[ 53%] Building CXX object CMakeFiles/flg.dir/src/Type.cpp.o
+[ 61%] Building CXX object CMakeFiles/flg.dir/src/set.cpp.o
+[ 69%] Building CXX object CMakeFiles/flg.dir/src/smt_solver.cpp.o
+[ 76%] Building CXX object CMakeFiles/flg.dir/src/smt_shim.cpp.o
+[ 84%] Building CXX object CMakeFiles/flg.dir/src/smt_parser.cpp.o
+[ 92%] Building CXX object CMakeFiles/flg.dir/formulog.cpp.o
+[100%] Linking CXX executable flg
+[100%] Built target flg
+LOG:COMPILE;ELAPSED=90.80s;USER=159.00s;SYSTEM=4.78s;CPU=180%;MEM=1614972kb
+LOG:Execute command: timeout 1800 /usr/bin/time -f LOG:EXECUTE;ELAPSED=%es;USER=%Us;SYSTEM=%Ss;CPU=%P;MEM=%Mkb /home/ubuntu/formulog-compiler-eval/benchmarks/scuba/bms/antlr/../../codegen/build/flg --dump-sizes --smt-stats --smt-solver-mode=check-sat-assuming -j 40 -D /home/ubuntu/formulog-compiler-eval/benchmarks/scuba/bms/antlr/out -F /home/ubuntu/formulog-compiler-eval/benchmarks/scuba/bms/antlr/facts -F /home/ubuntu/formulog-compiler-eval/benchmarks/scuba/lib_facts --no-smt-double-check
+Parsing...
+Finished parsing (10.014s)
+Evaluating...
+Finished evaluating (83.434s)
+
+==================== SMT STATS ====================
+SMT calls: 82
+SMT time (ms): 5472.27
+SMT wait time (ms): 0
+SMT cache hits: 0
+SMT cache misses: 82
+SMT cache clears: 0
+SMT calls per solver: 1,3,2,3,2,1,2,2,3,1,5,2,2,4,3,3,2,2,2,5,3,2,2,2,2,3,3,1,1,3,2,3,1,1,1,1,1
+SMT time per solver (ms): 19.7915,285.922,191.361,159.932,37.9858,19.8262,31.9077,62.8279,139.545,19.6782,498.028,93.1097,131.057,438.238,110.373,180.555,103.232,61.3522,77.8032,583.797,173.225,89.5024,118.536,106.366,106.417,284.75,418.312,37.0059,8.1122,403.507,84.1507,297.547,11.998,12.4379,14.9595,28.8844,30.2311
+
+==================== RELATION SIZES ====================
+size5_stub: 2
+size3_stub: 1
+size4_stub: 1
+size2_stub: 21
+main_entry: 1
+field_has_reference_type: 51158
+type_defines_method: 174075
+size1_stub: 4
+application_method: 2677
+subtype_of_exn_or_err: 810
+sup_123_0: 34445
+sup_125_0: 150029
+input_is_strict_subtype_of_bb: 102257
+sup_178_0: 88318
+is_strict_subtype_of: 18324
+invoke_special_has_resolved_type: 150029
+call_site_nth_arg: 32286
+call_site_ret_and_args: 17057
+cipa_allocation_type: 13808
+cipa_hptsto: 300011
+cipa_invocation: 21919
+cipa_invocation_ret: 10070
+cipa_reach_class: 3198
+cipa_reach_method: 4493
+cipa_receiver_can_have_type: 13938
+cipa_sptsto: 1829
+cipa_vptsto: 253518
+input_is_subtype_of_bb: 5063
+input_resolves_to_bbf: 3799
+is_subtype_of: 2010
+not_exceptional_bb: 118840
+not_exceptional_iindex: 121370
+phi_def: 7409
+relevant_clinit: 658
+resolves_to: 3799
+sup_153_0: 4053
+sup_159_0: 874
+sup_30_0: 11137
+sup_48_0: 13849
+sup_49_0: 5164
+sup_52_0: 7220
+sup_53_0: 165316
+sup_55_0: 18532
+sup_56_0: 25647
+sup_57_0: 2834
+sup_58_0: 4871
+sup_59_0: 23959
+resolves_to_multiple_targets: 321
+call_graph_tc: 278283
+s1_method: 788
+root: 659
+trans_recursive_method: 148
+sup_113_0: 488
+sup_105_0: 83
+sup_116_0: 1531
+sup_114_0: 82
+sup_109_0: 429
+next_instr_forwards: 15089
+cfg_exit: 1072
+next_instr_backwards: 15347
+cfg_entry: 801
+sup_117_0: 71
+sup_140_0: 493
+s2_method: 712
+is_bad_call: 4591
+cfg_is_pred_of: 17053
+sup_108_0: 1092
+sup_86_0: 92
+cfg_is_transitive_pred_of: 451195
+concl_instantiate_loc: 2368
+concl_instantiate_obj: 2908
+constraint_is_sat: 1
+field_lookup: 9659
+field_lookup_at_call: 83610
+fs_member: 25
+has_alloc: 188840
+input_concl_instantiate_loc_bf: 2094
+input_concl_instantiate_obj_bf: 2434
+input_concl_instantiate_phi_b: 1
+input_constraint_is_sat_b: 83
+input_field_lookup_at_call_bbbbff: 33316
+input_field_lookup_bbbbff: 8000
+input_fs_member_fb: 11
+input_instantiate_cipa_bbf: 1237336
+input_instantiate_constraint_bbf: 5096
+input_instantiate_loc_bbff: 849303
+input_instantiate_ptsto_bbbff: 718861
+instantiate_cipa: 1242952
+instantiate_constraint: 5168
+instantiate_heap: 2182853
+instantiate_loc: 944806
+instantiate_ptsto: 809455
+invocation: 5415
+ptsto: 2252483
+summary: 1280372
+summary_ret: 3846
+sup_104_0: 72265
+sup_104_1: 73787
+sup_104_2: 73825
+sup_105_1: 79
+sup_109_1: 881
+sup_111_0: 60560
+sup_111_1: 64198
+sup_113_1: 499
+sup_116_1: 2838
+sup_144_0: 2301682
+sup_144_1: 2236405
+sup_144_2: 2336818
+sup_162_0: 19
+sup_165_0: 1061
+sup_167_0: 40199
+sup_169_0: 1017496
+sup_172_0: 40858
+sup_174_0: 0
+sup_174_1: 0
+sup_175_0: 718861
+sup_175_1: 762481
+sup_182_0: 276
+sup_183_0: 276
+sup_183_1: 3034
+sup_183_2: 8819
+sup_184_0: 739364
+sup_185_0: 276
+sup_186_0: 6700
+sup_188_0: 6045
+sup_189_0: 704
+sup_190_0: 13337
+sup_190_1: 38008
+sup_194_0: 30
+sup_194_1: 102
+sup_196_0: 10
+sup_199_0: 36
+main_summary_edge: 71960
+has_summary: 886
+main_summary_node: 3186
+concl_instantiate_phi: 1
+conclusion: 73825
+[WORK] 10370943980
+LOG:EXECUTE;ELAPSED=93.70s;USER=2267.28s;SYSTEM=112.96s;CPU=2540%;MEM=2526300kb
+LOG:Success!

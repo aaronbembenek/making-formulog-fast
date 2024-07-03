@@ -1,0 +1,23 @@
+LOG:Benchmark directory: /home/ubuntu/formulog-systems-eval/benchmarks/scuba/bms/antlr
+LOG:Timeout: 1800
+LOG:Eval repo commit: e15464d
+LOG:Formulog commit: 4bb3cbb
+LOG:Z3 version: Z3 version 4.12.2 - 64 bit - build hashcode f7c9c9ef72fde0e00ef9409e6c24456effb8b930
+LOG:Java version start
+openjdk version "17.0.10" 2024-01-16
+OpenJDK Runtime Environment (build 17.0.10+7-Ubuntu-122.04.1)
+OpenJDK 64-Bit Server VM (build 17.0.10+7-Ubuntu-122.04.1, mixed mode, sharing)
+
+LOG:Java version end
+LOG:Mode: interpret-unbatched
+LOG:Solver mode: check-sat-assuming
+LOG:Parallelism: 40
+LOG:Interpret command: timeout 1800 /usr/bin/time -f LOG:INTERPRET;ELAPSED=%es;USER=%Us;SYSTEM=%Ss;CPU=%P;MEM=%Mkb java -Xmx180g -Xss256m -DmemoizeThreshold=0 -DsmtDoubleCheckUnknowns=false -DrecordWork -DeagerSemiNaive -jar /home/ubuntu/formulog-systems-eval/formulog/target/formulog-0.7.0-SNAPSHOT-jar-with-dependencies.jar bench.flg --dump-sizes --smt-stats --smt-solver-mode=check-sat-assuming -j 40 -D /home/ubuntu/formulog-systems-eval/benchmarks/scuba/bms/antlr/out -F /home/ubuntu/formulog-systems-eval/benchmarks/scuba/bms/antlr/facts -F /home/ubuntu/formulog-systems-eval/benchmarks/scuba/lib_facts 
+Parsing...
+Finished parsing (27.592s)
+Type checking...
+Finished type checking (8.593s)
+Rewriting and validating...
+Finished rewriting and validating (3.726s)
+Evaluating...
+/home/ubuntu/formulog-systems-eval/scripts/bench_one.sh: line 9: 121676 Killed                  timeout -s 9 ${@}

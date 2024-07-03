@@ -1,0 +1,216 @@
+LOG:Benchmark directory: /home/ubuntu/formulog-systems-eval/benchmarks/scuba/bms/polyglot
+LOG:Timeout: 1800
+LOG:Eval repo commit: 83c0d57
+LOG:Formulog commit: 4bb3cbb
+LOG:Z3 version: Z3 version 4.12.2 - 64 bit - build hashcode f7c9c9ef72fde0e00ef9409e6c24456effb8b930
+LOG:Java version start
+openjdk version "17.0.10" 2024-01-16
+OpenJDK Runtime Environment (build 17.0.10+7-Ubuntu-122.04.1)
+OpenJDK 64-Bit Server VM (build 17.0.10+7-Ubuntu-122.04.1, mixed mode, sharing)
+
+LOG:Java version end
+LOG:Mode: interpret-unbatched
+LOG:Solver mode: check-sat-assuming
+LOG:Parallelism: 40
+LOG:Interpret command: timeout 1800 /usr/bin/time -f LOG:INTERPRET;ELAPSED=%es;USER=%Us;SYSTEM=%Ss;CPU=%P;MEM=%Mkb java -Xmx180g -Xss256m -DmemoizeThreshold=0 -DsmtDoubleCheckUnknowns=false -DrecordWork -DeagerSemiNaive -jar /home/ubuntu/formulog-systems-eval/formulog/target/formulog-0.7.0-SNAPSHOT-jar-with-dependencies.jar bench.flg --dump-sizes --smt-stats --smt-solver-mode=check-sat-assuming -j 40 -D /home/ubuntu/formulog-systems-eval/benchmarks/scuba/bms/polyglot/out -F /home/ubuntu/formulog-systems-eval/benchmarks/scuba/bms/polyglot/facts -F /home/ubuntu/formulog-systems-eval/benchmarks/scuba/lib_facts 
+Parsing...
+Finished parsing (27.044s)
+Type checking...
+Finished type checking (8.341s)
+Rewriting and validating...
+Finished rewriting and validating (3.896s)
+Evaluating...
+Finished evaluating (1136.932s)
+
+==================== SMT STATS ====================
+SMT calls: 2
+SMT time (ms): 56
+SMT wait time (ms): 0.039964
+SMT cache hits: 0
+SMT cache misses: 2
+SMT cache clears: 0
+SMT calls per solver: 1,1
+SMT time per solver (ms): 28,28
+
+==================== RELATION SIZES ====================
+application_class: 1157
+application_entry: 1
+application_method: 11131
+block_first_instr: 2230916
+block_has_instr: 2547377
+block_last_instr: 2230916
+call_graph_tc: 175249
+call_site_nth_arg: 22257
+call_site_ret_and_args: 11897
+cfg_entry: 113
+cfg_exit: 132
+cfg_is_pred_of: 1888
+cfg_is_transitive_pred_of: 49284
+cipa_allocation_type: 13157
+cipa_hptsto: 165525
+cipa_invocation: 16404
+cipa_invocation_arg: 0
+cipa_invocation_ret: 7013
+cipa_reach_class: 3145
+cipa_reach_method: 3798
+cipa_receiver_can_have_type: 9547
+cipa_sptsto: 1751
+cipa_vptsto: 187965
+clinit_method: 4797
+concl_instantiate_loc: 366
+concl_instantiate_obj: 965
+concl_instantiate_phi: 1
+conclusion: 5007
+constraint_is_sat: 1
+declares_method: 182529
+entry_block: 163649
+exit_block: 163649
+field_has_reference_type: 52405
+field_has_type: 85922
+field_lookup: 1067
+field_lookup_at_call: 7362
+fs_member: 0
+has_alloc: 18417
+has_field: 246734
+has_summary: 178
+implements_interface: 29759
+init_method: 25084
+input_concl_instantiate_loc_bf: 367
+input_concl_instantiate_obj_bf: 921
+input_concl_instantiate_phi_b: 1
+input_constraint_is_sat_b: 3
+input_field_lookup_at_call_bbbbff: 491
+input_field_lookup_bbbbff: 406
+input_fs_member_fb: 0
+input_instantiate_cipa_bbf: 594826
+input_instantiate_constraint_bbf: 382
+input_instantiate_loc_bbff: 33853
+input_instantiate_ptsto_bbbff: 29834
+input_is_strict_subtype_of_bb: 107605
+input_is_subtype_of_bb: 4715
+input_resolves_to_bbf: 2875
+instance_field: 40902
+instantiate_cipa: 595034
+instantiate_constraint: 382
+instantiate_heap: 53207
+instantiate_loc: 40924
+instantiate_ptsto: 30330
+instr_array_load: 37260
+instr_array_store: 335341
+instr_check_cast: 49424
+instr_get: 331831
+instr_invoke_dispatch: 458502
+instr_invoke_special: 155609
+instr_invoke_static: 85808
+instr_new: 169167
+instr_phi_node: 57296
+instr_put: 109735
+instr_return: 202001
+interface: 2664
+invocation: 426
+invoke_special_has_resolved_type: 155609
+is_bad_call: 4048
+is_direct_superclass_of: 21165
+is_intra_block_pred_of: 316461
+is_normal_pred_of: 2638107
+is_strict_subtype_of: 19151
+is_subtype_of: 1827
+local_var_type: 2139348
+main_entry: 1
+main_entry_args_item_loc: 0
+main_entry_args_loc: 0
+main_summary_edge: 4188
+main_summary_node: 941
+method_parameter: 321877
+native_method: 1588
+next_instr_backwards: 1623
+next_instr_forwards: 1602
+not_exceptional_bb: 104487
+not_exceptional_iindex: 107431
+phi_def: 6693
+phi_node: 74678
+ptsto: 62119
+relevant_clinit: 682
+resolves_to: 2875
+resolves_to_multiple_targets: 288
+return_string_stub: 16
+return_this_stub: 3
+root: 683
+s1_method: 100
+s2_method: 679
+selector_of_method: 185102
+size1_stub: 4
+size2_stub: 21
+size3_stub: 1
+size4_stub: 1
+size5_stub: 2
+static_field: 45020
+static_method: 26174
+subtype_of_exn_or_err: 822
+summary: 45871
+summary_ret: 1630
+sup_101_0: 10992
+sup_110_0: 48
+sup_132_0: 51321
+sup_132_1: 54249
+sup_132_2: 54500
+sup_133_0: 4124
+sup_134_0: 9520
+sup_154_0: 92997
+sup_157_0: 270
+sup_160_0: 6830
+sup_163_0: 5464
+sup_164_0: 577135
+sup_166_0: 0
+sup_166_1: 0
+sup_168_0: 0
+sup_171_0: 29834
+sup_171_1: 30330
+sup_176_0: 3760
+sup_178_0: 0
+sup_178_1: 0
+sup_178_2: 0
+sup_179_0: 146
+sup_181_0: 0
+sup_182_0: 437
+sup_183_0: 27
+sup_184_0: 0
+sup_185_0: 32078
+sup_186_0: 27
+sup_186_1: 27
+sup_190_0: 616
+sup_195_0: 0
+sup_195_1: 0
+sup_196_0: 0
+sup_201_0: 0
+sup_23_0: 35714
+sup_25_0: 155609
+sup_29_0: 4985
+sup_29_1: 4969
+sup_29_2: 5007
+sup_45_0: 6
+sup_47_0: 7675
+sup_47_1: 7841
+sup_48_0: 13
+sup_50_0: 14
+sup_50_1: 6
+sup_52_0: 30
+sup_52_1: 36
+sup_53_0: 15
+sup_53_1: 15
+sup_55_0: 45
+sup_55_1: 38
+sup_56_0: 17
+sup_59_0: 203
+sup_83_0: 4124
+sup_87_0: 18872
+sup_88_0: 114752
+sup_89_0: 6113
+sup_90_0: 19477
+sup_91_0: 2758
+sup_92_0: 20387
+trans_recursive_method: 119
+type_defines_method: 182529
+[WORK] 36494079661
+LOG:INTERPRET;ELAPSED=1181.68s;USER=46046.12s;SYSTEM=108.13s;CPU=3905%;MEM=137934400kb
+LOG:Success!

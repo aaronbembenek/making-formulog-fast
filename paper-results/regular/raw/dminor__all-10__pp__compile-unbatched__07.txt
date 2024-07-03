@@ -1,0 +1,137 @@
+LOG:Benchmark directory: /home/ubuntu/formulog-compiler-eval/benchmarks/dminor/bms/all-10
+LOG:Timeout: 1800
+LOG:Eval repo commit: e651af0
+LOG:Formulog commit: 8862fc1
+LOG:Z3 version: Z3 version 4.12.2 - 64 bit - build hashcode f7c9c9ef72fde0e00ef9409e6c24456effb8b930
+LOG:Java version start
+openjdk version "17.0.7" 2023-04-18
+OpenJDK Runtime Environment (build 17.0.7+7-Ubuntu-0ubuntu122.04.2)
+OpenJDK 64-Bit Server VM (build 17.0.7+7-Ubuntu-0ubuntu122.04.2, mixed mode, sharing)
+
+LOG:Java version end
+LOG:Mode: compile-unbatched
+LOG:Solver mode: push-pop
+LOG:Parallelism: 40
+LOG:Souffle info start
+----------------------------------------------------------------------------
+Version: 2.4-41-g93b082dc7
+Word size: 32 bits
+Options enabled: ffi openmp ncurses sqlite zlib
+----------------------------------------------------------------------------
+Copyright (c) 2016-22 The Souffle Developers.
+Copyright (c) 2013-16 Oracle and/or its affiliates.
+All rights reserved.
+============================================================================
+
+LOG:Souffle info end
+LOG:Execute command: timeout 1800 /usr/bin/time -f LOG:EXECUTE;ELAPSED=%es;USER=%Us;SYSTEM=%Ss;CPU=%P;MEM=%Mkb /home/ubuntu/formulog-compiler-eval/benchmarks/dminor/bms/all-10/../../codegen/build/flg --dump-sizes --smt-stats --smt-solver-mode=push-pop -j 40 -D /home/ubuntu/formulog-compiler-eval/benchmarks/dminor/bms/all-10/out -F /home/ubuntu/formulog-compiler-eval/benchmarks/dminor/bms/all-10/facts --no-smt-double-check
+Parsing...
+Finished parsing (0.008s)
+Evaluating...
+Finished evaluating (1.289s)
+
+==================== SMT STATS ====================
+SMT calls: 9619
+SMT time (ms): 29274.9
+SMT wait time (ms): 2825.47
+SMT cache hits: 14800
+SMT cache misses: 44014
+SMT cache clears: 0
+SMT calls per solver: 209,258,139,238,76,276,221,188,132,401,359,353,311,147,184,296,230,159,281,208,259,348,196,59,74,193,176,348,482,148,289,276,201,291,229,305,294,287,305,193
+SMT time per solver (ms): 798.423,812.815,819.285,749.396,808.282,752.639,754.485,906.046,776.701,611.951,783.68,679.196,762.483,852.914,840.537,748.423,782.961,633.234,624.952,595.28,790.784,742.418,656.559,745.476,788.158,640.51,692.03,663.298,616.392,834.76,722.164,746.5,585.088,738.01,768.483,709.432,718.712,639.489,740.361,642.627
+
+==================== RELATION SIZES ====================
+labeled_pure: 20
+type_indicator_func: 20
+type_alias: 154
+func_sig: 270
+sup_6_0: 154
+explore_exp: 1400
+explore_exps: 200
+explore_typ: 980
+sup_9_0: 270
+size_change_graph: 30
+check: 10357
+env_wf: 3253
+input_check_bbb: 10617
+input_env_wf_b: 3303
+input_subtype_bbb: 9399
+input_synth_app_helper_bbbbbf: 2501
+input_synth_bbf: 10359
+input_synth_entity_helper_bbf: 471
+input_synth_list_helper_bbf: 111
+input_type_wf_bb: 12300
+subtype: 9399
+sup_41_0: 2453
+sup_42_0: 500
+sup_43_0: 2342
+sup_44_0: 2780
+sup_45_0: 1274
+sup_46_0: 2280
+sup_47_0: 671
+sup_48_0: 9727
+sup_48_1: 9487
+sup_49_0: 90
+sup_49_1: 90
+sup_50_0: 160
+sup_50_1: 160
+sup_50_2: 160
+sup_51_0: 640
+sup_53_0: 440
+sup_54_0: 2862
+sup_55_0: 160
+sup_55_1: 160
+sup_56_0: 2116
+sup_56_1: 2036
+sup_57_0: 3390
+sup_58_0: 2074
+sup_58_1: 2074
+sup_59_0: 0
+sup_59_1: 0
+sup_59_2: 0
+sup_60_0: 399
+sup_61_0: 60
+sup_61_1: 60
+sup_61_2: 60
+sup_62_0: 554
+sup_63_0: 50
+sup_63_1: 50
+sup_63_2: 50
+sup_64_0: 50
+sup_64_1: 50
+sup_65_0: 1110
+sup_65_1: 1110
+sup_66_0: 111
+sup_66_1: 111
+sup_67_0: 70
+sup_68_0: 22
+sup_69_0: 0
+sup_70_0: 10
+sup_70_1: 10
+sup_71_0: 70
+sup_71_1: 70
+sup_71_2: 70
+sup_72_0: 30
+sup_73_0: 70
+sup_74_0: 63
+sup_74_1: 63
+sup_75_0: 9399
+sup_76_0: 380
+sup_76_1: 380
+sup_79_0: 1410
+sup_79_1: 1410
+sup_79_2: 1410
+sup_81_0: 0
+sup_81_1: 0
+synth: 10119
+synth_app_helper: 2501
+synth_entity_helper: 471
+synth_list_helper: 111
+type_wf: 12170
+may_not_terminate: 0
+type_not_ok: 0
+func_not_ok: 0
+prog_ok: 1
+[WORK] 1082583
+LOG:EXECUTE;ELAPSED=1.38s;USER=39.47s;SYSTEM=2.86s;CPU=3048%;MEM=224880kb
+LOG:Success!

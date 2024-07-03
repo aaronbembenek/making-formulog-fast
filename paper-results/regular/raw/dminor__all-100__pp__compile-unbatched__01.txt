@@ -1,0 +1,137 @@
+LOG:Benchmark directory: /home/ubuntu/formulog-compiler-eval/benchmarks/dminor/bms/all-100
+LOG:Timeout: 1800
+LOG:Eval repo commit: e651af0
+LOG:Formulog commit: 8862fc1
+LOG:Z3 version: Z3 version 4.12.2 - 64 bit - build hashcode f7c9c9ef72fde0e00ef9409e6c24456effb8b930
+LOG:Java version start
+openjdk version "17.0.7" 2023-04-18
+OpenJDK Runtime Environment (build 17.0.7+7-Ubuntu-0ubuntu122.04.2)
+OpenJDK 64-Bit Server VM (build 17.0.7+7-Ubuntu-0ubuntu122.04.2, mixed mode, sharing)
+
+LOG:Java version end
+LOG:Mode: compile-unbatched
+LOG:Solver mode: push-pop
+LOG:Parallelism: 40
+LOG:Souffle info start
+----------------------------------------------------------------------------
+Version: 2.4-41-g93b082dc7
+Word size: 32 bits
+Options enabled: ffi openmp ncurses sqlite zlib
+----------------------------------------------------------------------------
+Copyright (c) 2016-22 The Souffle Developers.
+Copyright (c) 2013-16 Oracle and/or its affiliates.
+All rights reserved.
+============================================================================
+
+LOG:Souffle info end
+LOG:Execute command: timeout 1800 /usr/bin/time -f LOG:EXECUTE;ELAPSED=%es;USER=%Us;SYSTEM=%Ss;CPU=%P;MEM=%Mkb /home/ubuntu/formulog-compiler-eval/benchmarks/dminor/bms/all-100/../../codegen/build/flg --dump-sizes --smt-stats --smt-solver-mode=push-pop -j 40 -D /home/ubuntu/formulog-compiler-eval/benchmarks/dminor/bms/all-100/out -F /home/ubuntu/formulog-compiler-eval/benchmarks/dminor/bms/all-100/facts --no-smt-double-check
+Parsing...
+Finished parsing (0.073s)
+Evaluating...
+Finished evaluating (73.665s)
+
+==================== SMT STATS ====================
+SMT calls: 95749
+SMT time (ms): 2.74284e+06
+SMT wait time (ms): 49934
+SMT cache hits: 153455
+SMT cache misses: 432039
+SMT cache clears: 0
+SMT calls per solver: 2643,2489,3064,2100,2336,1766,2004,1914,2325,1918,2497,2071,7548,738,2852,1971,2342,2229,1552,2103,2145,1760,1850,1864,4599,1349,1963,3250,3314,2228,1519,2397,1744,2173,2517,2242,2094,2889,2612,2778
+SMT time per solver (ms): 68507.5,69066.6,66998.7,68257.3,70933.3,67223.5,70376.1,68985.6,69088.3,69754.5,68355.9,67986.1,65609.7,70511,68883.1,70246.3,68819.3,69367.1,66254.2,69096.2,68641.9,64932.9,67980.1,69441.7,68185.5,69944.1,69650.1,69912.3,63947.4,69891.2,71113.7,70618.9,69995.6,69753.8,66834.1,67953.6,65837.5,70178.3,70012.8,63698.6
+
+==================== RELATION SIZES ====================
+labeled_pure: 200
+type_indicator_func: 200
+type_alias: 1504
+func_sig: 2700
+sup_6_0: 1504
+explore_exp: 14000
+explore_exps: 2000
+explore_typ: 9800
+sup_9_0: 2700
+size_change_graph: 300
+check: 103147
+env_wf: 32413
+input_check_bbb: 105747
+input_env_wf_b: 32913
+input_subtype_bbb: 93549
+input_synth_app_helper_bbbbbf: 25001
+input_synth_bbf: 103059
+input_synth_entity_helper_bbf: 4701
+input_synth_list_helper_bbf: 1101
+input_type_wf_bb: 122640
+subtype: 93549
+sup_41_0: 24413
+sup_42_0: 5000
+sup_43_0: 23312
+sup_44_0: 27710
+sup_45_0: 12704
+sup_46_0: 22800
+sup_47_0: 6701
+sup_48_0: 96847
+sup_48_1: 94447
+sup_49_0: 900
+sup_49_1: 900
+sup_50_0: 1600
+sup_50_1: 1600
+sup_50_2: 1600
+sup_51_0: 6400
+sup_53_0: 4400
+sup_54_0: 28512
+sup_55_0: 1600
+sup_55_1: 1600
+sup_56_0: 21016
+sup_56_1: 20216
+sup_57_0: 33810
+sup_58_0: 20704
+sup_58_1: 20704
+sup_59_0: 0
+sup_59_1: 0
+sup_59_2: 0
+sup_60_0: 3909
+sup_61_0: 600
+sup_61_1: 600
+sup_61_2: 600
+sup_62_0: 5414
+sup_63_0: 500
+sup_63_1: 500
+sup_63_2: 500
+sup_64_0: 500
+sup_64_1: 500
+sup_65_0: 11100
+sup_65_1: 11100
+sup_66_0: 1101
+sup_66_1: 1101
+sup_67_0: 700
+sup_68_0: 202
+sup_69_0: 0
+sup_70_0: 100
+sup_70_1: 100
+sup_71_0: 700
+sup_71_1: 700
+sup_71_2: 700
+sup_72_0: 300
+sup_73_0: 700
+sup_74_0: 603
+sup_74_1: 603
+sup_75_0: 93549
+sup_76_0: 3800
+sup_76_1: 3800
+sup_79_0: 14100
+sup_79_1: 14100
+sup_79_2: 14100
+sup_81_0: 0
+sup_81_1: 0
+synth: 100659
+synth_app_helper: 25001
+synth_entity_helper: 4701
+synth_list_helper: 1101
+type_wf: 121340
+may_not_terminate: 0
+type_not_ok: 0
+func_not_ok: 0
+prog_ok: 1
+[WORK] 12920340
+LOG:EXECUTE;ELAPSED=74.01s;USER=2847.49s;SYSTEM=18.18s;CPU=3871%;MEM=844540kb
+LOG:Success!

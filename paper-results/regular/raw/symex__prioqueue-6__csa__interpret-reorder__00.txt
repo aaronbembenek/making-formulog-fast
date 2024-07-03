@@ -1,0 +1,191 @@
+LOG:Benchmark directory: /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-6
+LOG:Timeout: 1800
+LOG:Eval repo commit: c0fb1b2
+LOG:Formulog commit: f2b133d
+LOG:Z3 version: Z3 version 4.12.2 - 64 bit - build hashcode f7c9c9ef72fde0e00ef9409e6c24456effb8b930
+LOG:Java version start
+openjdk version "17.0.7" 2023-04-18
+OpenJDK Runtime Environment (build 17.0.7+7-Ubuntu-0ubuntu122.04.2)
+OpenJDK 64-Bit Server VM (build 17.0.7+7-Ubuntu-0ubuntu122.04.2, mixed mode, sharing)
+
+LOG:Java version end
+LOG:Mode: interpret-reorder
+LOG:Solver mode: check-sat-assuming
+LOG:Parallelism: 40
+LOG:Interpret command: timeout 1800 /usr/bin/time -f LOG:INTERPRET;ELAPSED=%es;USER=%Us;SYSTEM=%Ss;CPU=%P;MEM=%Mkb java -Xmx180g -Xss256m -DsmtTaskSize=1 -DtaskSize=8 -DmemoizeThreshold=0 -DsmtDoubleCheckUnknowns=false -DrecordWork -Doptimize=5 -jar /home/ubuntu/formulog-compiler-eval/formulog/target/formulog-0.7.0-SNAPSHOT-jar-with-dependencies.jar bench.flg --dump-sizes --smt-stats --smt-solver-mode=check-sat-assuming -j 40 -D /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-6/out -F /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-6/facts 
+Parsing...
+Finished parsing (0.545s)
+Type checking...
+Finished type checking (0.08s)
+Rewriting and validating...
+Finished rewriting and validating (0.413s)
+Evaluating...
+Finished evaluating (124.89s)
+
+==================== SMT STATS ====================
+SMT calls: 41524
+SMT time (ms): 259793
+SMT wait time (ms): 4.236332
+SMT cache hits: 219365
+SMT cache misses: 493017
+SMT cache clears: 4619
+SMT calls per solver: 1023,1090,1033,1070,1141,977,1078,887,1004,1068,1050,965,1163,1069,1067,1068,975,944,1051,1010,1161,1061,1016,1098,901,946,1039,1077,972,1277,956,1080,983,1005,1076,1055,1004,878,1129,1077
+SMT time per solver (ms): 6169,6799,6703,6672,6973,6047,6399,5424,5875,6248,6546,6182,7631,7147,6899,7044,6062,5620,6735,6189,6840,7153,6861,6730,5454,5971,6092,6155,6033,8098,6101,6612,6308,6483,6654,6812,6180,5557,7602,6733
+
+==================== RELATION SIZES ====================
+add_instruction: 17
+add_instruction_first_operand: 17
+add_instruction_second_operand: 17
+alloca_instruction: 94
+alloca_instruction_type: 94
+alloca_nwords: 94
+and_instruction: 0
+and_instruction_first_operand: 0
+and_instruction_second_operand: 0
+array_type: 0
+array_type_has_component: 0
+array_type_has_size: 0
+assert_instruction: 2
+assume_instruction: 0
+basicblock_preds: 109
+bb_has_first_instruction: 79
+bitcast_instruction: 2
+bitcast_instruction_from_operand: 2
+br_cond_instruction: 31
+br_cond_instruction_condition: 31
+br_cond_instruction_iffalse_label: 31
+br_cond_instruction_iftrue_label: 31
+br_uncond_instruction: 47
+br_uncond_instruction_dest_label: 47
+broken_invariant: 0
+call_instruction: 6
+call_instruction_arg: 4
+call_instruction_fn_operand: 6
+completed_path: 4402
+compute_select: 0
+constant: 99
+constant_has_value: 99
+failed_assert: 0
+failed_assume: 0
+function_has_first_instruction: 1
+function_has_name: 4
+getelementptr_instruction: 70
+getelementptr_instruction_base: 70
+getelementptr_instruction_index: 70
+getelementptr_instruction_is_inbounds: 70
+getelementptr_instruction_nindices: 70
+has_same_bb_pred: 737
+has_value: 1390977
+icmp_instruction: 33
+icmp_instruction_condition: 33
+icmp_instruction_first_operand: 33
+icmp_instruction_second_operand: 33
+input_compute_select_bbbbff: 0
+input_has_value_bbf: 1390977
+instruction_assigns_to: 590
+instruction_bb_entry: 816
+instruction_in_function: 816
+is_special_function: 4
+load_instruction: 298
+load_instruction_address: 298
+lshr_instruction: 0
+lshr_instruction_first_operand: 0
+lshr_instruction_second_operand: 0
+memory_access_error: 7
+mul_instruction: 6
+mul_instruction_first_operand: 6
+mul_instruction_second_operand: 6
+next_instruction: 815
+no_fall_thru: 8
+phi_instruction: 2
+phi_instruction_pair_label: 4
+phi_instruction_pair_value: 4
+pointer_type: 6
+ret_instruction: 1
+sdiv_instruction: 4
+sdiv_instruction_first_operand: 4
+sdiv_instruction_second_operand: 4
+select_instruction: 0
+select_instruction_condition: 0
+select_instruction_first_operand: 0
+select_instruction_second_operand: 0
+sext_instruction: 50
+sext_instruction_from_operand: 50
+shl_instruction: 0
+shl_instruction_first_operand: 0
+shl_instruction_second_operand: 0
+srem_instruction: 0
+srem_instruction_first_operand: 0
+srem_instruction_second_operand: 0
+stepped: 1067493
+stepping: 1067493
+store_instruction: 145
+store_instruction_address: 145
+store_instruction_value: 145
+sub_instruction: 8
+sub_instruction_first_operand: 8
+sub_instruction_second_operand: 8
+sup_0_0: 0
+sup_10_0: 14998
+sup_10_1: 14998
+sup_11_0: 72070
+sup_12_0: 4942
+sup_13_0: 76946
+sup_14_0: 0
+sup_14_1: 0
+sup_16_0: 2
+sup_17_0: 0
+sup_17_1: 0
+sup_18_0: 4942
+sup_19_0: 169787
+sup_19_1: 169787
+sup_1_0: 169787
+sup_1_1: 169787
+sup_20_0: 0
+sup_20_1: 0
+sup_21_0: 1783
+sup_22_0: 0
+sup_26_0: 2
+sup_27_0: 32797
+sup_27_1: 32797
+sup_28_0: 0
+sup_28_1: 0
+sup_29_0: 76946
+sup_2_0: 447568
+sup_30_0: 84474
+sup_30_1: 84474
+sup_31_0: 81292
+sup_31_1: 81292
+sup_3_0: 447568
+sup_41_0: 4942
+sup_4_0: 0
+sup_4_1: 0
+sup_5_0: 0
+sup_5_1: 0
+sup_5_2: 0
+sup_5_3: 0
+sup_6_0: 0
+sup_6_1: 0
+sup_7_0: 1783
+sup_7_1: 1783
+sup_8_0: 6230
+sup_8_1: 6230
+sup_9_0: 0
+sup_9_1: 0
+type_has_size: 10
+udiv_instruction: 0
+udiv_instruction_first_operand: 0
+udiv_instruction_second_operand: 0
+unreachable_instruction: 0
+urem_instruction: 0
+urem_instruction_first_operand: 0
+urem_instruction_second_operand: 0
+variable: 669
+xor_instruction: 0
+xor_instruction_first_operand: 0
+xor_instruction_second_operand: 0
+zext_instruction: 2
+zext_instruction_from_operand: 2
+[WORK] 132032882
+LOG:INTERPRET;ELAPSED=127.33s;USER=943.30s;SYSTEM=36.57s;CPU=769%;MEM=22052296kb
+LOG:Success!

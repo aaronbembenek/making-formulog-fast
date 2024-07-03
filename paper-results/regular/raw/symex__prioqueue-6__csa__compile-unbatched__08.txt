@@ -1,0 +1,111 @@
+LOG:Benchmark directory: /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-6
+LOG:Timeout: 1800
+LOG:Eval repo commit: e651af0
+LOG:Formulog commit: 8862fc1
+LOG:Z3 version: Z3 version 4.12.2 - 64 bit - build hashcode f7c9c9ef72fde0e00ef9409e6c24456effb8b930
+LOG:Java version start
+openjdk version "17.0.7" 2023-04-18
+OpenJDK Runtime Environment (build 17.0.7+7-Ubuntu-0ubuntu122.04.2)
+OpenJDK 64-Bit Server VM (build 17.0.7+7-Ubuntu-0ubuntu122.04.2, mixed mode, sharing)
+
+LOG:Java version end
+LOG:Mode: compile-unbatched
+LOG:Solver mode: check-sat-assuming
+LOG:Parallelism: 40
+LOG:Souffle info start
+----------------------------------------------------------------------------
+Version: 2.4-41-g93b082dc7
+Word size: 32 bits
+Options enabled: ffi openmp ncurses sqlite zlib
+----------------------------------------------------------------------------
+Copyright (c) 2016-22 The Souffle Developers.
+Copyright (c) 2013-16 Oracle and/or its affiliates.
+All rights reserved.
+============================================================================
+
+LOG:Souffle info end
+LOG:Execute command: timeout 1800 /usr/bin/time -f LOG:EXECUTE;ELAPSED=%es;USER=%Us;SYSTEM=%Ss;CPU=%P;MEM=%Mkb /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-6/../../codegen/build/flg --dump-sizes --smt-stats --smt-solver-mode=check-sat-assuming -j 40 -D /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-6/out -F /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-6/facts --no-smt-double-check
+Parsing...
+Finished parsing (0.004s)
+Evaluating...
+Finished evaluating (19.390s)
+
+==================== SMT STATS ====================
+SMT calls: 41524
+SMT time (ms): 150543
+SMT wait time (ms): 2254.22
+SMT cache hits: 953686
+SMT cache misses: 35018
+SMT cache clears: 315
+SMT calls per solver: 1022,1061,1028,990,1010,972,1052,1071,1044,954,1020,1077,1029,1017,1093,1037,1130,1070,989,985,1033,1058,1100,974,1042,1008,1023,1011,1047,1164,1084,1005,1038,936,1068,1054,1096,1039,1070,1023
+SMT time per solver (ms): 4032.11,3528.78,3644.13,3661.48,3411.16,5026.94,3809.14,4078.39,3739.32,3701.97,4272.43,3499.74,3837.81,3889.43,3514.95,3870.69,3758.5,3670.63,3614.19,3628.94,3951.77,3683.1,3513.7,3688.28,4106.69,4119.55,3711.96,4138.04,3452.25,3951.18,3822.4,3499.17,3794.94,3206.55,3414.59,3771.58,3725.07,3638.82,3213.93,3948.79
+
+==================== RELATION SIZES ====================
+alloca_nwords: 94
+has_same_bb_pred: 737
+assert_instruction: 2
+assume_instruction: 0
+bb_has_first_instruction: 79
+function_has_first_instruction: 1
+compute_select: 0
+has_value: 1390977
+input_compute_select_bbbbff: 0
+input_has_value_bbf: 1390977
+stepped: 1067493
+stepping: 1067493
+sup_11_0: 76946
+sup_12_0: 447568
+sup_14_0: 81292
+sup_14_1: 81292
+sup_15_0: 72070
+sup_16_0: 1783
+sup_17_0: 1783
+sup_17_1: 1783
+sup_18_0: 2
+sup_19_0: 0
+sup_19_1: 0
+sup_20_0: 4942
+sup_21_0: 4942
+sup_22_0: 0
+sup_22_1: 0
+sup_24_0: 0
+sup_24_1: 0
+sup_25_0: 0
+sup_25_1: 0
+sup_26_0: 0
+sup_27_0: 32797
+sup_27_1: 32797
+sup_28_0: 2
+sup_29_0: 0
+sup_29_1: 0
+sup_29_2: 0
+sup_29_3: 0
+sup_30_0: 76946
+sup_31_0: 84474
+sup_31_1: 84474
+sup_32_0: 6230
+sup_32_1: 6230
+sup_33_0: 14998
+sup_33_1: 14998
+sup_35_0: 0
+sup_35_1: 0
+sup_36_0: 0
+sup_36_1: 0
+sup_37_0: 169787
+sup_37_1: 169787
+sup_38_0: 0
+sup_38_1: 0
+sup_3_0: 0
+sup_43_0: 169787
+sup_43_1: 169787
+sup_44_0: 447568
+sup_4_0: 4942
+failed_assert: 0
+memory_access_error: 7
+completed_path: 4402
+no_fall_thru: 8
+failed_assume: 0
+broken_invariant: 0
+[WORK] 93426120
+LOG:EXECUTE;ELAPSED=19.65s;USER=766.32s;SYSTEM=12.92s;CPU=3964%;MEM=3605364kb
+LOG:Success!

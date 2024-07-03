@@ -1,0 +1,294 @@
+LOG:Benchmark directory: /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5
+LOG:Timeout: 1800
+LOG:Eval repo commit: 8bbdb9a
+LOG:Formulog commit: 4bb3cbb
+LOG:Z3 version: Z3 version 4.12.2 - 64 bit - build hashcode f7c9c9ef72fde0e00ef9409e6c24456effb8b930
+LOG:Java version start
+openjdk version "17.0.7" 2023-04-18
+OpenJDK Runtime Environment (build 17.0.7+7-Ubuntu-0ubuntu122.04.2)
+OpenJDK 64-Bit Server VM (build 17.0.7+7-Ubuntu-0ubuntu122.04.2, mixed mode, sharing)
+
+LOG:Java version end
+LOG:Mode: cbmc
+LOG:Solver mode: NA
+LOG:Parallelism: 40
+LOG:CBMC info start
+5.85.0 (cbmc-5.85.0)
+LOG:CBMC info end
+LOG:Execute command: timeout 1800 /usr/bin/time -f LOG:EXECUTE;ELAPSED=%es;USER=%Us;SYSTEM=%Ss;CPU=%P;MEM=%Mkb cbmc /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c -DSYMEXEC -DCBMC --z3 --bounds-check --pointer-check --unwind 10
+**** WARNING: Use --unwinding-assertions to obtain sound verification results
+CBMC version 5.85.0 (cbmc-5.85.0) 64-bit x86_64 linux
+Parsing /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c
+Converting
+Type-checking bench
+Generating GOTO Program
+Adding CPROVER library (x86_64)
+Removal of function pointers and virtual functions
+Generic Property Instrumentation
+Running with 8 object bits, 56 offset bits (default)
+Starting Bounded Model Checking
+**** WARNING: no body for function symexec_new_int
+Unwinding loop main.0 iteration 1 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 172 function main thread 0
+Unwinding loop hpq_bubble_up.0 iteration 1 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 99 function hpq_bubble_up thread 0
+Unwinding loop main.0 iteration 2 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 172 function main thread 0
+Unwinding loop hpq_bubble_up.0 iteration 1 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 99 function hpq_bubble_up thread 0
+Unwinding loop main.0 iteration 3 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 172 function main thread 0
+Unwinding loop hpq_bubble_up.0 iteration 1 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 99 function hpq_bubble_up thread 0
+Unwinding loop hpq_bubble_up.0 iteration 2 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 99 function hpq_bubble_up thread 0
+Unwinding loop main.0 iteration 4 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 172 function main thread 0
+Unwinding loop hpq_bubble_up.0 iteration 1 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 99 function hpq_bubble_up thread 0
+Unwinding loop hpq_bubble_up.0 iteration 2 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 99 function hpq_bubble_up thread 0
+Unwinding loop main.0 iteration 5 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 172 function main thread 0
+Unwinding loop apq_extract_min.0 iteration 1 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 64 function apq_extract_min thread 0
+Unwinding loop apq_extract_min.0 iteration 2 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 64 function apq_extract_min thread 0
+Unwinding loop apq_extract_min.0 iteration 3 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 64 function apq_extract_min thread 0
+Unwinding loop apq_extract_min.0 iteration 4 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 64 function apq_extract_min thread 0
+Unwinding loop apq_extract_min.0 iteration 5 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 64 function apq_extract_min thread 0
+Unwinding loop hpq_trickle_down.0 iteration 1 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 120 function hpq_trickle_down thread 0
+Unwinding loop hpq_trickle_down.0 iteration 2 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 120 function hpq_trickle_down thread 0
+Unwinding loop hpq_trickle_down.0 iteration 3 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 120 function hpq_trickle_down thread 0
+Unwinding loop hpq_trickle_down.0 iteration 4 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 120 function hpq_trickle_down thread 0
+Unwinding loop hpq_trickle_down.0 iteration 5 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 120 function hpq_trickle_down thread 0
+Unwinding loop hpq_trickle_down.0 iteration 6 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 120 function hpq_trickle_down thread 0
+Unwinding loop hpq_trickle_down.0 iteration 7 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 120 function hpq_trickle_down thread 0
+Unwinding loop hpq_trickle_down.0 iteration 8 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 120 function hpq_trickle_down thread 0
+Unwinding loop hpq_trickle_down.0 iteration 9 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 120 function hpq_trickle_down thread 0
+Not unwinding loop hpq_trickle_down.0 iteration 10 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 120 function hpq_trickle_down thread 0
+Unwinding loop hpq_bubble_up.0 iteration 1 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 99 function hpq_bubble_up thread 0
+Unwinding loop hpq_bubble_up.0 iteration 2 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 99 function hpq_bubble_up thread 0
+Unwinding loop hpq_bubble_up.0 iteration 3 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 99 function hpq_bubble_up thread 0
+Unwinding loop hpq_bubble_up.0 iteration 4 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 99 function hpq_bubble_up thread 0
+Unwinding loop hpq_bubble_up.0 iteration 5 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 99 function hpq_bubble_up thread 0
+Unwinding loop hpq_bubble_up.0 iteration 6 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 99 function hpq_bubble_up thread 0
+Unwinding loop hpq_bubble_up.0 iteration 7 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 99 function hpq_bubble_up thread 0
+Unwinding loop hpq_bubble_up.0 iteration 8 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 99 function hpq_bubble_up thread 0
+Unwinding loop hpq_bubble_up.0 iteration 9 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 99 function hpq_bubble_up thread 0
+Not unwinding loop hpq_bubble_up.0 iteration 10 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 99 function hpq_bubble_up thread 0
+Unwinding loop apq_extract_min.0 iteration 1 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 64 function apq_extract_min thread 0
+Unwinding loop apq_extract_min.0 iteration 2 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 64 function apq_extract_min thread 0
+Unwinding loop apq_extract_min.0 iteration 3 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 64 function apq_extract_min thread 0
+Unwinding loop apq_extract_min.0 iteration 4 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 64 function apq_extract_min thread 0
+Unwinding loop apq_extract_min.0 iteration 5 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 64 function apq_extract_min thread 0
+Unwinding loop apq_extract_min.0 iteration 6 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 64 function apq_extract_min thread 0
+Unwinding loop apq_extract_min.0 iteration 7 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 64 function apq_extract_min thread 0
+Unwinding loop apq_extract_min.0 iteration 8 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 64 function apq_extract_min thread 0
+Unwinding loop apq_extract_min.0 iteration 9 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 64 function apq_extract_min thread 0
+Not unwinding loop apq_extract_min.0 iteration 10 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 64 function apq_extract_min thread 0
+Unwinding loop hpq_trickle_down.0 iteration 1 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 120 function hpq_trickle_down thread 0
+Unwinding loop hpq_trickle_down.0 iteration 2 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 120 function hpq_trickle_down thread 0
+Unwinding loop hpq_trickle_down.0 iteration 3 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 120 function hpq_trickle_down thread 0
+Unwinding loop hpq_trickle_down.0 iteration 4 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 120 function hpq_trickle_down thread 0
+Unwinding loop hpq_trickle_down.0 iteration 5 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 120 function hpq_trickle_down thread 0
+Unwinding loop hpq_trickle_down.0 iteration 6 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 120 function hpq_trickle_down thread 0
+Unwinding loop hpq_trickle_down.0 iteration 7 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 120 function hpq_trickle_down thread 0
+Unwinding loop hpq_trickle_down.0 iteration 8 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 120 function hpq_trickle_down thread 0
+Unwinding loop hpq_trickle_down.0 iteration 9 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 120 function hpq_trickle_down thread 0
+Not unwinding loop hpq_trickle_down.0 iteration 10 file /home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c line 120 function hpq_trickle_down thread 0
+Runtime Symex: 0.195672s
+size of program expression: 3613 steps
+simple slicing removed 5 assignments
+Generated 2060 VCC(s), 229 remaining after simplification
+Runtime Postprocess Equation: 0.000178658s
+Passing problem to SMT2 QF_AUFBV using Z3
+converting SSA
+Runtime Convert SSA: 0.041646s
+Running SMT2 QF_AUFBV using Z3
+Runtime Solver: 6.94972s
+Runtime decision procedure: 6.99173s
+Running SMT2 QF_AUFBV using Z3
+Runtime Solver: 12.9738s
+Runtime decision procedure: 12.9739s
+
+** Results:
+/home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c function apq_add
+[apq_add.pointer_dereference.1] line 47 dereference failure: pointer NULL in apq[(signed long int)5]: SUCCESS
+[apq_add.pointer_dereference.2] line 47 dereference failure: pointer invalid in apq[(signed long int)5]: SUCCESS
+[apq_add.pointer_dereference.3] line 47 dereference failure: deallocated dynamic object in apq[(signed long int)5]: SUCCESS
+[apq_add.pointer_dereference.4] line 47 dereference failure: dead object in apq[(signed long int)5]: SUCCESS
+[apq_add.pointer_dereference.5] line 47 dereference failure: pointer outside object bounds in apq[(signed long int)5]: SUCCESS
+[apq_add.pointer_dereference.6] line 47 dereference failure: invalid integer address in apq[(signed long int)5]: SUCCESS
+[apq_add.pointer_dereference.7] line 51 dereference failure: pointer NULL in apq[(signed long int)5]: SUCCESS
+[apq_add.pointer_dereference.8] line 51 dereference failure: pointer invalid in apq[(signed long int)5]: SUCCESS
+[apq_add.pointer_dereference.9] line 51 dereference failure: deallocated dynamic object in apq[(signed long int)5]: SUCCESS
+[apq_add.pointer_dereference.10] line 51 dereference failure: dead object in apq[(signed long int)5]: SUCCESS
+[apq_add.pointer_dereference.11] line 51 dereference failure: pointer outside object bounds in apq[(signed long int)5]: SUCCESS
+[apq_add.pointer_dereference.12] line 51 dereference failure: invalid integer address in apq[(signed long int)5]: SUCCESS
+[apq_add.pointer_dereference.13] line 52 dereference failure: pointer NULL in apq[(signed long int)n]: SUCCESS
+[apq_add.pointer_dereference.14] line 52 dereference failure: pointer invalid in apq[(signed long int)n]: SUCCESS
+[apq_add.pointer_dereference.15] line 52 dereference failure: deallocated dynamic object in apq[(signed long int)n]: SUCCESS
+[apq_add.pointer_dereference.16] line 52 dereference failure: dead object in apq[(signed long int)n]: SUCCESS
+[apq_add.pointer_dereference.17] line 52 dereference failure: pointer outside object bounds in apq[(signed long int)n]: SUCCESS
+[apq_add.pointer_dereference.18] line 52 dereference failure: invalid integer address in apq[(signed long int)n]: SUCCESS
+
+/home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c function apq_empty
+[apq_empty.pointer_dereference.1] line 41 dereference failure: pointer NULL in a[(signed long int)5]: SUCCESS
+[apq_empty.pointer_dereference.2] line 41 dereference failure: pointer invalid in a[(signed long int)5]: SUCCESS
+[apq_empty.pointer_dereference.3] line 41 dereference failure: deallocated dynamic object in a[(signed long int)5]: SUCCESS
+[apq_empty.pointer_dereference.4] line 41 dereference failure: dead object in a[(signed long int)5]: SUCCESS
+[apq_empty.pointer_dereference.5] line 41 dereference failure: pointer outside object bounds in a[(signed long int)5]: SUCCESS
+[apq_empty.pointer_dereference.6] line 41 dereference failure: invalid integer address in a[(signed long int)5]: SUCCESS
+
+/home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c function apq_extract_min
+[apq_extract_min.pointer_dereference.1] line 57 dereference failure: pointer NULL in apq[(signed long int)5]: SUCCESS
+[apq_extract_min.pointer_dereference.2] line 57 dereference failure: pointer invalid in apq[(signed long int)5]: SUCCESS
+[apq_extract_min.pointer_dereference.3] line 57 dereference failure: deallocated dynamic object in apq[(signed long int)5]: SUCCESS
+[apq_extract_min.pointer_dereference.4] line 57 dereference failure: dead object in apq[(signed long int)5]: SUCCESS
+[apq_extract_min.pointer_dereference.5] line 57 dereference failure: pointer outside object bounds in apq[(signed long int)5]: SUCCESS
+[apq_extract_min.pointer_dereference.6] line 57 dereference failure: invalid integer address in apq[(signed long int)5]: SUCCESS
+[apq_extract_min.pointer_dereference.7] line 61 dereference failure: pointer NULL in apq[(signed long int)5]: SUCCESS
+[apq_extract_min.pointer_dereference.8] line 61 dereference failure: pointer invalid in apq[(signed long int)5]: SUCCESS
+[apq_extract_min.pointer_dereference.9] line 61 dereference failure: deallocated dynamic object in apq[(signed long int)5]: SUCCESS
+[apq_extract_min.pointer_dereference.10] line 61 dereference failure: dead object in apq[(signed long int)5]: SUCCESS
+[apq_extract_min.pointer_dereference.11] line 61 dereference failure: pointer outside object bounds in apq[(signed long int)5]: SUCCESS
+[apq_extract_min.pointer_dereference.12] line 61 dereference failure: invalid integer address in apq[(signed long int)5]: SUCCESS
+[apq_extract_min.pointer_dereference.13] line 65 dereference failure: pointer NULL in apq[(signed long int)i]: SUCCESS
+[apq_extract_min.pointer_dereference.14] line 65 dereference failure: pointer invalid in apq[(signed long int)i]: SUCCESS
+[apq_extract_min.pointer_dereference.15] line 65 dereference failure: deallocated dynamic object in apq[(signed long int)i]: SUCCESS
+[apq_extract_min.pointer_dereference.16] line 65 dereference failure: dead object in apq[(signed long int)i]: SUCCESS
+[apq_extract_min.pointer_dereference.17] line 65 dereference failure: pointer outside object bounds in apq[(signed long int)i]: SUCCESS
+[apq_extract_min.pointer_dereference.18] line 65 dereference failure: invalid integer address in apq[(signed long int)i]: SUCCESS
+
+/home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c function hpq_add
+[hpq_add.pointer_dereference.1] line 108 dereference failure: pointer NULL in hpq[(signed long int)5]: SUCCESS
+[hpq_add.pointer_dereference.2] line 108 dereference failure: pointer invalid in hpq[(signed long int)5]: SUCCESS
+[hpq_add.pointer_dereference.3] line 108 dereference failure: deallocated dynamic object in hpq[(signed long int)5]: SUCCESS
+[hpq_add.pointer_dereference.4] line 108 dereference failure: dead object in hpq[(signed long int)5]: SUCCESS
+[hpq_add.pointer_dereference.5] line 108 dereference failure: pointer outside object bounds in hpq[(signed long int)5]: SUCCESS
+[hpq_add.pointer_dereference.6] line 108 dereference failure: invalid integer address in hpq[(signed long int)5]: SUCCESS
+[hpq_add.pointer_dereference.7] line 112 dereference failure: pointer NULL in hpq[(signed long int)5]: SUCCESS
+[hpq_add.pointer_dereference.8] line 112 dereference failure: pointer invalid in hpq[(signed long int)5]: SUCCESS
+[hpq_add.pointer_dereference.9] line 112 dereference failure: deallocated dynamic object in hpq[(signed long int)5]: SUCCESS
+[hpq_add.pointer_dereference.10] line 112 dereference failure: dead object in hpq[(signed long int)5]: SUCCESS
+[hpq_add.pointer_dereference.11] line 112 dereference failure: pointer outside object bounds in hpq[(signed long int)5]: SUCCESS
+[hpq_add.pointer_dereference.12] line 112 dereference failure: invalid integer address in hpq[(signed long int)5]: SUCCESS
+[hpq_add.pointer_dereference.13] line 113 dereference failure: pointer NULL in hpq[(signed long int)n]: SUCCESS
+[hpq_add.pointer_dereference.14] line 113 dereference failure: pointer invalid in hpq[(signed long int)n]: SUCCESS
+[hpq_add.pointer_dereference.15] line 113 dereference failure: deallocated dynamic object in hpq[(signed long int)n]: SUCCESS
+[hpq_add.pointer_dereference.16] line 113 dereference failure: dead object in hpq[(signed long int)n]: SUCCESS
+[hpq_add.pointer_dereference.17] line 113 dereference failure: pointer outside object bounds in hpq[(signed long int)n]: SUCCESS
+[hpq_add.pointer_dereference.18] line 113 dereference failure: invalid integer address in hpq[(signed long int)n]: SUCCESS
+
+/home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c function hpq_bubble_up
+[hpq_bubble_up.pointer_dereference.1] line 99 dereference failure: pointer NULL in hpq[(signed long int)idx]: SUCCESS
+[hpq_bubble_up.pointer_dereference.2] line 99 dereference failure: pointer invalid in hpq[(signed long int)idx]: SUCCESS
+[hpq_bubble_up.pointer_dereference.3] line 99 dereference failure: deallocated dynamic object in hpq[(signed long int)idx]: SUCCESS
+[hpq_bubble_up.pointer_dereference.4] line 99 dereference failure: dead object in hpq[(signed long int)idx]: SUCCESS
+[hpq_bubble_up.pointer_dereference.5] line 99 dereference failure: pointer outside object bounds in hpq[(signed long int)idx]: SUCCESS
+[hpq_bubble_up.pointer_dereference.6] line 99 dereference failure: invalid integer address in hpq[(signed long int)idx]: SUCCESS
+[hpq_bubble_up.pointer_dereference.7] line 99 dereference failure: pointer NULL in hpq[(signed long int)p]: SUCCESS
+[hpq_bubble_up.pointer_dereference.8] line 99 dereference failure: pointer invalid in hpq[(signed long int)p]: SUCCESS
+[hpq_bubble_up.pointer_dereference.9] line 99 dereference failure: deallocated dynamic object in hpq[(signed long int)p]: SUCCESS
+[hpq_bubble_up.pointer_dereference.10] line 99 dereference failure: dead object in hpq[(signed long int)p]: SUCCESS
+[hpq_bubble_up.pointer_dereference.11] line 99 dereference failure: pointer outside object bounds in hpq[(signed long int)p]: SUCCESS
+[hpq_bubble_up.pointer_dereference.12] line 99 dereference failure: invalid integer address in hpq[(signed long int)p]: SUCCESS
+
+/home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c function hpq_empty
+[hpq_empty.pointer_dereference.1] line 77 dereference failure: pointer NULL in a[(signed long int)5]: SUCCESS
+[hpq_empty.pointer_dereference.2] line 77 dereference failure: pointer invalid in a[(signed long int)5]: SUCCESS
+[hpq_empty.pointer_dereference.3] line 77 dereference failure: deallocated dynamic object in a[(signed long int)5]: SUCCESS
+[hpq_empty.pointer_dereference.4] line 77 dereference failure: dead object in a[(signed long int)5]: SUCCESS
+[hpq_empty.pointer_dereference.5] line 77 dereference failure: pointer outside object bounds in a[(signed long int)5]: SUCCESS
+[hpq_empty.pointer_dereference.6] line 77 dereference failure: invalid integer address in a[(signed long int)5]: SUCCESS
+
+/home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c function hpq_extract_min
+[hpq_extract_min.pointer_dereference.1] line 145 dereference failure: pointer NULL in hpq[(signed long int)5]: SUCCESS
+[hpq_extract_min.pointer_dereference.2] line 145 dereference failure: pointer invalid in hpq[(signed long int)5]: SUCCESS
+[hpq_extract_min.pointer_dereference.3] line 145 dereference failure: deallocated dynamic object in hpq[(signed long int)5]: SUCCESS
+[hpq_extract_min.pointer_dereference.4] line 145 dereference failure: dead object in hpq[(signed long int)5]: SUCCESS
+[hpq_extract_min.pointer_dereference.5] line 145 dereference failure: pointer outside object bounds in hpq[(signed long int)5]: SUCCESS
+[hpq_extract_min.pointer_dereference.6] line 145 dereference failure: invalid integer address in hpq[(signed long int)5]: SUCCESS
+[hpq_extract_min.pointer_dereference.7] line 149 dereference failure: pointer NULL in hpq[(signed long int)5]: SUCCESS
+[hpq_extract_min.pointer_dereference.8] line 149 dereference failure: pointer invalid in hpq[(signed long int)5]: SUCCESS
+[hpq_extract_min.pointer_dereference.9] line 149 dereference failure: deallocated dynamic object in hpq[(signed long int)5]: SUCCESS
+[hpq_extract_min.pointer_dereference.10] line 149 dereference failure: dead object in hpq[(signed long int)5]: SUCCESS
+[hpq_extract_min.pointer_dereference.11] line 149 dereference failure: pointer outside object bounds in hpq[(signed long int)5]: SUCCESS
+[hpq_extract_min.pointer_dereference.12] line 149 dereference failure: invalid integer address in hpq[(signed long int)5]: SUCCESS
+[hpq_extract_min.pointer_dereference.13] line 150 dereference failure: pointer NULL in hpq[(signed long int)0]: SUCCESS
+[hpq_extract_min.pointer_dereference.14] line 150 dereference failure: pointer invalid in hpq[(signed long int)0]: SUCCESS
+[hpq_extract_min.pointer_dereference.15] line 150 dereference failure: deallocated dynamic object in hpq[(signed long int)0]: SUCCESS
+[hpq_extract_min.pointer_dereference.16] line 150 dereference failure: dead object in hpq[(signed long int)0]: SUCCESS
+[hpq_extract_min.pointer_dereference.17] line 150 dereference failure: pointer outside object bounds in hpq[(signed long int)0]: SUCCESS
+[hpq_extract_min.pointer_dereference.18] line 150 dereference failure: invalid integer address in hpq[(signed long int)0]: SUCCESS
+[hpq_extract_min.pointer_dereference.19] line 151 dereference failure: pointer NULL in hpq[(signed long int)(n - 1)]: SUCCESS
+[hpq_extract_min.pointer_dereference.20] line 151 dereference failure: pointer invalid in hpq[(signed long int)(n - 1)]: SUCCESS
+[hpq_extract_min.pointer_dereference.21] line 151 dereference failure: deallocated dynamic object in hpq[(signed long int)(n - 1)]: SUCCESS
+[hpq_extract_min.pointer_dereference.22] line 151 dereference failure: dead object in hpq[(signed long int)(n - 1)]: SUCCESS
+[hpq_extract_min.pointer_dereference.23] line 151 dereference failure: pointer outside object bounds in hpq[(signed long int)(n - 1)]: SUCCESS
+[hpq_extract_min.pointer_dereference.24] line 151 dereference failure: invalid integer address in hpq[(signed long int)(n - 1)]: SUCCESS
+
+/home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c function hpq_trickle_down
+[hpq_trickle_down.pointer_dereference.1] line 119 dereference failure: pointer NULL in hpq[(signed long int)5]: SUCCESS
+[hpq_trickle_down.pointer_dereference.2] line 119 dereference failure: pointer invalid in hpq[(signed long int)5]: SUCCESS
+[hpq_trickle_down.pointer_dereference.3] line 119 dereference failure: deallocated dynamic object in hpq[(signed long int)5]: SUCCESS
+[hpq_trickle_down.pointer_dereference.4] line 119 dereference failure: dead object in hpq[(signed long int)5]: SUCCESS
+[hpq_trickle_down.pointer_dereference.5] line 119 dereference failure: pointer outside object bounds in hpq[(signed long int)5]: SUCCESS
+[hpq_trickle_down.pointer_dereference.6] line 119 dereference failure: invalid integer address in hpq[(signed long int)5]: SUCCESS
+[hpq_trickle_down.pointer_dereference.7] line 123 dereference failure: pointer NULL in hpq[(signed long int)r]: SUCCESS
+[hpq_trickle_down.pointer_dereference.8] line 123 dereference failure: pointer invalid in hpq[(signed long int)r]: SUCCESS
+[hpq_trickle_down.pointer_dereference.9] line 123 dereference failure: deallocated dynamic object in hpq[(signed long int)r]: SUCCESS
+[hpq_trickle_down.pointer_dereference.10] line 123 dereference failure: dead object in hpq[(signed long int)r]: SUCCESS
+[hpq_trickle_down.pointer_dereference.11] line 123 dereference failure: pointer outside object bounds in hpq[(signed long int)r]: SUCCESS
+[hpq_trickle_down.pointer_dereference.12] line 123 dereference failure: invalid integer address in hpq[(signed long int)r]: SUCCESS
+[hpq_trickle_down.pointer_dereference.13] line 123 dereference failure: pointer NULL in hpq[(signed long int)i]: SUCCESS
+[hpq_trickle_down.pointer_dereference.14] line 123 dereference failure: pointer invalid in hpq[(signed long int)i]: SUCCESS
+[hpq_trickle_down.pointer_dereference.15] line 123 dereference failure: deallocated dynamic object in hpq[(signed long int)i]: SUCCESS
+[hpq_trickle_down.pointer_dereference.16] line 123 dereference failure: dead object in hpq[(signed long int)i]: SUCCESS
+[hpq_trickle_down.pointer_dereference.17] line 123 dereference failure: pointer outside object bounds in hpq[(signed long int)i]: SUCCESS
+[hpq_trickle_down.pointer_dereference.18] line 123 dereference failure: invalid integer address in hpq[(signed long int)i]: SUCCESS
+[hpq_trickle_down.pointer_dereference.19] line 125 dereference failure: pointer NULL in hpq[(signed long int)l]: SUCCESS
+[hpq_trickle_down.pointer_dereference.20] line 125 dereference failure: pointer invalid in hpq[(signed long int)l]: SUCCESS
+[hpq_trickle_down.pointer_dereference.21] line 125 dereference failure: deallocated dynamic object in hpq[(signed long int)l]: SUCCESS
+[hpq_trickle_down.pointer_dereference.22] line 125 dereference failure: dead object in hpq[(signed long int)l]: SUCCESS
+[hpq_trickle_down.pointer_dereference.23] line 125 dereference failure: pointer outside object bounds in hpq[(signed long int)l]: SUCCESS
+[hpq_trickle_down.pointer_dereference.24] line 125 dereference failure: invalid integer address in hpq[(signed long int)l]: SUCCESS
+[hpq_trickle_down.pointer_dereference.25] line 125 dereference failure: pointer NULL in hpq[(signed long int)r]: SUCCESS
+[hpq_trickle_down.pointer_dereference.26] line 125 dereference failure: pointer invalid in hpq[(signed long int)r]: SUCCESS
+[hpq_trickle_down.pointer_dereference.27] line 125 dereference failure: deallocated dynamic object in hpq[(signed long int)r]: SUCCESS
+[hpq_trickle_down.pointer_dereference.28] line 125 dereference failure: dead object in hpq[(signed long int)r]: SUCCESS
+[hpq_trickle_down.pointer_dereference.29] line 125 dereference failure: pointer outside object bounds in hpq[(signed long int)r]: SUCCESS
+[hpq_trickle_down.pointer_dereference.30] line 125 dereference failure: invalid integer address in hpq[(signed long int)r]: SUCCESS
+[hpq_trickle_down.pointer_dereference.31] line 132 dereference failure: pointer NULL in hpq[(signed long int)l]: SUCCESS
+[hpq_trickle_down.pointer_dereference.32] line 132 dereference failure: pointer invalid in hpq[(signed long int)l]: SUCCESS
+[hpq_trickle_down.pointer_dereference.33] line 132 dereference failure: deallocated dynamic object in hpq[(signed long int)l]: SUCCESS
+[hpq_trickle_down.pointer_dereference.34] line 132 dereference failure: dead object in hpq[(signed long int)l]: SUCCESS
+[hpq_trickle_down.pointer_dereference.35] line 132 dereference failure: pointer outside object bounds in hpq[(signed long int)l]: SUCCESS
+[hpq_trickle_down.pointer_dereference.36] line 132 dereference failure: invalid integer address in hpq[(signed long int)l]: SUCCESS
+[hpq_trickle_down.pointer_dereference.37] line 132 dereference failure: pointer NULL in hpq[(signed long int)i]: SUCCESS
+[hpq_trickle_down.pointer_dereference.38] line 132 dereference failure: pointer invalid in hpq[(signed long int)i]: SUCCESS
+[hpq_trickle_down.pointer_dereference.39] line 132 dereference failure: deallocated dynamic object in hpq[(signed long int)i]: SUCCESS
+[hpq_trickle_down.pointer_dereference.40] line 132 dereference failure: dead object in hpq[(signed long int)i]: SUCCESS
+[hpq_trickle_down.pointer_dereference.41] line 132 dereference failure: pointer outside object bounds in hpq[(signed long int)i]: SUCCESS
+[hpq_trickle_down.pointer_dereference.42] line 132 dereference failure: invalid integer address in hpq[(signed long int)i]: SUCCESS
+
+/home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c function main
+[main.assertion.1] line 182 assertion apq_extract_min(apq) == hpq_extract_min(hpq): SUCCESS
+[main.assertion.2] line 191 assertion apq_extract_min(apq) == hpq_extract_min(hpq): SUCCESS
+
+/home/ubuntu/formulog-compiler-eval/benchmarks/symex/bms/prioqueue-5/bench.c function swap
+[swap.pointer_dereference.1] line 33 dereference failure: pointer NULL in a[(signed long int)i]: SUCCESS
+[swap.pointer_dereference.2] line 33 dereference failure: pointer invalid in a[(signed long int)i]: SUCCESS
+[swap.pointer_dereference.3] line 33 dereference failure: deallocated dynamic object in a[(signed long int)i]: SUCCESS
+[swap.pointer_dereference.4] line 33 dereference failure: dead object in a[(signed long int)i]: SUCCESS
+[swap.pointer_dereference.5] line 33 dereference failure: pointer outside object bounds in a[(signed long int)i]: FAILURE
+[swap.pointer_dereference.6] line 33 dereference failure: invalid integer address in a[(signed long int)i]: SUCCESS
+[swap.pointer_dereference.7] line 34 dereference failure: pointer NULL in a[(signed long int)j]: SUCCESS
+[swap.pointer_dereference.8] line 34 dereference failure: pointer invalid in a[(signed long int)j]: SUCCESS
+[swap.pointer_dereference.9] line 34 dereference failure: deallocated dynamic object in a[(signed long int)j]: SUCCESS
+[swap.pointer_dereference.10] line 34 dereference failure: dead object in a[(signed long int)j]: SUCCESS
+[swap.pointer_dereference.11] line 34 dereference failure: pointer outside object bounds in a[(signed long int)j]: SUCCESS
+[swap.pointer_dereference.12] line 34 dereference failure: invalid integer address in a[(signed long int)j]: SUCCESS
+[swap.pointer_dereference.13] line 35 dereference failure: pointer NULL in a[(signed long int)j]: SUCCESS
+[swap.pointer_dereference.14] line 35 dereference failure: pointer invalid in a[(signed long int)j]: SUCCESS
+[swap.pointer_dereference.15] line 35 dereference failure: deallocated dynamic object in a[(signed long int)j]: SUCCESS
+[swap.pointer_dereference.16] line 35 dereference failure: dead object in a[(signed long int)j]: SUCCESS
+[swap.pointer_dereference.17] line 35 dereference failure: pointer outside object bounds in a[(signed long int)j]: SUCCESS
+[swap.pointer_dereference.18] line 35 dereference failure: invalid integer address in a[(signed long int)j]: SUCCESS
+
+<builtin-library-malloc> function malloc
+[malloc.assertion.1] line 31 max allocation size exceeded: SUCCESS
+[malloc.assertion.2] line 36 max allocation may fail: SUCCESS
+
+** 1 of 166 failed (2 iterations)
+VERIFICATION FAILED
+Command exited with non-zero status 10
+LOG:EXECUTE;ELAPSED=20.23s;USER=20.01s;SYSTEM=0.22s;CPU=100%;MEM=149444kb

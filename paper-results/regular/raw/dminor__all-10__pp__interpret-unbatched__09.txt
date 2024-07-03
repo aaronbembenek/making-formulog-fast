@@ -1,0 +1,133 @@
+LOG:Benchmark directory: /home/ubuntu/formulog-compiler-eval/benchmarks/dminor/bms/all-10
+LOG:Timeout: 1800
+LOG:Eval repo commit: c0fb1b2
+LOG:Formulog commit: f2b133d
+LOG:Z3 version: Z3 version 4.12.2 - 64 bit - build hashcode f7c9c9ef72fde0e00ef9409e6c24456effb8b930
+LOG:Java version start
+openjdk version "17.0.7" 2023-04-18
+OpenJDK Runtime Environment (build 17.0.7+7-Ubuntu-0ubuntu122.04.2)
+OpenJDK 64-Bit Server VM (build 17.0.7+7-Ubuntu-0ubuntu122.04.2, mixed mode, sharing)
+
+LOG:Java version end
+LOG:Mode: interpret-unbatched
+LOG:Solver mode: push-pop
+LOG:Parallelism: 40
+LOG:Interpret command: timeout 1800 /usr/bin/time -f LOG:INTERPRET;ELAPSED=%es;USER=%Us;SYSTEM=%Ss;CPU=%P;MEM=%Mkb java -Xmx180g -Xss256m -DsmtTaskSize=1 -DtaskSize=8 -DmemoizeThreshold=0 -DsmtDoubleCheckUnknowns=false -DrecordWork -DeagerSemiNaive -jar /home/ubuntu/formulog-compiler-eval/formulog/target/formulog-0.7.0-SNAPSHOT-jar-with-dependencies.jar bench.flg --dump-sizes --smt-stats --smt-solver-mode=push-pop -j 40 -D /home/ubuntu/formulog-compiler-eval/benchmarks/dminor/bms/all-10/out -F /home/ubuntu/formulog-compiler-eval/benchmarks/dminor/bms/all-10/facts 
+Parsing...
+Finished parsing (0.951s)
+Type checking...
+Finished type checking (0.086s)
+Rewriting and validating...
+Finished rewriting and validating (0.381s)
+Evaluating...
+Finished evaluating (2.002s)
+
+==================== SMT STATS ====================
+SMT calls: 9619
+SMT time (ms): 21390
+SMT wait time (ms): 5657.981134
+SMT cache hits: 12957
+SMT cache misses: 35931
+SMT cache clears: 0
+SMT calls per solver: 209,324,330,175,189,211,187,188,173,244,281,226,211,207,240,270,280,297,243,299,251,258,221,293,258,194,198,231,288,236,190,134,298,240,267,270,225,222,273,288
+SMT time per solver (ms): 590,585,523,358,471,728,591,731,417,457,526,687,576,526,531,603,473,595,569,549,538,399,499,422,535,662,599,632,532,415,449,592,592,518,607,579,385,269,634,446
+
+==================== RELATION SIZES ====================
+check: 10357
+env_wf: 3253
+explore_exp: 1400
+explore_exps: 200
+explore_typ: 980
+func_not_ok: 0
+func_sig: 270
+input_check_bbb: 10617
+input_env_wf_b: 3303
+input_subtype_bbb: 9399
+input_synth_app_helper_bbbbbf: 2501
+input_synth_bbf: 10359
+input_synth_entity_helper_bbf: 471
+input_synth_list_helper_bbf: 111
+input_type_wf_bb: 12300
+labeled_pure: 20
+may_not_terminate: 0
+prog_ok: 1
+raw_func_sig: 270
+raw_labeled_pure: 20
+raw_type_alias: 154
+raw_type_indicator_func: 20
+size_change_graph: 30
+subtype: 9399
+sup_23_0: 270
+sup_39_0: 154
+sup_41_0: 640
+sup_42_0: 9727
+sup_42_1: 9487
+sup_43_0: 160
+sup_43_1: 160
+sup_43_2: 160
+sup_44_0: 90
+sup_44_1: 90
+sup_45_0: 500
+sup_46_0: 2453
+sup_47_0: 2280
+sup_48_0: 671
+sup_49_0: 2780
+sup_50_0: 1274
+sup_51_0: 2342
+sup_52_0: 399
+sup_53_0: 10
+sup_53_1: 10
+sup_54_0: 554
+sup_55_0: 22
+sup_56_0: 111
+sup_56_1: 111
+sup_57_0: 0
+sup_57_1: 0
+sup_57_2: 0
+sup_58_0: 63
+sup_58_1: 63
+sup_59_0: 3390
+sup_60_0: 50
+sup_60_1: 50
+sup_61_0: 70
+sup_62_0: 50
+sup_62_1: 50
+sup_62_2: 50
+sup_63_0: 1110
+sup_63_1: 1110
+sup_64_0: 0
+sup_65_0: 70
+sup_66_0: 2116
+sup_66_1: 2036
+sup_67_0: 60
+sup_67_1: 60
+sup_67_2: 60
+sup_68_0: 70
+sup_68_1: 70
+sup_68_2: 70
+sup_69_0: 30
+sup_70_0: 2074
+sup_70_1: 2074
+sup_71_0: 160
+sup_71_1: 160
+sup_72_0: 9399
+sup_73_0: 2862
+sup_75_0: 440
+sup_76_0: 0
+sup_76_1: 0
+sup_79_0: 1410
+sup_79_1: 1410
+sup_79_2: 1410
+sup_81_0: 380
+sup_81_1: 380
+synth: 10119
+synth_app_helper: 2501
+synth_entity_helper: 471
+synth_list_helper: 111
+type_alias: 154
+type_indicator_func: 20
+type_not_ok: 0
+type_wf: 12170
+[WORK] 1041387
+LOG:INTERPRET;ELAPSED=4.14s;USER=74.36s;SYSTEM=7.29s;CPU=1969%;MEM=6345292kb
+LOG:Success!
