@@ -199,7 +199,7 @@ To use Jupyter Notebook, need
 
 ## Reusability Guide
 
-The primary reusable components of our artifact are our contributions to the Formulog platform (described more fully below):
+The primary reusable components of our artifact are our contributions to the Formulog platform:
 
 1. a compiler from Formulog to off-the-shelf Soufflé;
 2. an eager evaluation mode for the Formulog interpreter; and
@@ -214,7 +214,9 @@ To run these unit tests, enter the `formulog` directory and run this command (ta
 mvn -DtestCodeGen -DtestCodeGenEager package
 ```
 
-In a subsection "Trying Out Our Formulog Extensions" below we discuss how you can try out our different Formulog extensions for yourself.
+In the subsection "Trying Out Our Formulog Extensions" below we discuss how you can try out our different Formulog extensions for yourself.
+
+In what follows, we discuss each of our extensions in turn.
 
 ### Compiler from Formulog to Off-the-Shelf Soufflé
 
@@ -253,7 +255,7 @@ This abstract class is extended by classes for traditional semi-naive evaluation
 This design makes it easy to extend the Formulog interpreter with alternative evaluation methods.
 First, it would be simple to use different evaluation methods for different strata, by dynamically choosing which stratum evaluator class to use on a per-stratum basis.
 Second, it is relatively lightweight to add an alternative stratum-level evaluation method by extending the `AbstractStratumEvaluator` class.
-For example, using the `EagerStratumEvaluator` class as a guide, it should not be hard to implement a proof-of-concept evaluation method that explore the logical inference space with an order different than DFS or BFS.
+For example, using the `EagerStratumEvaluator` class as a guide, it should not be hard to implement a proof-of-concept evaluation method that explore the logical inference space with an order different than DFS (eager evaluation) and BFS (semi-naive evaluation); for example, by choosing which inferences to explore based on some notion of priority.
 This should require a few hundred lines of code, while reusing much of the Formulog codebase (>20k SLOC Java, excluding compiler).
 
 ### Eager Evaluation for the Formulog Compiler 
