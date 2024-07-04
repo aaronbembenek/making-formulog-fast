@@ -270,10 +270,10 @@ The primary reusable components of our artifact are our contributions to the For
 2. an eager evaluation mode for the Formulog interpreter; and
 3. an eager evaluation extension to the Formulog compiler.
 
-**All three extensions are feature complete---that is, they work with the full Formulog language, and should work with arbitrary Formulog programs (modulo bugs).**
+**All three extensions are feature complete---that is, they work with the full Formulog language, and should work with arbitrary Formulog programs (modulo any bugs, of course!).**
 
-All three extensions have passed the ~300 Formulog test cases in the `formulog/src/test/resources/` directory.
-To run these unit tests, enter the `formulog` directory and run this command (takes roughly an hour on our laptop):
+All three extensions have passed the >200 Formulog evaluation test cases in the `formulog/src/test/resources/` directory.
+To run these unit tests, enter the `formulog` directory and run this command (takes a little over an hour on our laptop):
 
 ```bash
 mvn -DtestCodeGen -DtestCodeGenEager package
@@ -281,7 +281,7 @@ mvn -DtestCodeGen -DtestCodeGenEager package
 
 In the subsection "Trying Out Our Formulog Extensions" below we discuss how you can try out our different Formulog extensions for yourself.
 
-In what follows, we discuss each of our extensions in turn.
+In what follows, we discuss each of our extensions in turn, as well as the reusability of our experimental infrastructure.
 
 ### Compiler from Formulog to Off-the-Shelf Soufflé
 
