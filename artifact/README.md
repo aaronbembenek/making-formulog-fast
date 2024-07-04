@@ -182,23 +182,85 @@ If you are interested in trying out the Formulog compiler and/or eager evaluatio
 
 ## Step-by-Step Instructions (Phase 2)
 
-XXX
-
-- Log on to AWS EC2
-- Run experiment script
-- Run analysis script
-- What to expect
-- Note about scuba/luindex
+You will need to SSH onto a provisioned AWS EC2 to run these experiments (or run the x86 Docker container on a machine with ~200 GB RAM and ~40 vCPUs).
+We will coordinate with the AEC chairs about getting you the server's address and password.
+You can SSH onto the server like so:
 
 ```bash
-grep non-zero phase2-results/raw/scuba__luindex*scuba*
+ssh ubuntu@[server-address]
 ```
 
-To use Jupyter Notebook, need
-- notebook
-- matplotlib
-- pandas
-- seaborn
+You will then be required to enter the password.
+We will disable SSH logging, so access is anonymous.
+Reviewers will need to ensure that they are using the server one-at-a-time.
+
+The server will have the same structure and content as the x86 Docker image.
+The script for running the full set of experiments is `scripts/full_eval.sh`.
+Please edit it (with `vim` or `nano`) to configure the experiment to your liking (e.g., number of trials, which benchmarks to run); see the script for more information on how to do this.
+When modified to run a single trial of the default experiments, it takes XXX hours to complete.
+
+Once you have configured the experiment to your liking, run it with this command:
+
+```bash
+./scripts/full_eval.sh phase2-results/raw
+```
+
+This will populate the directory `phase2-results/raw/` with the raw output logs from the experiment.
+To process and analyze the logs, run these commands:
+
+```bash
+cd phase2-results
+../scripts/process_logs.py raw/* > results.csv
+../scripts/analysis.py
+```
+
+This command will create a file `stats.txt` with the statistics (about speedups, memory usage, etc.) we cite in the paper (we explicitly note where we have drawn statistics for Table 1).
+It will also populate a `figures` directory with the figures we use in the paper.
+To view these figures, you will need to retrieve the directory from the server and open it on your local machine.
+First, in the `phase2-results/` directory on the server, archive the directory:
+
+```bash
+zip figures.zip -r figures/
+```
+
+Then, from your local machine, retrieve the directory:
+
+```bash
+scp ubuntu@[server-address]:/home/ubuntu/phase2-results/figures.zip .
+```
+
+Once you unzip it, you can view the PDFs for Figures 4 and 6 in the paper.
+You can also use LaTeX to build Table 2.
+
+One note about our analysis script: it assumes that the reference Scuba implementation fails with an error on the `luindex` benchmark (which is what happened in our experiments).
+To see whether this holds in your experiments, run this command (on the server):
+
+```bash
+grep non-zero ~/phase2-results/raw/scuba__luindex*scuba*
+```
+
+This should return output like this, for the trials that ended in an error (i.e., with a non-zero exit status):
+
+```
+/home/ubuntu/phase2-results/raw/scuba__luindex__NA__scuba__00.txt:Command exited with non-zero status 1
+/home/ubuntu/phase2-results/raw/scuba__luindex__NA__scuba__01.txt:Command exited with non-zero status 1
+/home/ubuntu/phase2-results/raw/scuba__luindex__NA__scuba__02.txt:Command exited with non-zero status 1
+/home/ubuntu/phase2-results/raw/scuba__luindex__NA__scuba__03.txt:Command exited with non-zero status 1
+/home/ubuntu/phase2-results/raw/scuba__luindex__NA__scuba__04.txt:Command exited with non-zero status 1
+/home/ubuntu/phase2-results/raw/scuba__luindex__NA__scuba__05.txt:Command exited with non-zero status 1
+/home/ubuntu/phase2-results/raw/scuba__luindex__NA__scuba__06.txt:Command exited with non-zero status 1
+/home/ubuntu/phase2-results/raw/scuba__luindex__NA__scuba__07.txt:Command exited with non-zero status 1
+/home/ubuntu/phase2-results/raw/scuba__luindex__NA__scuba__08.txt:Command exited with non-zero status 1
+/home/ubuntu/phase2-results/raw/scuba__luindex__NA__scuba__09.txt:Command exited with non-zero status 1
+```
+
+If you are particularly eager, you can also use the provided Jupyter notebook `scripts/analysis.ipynb` to analyze results (it does the same thing as `scripts/analysis.py`, but in an interactive way).
+This will have to be done on your local machine; you will need to move the `results.csv` file off the server, and then also use a Python environment with the following dependencies:
+
+- `notebook`
+- `matplotlib`
+- `pandas`
+- `seaborn`
 
 ## Reusability Guide
 
