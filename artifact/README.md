@@ -79,7 +79,7 @@ docker load < vms/mff-arm64.tar.gz
 docker run --name mff -it mff-arm64
 ```
 
-### Experiment #1: Run Formulog
+### Experiment #1: Test Experimental Infrastructure
 
 Once you are in the Docker container, you can run a script that will run a set of relatively small experiments:
 
@@ -102,10 +102,10 @@ These determine the encoding the Formulog runtime uses for incremental SMT solvi
 The possible values for `[eval-mode]` are:
 
 - `interpret`: use Formulog interpreter in semi-naive mode
-- `interpret-reorder`: reorder each rule body so delta atom is first, and then use Formulog interpreter in semi-naive mode
+- `interpret-reorder`: reorder each rule body so delta atom is first (the order implicitly used by eager evaluation), and then use Formulog interpreter in semi-naive mode
 - `interpret-unbatched`: use Formulog interpreter in eager evaluation mode
 - `compile`: use Formulog compiler to generate code performing semi-naive evaluation
-- `compile-reorder`: reorder each rule body so delta atom is first, and then use Formulog compiler to generate code performing semi-naive evaluation
+- `compile-reorder`: reorder each rule body so delta atom is first (the order implicitly used by eager evaluation), and then use Formulog compiler to generate code performing semi-naive evaluation
 - `compile-unbatched`: use Formulog compiler to generate code performing eager evaluation
 
 The raw output logs can be turned into a CSV using the script `scripts/process_logs.py`, and the CSV values can be summarized using the script `scripts/summarize_kicktires.py`:
@@ -114,7 +114,7 @@ The raw output logs can be turned into a CSV using the script `scripts/process_l
 ./scripts/process_logs.py phase1-results/* | ./scripts/summarize_kicktires.py
 ```
 
-This is the summary we received on the Mac laptop:
+This is the summary we received on the M2 Mac laptop (note that the reference implementations `scuba` and `klee` did not run, since here we used the ARM Docker image):
 
 ```
 dminor/all-10
@@ -134,7 +134,7 @@ symex/shuffle-4
 	interpret-unbatched 1.29s
 ```
 
-This is the output we received on the Linux server:
+This is the output we received on the Linux server (using the x86 Docker image):
 
 ```
 XXX
