@@ -46,15 +46,16 @@ We have tested the "kick-the-tires" phase on these machines:
 - an x86 Ubuntu server with 4 vCPUs and 16 GB RAM 
 
 For the full evaluation of the artifact, a more powerful machine is necessary (~40 vCPUs, ~200 GB of memory).
-We will give artifact reviewers SSH access to an AWS EC2 with the correct specs.
+We will give artifact reviewers anonymous SSH access to an AWS EC2 with the correct specs.
 Access will be coordinated via the AEC chairs.
+Reviewers will need to ensure that only one reviewer is running experiments on the EC2 at a time. 
 
 ## Getting Started Guide (Phase 1)
 
 You should be able to run these experiments on a moderately powerful laptop that has Docker.
 In the `vms/` directory, there are two archived Docker images, one for x86 and one for ARM.
 Both images contain the software (and scripts) necessary for running the Formulog experiments in the paper; however, only the x86 one also supports running the reference implementations from Section 6.1 (e.g., KLEE and the original Scuba points-to analysis), as we were unable to get them to work on ARM.
-We recommend using whichever image matches your architecture (it might be possible to run the other one via emulation, but this will be quite slow).
+We recommend using whichever image matches your architecture (it might be possible to run the other image via emulation, but this will be quite slow).
 
 Make sure Docker is configured to give containers at least 4 CPUs and 8 GB RAM (more is better); to see what the current setting is, grep for "CPUs" and "Total Memory" in the output of the command `docker info`.
 If you are using Docker Desktop on Mac, you can increase the resource limits following [these instructions](https://docs.docker.com/desktop/settings/mac/#advanced).
@@ -81,7 +82,7 @@ Once you are in the Docker container, you can run a script that will run a set o
 ./scripts/kicktires.sh phase1-results
 ```
 
-On a 2023 M2 MacBook Pro with 10 vCPUS and 16 GB RAM this takes XXX minutes; XXX.
+On a 2023 M2 MacBook Pro with 10 vCPUS and 16 GB RAM this takes 16 minutes; XXX.
 
 The previous command will populate the directory `~/phase1-results` with output files from the experiment.
 Each file is named according to this convention:
@@ -102,15 +103,37 @@ The possible values for `[eval-mode]` are:
 - `compile-reorder`: reorder each rule body so delta atom is first, and then use Formulog compiler to generate code performing semi-naive evaluation
 - `compile-unbatched`: use Formulog compiler to generate code performing eager evaluation
 
-XXX
-
-The raw data logs can be turned into a CSV using the script `scripts/process_logs.py`, and the CSV values can be summarized using the script `scripts/summarize_kicktires.py`:
+The raw output logs can be turned into a CSV using the script `scripts/process_logs.py`, and the CSV values can be summarized using the script `scripts/summarize_kicktires.py`:
 
 ```bash
 ./scripts/process_logs.py phase1-results/* | ./scripts/summarize_kicktires.py
 ```
 
-This is the output we received on XXX
+This is the summary we received on the Mac laptop:
+
+```
+dminor/all-10
+	compile-reorder 6.87s
+	compile-unbatched 1.54s
+	interpret-reorder 9.24s
+	interpret-unbatched 4.74s
+scuba/polyglot
+	scuba NA
+	compile-unbatched 329.59s
+	compile 115.07s
+symex/shuffle-4
+	klee NA
+	compile-reorder 1.47s
+	compile-unbatched 0.38s
+	interpret-reorder 2.10s
+	interpret-unbatched 1.29s
+```
+
+This is the output we received on the Linux server:
+
+```
+XXX
+```
 
 ### Experiment #2: Count SLOC for Eager Evaluation Implementations
 
@@ -133,6 +156,9 @@ The artifact has the following content:
     - `benchmarks/[case-study]/bms/`: the benchmarks themselves, each one with its own directory containing the archived facts (i.e., the EDB) for that benchmark
 - `formulog/`: the Formulog source code
     - `formulog/src/main/java/edu/harvard/seas/pl/formulog/codegen/`: the code for the compiler
+        - `formulog/src/main/java/edu/harvard/seas/pl/formulog/codegen/CodeGen.java`: the entry point for the compiler
+        - `formulog/src/main/java/edu/harvard/seas/pl/formulog/codegen/*(Cpp|Hpp).java`: code for specializing a C++ file (from the Formulog runtime) to the program being compiled
+        - `formulog/src/main/java/edu/harvard/seas/pl/formulog/codegen/[Construct]CodeGen.java`: code for compiling a particular Formulog language construct (e.g., a type, a term, a rule)
     - `formulog/src/main/java/edu/harvard/seas/pl/formulog/eval/EagerStratumEvaluator`: the implementation of eager evaluation in the Formulog interpreter
 - `souffle/`: our eager evaluation extension to Soufflé (see `souffle/README.md` for more details)
 - `lib/`: various libraries used during the experiments, including a symlink to the Formulog JAR
@@ -152,7 +178,99 @@ The artifact has the following content:
     - `scripts/process_logs.sh`: script that takes raw output logs and turns them into CSV data
     - `scripts/summarize_kicktires.sh`: script for summarizing the results of the Phase 1 "kick-the-tires" experiments
 
+If you are interested in trying out the Formulog compiler and/or eager evaluation on your own Formulog program, see the subsection "Trying Out Our Formulog Extensions" in the "Reusability Guide" part of this document.
+
+## Step-by-Step Instructions (Phase 2)
+
+- Run experiment script
+- Run analysis script
+- What to expect
+- Note about scuba/luindex
+
+```bash
+grep non-zero phase2-results/raw/scuba__luindex*scuba*
+```
+
+To use Jupyter Notebook, need
+- notebook
+- matplotlib
+- pandas
+- seaborn
+
+## Reusability Guide
+
+The primary reusable components of our artifact are our contributions to the Formulog platform (described more fully below):
+
+1. a compiler from Formulog to off-the-shelf Soufflé;
+2. an eager evaluation mode for the Formulog interpreter; and
+3. an eager evaluation extension to the Formulog compiler.
+
+**All three extensions are feature complete---that is, they work with the full Formulog language, and should work with arbitrary Formulog programs (modulo bugs).**
+
+All three extensions have passed the ~300 Formulog test cases in the `formulog/src/test/resources/` directory.
+To run these unit tests, enter the `formulog` directory and run this command (takes roughly an hour on our laptop):
+
+```bash
+mvn -DtestCodeGen -DtestCodeGenEager package
+```
+
+In a subsection "Trying Out Our Formulog Extensions" below we discuss how you can try out our different Formulog extensions for yourself.
+
+### Compiler from Formulog to Off-the-Shelf Soufflé
+
+We have built a compiler for Formulog that transpiles the functional and SMT fragment of Formulog to C++ and the Datalog fragment to Soufflé.
+Off-the-shelf Soufflé is then used to compile the Soufflé code to C++, which can be linked with the C++ generated by the Formulog compiler.
+The compiler consists of ~4.4k lines of Java, plus ~3k lines of C++ for the skeleton Formulog runtime.
+
+Relevant source directories:
+
+- `formulog/src/main/java/edu/harvard/seas/pl/formulog/codegen/`
+- `formulog/src/main/java/edu/harvard/seas/pl/formulog/codegen/ast/cpp/`
+- `formulog/src/main/java/edu/harvard/seas/pl/formulog/codegen/ast/souffle/`
+- `formulog/src/main/resources/codegen/`
+
+The entry point for the compiler is the `CodeGen` class.
+Some classes in the `codegen` package translate specific Formulog language constructs; these classes have names like `[Construct]CodeGen`.
+For example, the class `TermCodeGen` defines how to translate a Formulog term (like a constructor or primitive).
+Other classes specialize the skeleton Formulog C++ runtime to the program being translated; these classes are named after the C++ file that they fill in (e.g., `SymbolHpp` and `SymbolCpp` for `Symbol.hpp` and `SymbolCpp`, respectively).
+The skeleton Formulog C++ runtime can be found in the `formulog/src/main/resources/codegen/` directory.
+
+We expect that the amount of work needed to extend the compiler to support a new Formulog feature will typically be commensurate with the amount of work needed to extend the Formulog interpreter to handle that feature (an exception might be if Soufflé already supports some feature that Formulog does not, in which case extending the Formulog compiler might be easier than extending the interpreter).
+Thus, it should be lightweight to extend the compiler with a non-invasive feature (say, new primitive terms representing character literals).
+
+### Eager Evaluation for the Formulog Interpreter
+
+We have extended the Formulog interpreter to support eager evaluation.
+
+Relevant source files:
+
+- `formulog/src/main/java/edu/harvard/seas/pl/formulog/eval/AbstractStratumEvaluator` 
+- `formulog/src/main/java/edu/harvard/seas/pl/formulog/eval/EagerStratumEvaluator` 
+- `formulog/src/main/java/edu/harvard/seas/pl/formulog/eval/RoundBasedStratumEvaluator` 
+
+We have abstracted stratum-level evaluation in the Formulog interpreter with an `AbstractStratumEvaluator` class that includes core functionality shared between evaluation methods.
+This abstract class is extended by classes for traditional semi-naive evaluation (`RoundBasedStratumEvaluator`) and eager evaluation (`EagerStratumEvaluator`).
+This design makes it easy to extend the Formulog interpreter with alternative evaluation methods.
+First, it would be simple to use different evaluation methods for different strata, by dynamically choosing which stratum evaluator class to use on a per-stratum basis.
+Second, it is relatively lightweight to add an alternative stratum-level evaluation method by extending the `AbstractStratumEvaluator` class.
+For example, using the `EagerStratumEvaluator` class as a guide, it should not be hard to implement a proof-of-concept evaluation method that explore the logical inference space with an order different than DFS or BFS.
+This should require a few hundred lines of code, while reusing much of the Formulog codebase (>20k SLOC Java, excluding compiler).
+
+### Eager Evaluation for the Formulog Compiler 
+
+We have extended the Soufflé code generator with preliminary support for eager evaluation.
+This extension to Soufflé works in a seamless way with our Formulog compiler.
+However, it can also be used to generate eager evaluation code for Soufflé programs in general (i.e., ones not resulting from Formulog compilation).
+This means that it can be reused by (the many) tools written in Soufflé, as well as tools that generate Soufflé code.
+
+See `souffle/README.md` for additional information, such as usage and limitations.
+The main current limitation is our extension does not support Soufflé's aggregation constructs; however, this is not a fundamental limitation and support could be added in the future.
+
+### Trying Out Our Formulog Extensions
+
 You can try running our extensions to Formulog on an arbitrary Formulog program; say, one you write yourself, or one of the example programs in `formulog/examples`.
+To learn more about the Formulog language, check out the language reference in the `formulog/docs/` directory (or [rendered online](https://github.com/aaronbembenek/formulog-fork/tree/mff-artifact/docs)).
+
 Let's assume you want to evaluate the program `formulog/examples/greeting.flg`.
 To run it with the Formulog interpreter using semi-naive evaluation, run this command:
 
@@ -198,26 +316,9 @@ The generated C++ file implementing semi-naive or eager evaluation for the progr
 clang-format -i ~/codegen/build/formulog.cpp
 ```
 
-## Step-by-Step Instructions (Phase 2)
+### Extending Our Experimental Infrastructure
 
-- Run experiment script
-- Run analysis script
-- What to expect
-- Note about scuba/luindex
+Finally, we believe that the experimental infrastructure in this artifact can be adapted and reused for future experiments (it itself builds on the artifact published in the OOPSLA'20 Formulog paper).
 
-```bash
-grep non-zero phase2-results/raw/scuba__luindex*scuba*
-```
-
-To use Jupyter Notebook, need
-- notebook
-- matplotlib
-- pandas
-- seaborn
-
-## Reusability Guide
-
-- Implementation of eager eval in Formulog interpreter is reusable in that we have abstract class that could support other types of evaluation; also would be easy to use eager eval for some stratum and semi-naive for others
-- Can use eager eval for other Formulog programs, both with interpreter and Souffle
-- Could potentially use eager eval for other Souffle programs
-- Experimental infrastructure and benchmarks
+- Creating new benchmarks
+- Running different experiments (such as just Soufflé code)
