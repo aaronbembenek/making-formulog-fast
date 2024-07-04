@@ -182,6 +182,9 @@ If you are interested in trying out the Formulog compiler and/or eager evaluatio
 
 ## Step-by-Step Instructions (Phase 2)
 
+XXX
+
+- Log on to AWS EC2
 - Run experiment script
 - Run analysis script
 - What to expect
@@ -265,13 +268,13 @@ This extension to Soufflé works in a seamless way with our Formulog compiler.
 However, it can also be used to generate eager evaluation code for Soufflé programs in general (i.e., ones not resulting from Formulog compilation).
 This means that it can be reused by (the many) tools written in Soufflé, as well as tools that generate Soufflé code.
 
-See `souffle/README.md` for additional information, such as usage and limitations.
+See `souffle/README.md` ([rendered online](https://github.com/aaronbembenek/souffle/blob/eager-eval/README.md)) for additional information, such as usage and limitations.
 The main current limitation is our extension does not support Soufflé's aggregation constructs; however, this is not a fundamental limitation and support could be added in the future.
 
 ### Trying Out Our Formulog Extensions
 
 You can try running our extensions to Formulog on an arbitrary Formulog program; say, one you write yourself, or one of the example programs in `formulog/examples`.
-To learn more about the Formulog language, check out the language reference in the `formulog/docs/` directory (or [rendered online](https://github.com/aaronbembenek/formulog-fork/tree/mff-artifact/docs)).
+To learn more about the Formulog language, check out the language reference in the `formulog/docs/` directory ([rendered online](https://github.com/aaronbembenek/formulog-fork/tree/mff-artifact/docs)), as well as `formulog/README.md` ([rendered online](https://github.com/aaronbembenek/formulog-fork/blob/mff-artifact/README.md)).
 
 Let's assume you want to evaluate the program `formulog/examples/greeting.flg`.
 To run it with the Formulog interpreter using semi-naive evaluation, run this command:
@@ -321,6 +324,8 @@ clang-format -i ~/codegen/build/formulog.cpp
 ### Extending Our Experimental Infrastructure
 
 Finally, we believe that the experimental infrastructure in this artifact can be adapted and reused for future experiments (it itself builds on the artifact published in the OOPSLA'20 Formulog paper).
+
+XXX
 
 - Creating new benchmarks
 - Running different experiments (such as just Soufflé code)
