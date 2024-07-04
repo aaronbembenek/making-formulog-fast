@@ -21,16 +21,21 @@ Our paper explores two approaches to making Formulog faster:
 
 ### Supported Claims
 
-This artifact supports the following claims:
+This artifact supports the following main claims:
 
-- On the Formulog benchmark suite, compiling Formulog leads to speedups over interpreting Formulog (~2x arithmetic mean speedup in our experiments); this claim can be evaluated using the experiment scripts in the artifact.
-- On SMT-heavy benchmarks, interpreting Formulog using eager evaluation leads to speedups over compiling Formulog to off-the-shelf Soufflé (~5x arithmetic mean speedup in our experiments); this claim can be evaluated using the experiment scripts in the artifact.
-- On SMT-heavy benchmarks, compiling Formulog to our modified version of Soufflé that uses eager evaluation leads to speedups over interpreting Formulog with eager evaluation (~2x arithmetic mean speedup in our experiments); this claim can be evaluated using the experiment scripts in the artifact.
-- On SMT-heavy benchmarks, using eager evaluation typically (although not universally) leads to faster SMT solving times compared to using semi-naive evaluation; this claim can be evaluated using the experiment scripts in the artifact.
-- Our improvements to Formulog---compilation and (on SMT-heavy benchmarks) eager evaluation---help Formulog be competitive with previously published, non-Datalog implementations of a range of SMT-based program analyses; this claim can be evaluated using the experiment scripts in the artifact.
-- Eager evaluation can be added to existing Datalog infrastructure with relatively low amounts of new code (~500 SLOC in the Formulog interpreter, and ~500 SLOC in Soufflé); this claim can be evaluated by running the utility `cloc` on the source directories contained in this artifact (we provide a script for this).
+1. On the Formulog benchmark suite, compiling Formulog leads to speedups over interpreting Formulog (~2x arithmetic mean speedup in our experiments) as well as much less memory usage (~38x arithmetic mean less in our experiments).
+2. On SMT-heavy benchmarks, interpreting Formulog using eager evaluation leads to speedups over compiling Formulog to off-the-shelf Soufflé (~5x arithmetic mean speedup in our experiments).
+3. On SMT-heavy benchmarks, compiling Formulog to our modified version of Soufflé that uses eager evaluation leads to speedups over interpreting Formulog with eager evaluation (~2x arithmetic mean speedup in our experiments).
+4. On SMT-heavy benchmarks, using eager evaluation typically (although not universally) leads to faster SMT solving times compared to using semi-naive evaluation.
+5. Our improvements to Formulog---compilation and (on SMT-heavy benchmarks) eager evaluation---help Formulog be competitive with previously published, non-Datalog implementations of a range of SMT-based program analyses.
+6. Eager evaluation can be added to existing Datalog infrastructure with relatively low amounts of new code (~500 SLOC in the Formulog interpreter, and ~500 SLOC in Soufflé).
 
-More details about evaluating each claim are given in the instructions below.
+Claims 1-5 can be evaluated by either analyzing the data we collected in our experiments (in the directory `paper-results/regular/`) or by using the scripts we provide to rerun our experiments.
+In either case, the data analysis scripts we provide can calculate the statistics we report throughout the paper (including those in Table 1), and also generate Figure 2 (relevant to claim 1), Figure 6 (relevant to claims 2 and 3), and Table 2 (relevant to claims 1-5). 
+
+Claim 6 can be evaluated by running the utility `cloc` on the source directories contained in this artifact (we provide a script for this).
+
+More details are given in the instructions below.
 
 ### Unsupported Claims
 
@@ -206,12 +211,12 @@ Once you have configured the experiment to your liking, run it with this command
 ```
 
 This will populate the directory `phase2-results/raw/` with the raw output logs from the experiment.
-To process and analyze the logs, run these commands:
+To process and analyze the logs, run these commands (where `[TIMEOUT]` is the timeout used in the experiments, measured in seconds):
 
 ```bash
 cd phase2-results
 ../scripts/process_logs.py raw/* > results.csv
-../scripts/analysis.py
+../scripts/analysis.py results.csv [TIMEOUT]
 ```
 
 This command will create a file `stats.txt` with the statistics (about speedups, memory usage, etc.) we cite in the paper (we explicitly note where we have drawn statistics for Table 1).
@@ -275,7 +280,7 @@ The small idiosyncrasy is that the handwritten parser in the C++ Formulog runtim
 This is a minor nuisance---it means that sometimes you need two sets of fact files, one for interpreted Formulog and one for compiled Formulog---but not a fundamental limitation; we plan to update the parser soon.
 
 All three extensions have passed the >200 Formulog evaluation test cases in the `formulog/src/test/resources/` directory.
-To run these unit tests, enter the `formulog/` directory and run this command (takes a little over an hour on our laptop):
+To run these unit tests, enter the `formulog/` directory and run this command (takes a little over an hour on an M2 MacBook Pro laptop):
 
 ```bash
 mvn -DtestCodeGen -DtestCodeGenEager package
@@ -305,7 +310,7 @@ Other classes specialize the skeleton Formulog C++ runtime to the program being 
 The skeleton Formulog C++ runtime can be found in the `formulog/src/main/resources/codegen/` directory.
 
 We expect that the amount of work needed to extend the compiler to support a new Formulog feature will typically be commensurate with the amount of work needed to extend the Formulog interpreter to handle that feature (an exception might be if Soufflé already supports some feature that Formulog does not, in which case extending the Formulog compiler might be easier than extending the interpreter).
-Thus, it should be lightweight to extend the compiler with a non-invasive feature (say, new primitive terms representing character literals).
+Thus, it should be lightweight to extend the compiler with a non-invasive feature (say, new primitive terms representing character literals, or new standard library functions).
 
 ### Eager Evaluation for the Formulog Interpreter
 
@@ -322,8 +327,8 @@ This abstract class is extended by classes for traditional semi-naive evaluation
 This design makes it easy to extend the Formulog interpreter with alternative evaluation methods.
 First, it would be simple to use different evaluation methods for different strata, by dynamically choosing which stratum evaluator class to use on a per-stratum basis.
 Second, it is relatively lightweight to add an alternative stratum-level evaluation method by extending the `AbstractStratumEvaluator` class.
-For example, using the `EagerStratumEvaluator` class as a guide, it should not be hard to implement a proof-of-concept evaluation method that explore the logical inference space with an order different than DFS (eager evaluation) and BFS (semi-naive evaluation); for example, by choosing which inferences to explore based on some notion of priority.
-This should require a few hundred lines of code, while reusing much of the Formulog codebase (>20k SLOC Java, excluding compiler).
+For example, using the `EagerStratumEvaluator` class as a guide, it should not be hard to implement a proof-of-concept evaluation method that explores the logical inference space with an order different from DFS (eager evaluation) and BFS (semi-naive evaluation); for example, by choosing which inferences to explore based on some notion of priority.
+This should require a few hundred lines of code, while reusing much of the Formulog codebase (>20k SLOC Java, excluding the compiler).
 
 ### Eager Evaluation for the Formulog Compiler 
 
@@ -387,7 +392,7 @@ clang-format -i ~/codegen/build/formulog.cpp
 
 ### Extending Our Experimental Infrastructure
 
-Finally, we believe that the experimental infrastructure in this artifact can be adapted and reused for future experiments (it itself builds on the artifact published in the OOPSLA'20 Formulog paper).
+Finally, we believe that the experimental infrastructure in this artifact can be adapted and reused for future experiments (it itself builds on the artifact published with the OOPSLA'20 Formulog paper).
 
 New Formulog case studies can be added by following the same structure as the existing case studies.
 To add a new Formulog case study---say, `foo`---create a directory `benchmarks/foo/` and place in it a file `bench.flg` with the case study code.
