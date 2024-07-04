@@ -152,6 +152,6 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /root/
 COPY benchmarks/ benchmarks/
 COPY scripts/ scripts/
-COPY results/ results/
+COPY paper-results/ paper-results/
 COPY lib_facts.zip benchmarks/scuba/lib_facts.zip
 ENV LD_LIBRARY_PATH=/usr/local/lib/
