@@ -268,12 +268,14 @@ The primary reusable components of our artifact are our contributions to the For
 
 1. a compiler from Formulog to off-the-shelf Soufflé;
 2. an eager evaluation mode for the Formulog interpreter; and
-3. an eager evaluation extension to the Formulog compiler.
+3. an eager evaluation extension for the Formulog compiler (via an extension to Soufflé).
 
-**All three extensions are feature complete---that is, they work with the full Formulog language, and should work with arbitrary Formulog programs (modulo any bugs, of course!).**
+**All three extensions are feature complete---that is, they work with the full Formulog language (with a small caveat), and should work with arbitrary Formulog programs (modulo any bugs, of course!).**
+The small caveat is that the handwritten C++ parser in the Formulog runtime is not currently able to parse the syntactic sugar for SMT formulas that occur in external fact files.
+This is a minor nuisance, but not a fundamental limitation; we plan to update the parser soon.
 
 All three extensions have passed the >200 Formulog evaluation test cases in the `formulog/src/test/resources/` directory.
-To run these unit tests, enter the `formulog` directory and run this command (takes a little over an hour on our laptop):
+To run these unit tests, enter the `formulog/` directory and run this command (takes a little over an hour on our laptop):
 
 ```bash
 mvn -DtestCodeGen -DtestCodeGenEager package
