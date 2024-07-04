@@ -272,7 +272,7 @@ The primary reusable components of our artifact are our contributions to the For
 
 **All three extensions are feature complete---that is, they work with the full Formulog language (with one small idiosyncrasy), and should work with arbitrary Formulog programs (modulo any bugs, of course!).**
 The small idiosyncrasy is that the handwritten C++ parser in the Formulog runtime is not currently able to parse the syntactic sugar for SMT formulas; this only affects the parsing of SMT formulas that occur in external fact files (i.e., the `.tsv` files containing the EDB that are loaded at runtime).
-This is a minor nuisance (e.g., it means that sometimes you need two sets of fact files, one for interpreted Formulog and one for compiled Formulog), but not a fundamental limitation; we plan to update the parser soon.
+This is a minor nuisance---it means that sometimes you need two sets of fact files, one for interpreted Formulog and one for compiled Formulog---but not a fundamental limitation; we plan to update the parser soon.
 
 All three extensions have passed the >200 Formulog evaluation test cases in the `formulog/src/test/resources/` directory.
 To run these unit tests, enter the `formulog/` directory and run this command (takes a little over an hour on our laptop):
