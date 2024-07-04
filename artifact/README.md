@@ -254,8 +254,8 @@ This should return output like this, for the trials that ended in an error (i.e.
 /home/ubuntu/phase2-results/raw/scuba__luindex__NA__scuba__09.txt:Command exited with non-zero status 1
 ```
 
-If you are particularly eager, you can also use the provided Jupyter notebook `scripts/analysis.ipynb` to analyze results (it does the same thing as `scripts/analysis.py`, but in an interactive way).
-This will have to be done on your local machine; you will need to move the `results.csv` file off the server, and then also use a Python environment with the following dependencies:
+Although there is no particular need to, you can also use the provided Jupyter notebook `scripts/analysis.ipynb` to analyze results (it does the same thing as `scripts/analysis.py`, but in an interactive way).
+This will have to be done on your local machine; you will need to move the `results.csv` file off the server (using `scp`), and then also use a Python environment with the following dependencies:
 
 - `notebook`
 - `matplotlib`
