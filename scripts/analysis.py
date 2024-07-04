@@ -6,7 +6,7 @@
 # This Jupyter Notebook analyzes our experimental data.
 # It calculates the numbers reported in the paper, and also generates the figures and tables.
 
-# In[3]:
+# In[1]:
 
 
 import os
@@ -15,16 +15,33 @@ import pandas as pd
 import seaborn as sns
 
 
+# In[2]:
+
+
+import __main__ as main
+
+if hasattr(main, "__file__"):
+    import sys
+    if len(sys.argv) != 3:
+        print(f"usage: {sys.argv[0]} CSV_FILE TIMEOUT")
+        exit(1)
+    results_file = sys.argv[1]
+    timeout = int(sys.argv[2])
+else:
+    results_file = "results.csv"
+    timeout = 1800
+
+
 # ## Data Wrangling
 
-# In[4]:
+# In[3]:
 
 
-data = pd.read_csv("results.csv")
+data = pd.read_csv(results_file)
 data.head()
 
 
-# In[5]:
+# In[4]:
 
 
 def get_time(row):
@@ -33,17 +50,17 @@ def get_time(row):
     else:
         val = row["execute_time"]
     if pd.isnull(val):
-        val = 1800  # timeout amount
+        val = timeout
     return val
 
 
-# In[6]:
+# In[5]:
 
 
 data["time"] = data.apply(get_time, axis=1)
 
 
-# In[7]:
+# In[6]:
 
 
 def get_cpu(row):
@@ -54,13 +71,13 @@ def get_cpu(row):
     return val
 
 
-# In[8]:
+# In[7]:
 
 
 data["cpu"] = data.apply(get_cpu, axis=1)
 
 
-# In[9]:
+# In[8]:
 
 
 def get_mem(row):
@@ -71,19 +88,19 @@ def get_mem(row):
     return val
 
 
-# In[10]:
+# In[9]:
 
 
 data["mem"] = data.apply(get_mem, axis=1)
 
 
-# In[11]:
+# In[10]:
 
 
 data
 
 
-# In[12]:
+# In[11]:
 
 
 # Rename modes according to what we use in the paper
@@ -102,7 +119,7 @@ new_mode_names = {
 data["mode"] = data["mode"].map(new_mode_names)
 
 
-# In[13]:
+# In[12]:
 
 
 medians = data.groupby(["case_study", "benchmark", "mode"]).agg(
@@ -118,7 +135,7 @@ medians = data.groupby(["case_study", "benchmark", "mode"]).agg(
 )
 
 
-# In[14]:
+# In[13]:
 
 
 medians.columns = [
@@ -133,13 +150,13 @@ medians.columns = [
 medians = medians.reset_index()
 
 
-# In[15]:
+# In[14]:
 
 
 medians
 
 
-# In[16]:
+# In[15]:
 
 
 def stats(df, process_row):
@@ -173,7 +190,7 @@ def widen(df, val):
     ).reset_index()
 
 
-# In[17]:
+# In[16]:
 
 
 times = widen(medians, "median_time")
@@ -184,7 +201,7 @@ mem = widen(medians, "median_mem")
 smt_cache_misses = widen(medians, "median_smt_cache_misses")
 
 
-# In[18]:
+# In[17]:
 
 
 def smt_heavy(df):
@@ -195,7 +212,7 @@ def smt_heavy(df):
 # 
 # The overall performance improvement relative to the baseline interpreter, using compilation and eager evaluation (as appropriate):
 
-# In[1]:
+# In[18]:
 
 
 def print_nice(msg):
@@ -606,17 +623,17 @@ speedup(times, "cbmc", baseline="compile-eager")
 def dminor(row):
     match row["benchmark"]:
         case "all-1":
-            return 1.5
+            return min(1.5, timeout)
         case "all-10":
-            return 68
+            return min(68, timeout)
         case "all-100":
-            return 1800
+            return timeout
 
 
 times["dminor"] = times.apply(dminor, axis=1)
 
 
-# In[56]:
+# In[51]:
 
 
 # Table 2
@@ -628,7 +645,7 @@ def make_table_row(row, acc):
             return "error"
         if pd.isnull(row[mode]):
             return "-"
-        if row[mode] == 1800:
+        if row[mode] == timeout:
             return "TO"
         else:
             t = f"{row[mode]:0.2f}"
