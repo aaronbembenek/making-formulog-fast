@@ -61,6 +61,7 @@ RUN apt-get update && apt-get install -y \
     && cd .. \
     && rm -rf z3 \
     # Install KLEE
+    && pip3 install wllvm \
     && git clone https://github.com/klee/klee-uclibc.git \
     && cd klee-uclibc \
     && git checkout 955d502 \
@@ -95,6 +96,7 @@ RUN apt-get update && apt-get install -y \
     libsqlite3-dev \
     mcpp \
     python3 \
+    python3-pip \
     sqlite3 \
     zlib1g-dev \
     wget \
@@ -147,7 +149,9 @@ RUN apt-get update && apt-get install -y \
     # Set up vim syntax highlighting
     && mkdir -p .vim/syntax .vim/ftdetect \
     && cp formulog/misc/flg.vim .vim/syntax/ \
-    && echo "au BufRead,BufNewFile *.flg set filetype=flg" > .vim/ftdetect/flg.vim
+    && echo "au BufRead,BufNewFile *.flg set filetype=flg" > .vim/ftdetect/flg.vim \
+    # Set up Python dependencies for analysis script
+    && pip3 install matplotlib pandas seaborn
 
 WORKDIR /root/
 COPY benchmarks/ benchmarks/
