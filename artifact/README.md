@@ -30,7 +30,7 @@ This artifact supports the following main claims:
 5. Our improvements to Formulog---compilation and (on SMT-heavy benchmarks) eager evaluation---help Formulog be competitive with previously published, non-Datalog implementations of a range of SMT-based program analyses.
 6. Eager evaluation can be added to existing Datalog infrastructure with relatively low amounts of new code (~500 SLOC in the Formulog interpreter, and ~500 SLOC in Soufflé).
 
-Claims 1-5 can be evaluated by either analyzing the data we collected in our experiments (in the directory `paper-results/regular/`) or by using the scripts we provide to rerun our experiments.
+Claims 1-5 can be evaluated by either analyzing the data we collected in our experiments (in the directory `paper-results/regular/` in the artifact) or by using the scripts we provide to rerun our experiments.
 In either case, the data analysis scripts we provide can calculate the statistics we report throughout the paper (including those in Table 1), and also generate Figure 2 (relevant to claim 1), Figure 6 (relevant to claims 2-4), and Table 2 (relevant to claims 1-5). 
 
 Claim 6 can be evaluated by running the utility `cloc` on the source directories contained in this artifact (we provide a script for this).
