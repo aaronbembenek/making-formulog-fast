@@ -204,7 +204,8 @@ Reviewers will need to ensure that they are using the server one-at-a-time, in o
 The server will have the same structure and content as the x86 Docker image.
 The script for running the full set of experiments is `scripts/full_eval.sh`.
 Please edit it (with `vim` or `nano`) to configure the experiment to your liking (e.g., number of trials, which benchmarks to run); see the script for more information on how to do this.
-When modified to run a single trial of every configuration, it takes XXX hours to complete.
+When modified to run a single trial of every configuration (and the default timeout of 30 minutes), it takes 12-14 hours to complete.
+By our calculations, if you were to run a single trial of every configuration with a timeout of 10 minutes, it would take 8-10 hours to complete.
 
 Once you have configured the experiment to your liking, run it with this command:
 
@@ -212,7 +213,7 @@ Once you have configured the experiment to your liking, run it with this command
 ./scripts/full_eval.sh phase2-results/raw
 ```
 
-This will populate the directory `phase2-results/raw/` with the raw output logs from the experiment ().
+This will populate the directory `phase2-results/raw/` with the raw output logs from the experiment (named according to the same convention as the Phase 1 results).
 To process and analyze the logs, run these commands (where `[TIMEOUT]` is the timeout used in the experiments, measured in seconds):
 
 ```bash
@@ -240,7 +241,7 @@ Once you unzip it, you can view the PDFs for Figures 4 and 6 in the paper.
 You can also use LaTeX to build Table 2.
 These figures and table should look similar to what is presented in the paper, and the statistics in `stats.txt` should also roughly match the results in the paper.
 
-The experimental results we report in the paper (including raw output logs) are in the directory `paper-results/regular/`; we have already run the data analysis script to generate figures and statistics for them.
+The experimental results we report in the paper (including raw output logs) are in the directory `paper-results/regular/`; we have already run the data analysis script to generate figures and statistics for them (which you can compare against).
 
 One note about our data analysis script: it assumes that the reference Scuba implementation fails with an error on the `luindex` benchmark (which is what happened in our experiments).
 To see whether this holds in your experiments, run this command (on the server):
