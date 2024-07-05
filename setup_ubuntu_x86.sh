@@ -61,8 +61,8 @@ sudo apt-get install -y \
 java_version=zulu7.56.0.11-ca-jdk7.0.352-linux_x64
 wget "https://cdn.azul.com/zulu/bin/${java_version}.tar.gz" -O java7.tar.gz
 tar -xf java7.tar.gz
-mv "$JAVA_VERSION" java7
-rm -rf java7.tar.gz
+mv "$java_version" java7
+rm java7.tar.gz
 
 # Install Z3
 git clone https://github.com/Z3Prover/z3.git
@@ -75,7 +75,6 @@ cmake -B build -S . -DCMAKE_BUILD_TYPE=Release -DZ3_BUILD_JAVA_BINDINGS=TRUE -DZ
 cmake --build build -j$(nproc)
 sudo cmake --build build --target install
 cd ..
-rm -rf z3
 
 # Install KLEE
 pip3 install wllvm
@@ -105,7 +104,6 @@ cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DTBB_TEST=OFF
 cmake --build build -j$(nproc)
 sudo cmake --install build
 cd ..
-rm -rf oneTBB
 
 # Install Boost
 wget https://boostorg.jfrog.io/artifactory/main/release/1.81.0/source/boost_1_81_0.tar.gz
@@ -115,7 +113,7 @@ cd boost_1_81_0
 ./b2 --with-program_options --with-filesystem --with-system
 sudo ./b2 install --with-program_options --with-filesystem --with-system
 cd ..
-rm -rf boost_1_81_0 boost_1_81_0.tar.gz
+rm boost_1_81_0.tar.gz
 
 # Install modified Souffle
 cd $root_dir
