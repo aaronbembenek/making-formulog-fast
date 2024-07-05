@@ -62,7 +62,7 @@ In the `vms/` directory, there are two archived Docker images, one for x86 and o
 Both images contain the software (and scripts) necessary for running the Formulog experiments in the paper; however, only the x86 one also supports running the reference implementations from Section 6.1 (e.g., KLEE and the original Scuba points-to analysis), as we were unable to get them to work on ARM.
 We recommend using whichever image matches your architecture (it might be possible to run the other image via emulation, but this will be quite slow).
 
-Make sure Docker is configured to give containers at least 4 CPUs and 8 GB RAM (more is better); to see what the current setting is, grep for "CPUs" and "Total Memory" in the output of the command `docker info`.
+Make sure Docker is configured to give containers at least 4 CPUs (more is better) and 8 GB RAM (more is better); to see what the current setting is, grep for "CPUs" and "Total Memory" in the output of the command `docker info`.
 If you are using Docker Desktop on Mac, you can increase the resource limits following [these instructions](https://docs.docker.com/desktop/settings/mac/#advanced).
 
 To load the x86 image and start an interactive Docker container based on it named `mff` (for "Making Formulog Fast"), run these commands:
@@ -87,7 +87,7 @@ Once you are in the Docker container, you can run a script that will run a set o
 ./scripts/kicktires.sh phase1-results
 ```
 
-On a 2023 M2 MacBook Pro with 10 vCPUS and 16 GB RAM this takes 16 minutes; XXX.
+On a 2023 M2 MacBook Pro with 10 vCPUS and 16 GB RAM this takes 16 minutes; on an Ubuntu server with 4 vCPUs and 8 GB RAM this takes XXX.
 
 The previous command will populate the directory `~/phase1-results` with output files from the experiment.
 Each file is named according to this convention:
@@ -107,6 +107,7 @@ The possible values for `[eval-mode]` are:
 - `compile`: use Formulog compiler to generate code performing semi-naive evaluation
 - `compile-reorder`: reorder each rule body so delta atom is first (the order implicitly used by eager evaluation), and then use Formulog compiler to generate code performing semi-naive evaluation
 - `compile-unbatched`: use Formulog compiler to generate code performing eager evaluation
+- `klee`, `cbmc`, `scuba`: the non-Datalog reference implementations described in Section 6.1 of the paper
 
 The raw output logs can be turned into a CSV using the script `scripts/process_logs.py`, and the CSV values can be summarized using the script `scripts/summarize_kicktires.py`:
 
@@ -134,13 +135,17 @@ symex/shuffle-4
 	interpret-unbatched 1.29s
 ```
 
+While this experiment uses a small set of relatively fast-running benchmarks, our results are generally in line with the paper's claims: compilation leads to speedups over interpretation; interpreting with eager evaluation can be faster than compiled semi-naive on SMT-heavy case studies (dminor and symex); compiled eager evaluation is faster than interpreted eager evaluation;
+
+XXX and compilation (with eager evaluation, as appropriate) can make Formulog competitive with reference implementations written in non-Datalog languages (i.e., the scuba and klee tools).
+
 This is the output we received on the Ubuntu server (using the x86 Docker image):
 
 ```
 XXX
 ```
 
-While this experiment uses a small set of relatively fast-running benchmarks, the results should be generally in line with the paper's claims: compilation leads to speedups over interpretation; interpreting with eager evaluation can be faster than compiled semi-naive on SMT-heavy case studies (dminor and symex); compiled eager evaluation is faster than interpreted eager evaluation; and compilation (with eager evaluation, as appropriate) makes Formulog competitive with reference implementations written in non-Datalog languages (i.e., the scuba and klee tools).
+These results are XXX
 
 ### Experiment #2: Count SLOC for Eager Evaluation Implementations
 
@@ -213,7 +218,9 @@ We recommend adjusting three dimensions:
 See the script for more information on how to change these settings.
 We do not recommend changing which modes are run (e.g., `compile`, `compile-unbatched`, ...), as our data analysis script can break if not all modes are present; furthermore, our data analysis script assumes at least one benchmark is run per case study.
 
-When modified to run a single trial of every configuration (and the default timeout of 30 minutes), the experiment takes 12-14 hours to complete.
+**Our recommendation is to run one trial of every benchmark, with a timeout of 30 minutes.**
+(This is the default setting, except for the number of trials.)
+This should take 12-14 hours to complete; if you have more time, you can increase the number of trials.
 By our calculations, if you were to run a single trial of every configuration with a timeout of 10 minutes, it would take 7-9 hours to complete.
 
 Once you have configured the experiment to your liking, run it with this command:
@@ -228,9 +235,10 @@ To process and analyze the logs, run these commands (where `[TIMEOUT]` is the ti
 ```bash
 cd phase2-results
 ../scripts/process_logs.py raw/* > results.csv
-../scripts/analysis.py results.csv [TIMEOUT]
+python3 ../scripts/analysis.py results.csv [TIMEOUT]
 ```
 
+(You can safely ignore the numpy warnings.)
 This command will create a file `stats.txt` with the statistics (about speedups, memory usage, etc.) we cite in the paper (we explicitly note where we have drawn statistics for Table 1).
 It will also populate a `figures/` directory with the figures we use in the paper.
 To view these figures, you will need to retrieve the directory from the server and open it on your local machine.
