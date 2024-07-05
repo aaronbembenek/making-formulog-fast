@@ -125,7 +125,7 @@ RUN apt-get update && apt-get install -y \
     && ./b2 --with-program_options --with-filesystem --with-system \
     && ./b2 install --with-program_options --with-filesystem --with-system \
     && cd .. \
-    && rm boost_1_81_0 boost_1_81_0.tar.gz \
+    && rm -rf boost_1_81_0 boost_1_81_0.tar.gz \
     # Install modified Souffle
     && cd \
     && git clone --branch eager-eval https://github.com/aaronbembenek/souffle.git \
