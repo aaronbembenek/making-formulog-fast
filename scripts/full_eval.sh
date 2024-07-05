@@ -11,6 +11,11 @@ output_dir=$(readlink -f -- "$1")
 script_dir=$(dirname -- "$(readlink -f -- "$0")")
 cd $script_dir/..
 
+# Modify these variables to adjust the duration of the experiments.
+ntrials=10
+timeout=1800 # seconds
+nthreads=40
+
 # The follow options are supported for the `--modes` argument`:
 #
 #   `interpret`: use Formulog interpreter in semi-naive mode
@@ -34,11 +39,6 @@ cd $script_dir/..
 #   `cbmc`: use CBMC (symex only)
 #
 #   `scuba`: use the reference Scuba implementation (scuba only)
-
-# Modify these variables to adjust the duration of the experiments.
-ntrials=10
-timeout=1800 # seconds
-nthreads=40
 
 # In what follows, comment out the benchmarks you do not want to run. For
 # example, to run the dminor case study on only the `all-10` benchmark you'd
