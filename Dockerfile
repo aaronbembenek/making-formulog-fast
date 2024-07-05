@@ -116,6 +116,7 @@ RUN apt-get update && apt-get install -y \
     && cmake --build build -j$(nproc) \
     && cmake --install build \
     && cd .. \
+    && rm -rf oneTBB \
     # Install Boost
     && wget https://boostorg.jfrog.io/artifactory/main/release/1.81.0/source/boost_1_81_0.tar.gz \
     && tar -xf boost_1_81_0.tar.gz \
@@ -124,7 +125,7 @@ RUN apt-get update && apt-get install -y \
     && ./b2 --with-program_options --with-filesystem --with-system \
     && ./b2 install --with-program_options --with-filesystem --with-system \
     && cd .. \
-    && rm boost_1_81_0.tar.gz \
+    && rm boost_1_81_0 boost_1_81_0.tar.gz \
     # Install modified Souffle
     && cd \
     && git clone --branch eager-eval https://github.com/aaronbembenek/souffle.git \
