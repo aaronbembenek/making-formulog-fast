@@ -48,7 +48,7 @@ The paper reviewers have requested that we include some limited scalability expe
 For the "kick-the-tires" phase of the artifact evaluation, a moderately powerful laptop (x86 or ARM) that can run Docker should be sufficient---say, a laptop with at least 4 vCPUs and 8 GB RAM.
 We have tested the "kick-the-tires" phase on these machines:
 - a 2023 M2 MacBook Pro with 10 vCPUs and 16 GB RAM
-- an x86 Ubuntu server with 4 vCPUs and 16 GB RAM 
+- an x86 Ubuntu server with 4 vCPUs and 8 GB RAM
 
 For the full evaluation of the artifact, a more powerful machine is necessary (~40 vCPUs, ~200 GB of memory).
 We will give artifact reviewers anonymous SSH access to an AWS EC2 with the correct specs.
@@ -134,13 +134,13 @@ symex/shuffle-4
 	interpret-unbatched 1.29s
 ```
 
-This is the output we received on the Linux server (using the x86 Docker image):
+This is the output we received on the Ubuntu server (using the x86 Docker image):
 
 ```
 XXX
 ```
 
-XXX summarize results
+While this experiment uses a small set of relatively fast-running benchmarks, the results should be generally in line with the paper's claims: compilation leads to speedups over interpretation; interpreting with eager evaluation can be faster than compiled semi-naive on SMT-heavy case studies (dminor and symex); compiled eager evaluation is faster than interpreted eager evaluation; and compilation (with eager evaluation, as appropriate) makes Formulog competitive with reference implementations written in non-Datalog languages (i.e., the scuba and klee tools).
 
 ### Experiment #2: Count SLOC for Eager Evaluation Implementations
 
@@ -148,7 +148,7 @@ In the paper, we claim that eager evaluation can be relatively easily added to e
 To demonstrate this, we have provided a script to count the number of lines of code needed to support eager evaluation in the Formulog interpreter and Soufflé code generator:
 
 ```
-./scripts/count_sloc
+./scripts/count_sloc.sh
 ```
 
 This should print out some statistics about lines of code using the `cloc` utility; in particular, that our eager evaluation implementation in the Formulog interpreter consists of 481 SLOC Java, and our extensions to Souffle required modifying 59 SLOC, adding 558 SLOC, and removing 2 SLOC (all in C++).
