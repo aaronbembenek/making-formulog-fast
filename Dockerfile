@@ -12,9 +12,7 @@ RUN apt-get update && apt-get install -y build-essential cmake git python3 \
     && git checkout f7c9c9ef72fde0e00ef9409e6c24456effb8b930 \
     && cmake -B build -S . -DCMAKE_BUILD_TYPE=Release \
     && cmake --build build -j$(nproc) \
-    && cmake --build build --target install \
-    && cd .. \
-    && rm -rf z3
+    && cmake --build build --target install
 
 FROM base AS build-amd64
 ARG DEBIAN_FRONTEND
@@ -47,7 +45,7 @@ RUN apt-get update && apt-get install -y \
     && wget "https://cdn.azul.com/zulu/bin/$JAVA_VERSION.tar.gz" -O java7.tar.gz \
     && tar -xf java7.tar.gz \
     && mv "$JAVA_VERSION" java7 \
-    && rm -rf java7.tar.gz \
+    && rm java7.tar.gz \
     # Install Z3
     && git clone https://github.com/Z3Prover/z3.git \
     && cd z3 \
@@ -59,7 +57,6 @@ RUN apt-get update && apt-get install -y \
     && cmake --build build -j$(nproc) \
     && cmake --build build --target install \
     && cd .. \
-    && rm -rf z3 \
     # Install KLEE
     && pip3 install wllvm \
     && git clone https://github.com/klee/klee-uclibc.git \
@@ -119,7 +116,6 @@ RUN apt-get update && apt-get install -y \
     && cmake --build build -j$(nproc) \
     && cmake --install build \
     && cd .. \
-    && rm -rf oneTBB \
     # Install Boost
     && wget https://boostorg.jfrog.io/artifactory/main/release/1.81.0/source/boost_1_81_0.tar.gz \
     && tar -xf boost_1_81_0.tar.gz \
@@ -128,7 +124,7 @@ RUN apt-get update && apt-get install -y \
     && ./b2 --with-program_options --with-filesystem --with-system \
     && ./b2 install --with-program_options --with-filesystem --with-system \
     && cd .. \
-    && rm -rf boost_1_81_0 boost_1_81_0.tar.gz \
+    && rm boost_1_81_0.tar.gz \
     # Install modified Souffle
     && cd \
     && git clone --branch eager-eval https://github.com/aaronbembenek/souffle.git \
