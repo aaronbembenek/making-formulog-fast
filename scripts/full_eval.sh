@@ -6,6 +6,8 @@ if [ -z "$1" ]; then
     exit 1
 fi
 
+mkdir -p "$1"
+output_dir=$(readlink -f -- "$1")
 script_dir=$(dirname -- "$(readlink -f -- "$0")")
 cd $script_dir/..
 
@@ -33,9 +35,10 @@ cd $script_dir/..
 #
 #   `scuba`: use the reference Scuba implementation (scuba only)
 
-# Modify these variables to shorten the length of the experiments.
+# Modify these variables to adjust the duration of the experiments.
 ntrials=10
 timeout=1800 # seconds
+nthreads=40
 
 # In what follows, comment out modes and benchmarks you do not want to run.
 #
@@ -73,9 +76,9 @@ dminor_bms=(
     benchmarks/dminor/bms/all-100
 )
 
-python3 -u scripts/bench.py --output-dir "$1" \
+python3 -u scripts/bench.py -o --output-dir "$output_dir" \
     --modes "${dminor_modes[@]}" \
-    --ntrials $ntrials -j 40 --smt-solver-modes push-pop \
+    --ntrials $ntrials -j $nthreads --smt-solver-modes push-pop \
     --record-work --small-tasks --timeout $timeout \
     --benchmark-dirs "${dminor_bms[@]}"
 
@@ -88,8 +91,8 @@ symex_modes=(
     interpret-unbatched
     compile-reorder
     compile-unbatched
-    cbmc
-    klee
+    klee # the primary reference implementation
+    cbmc # a secondary reference implementation
 )
 
 symex_bms=(
@@ -105,9 +108,9 @@ symex_bms=(
     benchmarks/symex/bms/sort-7
 )
 
-python3 -u scripts/bench.py -o --output-dir "$1" \
+python3 -u scripts/bench.py -o --output-dir "$output_dir" \
     --modes "${symex_modes[@]}" \
-    --ntrials $ntrials -j 40 --smt-solver-modes check-sat-assuming \
+    --ntrials $ntrials -j $nthreads --smt-solver-modes check-sat-assuming \
     --record-work --small-tasks --timeout $timeout \
     --benchmark-dirs "${symex_bms[@]}"
 
@@ -125,7 +128,7 @@ scuba_modes=(
     interpret-unbatched
     compile
     compile-unbatched
-    scuba
+    scuba # the reference implementation
 )
 
 scuba_bms=(
@@ -141,8 +144,8 @@ scuba_bms=(
     benchmarks/scuba/bms/xalan
 )
 
-python3 -u scripts/bench.py -o --output-dir "$1" \
+python3 -u scripts/bench.py -o --output-dir "$output_dir" \
     --modes "${scuba_modes[@]}" \
-    --ntrials $ntrials -j 40 --smt-solver-modes check-sat-assuming \
+    --ntrials $ntrials -j $nthreads --smt-solver-modes check-sat-assuming \
     --record-work --timeout $timeout \
     --benchmark-dirs "${scuba_bms[@]}"
