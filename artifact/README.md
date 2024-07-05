@@ -140,6 +140,8 @@ This is the output we received on the Linux server (using the x86 Docker image):
 XXX
 ```
 
+XXX summarize results
+
 ### Experiment #2: Count SLOC for Eager Evaluation Implementations
 
 In the paper, we claim that eager evaluation can be relatively easily added to existing Datalog infrastructure.
@@ -197,12 +199,12 @@ ssh ubuntu@[server-address]
 
 You will then be required to enter the password.
 We will disable SSH logging, so access is anonymous.
-Reviewers will need to ensure that they are using the server one-at-a-time.
+Reviewers will need to ensure that they are using the server one-at-a-time, in order that their experiments do not clash.
 
 The server will have the same structure and content as the x86 Docker image.
 The script for running the full set of experiments is `scripts/full_eval.sh`.
 Please edit it (with `vim` or `nano`) to configure the experiment to your liking (e.g., number of trials, which benchmarks to run); see the script for more information on how to do this.
-When modified to run a single trial of the default experiments, it takes XXX hours to complete.
+When modified to run a single trial of every configuration, it takes XXX hours to complete.
 
 Once you have configured the experiment to your liking, run it with this command:
 
@@ -210,7 +212,7 @@ Once you have configured the experiment to your liking, run it with this command
 ./scripts/full_eval.sh phase2-results/raw
 ```
 
-This will populate the directory `phase2-results/raw/` with the raw output logs from the experiment.
+This will populate the directory `phase2-results/raw/` with the raw output logs from the experiment ().
 To process and analyze the logs, run these commands (where `[TIMEOUT]` is the timeout used in the experiments, measured in seconds):
 
 ```bash
@@ -220,7 +222,7 @@ cd phase2-results
 ```
 
 This command will create a file `stats.txt` with the statistics (about speedups, memory usage, etc.) we cite in the paper (we explicitly note where we have drawn statistics for Table 1).
-It will also populate a `figures` directory with the figures we use in the paper.
+It will also populate a `figures/` directory with the figures we use in the paper.
 To view these figures, you will need to retrieve the directory from the server and open it on your local machine.
 First, in the `phase2-results/` directory on the server, archive the directory:
 
@@ -228,7 +230,7 @@ First, in the `phase2-results/` directory on the server, archive the directory:
 zip figures.zip -r figures/
 ```
 
-Then, from your local machine, retrieve the directory:
+Then, from your local machine, retrieve the archived directory:
 
 ```bash
 scp ubuntu@[server-address]:/home/ubuntu/phase2-results/figures.zip .
@@ -236,8 +238,11 @@ scp ubuntu@[server-address]:/home/ubuntu/phase2-results/figures.zip .
 
 Once you unzip it, you can view the PDFs for Figures 4 and 6 in the paper.
 You can also use LaTeX to build Table 2.
+These figures and table should look similar to what is presented in the paper, and the statistics in `stats.txt` should also roughly match the results in the paper.
 
-One note about our analysis script: it assumes that the reference Scuba implementation fails with an error on the `luindex` benchmark (which is what happened in our experiments).
+The experimental results we report in the paper (including raw output logs) are in the directory `paper-results/regular/`; we have already run the data analysis script to generate figures and statistics for them.
+
+One note about our data analysis script: it assumes that the reference Scuba implementation fails with an error on the `luindex` benchmark (which is what happened in our experiments).
 To see whether this holds in your experiments, run this command (on the server):
 
 ```bash
@@ -266,6 +271,8 @@ This will have to be done on your local machine; you will need to move the `resu
 - `matplotlib`
 - `pandas`
 - `seaborn`
+
+Our reusability guide has more information about digging deeper into our artifact and building on top of it.
 
 ## Reusability Guide
 

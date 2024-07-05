@@ -122,9 +122,9 @@ python3 -u scripts/bench.py -o --output-dir "$1" \
 # uses SMT solving sparingly.
 scuba_modes=(
     interpret
-    # interpret-unbatched
+    interpret-unbatched
     compile
-    # compile-unbatched
+    compile-unbatched
     scuba
 )
 
