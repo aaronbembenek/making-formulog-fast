@@ -74,6 +74,7 @@ RUN apt-get update && apt-get install -y \
     && cmake --build build -j$(nproc) \
     && cmake --build build --target install \
     && cmake --build build --target clean \
+    && cd .. \
     # Install CBMC
     && wget "https://github.com/diffblue/cbmc/releases/download/cbmc-5.85.0/ubuntu-22.04-cbmc-5.85.0-Linux.deb" -O cbmc.deb \
     && dpkg -i cbmc.deb \
@@ -110,6 +111,7 @@ RUN apt-get update && apt-get install -y \
     zip \
     clang-format \
     nano \
+    cloc \
     # Install TBB
     && git clone --depth 1 --branch v2021.13.0 https://github.com/oneapi-src/oneTBB.git \
     && cd oneTBB \
