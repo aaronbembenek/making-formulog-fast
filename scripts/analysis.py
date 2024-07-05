@@ -494,14 +494,14 @@ speedup(smt_heavy(smt_cache_misses), "compile-eager", baseline="compile")
 # In[41]:
 
 
-print_nice("SMT solving time speedup of interpret-eager over compile")
+print_nice("SMT solving time speedup of interpret-eager over compile on SMT-heavy benchmarks")
 speedup(smt_heavy(smt_times), "interpret-eager", baseline="compile")
 
 
 # In[42]:
 
 
-print_nice("SMT solving time speedup of compile-eager over compile")
+print_nice("SMT solving time speedup of compile-eager over compile on SMT-heavy benchmarks")
 speedup(smt_heavy(smt_times), "compile-eager", baseline="compile")
 
 

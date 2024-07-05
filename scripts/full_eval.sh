@@ -40,11 +40,21 @@ ntrials=10
 timeout=1800 # seconds
 nthreads=40
 
-# In what follows, comment out modes and benchmarks you do not want to run.
+# In what follows, comment out the benchmarks you do not want to run. For
+# example, to run the dminor case study on only the `all-10` benchmark you'd
+# modify the code below to be like this (ignoring the `#`s in the first column):
 #
-# For example, to run just the `compile-reorder` and `compile-unbatched` modes
-# on only the `all-10` benchmark (dminor), you'd modify the code below to be
-# like this (ignoring the `#`s in the first column):
+#    dminor_bms=(
+#        # benchmarks/dminor/bms/all-1
+#        benchmarks/dminor/bms/all-10
+#        # benchmarks/dminor/bms/all-100
+#    )
+#
+# Our data analysis script assumes that at least one benchmark is run per case
+# study.
+#
+# It is also possible to comment out modes that you do not want to run; however,
+# this can break our data analysis script, so we do not recommend it.
 #
 #    dminor_modes=(
 #        # interpret-reorder
@@ -53,11 +63,6 @@ nthreads=40
 #        compile-unbatched
 #    )
 #
-#    dminor_bms=(
-#        # benchmarks/dminor/bms/all-1
-#        benchmarks/dminor/bms/all-10
-#        # benchmarks/dminor/bms/all-100
-#    )
 
 ################################################################################
 # DMINOR
@@ -118,11 +123,6 @@ python3 -u scripts/bench.py -o --output-dir "$output_dir" \
 # SCUBA
 ################################################################################
 
-# We recommend not running the unbatched modes for this case study, as they are
-# particularly slow. As discussed in Section 5.3.1 in the paper, the
-# delta-atom-first rule body reordering strategy implicitly used by eager
-# evaluation is a bad ordering for this program. Furthermore, this case study
-# uses SMT solving sparingly.
 scuba_modes=(
     interpret
     interpret-unbatched

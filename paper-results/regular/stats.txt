@@ -558,7 +558,7 @@ max       18.249724
 dtype: float64
 
 ################################################################################
-SMT solving time speedup of interpret-eager over compile
+SMT solving time speedup of interpret-eager over compile on SMT-heavy benchmarks
 
 all:
 mean      1.316540
@@ -589,7 +589,7 @@ max       2.735215
 dtype: float64
 
 ################################################################################
-SMT solving time speedup of compile-eager over compile
+SMT solving time speedup of compile-eager over compile on SMT-heavy benchmarks
 
 all:
 mean      1.305949

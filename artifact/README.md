@@ -58,7 +58,7 @@ Reviewers will need to ensure that only one reviewer is running experiments on t
 ## Getting Started Guide (Phase 1)
 
 You should be able to run these experiments on a moderately powerful laptop that has Docker.
-In the `vms/` directory, there are two archived Docker images, one for x86 and one for ARM.
+In the `vms/` directory, there are two archived Docker images, one for x86 and one for ARM (e.g., M1+ Macs).
 Both images contain the software (and scripts) necessary for running the Formulog experiments in the paper; however, only the x86 one also supports running the reference implementations from Section 6.1 (e.g., KLEE and the original Scuba points-to analysis), as we were unable to get them to work on ARM.
 We recommend using whichever image matches your architecture (it might be possible to run the other image via emulation, but this will be quite slow).
 
@@ -203,9 +203,18 @@ Reviewers will need to ensure that they are using the server one-at-a-time, in o
 
 The server will have the same structure and content as the x86 Docker image.
 The script for running the full set of experiments is `scripts/full_eval.sh`.
-Please edit it (with `vim` or `nano`) to configure the experiment to your liking (e.g., number of trials, which benchmarks to run); see the script for more information on how to do this.
-When modified to run a single trial of every configuration (and the default timeout of 30 minutes), it takes 12-14 hours to complete.
-By our calculations, if you were to run a single trial of every configuration with a timeout of 10 minutes, it would take 8-10 hours to complete.
+Please edit it (with `vim` or `nano`) to configure the experiment to your liking.
+We recommend adjusting three dimensions:
+
+- the number of trials per configuration (default: 10)
+- the timeout per trial (default: 30 minutes)
+- the benchmarks to run (default: all)
+
+See the script for more information on how to change these settings.
+We do not recommend changing which modes are run (e.g., `compile`, `compile-unbatched`, ...), as our data analysis script can break if not all modes are present; furthermore, our data analysis script assumes at least one benchmark is run per case study.
+
+When modified to run a single trial of every configuration (and the default timeout of 30 minutes), the experiment takes 12-14 hours to complete.
+By our calculations, if you were to run a single trial of every configuration with a timeout of 10 minutes, it would take 7-9 hours to complete.
 
 Once you have configured the experiment to your liking, run it with this command:
 
