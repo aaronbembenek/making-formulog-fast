@@ -303,7 +303,7 @@ Relevant source directories:
 - `formulog/src/main/java/edu/harvard/seas/pl/formulog/codegen/ast/souffle/`
 - `formulog/src/main/resources/codegen/`
 
-The entry point for the compiler is the `CodeGen` class.
+The entry point for the compiler is the `codegen.CodeGen` class.
 Some classes in the `codegen` package translate specific Formulog language constructs; these classes have names like `[Construct]CodeGen`.
 For example, the class `TermCodeGen` defines how to translate a Formulog term (like a constructor or primitive).
 Other classes specialize the skeleton Formulog C++ runtime to the program being translated; these classes are named after the C++ file that they fill in (e.g., `SymbolHpp` and `SymbolCpp` for `Symbol.hpp` and `SymbolCpp`, respectively).
@@ -330,11 +330,11 @@ Second, it is relatively lightweight to add an alternative stratum-level evaluat
 For example, using the `EagerStratumEvaluator` class as a guide, it should not be hard to implement a proof-of-concept evaluation method that explores the logical inference space with an order different from DFS (eager evaluation) and BFS (semi-naive evaluation); for example, by choosing which inferences to explore based on some notion of priority.
 This should require a few hundred lines of code, while reusing much of the Formulog codebase (>20k SLOC Java, excluding the compiler).
 
-### Eager Evaluation for the Formulog Compiler 
+### Eager Evaluation for the Formulog and Soufflé Compilers
 
 We have extended the Soufflé code generator with preliminary support for eager evaluation.
-This extension to Soufflé works in a seamless way with our Formulog compiler.
-However, it can also be used to generate eager evaluation code for Soufflé programs in general (i.e., ones not resulting from Formulog compilation).
+This extension to Soufflé works in a seamless way with our Formulog compiler, and so Formulog programs can be compiled into code performing eager evaluation.
+However, it can also be used to generate eager evaluation code for Soufflé programs more generally (i.e., ones not resulting from Formulog compilation).
 This means that it can be reused by (the many) tools written in Soufflé, as well as tools that generate Soufflé code.
 
 See `souffle/README.md` ([rendered online](https://github.com/aaronbembenek/souffle/blob/eager-eval/README.md)) for additional information, such as usage and limitations.
