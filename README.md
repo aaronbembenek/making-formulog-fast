@@ -1,7 +1,7 @@
 # Artifact for "Making Formulog Fast"
 
 These are internal instructions for building the artifact.
-Instructions for reviewers are in [artifact/README.md](artifact/README.md).
+Instructions for reviewers are in [434/README.md](434/README.md).
 
 First, you need to download `lib_facts.zip` from the GitHub repo "Releases" to the base directory.
 
@@ -15,8 +15,8 @@ docker build --platform linux/arm64 -t mff-arm64 .
 To distribute the images, save them as archives:
 
 ```bash
-docker save mff-amd64 | gzip > artifact/vms/mff-amd64.tar.gz
-docker save mff-arm64 | gzip > artifact/vms/mff-arm64.tar.gz
+docker save mff-amd64 | gzip > 434/vms/mff-amd64.tar.gz
+docker save mff-arm64 | gzip > 434/vms/mff-arm64.tar.gz
 ```
 
 Saved images will be put in the "Releases" section of the GitHub repo.
