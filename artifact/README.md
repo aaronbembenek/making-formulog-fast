@@ -87,7 +87,7 @@ Once you are in the Docker container, you can run a script that will run a set o
 ./scripts/kicktires.sh phase1-results
 ```
 
-On a 2023 M2 MacBook Pro with 10 vCPUS and 16 GB RAM this takes 16 minutes; on an Ubuntu server with 4 vCPUs and 8 GB RAM this takes XXX.
+On a 2023 M2 MacBook Pro with 10 vCPUS and 16 GB RAM this takes 8 minutes; on an Ubuntu server with 4 vCPUs and 8 GB RAM this takes XXX.
 
 The previous command will populate the directory `~/phase1-results` with output files from the experiment.
 Each file is named according to this convention:
@@ -119,20 +119,19 @@ This is the summary we received on the M2 Mac laptop (note that the reference im
 
 ```
 dminor/all-10
-	compile-reorder 6.87s
-	compile-unbatched 1.54s
-	interpret-reorder 9.24s
-	interpret-unbatched 4.74s
+	compile-reorder 5.10s
+	compile-unbatched 1.58s
+	interpret-reorder 10.53s
+	interpret-unbatched 5.15s
 scuba/polyglot
 	scuba NA
-	compile-unbatched 329.59s
-	compile 115.07s
+	compile 112.47s
 symex/shuffle-4
 	klee NA
-	compile-reorder 1.47s
-	compile-unbatched 0.38s
-	interpret-reorder 2.10s
-	interpret-unbatched 1.29s
+	compile-reorder 1.56s
+	compile-unbatched 0.29s
+	interpret-reorder 1.86s
+	interpret-unbatched 1.34s
 ```
 
 While this experiment uses a small set of relatively fast-running benchmarks, our results are generally in line with the paper's claims: compilation leads to speedups over interpretation; interpreting with eager evaluation can be faster than compiled semi-naive on SMT-heavy case studies (dminor and symex); and compiled eager evaluation is faster than interpreted eager evaluation.
