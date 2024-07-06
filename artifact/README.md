@@ -432,10 +432,11 @@ cmake --build build -j
 ./build/flg --dump-idb
 ```
 
-To instead build and run the eager evaluation of this program, add the appropriate flag when configuring the build: 
+To instead build and run the eager evaluation of this program, add the appropriate flag when configuring the build (you'll also want to remove the `codegen/build/` folder if there is already one there):
 
 ```bash
 cd ~/codegen
+rm -rf build
 cmake -S . -B build -DFLG_EAGER_EVAL=On
 cmake --build build -j
 ./build/flg --dump-idb
