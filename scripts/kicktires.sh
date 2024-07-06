@@ -10,7 +10,7 @@ script_dir=$(dirname -- "$(readlink -f -- "$0")")
 cd $script_dir/..
 
 ncores=$(nproc)
-timeout=480 # seconds
+timeout=300 # seconds
 
 python3 -u scripts/bench.py --output-dir "$1" \
     --modes interpret-reorder interpret-unbatched compile-reorder compile-unbatched \
