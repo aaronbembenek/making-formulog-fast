@@ -87,7 +87,7 @@ Once you are in the Docker container, you can run a script that will run a set o
 ./scripts/kicktires.sh phase1-results
 ```
 
-On a 2023 M2 MacBook Pro with 10 vCPUS and 16 GB RAM this takes 8 minutes; on an Ubuntu server with 4 vCPUs and 8 GB RAM this takes XXX.
+On a 2023 M2 MacBook Pro with 10 vCPUS and 16 GB RAM this takes 8 minutes; on an Ubuntu server with 4 vCPUs and 8 GB RAM this takes 22 minutes.
 
 The previous command will populate the directory `~/phase1-results` with output files from the experiment.
 Each file is named according to this convention:
@@ -115,7 +115,7 @@ The raw output logs can be turned into a CSV using the script `scripts/process_l
 ./scripts/process_logs.py phase1-results/* | ./scripts/summarize_kicktires.py
 ```
 
-This is the summary we received on the M2 Mac laptop (note that the reference implementations `scuba` and `klee` did not run, since here we used the ARM Docker image):
+This is the summary we received on the M2 Mac laptop (note that the reference implementations Scuba and KLEE did not run, since here we used the ARM Docker image):
 
 ```
 dminor/all-10
@@ -139,10 +139,23 @@ While this experiment uses a small set of relatively fast-running benchmarks, ou
 This is the output we received on the resource-constrained Ubuntu server (using the x86 Docker image):
 
 ```
-XXX
+dminor/all-10
+	compile-reorder 11.82s
+	compile-unbatched 8.10s
+	interpret-reorder 23.36s
+	interpret-unbatched 16.93s
+scuba/polyglot
+	scuba 95.80s
+	compile 425.79s
+symex/shuffle-4
+	klee 56.60s
+	compile-reorder 1.32s
+	compile-unbatched 1.12s
+	interpret-reorder 4.32s
+	interpret-unbatched 3.91s
 ```
 
-Formulog does not perform as strongly here due to the low number of cores on the server (only 4 vCPUs); however, you can see that it still beats klee by a wide margin in the symex experiment.
+Formulog does not perform as strongly here due to the low number of cores on the server (only 4 vCPUs); however, you can see that it still beats KLEE by a wide margin in the symex experiment.
 
 ### Experiment #2: Count SLOC for Eager Evaluation Implementations
 
