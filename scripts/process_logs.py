@@ -61,11 +61,11 @@ data_pat = re.compile(
 def get_idb_size(data):
     size = 0
     lines = iter(data.split("\n"))
-    line = next(lines)
-    while line != "==================== RELATION SIZES ====================":
-        line = next(lines)
-    p = re.compile(r"[a-z][a-zA-Z0-9_]*: (\d+)$")
     try:
+        line = next(lines)
+        while line != "==================== RELATION SIZES ====================":
+            line = next(lines)
+        p = re.compile(r"[a-z][a-zA-Z0-9_]*: (\d+)$")
         while True:
             line = next(lines)
             m = p.match(line)
