@@ -135,17 +135,15 @@ symex/shuffle-4
 	interpret-unbatched 1.29s
 ```
 
-While this experiment uses a small set of relatively fast-running benchmarks, our results are generally in line with the paper's claims: compilation leads to speedups over interpretation; interpreting with eager evaluation can be faster than compiled semi-naive on SMT-heavy case studies (dminor and symex); compiled eager evaluation is faster than interpreted eager evaluation;
+While this experiment uses a small set of relatively fast-running benchmarks, our results are generally in line with the paper's claims: compilation leads to speedups over interpretation; interpreting with eager evaluation can be faster than compiled semi-naive on SMT-heavy case studies (dminor and symex); and compiled eager evaluation is faster than interpreted eager evaluation.
 
-XXX and compilation (with eager evaluation, as appropriate) can make Formulog competitive with reference implementations written in non-Datalog languages (i.e., the scuba and klee tools).
-
-This is the output we received on the Ubuntu server (using the x86 Docker image):
+This is the output we received on the resource-constrained Ubuntu server (using the x86 Docker image):
 
 ```
 XXX
 ```
 
-These results are XXX
+Formulog does not perform as strongly here due to the low number of cores on the server (only 4 vCPUs); however, you can see that it still beats klee by a wide margin in the symex experiment.
 
 ### Experiment #2: Count SLOC for Eager Evaluation Implementations
 
@@ -220,7 +218,7 @@ We do not recommend changing which modes are run (e.g., `compile`, `compile-unba
 
 **Our recommendation is to run one trial of every benchmark, with a timeout of 30 minutes.**
 (This is the default setting, except for the number of trials.)
-This should take 12-14 hours to complete; if you have more time, you can increase the number of trials.
+This should take 12-14 hours to complete; if you have more time at your disposal, you can increase the number of trials.
 By our calculations, if you were to run a single trial of every configuration with a timeout of 10 minutes, it would take 7-9 hours to complete.
 
 Once you have configured the experiment to your liking, run it with this command:
@@ -230,12 +228,12 @@ Once you have configured the experiment to your liking, run it with this command
 ```
 
 This will populate the directory `phase2-results/raw/` with the raw output logs from the experiment (named according to the same convention as the Phase 1 results).
-To process and analyze the logs, run these commands (where `[TIMEOUT]` is the timeout used in the experiments, measured in seconds):
+To process and analyze the logs, run these commands (where `[timeout]` is the timeout used in the experiments, measured in seconds):
 
 ```bash
 cd phase2-results
 ../scripts/process_logs.py raw/* > results.csv
-python3 ../scripts/analysis.py results.csv [TIMEOUT]
+python3 ../scripts/analysis.py results.csv [timeout] > stats.txt
 ```
 
 (You can safely ignore the numpy warnings.)
