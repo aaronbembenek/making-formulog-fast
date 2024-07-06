@@ -104,7 +104,6 @@ cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DTBB_TEST=OFF
 cmake --build build -j$(nproc)
 sudo cmake --install build
 cd ..
-rm -rf oneTBB
 
 # Install Boost
 wget https://boostorg.jfrog.io/artifactory/main/release/1.81.0/source/boost_1_81_0.tar.gz
@@ -114,7 +113,7 @@ cd boost_1_81_0
 ./b2 --with-program_options --with-filesystem --with-system
 sudo ./b2 install --with-program_options --with-filesystem --with-system
 cd ..
-rm -rf boost_1_81_0 boost_1_81_0.tar.gz
+rm boost_1_81_0.tar.gz
 
 # Install modified Souffle
 cd $root_dir
