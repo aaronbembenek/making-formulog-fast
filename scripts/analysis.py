@@ -701,7 +701,7 @@ s.append(r"\begin{document}")
 s.append(r"\begin{tabular}{ll rr rrr rr}")
 s.append(r"\toprule")
 s.append(
-    r"& & \multicolumn{2}{c}{Formulog interp. (s)} && \multicolumn{2}{c}{Formulog compile (s)} && Reference \\\\"
+    r"& & \multicolumn{2}{c}{Formulog interp. (s)} && \multicolumn{2}{c}{Formulog compile (s)} && Reference \\"
 )
 s.append(r"\cline{3-4} \cline{6-7}")
 s.append(
