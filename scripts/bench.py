@@ -98,22 +98,23 @@ def run(
             for solver_mode in solver_modes:
                 short_solver_mode = short_solver_modes[solver_mode]
                 name_intermediate = f"{name_prefix}__{short_solver_mode}__{mode}"
-                for trial in range(first_trial, first_trial + ntrials):
-                    name = f"{name_intermediate}__{trial:0>2d}.txt"
-                    output_file = os.path.join(output_dir, name)
-                    print(case_study, benchmark, solver_mode, mode, trial)
-                    run_one(
-                        output_file,
-                        bench_dir,
-                        mode,
-                        solver_mode,
-                        timeout,
-                        script_dir,
-                        parallelism,
-                        detailed_smt_stats,
-                        record_work,
-                        small_tasks,
-                    )
+                for nthreads in parallelism:
+                    for trial in range(first_trial, first_trial + ntrials):
+                        name = f"{name_intermediate}__{nthreads:0>2d}__{trial:0>2d}.txt"
+                        output_file = os.path.join(output_dir, name)
+                        print(case_study, benchmark, solver_mode, mode, nthreads, trial)
+                        run_one(
+                            output_file,
+                            bench_dir,
+                            mode,
+                            solver_mode,
+                            timeout,
+                            script_dir,
+                            nthreads,
+                            detailed_smt_stats,
+                            record_work,
+                            small_tasks,
+                        )
 
 
 def main():
@@ -156,7 +157,12 @@ def main():
         help="proceed even if output directory exists",
     )
     parser.add_argument(
-        "-j", "--parallelism", type=int, default=40, help="number of threads to use"
+        "-j",
+        "--parallelism",
+        type=int,
+        nargs="+",
+        default=40,
+        help="number of threads to use",
     )
     parser.add_argument(
         "--smt-solver-modes",

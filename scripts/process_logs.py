@@ -32,6 +32,7 @@ schema = [
     "smt_cache_misses",
     "smt_cache_clears",
     "work",
+    "parallelism",
 ]
 
 benchmark_pat = re.compile(r"^LOG:Benchmark directory: (.*)\n", re.MULTILINE)
@@ -51,6 +52,7 @@ pat_dict = {
     "smt_cache_clears": re.compile(
         r"^(?:SMT cache clears:|\[CSA CACHE CLEARS\]) (.*)\n", re.MULTILINE
     ),
+    "parallelism": re.compile(r"^LOG:Parallelism: (.*)\n", re.MULTILINE)
 }
 
 data_pat = re.compile(
