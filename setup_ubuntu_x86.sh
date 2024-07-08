@@ -69,11 +69,13 @@ git clone https://github.com/Z3Prover/z3.git
 cd z3
 git checkout f7c9c9ef72fde0e00ef9409e6c24456effb8b930
 git apply ../z3.patch
-export JAVA_HOME=$script_dir/../lib/java7/
-export PATH="$JAVA_HOME/bin:$PATH"
-cmake -B build -S . -DCMAKE_BUILD_TYPE=Release -DZ3_BUILD_JAVA_BINDINGS=TRUE -DZ3_INSTALL_JAVA_BINDINGS=TRUE
-cmake --build build -j$(nproc)
-sudo cmake --build build --target install
+(
+    export JAVA_HOME=$script_dir/../lib/java7/
+    export PATH="$JAVA_HOME/bin:$PATH"
+    cmake -B build -S . -DCMAKE_BUILD_TYPE=Release -DZ3_BUILD_JAVA_BINDINGS=TRUE -DZ3_INSTALL_JAVA_BINDINGS=TRUE
+    cmake --build build -j$(nproc)
+    sudo cmake --build build --target install
+)
 cd ..
 
 # Install KLEE
@@ -139,7 +141,7 @@ cd ..
 # Set up vim syntax highlighting
 mkdir -p .vim/syntax .vim/ftdetect
 cp formulog/misc/flg.vim .vim/syntax/
-echo "au BufRead,BufNewFile *.flg set filetype=flg" > .vim/ftdetect/flg.vim
+echo "au BufRead,BufNewFile *.flg set filetype=flg" >.vim/ftdetect/flg.vim
 # Set up Python dependencies for analysis script
 pip3 install matplotlib pandas seaborn
 
