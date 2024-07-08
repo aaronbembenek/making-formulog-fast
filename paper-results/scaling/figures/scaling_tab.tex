@@ -1,0 +1,27 @@
+\documentclass{article}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{color}
+\usepackage{booktabs}
+\usepackage{pdflscape}
+\definecolor{Gray}{gray}{0.9}
+\begin{document}
+\scriptsize
+\begin{landscape}
+\begin{tabular}{llrrrrrrrrrrrrrrr}
+\toprule
+& & \multicolumn{7}{c}{Semi-naive evaluation} & & \multicolumn{7}{c}{Eager evaluation} \\
+\cline{3-9} \cline{11-17}
+& & \multicolumn{7}{c}{\# threads} & & \multicolumn{7}{c}{\# threads}\\
+Case study & Benchmark& 1 & 8 & 16 & 24 & 32 & 40 & 48& & 1 & 8 & 16 & 24 & 32 & 40 & 48\\
+\midrule
+dminor & all-100 & 1430.93 & 195.48 & 116.16 & 93.48 & 87.41 & 90.79 & 98.26 & & 1379.57 & 167.95 & 90.97 & 67.52 & {\bf 65.89} & 66.20 & 67.56\\
+symex & interp-6 & 865.12 & 464.94 & 466.71 & 471.62 & 466.24 & 465.81 & 486.17 & & 199.82 & 27.73 & 16.38 & 13.99 & 13.62 & 13.73 & {\bf 13.17}\\
+symex & numbrix-sat & {\bf 4.60} & 16.06 & 23.47 & 26.67 & 9.65 & 9.21 & 22.66 & & 5.19 & 12.05 & 17.02 & 17.13 & 19.66 & 23.93 & 21.30\\
+symex & prioqueue-6 & 232.24 & 93.46 & 96.37 & 98.14 & 100.18 & 103.41 & 113.88 & & 151.35 & 27.98 & 22.66 & 21.38 & 20.15 & 19.35 & {\bf 18.76}\\
+symex & shuffle-5 & 22.58 & 4.38 & 3.78 & 3.80 & 3.91 & 4.05 & 4.36 & & 22.45 & 3.33 & 2.30 & 2.05 & {\bf 1.91} & 1.92 & 2.00\\
+symex & sort-7 & 782.74 & 122.57 & 81.70 & 71.40 & 71.23 & {\bf 69.51} & 70.74 & & 592.49 & 113.37 & 93.42 & 86.28 & 81.58 & 78.59 & 75.36\\
+\bottomrule
+\end{tabular}
+\end{landscape}
+\end{document}
