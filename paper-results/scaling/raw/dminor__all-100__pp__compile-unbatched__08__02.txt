@@ -1,0 +1,138 @@
+LOG:Benchmark directory: /home/ubuntu/benchmarks/dminor/bms/all-100
+LOG:Timeout: 1800
+fatal: not a git repository (or any of the parent directories): .git
+LOG:Eval repo commit:
+LOG:Formulog commit: 9ab17fd
+LOG:Z3 version: Z3 version 4.12.2 - 64 bit - build hashcode f7c9c9ef72fde0e00ef9409e6c24456effb8b930
+LOG:Java version start
+openjdk version "17.0.11" 2024-04-16
+OpenJDK Runtime Environment (build 17.0.11+9-Ubuntu-122.04.1)
+OpenJDK 64-Bit Server VM (build 17.0.11+9-Ubuntu-122.04.1, mixed mode, sharing)
+
+LOG:Java version end
+LOG:Mode: compile-unbatched
+LOG:Solver mode: push-pop
+LOG:Parallelism: 8
+LOG:Souffle info start
+----------------------------------------------------------------------------
+Version: 290d63840
+Word size: 32 bits
+Options enabled: ffi openmp ncurses sqlite zlib
+----------------------------------------------------------------------------
+Copyright (c) 2016-22 The Souffle Developers.
+Copyright (c) 2013-16 Oracle and/or its affiliates.
+All rights reserved.
+============================================================================
+
+LOG:Souffle info end
+LOG:Execute command: timeout 1800 /usr/bin/time -f LOG:EXECUTE;ELAPSED=%es;USER=%Us;SYSTEM=%Ss;CPU=%P;MEM=%Mkb /home/ubuntu/benchmarks/dminor/bms/all-100/../../codegen/build/flg --dump-sizes --smt-stats --smt-solver-mode=push-pop -j 8 -D /home/ubuntu/benchmarks/dminor/bms/all-100/out -F /home/ubuntu/benchmarks/dminor/bms/all-100/facts --no-smt-double-check
+Parsing...
+Finished parsing (0.065s)
+Evaluating...
+Finished evaluating (168.665s)
+
+==================== SMT STATS ====================
+SMT calls: 95749
+SMT time (ms): 1.30593e+06
+SMT wait time (ms): 3685.22
+SMT cache hits: 153658
+SMT cache misses: 431836
+SMT cache clears: 0
+SMT calls per solver: 10736,9517,24448,11502,10452,10837,9348,8909
+SMT time per solver (ms): 163728,164367,161384,163543,163966,162246,164167,162524
+
+==================== RELATION SIZES ====================
+labeled_pure: 200
+type_indicator_func: 200
+func_sig: 2700
+type_alias: 1504
+explore_exp: 14000
+explore_exps: 2000
+explore_typ: 9800
+sup_23_0: 2700
+sup_39_0: 1504
+size_change_graph: 300
+check: 103147
+env_wf: 32413
+input_check_bbb: 105747
+input_env_wf_b: 32913
+input_subtype_bbb: 93549
+input_synth_app_helper_bbbbbf: 25001
+input_synth_bbf: 103059
+input_synth_entity_helper_bbf: 4701
+input_synth_list_helper_bbf: 1101
+input_type_wf_bb: 122640
+subtype: 93549
+sup_41_0: 6400
+sup_42_0: 96847
+sup_42_1: 94447
+sup_43_0: 1600
+sup_43_1: 1600
+sup_43_2: 1600
+sup_44_0: 900
+sup_44_1: 900
+sup_45_0: 5000
+sup_46_0: 24413
+sup_47_0: 22800
+sup_48_0: 6701
+sup_49_0: 27710
+sup_50_0: 12704
+sup_51_0: 23312
+sup_52_0: 3909
+sup_53_0: 100
+sup_53_1: 100
+sup_54_0: 5414
+sup_55_0: 202
+sup_56_0: 1101
+sup_56_1: 1101
+sup_57_0: 0
+sup_57_1: 0
+sup_57_2: 0
+sup_58_0: 603
+sup_58_1: 603
+sup_59_0: 33810
+sup_60_0: 700
+sup_61_0: 500
+sup_61_1: 500
+sup_61_2: 500
+sup_62_0: 11100
+sup_62_1: 11100
+sup_63_0: 0
+sup_64_0: 700
+sup_65_0: 700
+sup_65_1: 700
+sup_65_2: 700
+sup_66_0: 21016
+sup_66_1: 20216
+sup_67_0: 600
+sup_67_1: 600
+sup_67_2: 600
+sup_68_0: 500
+sup_68_1: 500
+sup_69_0: 300
+sup_70_0: 20704
+sup_70_1: 20704
+sup_71_0: 1600
+sup_71_1: 1600
+sup_72_0: 93549
+sup_73_0: 28512
+sup_75_0: 4400
+sup_76_0: 0
+sup_76_1: 0
+sup_79_0: 14100
+sup_79_1: 14100
+sup_79_2: 14100
+sup_81_0: 3800
+sup_81_1: 3800
+synth: 100659
+synth_app_helper: 25001
+synth_entity_helper: 4701
+synth_list_helper: 1101
+type_wf: 121340
+may_not_terminate: 0
+type_not_ok: 0
+func_not_ok: 0
+prog_ok: 1
+[WORK] 12921277
+LOG:EXECUTE;ELAPSED=168.82s;USER=1347.84s;SYSTEM=6.12s;CPU=802%;MEM=626096kb
+LOG:Success!
