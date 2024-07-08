@@ -1,0 +1,821 @@
+LOG:Benchmark directory: /home/ubuntu/benchmarks/symex/bms/interp-6
+LOG:Timeout: 1800
+fatal: not a git repository (or any of the parent directories): .git
+LOG:Eval repo commit:
+LOG:Formulog commit: 9ab17fd
+LOG:Z3 version: Z3 version 4.12.2 - 64 bit - build hashcode f7c9c9ef72fde0e00ef9409e6c24456effb8b930
+LOG:Java version start
+openjdk version "17.0.11" 2024-04-16
+OpenJDK Runtime Environment (build 17.0.11+9-Ubuntu-122.04.1)
+OpenJDK 64-Bit Server VM (build 17.0.11+9-Ubuntu-122.04.1, mixed mode, sharing)
+
+LOG:Java version end
+LOG:Mode: compile-unbatched
+LOG:Solver mode: check-sat-assuming
+LOG:Parallelism: 48
+LOG:Souffle info start
+----------------------------------------------------------------------------
+Version: 290d63840
+Word size: 32 bits
+Options enabled: ffi openmp ncurses sqlite zlib
+----------------------------------------------------------------------------
+Copyright (c) 2016-22 The Souffle Developers.
+Copyright (c) 2013-16 Oracle and/or its affiliates.
+All rights reserved.
+============================================================================
+
+LOG:Souffle info end
+LOG:Transpile command: /usr/bin/time -f LOG:TRANSPILE;ELAPSED=%es;USER=%Us;SYSTEM=%Ss;CPU=%P;MEM=%Mkb java -Xmx180g -Xss256m -DsmtTaskSize=1 -DtaskSize=8 -DmemoizeThreshold=0 -DsmtDoubleCheckUnknowns=false -jar /home/ubuntu/formulog/target/formulog-0.7.0-SNAPSHOT-jar-with-dependencies.jar bench.flg --dump-sizes --smt-stats --smt-solver-mode=check-sat-assuming -j 48 -D /home/ubuntu/benchmarks/symex/bms/interp-6/out -F /home/ubuntu/benchmarks/symex/bms/interp-6/facts -c --codegen-dir /home/ubuntu/benchmarks/symex/bms/interp-6/../../codegen
+LOG:TRANSPILE;ELAPSED=0.83s;USER=4.87s;SYSTEM=0.41s;CPU=636%;MEM=340132kb
+LOG:Compile command: /usr/bin/time -f LOG:COMPILE;ELAPSED=%es;USER=%Us;SYSTEM=%Ss;CPU=%P;MEM=%Mkb bash -c cmake -B /home/ubuntu/benchmarks/symex/bms/interp-6/../../codegen/build -S /home/ubuntu/benchmarks/symex/bms/interp-6/../../codegen -DCMAKE_BUILD_TYPE=Release     -DFLG_EAGER_EVAL=On -DFLG_RECORD_WORK=On && cmake --build /home/ubuntu/benchmarks/symex/bms/interp-6/../../codegen/build -j
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found Boost: /usr/local/lib/cmake/Boost-1.81.0/BoostConfig.cmake (found suitable version "1.81.0", minimum required is "1.81") found components: filesystem system program_options 
+-- Found OpenMP_C: -fopenmp (found version "4.5") 
+-- Found OpenMP_CXX: -fopenmp (found version "4.5") 
+-- Found OpenMP: TRUE (found version "4.5")  
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/ubuntu/benchmarks/symex/codegen/build
+[  7%] Generating formulog.cpp
+Warning: Variable x43 only occurs once in file formulog.dl at line 699
+	stepped_(Instr, St, x43, P).
+---------------------^--------
+Warning: Variable x33 only occurs once in file formulog.dl at line 820
+	stepped_(Instr, St, x33, P).
+---------------------^--------
+Warning: Variable D only occurs once in file formulog.dl at line 847
+input_has_value_bbf_(Y, St) :- sup_28_0_(D, Instr, Next, P, St, Y, Z).
+-----------------------------------------^-----------------------------
+Warning: Variable Instr only occurs once in file formulog.dl at line 847
+input_has_value_bbf_(Y, St) :- sup_28_0_(D, Instr, Next, P, St, Y, Z).
+--------------------------------------------^--------------------------
+Warning: Variable Next only occurs once in file formulog.dl at line 847
+input_has_value_bbf_(Y, St) :- sup_28_0_(D, Instr, Next, P, St, Y, Z).
+---------------------------------------------------^-------------------
+Warning: Variable P only occurs once in file formulog.dl at line 847
+input_has_value_bbf_(Y, St) :- sup_28_0_(D, Instr, Next, P, St, Y, Z).
+---------------------------------------------------------^-------------
+Warning: Variable Z only occurs once in file formulog.dl at line 847
+input_has_value_bbf_(Y, St) :- sup_28_0_(D, Instr, Next, P, St, Y, Z).
+-------------------------------------------------------------------^---
+Warning: Variable D only occurs once in file formulog.dl at line 848
+input_has_value_bbf_(Y, St) :- sup_3_0_(D, Instr, Next, P, St, Y).
+----------------------------------------^--------------------------
+Warning: Variable Instr only occurs once in file formulog.dl at line 848
+input_has_value_bbf_(Y, St) :- sup_3_0_(D, Instr, Next, P, St, Y).
+-------------------------------------------^-----------------------
+Warning: Variable Next only occurs once in file formulog.dl at line 848
+input_has_value_bbf_(Y, St) :- sup_3_0_(D, Instr, Next, P, St, Y).
+--------------------------------------------------^----------------
+Warning: Variable P only occurs once in file formulog.dl at line 848
+input_has_value_bbf_(Y, St) :- sup_3_0_(D, Instr, Next, P, St, Y).
+--------------------------------------------------------^----------
+Warning: Variable D only occurs once in file formulog.dl at line 849
+input_has_value_bbf_(Y, St) :- sup_29_0_(D, Instr, Next, P, St, Y, Z).
+-----------------------------------------^-----------------------------
+Warning: Variable Instr only occurs once in file formulog.dl at line 849
+input_has_value_bbf_(Y, St) :- sup_29_0_(D, Instr, Next, P, St, Y, Z).
+--------------------------------------------^--------------------------
+Warning: Variable Next only occurs once in file formulog.dl at line 849
+input_has_value_bbf_(Y, St) :- sup_29_0_(D, Instr, Next, P, St, Y, Z).
+---------------------------------------------------^-------------------
+Warning: Variable P only occurs once in file formulog.dl at line 849
+input_has_value_bbf_(Y, St) :- sup_29_0_(D, Instr, Next, P, St, Y, Z).
+---------------------------------------------------------^-------------
+Warning: Variable Z only occurs once in file formulog.dl at line 849
+input_has_value_bbf_(Y, St) :- sup_29_0_(D, Instr, Next, P, St, Y, Z).
+-------------------------------------------------------------------^---
+Warning: Variable D only occurs once in file formulog.dl at line 850
+input_has_value_bbf_(Op1, St) :- sup_6_1_(D, Instr, Next, Op1, Op2, P, St, Vcond).
+------------------------------------------^----------------------------------------
+Warning: Variable Instr only occurs once in file formulog.dl at line 850
+input_has_value_bbf_(Op1, St) :- sup_6_1_(D, Instr, Next, Op1, Op2, P, St, Vcond).
+---------------------------------------------^-------------------------------------
+Warning: Variable Next only occurs once in file formulog.dl at line 850
+input_has_value_bbf_(Op1, St) :- sup_6_1_(D, Instr, Next, Op1, Op2, P, St, Vcond).
+----------------------------------------------------^------------------------------
+Warning: Variable Op2 only occurs once in file formulog.dl at line 850
+input_has_value_bbf_(Op1, St) :- sup_6_1_(D, Instr, Next, Op1, Op2, P, St, Vcond).
+---------------------------------------------------------------^-------------------
+Warning: Variable P only occurs once in file formulog.dl at line 850
+input_has_value_bbf_(Op1, St) :- sup_6_1_(D, Instr, Next, Op1, Op2, P, St, Vcond).
+--------------------------------------------------------------------^--------------
+Warning: Variable Vcond only occurs once in file formulog.dl at line 850
+input_has_value_bbf_(Op1, St) :- sup_6_1_(D, Instr, Next, Op1, Op2, P, St, Vcond).
+---------------------------------------------------------------------------^-------
+Warning: Variable D only occurs once in file formulog.dl at line 851
+input_has_value_bbf_(Y, St) :- sup_31_0_(D, Instr, Next, P, St, Y, Z).
+-----------------------------------------^-----------------------------
+Warning: Variable Instr only occurs once in file formulog.dl at line 851
+input_has_value_bbf_(Y, St) :- sup_31_0_(D, Instr, Next, P, St, Y, Z).
+--------------------------------------------^--------------------------
+Warning: Variable Next only occurs once in file formulog.dl at line 851
+input_has_value_bbf_(Y, St) :- sup_31_0_(D, Instr, Next, P, St, Y, Z).
+---------------------------------------------------^-------------------
+Warning: Variable P only occurs once in file formulog.dl at line 851
+input_has_value_bbf_(Y, St) :- sup_31_0_(D, Instr, Next, P, St, Y, Z).
+---------------------------------------------------------^-------------
+Warning: Variable Z only occurs once in file formulog.dl at line 851
+input_has_value_bbf_(Y, St) :- sup_31_0_(D, Instr, Next, P, St, Y, Z).
+-------------------------------------------------------------------^---
+Warning: Variable D only occurs once in file formulog.dl at line 852
+input_has_value_bbf_(X, St) :- sup_20_0_(D, Next, P, St, X).
+-----------------------------------------^-------------------
+Warning: Variable Next only occurs once in file formulog.dl at line 852
+input_has_value_bbf_(X, St) :- sup_20_0_(D, Next, P, St, X).
+--------------------------------------------^----------------
+Warning: Variable P only occurs once in file formulog.dl at line 852
+input_has_value_bbf_(X, St) :- sup_20_0_(D, Next, P, St, X).
+--------------------------------------------------^----------
+Warning: Variable D only occurs once in file formulog.dl at line 853
+input_has_value_bbf_(X, St) :- sup_18_0_(D, Instr, Next, P, St, X).
+-----------------------------------------^--------------------------
+Warning: Variable Instr only occurs once in file formulog.dl at line 853
+input_has_value_bbf_(X, St) :- sup_18_0_(D, Instr, Next, P, St, X).
+--------------------------------------------^-----------------------
+Warning: Variable Next only occurs once in file formulog.dl at line 853
+input_has_value_bbf_(X, St) :- sup_18_0_(D, Instr, Next, P, St, X).
+---------------------------------------------------^----------------
+Warning: Variable P only occurs once in file formulog.dl at line 853
+input_has_value_bbf_(X, St) :- sup_18_0_(D, Instr, Next, P, St, X).
+---------------------------------------------------------^----------
+Warning: Variable Instr only occurs once in file formulog.dl at line 854
+input_has_value_bbf_(X, St) :- sup_0_0_(Instr, P, St, X).
+----------------------------------------^-----------------
+Warning: Variable P only occurs once in file formulog.dl at line 854
+input_has_value_bbf_(X, St) :- sup_0_0_(Instr, P, St, X).
+-----------------------------------------------^----------
+Warning: Variable D only occurs once in file formulog.dl at line 855
+input_has_value_bbf_(Y, St) :- sup_12_0_(D, Instr, Next, P, St, Y, Z).
+-----------------------------------------^-----------------------------
+Warning: Variable Instr only occurs once in file formulog.dl at line 855
+input_has_value_bbf_(Y, St) :- sup_12_0_(D, Instr, Next, P, St, Y, Z).
+--------------------------------------------^--------------------------
+Warning: Variable Next only occurs once in file formulog.dl at line 855
+input_has_value_bbf_(Y, St) :- sup_12_0_(D, Instr, Next, P, St, Y, Z).
+---------------------------------------------------^-------------------
+Warning: Variable P only occurs once in file formulog.dl at line 855
+input_has_value_bbf_(Y, St) :- sup_12_0_(D, Instr, Next, P, St, Y, Z).
+---------------------------------------------------------^-------------
+Warning: Variable Z only occurs once in file formulog.dl at line 855
+input_has_value_bbf_(Y, St) :- sup_12_0_(D, Instr, Next, P, St, Y, Z).
+-------------------------------------------------------------------^---
+Warning: Variable D only occurs once in file formulog.dl at line 856
+input_has_value_bbf_(Cond, St) :- sup_6_0_(Cond, D, Instr, Next, Op1, Op2, P, St).
+-------------------------------------------------^---------------------------------
+Warning: Variable Instr only occurs once in file formulog.dl at line 856
+input_has_value_bbf_(Cond, St) :- sup_6_0_(Cond, D, Instr, Next, Op1, Op2, P, St).
+----------------------------------------------------^------------------------------
+Warning: Variable Next only occurs once in file formulog.dl at line 856
+input_has_value_bbf_(Cond, St) :- sup_6_0_(Cond, D, Instr, Next, Op1, Op2, P, St).
+-----------------------------------------------------------^-----------------------
+Warning: Variable Op1 only occurs once in file formulog.dl at line 856
+input_has_value_bbf_(Cond, St) :- sup_6_0_(Cond, D, Instr, Next, Op1, Op2, P, St).
+-----------------------------------------------------------------^-----------------
+Warning: Variable Op2 only occurs once in file formulog.dl at line 856
+input_has_value_bbf_(Cond, St) :- sup_6_0_(Cond, D, Instr, Next, Op1, Op2, P, St).
+----------------------------------------------------------------------^------------
+Warning: Variable P only occurs once in file formulog.dl at line 856
+input_has_value_bbf_(Cond, St) :- sup_6_0_(Cond, D, Instr, Next, Op1, Op2, P, St).
+---------------------------------------------------------------------------^-------
+Warning: Variable D only occurs once in file formulog.dl at line 857
+input_has_value_bbf_(Op2, St) :- sup_6_2_(D, Instr, Next, Op2, P, St, V1, Vcond).
+------------------------------------------^---------------------------------------
+Warning: Variable Instr only occurs once in file formulog.dl at line 857
+input_has_value_bbf_(Op2, St) :- sup_6_2_(D, Instr, Next, Op2, P, St, V1, Vcond).
+---------------------------------------------^------------------------------------
+Warning: Variable Next only occurs once in file formulog.dl at line 857
+input_has_value_bbf_(Op2, St) :- sup_6_2_(D, Instr, Next, Op2, P, St, V1, Vcond).
+----------------------------------------------------^-----------------------------
+Warning: Variable P only occurs once in file formulog.dl at line 857
+input_has_value_bbf_(Op2, St) :- sup_6_2_(D, Instr, Next, Op2, P, St, V1, Vcond).
+---------------------------------------------------------------^------------------
+Warning: Variable V1 only occurs once in file formulog.dl at line 857
+input_has_value_bbf_(Op2, St) :- sup_6_2_(D, Instr, Next, Op2, P, St, V1, Vcond).
+----------------------------------------------------------------------^-----------
+Warning: Variable Vcond only occurs once in file formulog.dl at line 857
+input_has_value_bbf_(Op2, St) :- sup_6_2_(D, Instr, Next, Op2, P, St, V1, Vcond).
+--------------------------------------------------------------------------^-------
+Warning: Variable D only occurs once in file formulog.dl at line 858
+input_has_value_bbf_(Y, St) :- sup_15_0_(D, Instr, Next, P, St, Y, Z).
+-----------------------------------------^-----------------------------
+Warning: Variable Instr only occurs once in file formulog.dl at line 858
+input_has_value_bbf_(Y, St) :- sup_15_0_(D, Instr, Next, P, St, Y, Z).
+--------------------------------------------^--------------------------
+Warning: Variable Next only occurs once in file formulog.dl at line 858
+input_has_value_bbf_(Y, St) :- sup_15_0_(D, Instr, Next, P, St, Y, Z).
+---------------------------------------------------^-------------------
+Warning: Variable P only occurs once in file formulog.dl at line 858
+input_has_value_bbf_(Y, St) :- sup_15_0_(D, Instr, Next, P, St, Y, Z).
+---------------------------------------------------------^-------------
+Warning: Variable Z only occurs once in file formulog.dl at line 858
+input_has_value_bbf_(Y, St) :- sup_15_0_(D, Instr, Next, P, St, Y, Z).
+-------------------------------------------------------------------^---
+Warning: Variable D only occurs once in file formulog.dl at line 859
+input_has_value_bbf_(X, St) :- sup_4_0_(D, Next, P, St, X).
+----------------------------------------^-------------------
+Warning: Variable Next only occurs once in file formulog.dl at line 859
+input_has_value_bbf_(X, St) :- sup_4_0_(D, Next, P, St, X).
+-------------------------------------------^----------------
+Warning: Variable P only occurs once in file formulog.dl at line 859
+input_has_value_bbf_(X, St) :- sup_4_0_(D, Next, P, St, X).
+-------------------------------------------------^----------
+Warning: Variable D only occurs once in file formulog.dl at line 860
+input_has_value_bbf_(Y, St) :- sup_19_0_(D, Instr, Next, P, St, Y, Z).
+-----------------------------------------^-----------------------------
+Warning: Variable Instr only occurs once in file formulog.dl at line 860
+input_has_value_bbf_(Y, St) :- sup_19_0_(D, Instr, Next, P, St, Y, Z).
+--------------------------------------------^--------------------------
+Warning: Variable Next only occurs once in file formulog.dl at line 860
+input_has_value_bbf_(Y, St) :- sup_19_0_(D, Instr, Next, P, St, Y, Z).
+---------------------------------------------------^-------------------
+Warning: Variable P only occurs once in file formulog.dl at line 860
+input_has_value_bbf_(Y, St) :- sup_19_0_(D, Instr, Next, P, St, Y, Z).
+---------------------------------------------------------^-------------
+Warning: Variable Z only occurs once in file formulog.dl at line 860
+input_has_value_bbf_(Y, St) :- sup_19_0_(D, Instr, Next, P, St, Y, Z).
+-------------------------------------------------------------------^---
+Warning: Variable Cond only occurs once in file formulog.dl at line 861
+input_has_value_bbf_(Op1, St) :- sup_9_0_(Cond, D, Instr, Next, Op1, Op2, P, St).
+------------------------------------------^---------------------------------------
+Warning: Variable D only occurs once in file formulog.dl at line 861
+input_has_value_bbf_(Op1, St) :- sup_9_0_(Cond, D, Instr, Next, Op1, Op2, P, St).
+------------------------------------------------^---------------------------------
+Warning: Variable Instr only occurs once in file formulog.dl at line 861
+input_has_value_bbf_(Op1, St) :- sup_9_0_(Cond, D, Instr, Next, Op1, Op2, P, St).
+---------------------------------------------------^------------------------------
+Warning: Variable Next only occurs once in file formulog.dl at line 861
+input_has_value_bbf_(Op1, St) :- sup_9_0_(Cond, D, Instr, Next, Op1, Op2, P, St).
+----------------------------------------------------------^-----------------------
+Warning: Variable Op2 only occurs once in file formulog.dl at line 861
+input_has_value_bbf_(Op1, St) :- sup_9_0_(Cond, D, Instr, Next, Op1, Op2, P, St).
+---------------------------------------------------------------------^------------
+Warning: Variable P only occurs once in file formulog.dl at line 861
+input_has_value_bbf_(Op1, St) :- sup_9_0_(Cond, D, Instr, Next, Op1, Op2, P, St).
+--------------------------------------------------------------------------^-------
+Warning: Variable P only occurs once in file formulog.dl at line 862
+input_has_value_bbf_(X, St) :- sup_2_0_(P, St, X).
+----------------------------------------^----------
+Warning: Variable D only occurs once in file formulog.dl at line 863
+input_has_value_bbf_(X, St) :- sup_13_0_(D, Next, P, St, X).
+-----------------------------------------^-------------------
+Warning: Variable Next only occurs once in file formulog.dl at line 863
+input_has_value_bbf_(X, St) :- sup_13_0_(D, Next, P, St, X).
+--------------------------------------------^----------------
+Warning: Variable P only occurs once in file formulog.dl at line 863
+input_has_value_bbf_(X, St) :- sup_13_0_(D, Next, P, St, X).
+--------------------------------------------------^----------
+Warning: Variable D only occurs once in file formulog.dl at line 864
+input_has_value_bbf_(Y, St) :- sup_21_0_(D, Instr, Next, P, St, Y, Z).
+-----------------------------------------^-----------------------------
+Warning: Variable Instr only occurs once in file formulog.dl at line 864
+input_has_value_bbf_(Y, St) :- sup_21_0_(D, Instr, Next, P, St, Y, Z).
+--------------------------------------------^--------------------------
+Warning: Variable Next only occurs once in file formulog.dl at line 864
+input_has_value_bbf_(Y, St) :- sup_21_0_(D, Instr, Next, P, St, Y, Z).
+---------------------------------------------------^-------------------
+Warning: Variable P only occurs once in file formulog.dl at line 864
+input_has_value_bbf_(Y, St) :- sup_21_0_(D, Instr, Next, P, St, Y, Z).
+---------------------------------------------------------^-------------
+Warning: Variable Z only occurs once in file formulog.dl at line 864
+input_has_value_bbf_(Y, St) :- sup_21_0_(D, Instr, Next, P, St, Y, Z).
+-------------------------------------------------------------------^---
+Warning: Variable D only occurs once in file formulog.dl at line 865
+input_has_value_bbf_(X, St) :- sup_14_0_(D, Next, P, St, X).
+-----------------------------------------^-------------------
+Warning: Variable Next only occurs once in file formulog.dl at line 865
+input_has_value_bbf_(X, St) :- sup_14_0_(D, Next, P, St, X).
+--------------------------------------------^----------------
+Warning: Variable P only occurs once in file formulog.dl at line 865
+input_has_value_bbf_(X, St) :- sup_14_0_(D, Next, P, St, X).
+--------------------------------------------------^----------
+Warning: Variable D only occurs once in file formulog.dl at line 866
+input_has_value_bbf_(A, St) :- sup_17_0_(A, D, I, Instr, Next, P, St).
+--------------------------------------------^--------------------------
+Warning: Variable I only occurs once in file formulog.dl at line 866
+input_has_value_bbf_(A, St) :- sup_17_0_(A, D, I, Instr, Next, P, St).
+-----------------------------------------------^-----------------------
+Warning: Variable Instr only occurs once in file formulog.dl at line 866
+input_has_value_bbf_(A, St) :- sup_17_0_(A, D, I, Instr, Next, P, St).
+--------------------------------------------------^--------------------
+Warning: Variable Next only occurs once in file formulog.dl at line 866
+input_has_value_bbf_(A, St) :- sup_17_0_(A, D, I, Instr, Next, P, St).
+---------------------------------------------------------^-------------
+Warning: Variable P only occurs once in file formulog.dl at line 866
+input_has_value_bbf_(A, St) :- sup_17_0_(A, D, I, Instr, Next, P, St).
+---------------------------------------------------------------^-------
+Warning: Variable D only occurs once in file formulog.dl at line 867
+input_has_value_bbf_(Op, St) :- sup_23_0_(D, Instr, Next, Op, P, St).
+------------------------------------------^---------------------------
+Warning: Variable Instr only occurs once in file formulog.dl at line 867
+input_has_value_bbf_(Op, St) :- sup_23_0_(D, Instr, Next, Op, P, St).
+---------------------------------------------^------------------------
+Warning: Variable Next only occurs once in file formulog.dl at line 867
+input_has_value_bbf_(Op, St) :- sup_23_0_(D, Instr, Next, Op, P, St).
+----------------------------------------------------^-----------------
+Warning: Variable P only occurs once in file formulog.dl at line 867
+input_has_value_bbf_(Op, St) :- sup_23_0_(D, Instr, Next, Op, P, St).
+--------------------------------------------------------------^-------
+Warning: Variable D only occurs once in file formulog.dl at line 868
+input_has_value_bbf_(Y, St) :- sup_26_0_(D, Instr, Next, P, St, Y, Z).
+-----------------------------------------^-----------------------------
+Warning: Variable Instr only occurs once in file formulog.dl at line 868
+input_has_value_bbf_(Y, St) :- sup_26_0_(D, Instr, Next, P, St, Y, Z).
+--------------------------------------------^--------------------------
+Warning: Variable Next only occurs once in file formulog.dl at line 868
+input_has_value_bbf_(Y, St) :- sup_26_0_(D, Instr, Next, P, St, Y, Z).
+---------------------------------------------------^-------------------
+Warning: Variable P only occurs once in file formulog.dl at line 868
+input_has_value_bbf_(Y, St) :- sup_26_0_(D, Instr, Next, P, St, Y, Z).
+---------------------------------------------------------^-------------
+Warning: Variable Z only occurs once in file formulog.dl at line 868
+input_has_value_bbf_(Y, St) :- sup_26_0_(D, Instr, Next, P, St, Y, Z).
+-------------------------------------------------------------------^---
+Warning: Variable P only occurs once in file formulog.dl at line 869
+input_has_value_bbf_(X, St) :- sup_41_0_(P, St, X).
+-----------------------------------------^----------
+Warning: Variable D only occurs once in file formulog.dl at line 870
+input_has_value_bbf_(Z, St) :- sup_21_1_(D, Instr, Next, P, St, V1, Z).
+-----------------------------------------^------------------------------
+Warning: Variable Instr only occurs once in file formulog.dl at line 870
+input_has_value_bbf_(Z, St) :- sup_21_1_(D, Instr, Next, P, St, V1, Z).
+--------------------------------------------^---------------------------
+Warning: Variable Next only occurs once in file formulog.dl at line 870
+input_has_value_bbf_(Z, St) :- sup_21_1_(D, Instr, Next, P, St, V1, Z).
+---------------------------------------------------^--------------------
+Warning: Variable P only occurs once in file formulog.dl at line 870
+input_has_value_bbf_(Z, St) :- sup_21_1_(D, Instr, Next, P, St, V1, Z).
+---------------------------------------------------------^--------------
+Warning: Variable V1 only occurs once in file formulog.dl at line 870
+input_has_value_bbf_(Z, St) :- sup_21_1_(D, Instr, Next, P, St, V1, Z).
+----------------------------------------------------------------^-------
+Warning: Variable D only occurs once in file formulog.dl at line 871
+input_has_value_bbf_(Z, St) :- sup_19_1_(D, Instr, Next, P, St, V1, Z).
+-----------------------------------------^------------------------------
+Warning: Variable Instr only occurs once in file formulog.dl at line 871
+input_has_value_bbf_(Z, St) :- sup_19_1_(D, Instr, Next, P, St, V1, Z).
+--------------------------------------------^---------------------------
+Warning: Variable Next only occurs once in file formulog.dl at line 871
+input_has_value_bbf_(Z, St) :- sup_19_1_(D, Instr, Next, P, St, V1, Z).
+---------------------------------------------------^--------------------
+Warning: Variable P only occurs once in file formulog.dl at line 871
+input_has_value_bbf_(Z, St) :- sup_19_1_(D, Instr, Next, P, St, V1, Z).
+---------------------------------------------------------^--------------
+Warning: Variable V1 only occurs once in file formulog.dl at line 871
+input_has_value_bbf_(Z, St) :- sup_19_1_(D, Instr, Next, P, St, V1, Z).
+----------------------------------------------------------------^-------
+Warning: Variable D only occurs once in file formulog.dl at line 872
+input_has_value_bbf_(N, St) :- sup_27_0_(D, Instr, N, Next, P, St).
+-----------------------------------------^--------------------------
+Warning: Variable Instr only occurs once in file formulog.dl at line 872
+input_has_value_bbf_(N, St) :- sup_27_0_(D, Instr, N, Next, P, St).
+--------------------------------------------^-----------------------
+Warning: Variable Next only occurs once in file formulog.dl at line 872
+input_has_value_bbf_(N, St) :- sup_27_0_(D, Instr, N, Next, P, St).
+------------------------------------------------------^-------------
+Warning: Variable P only occurs once in file formulog.dl at line 872
+input_has_value_bbf_(N, St) :- sup_27_0_(D, Instr, N, Next, P, St).
+------------------------------------------------------------^-------
+Warning: Variable Cond only occurs once in file formulog.dl at line 873
+input_has_value_bbf_(Op2, St) :- sup_9_1_(Cond, D, Instr, Next, Op2, P, St, V1).
+------------------------------------------^--------------------------------------
+Warning: Variable D only occurs once in file formulog.dl at line 873
+input_has_value_bbf_(Op2, St) :- sup_9_1_(Cond, D, Instr, Next, Op2, P, St, V1).
+------------------------------------------------^--------------------------------
+Warning: Variable Instr only occurs once in file formulog.dl at line 873
+input_has_value_bbf_(Op2, St) :- sup_9_1_(Cond, D, Instr, Next, Op2, P, St, V1).
+---------------------------------------------------^-----------------------------
+Warning: Variable Next only occurs once in file formulog.dl at line 873
+input_has_value_bbf_(Op2, St) :- sup_9_1_(Cond, D, Instr, Next, Op2, P, St, V1).
+----------------------------------------------------------^----------------------
+Warning: Variable P only occurs once in file formulog.dl at line 873
+input_has_value_bbf_(Op2, St) :- sup_9_1_(Cond, D, Instr, Next, Op2, P, St, V1).
+---------------------------------------------------------------------^-----------
+Warning: Variable V1 only occurs once in file formulog.dl at line 873
+input_has_value_bbf_(Op2, St) :- sup_9_1_(Cond, D, Instr, Next, Op2, P, St, V1).
+----------------------------------------------------------------------------^----
+Warning: Variable D only occurs once in file formulog.dl at line 874
+input_has_value_bbf_(Y, St) :- sup_25_0_(D, Instr, Next, P, St, Y).
+-----------------------------------------^--------------------------
+Warning: Variable Instr only occurs once in file formulog.dl at line 874
+input_has_value_bbf_(Y, St) :- sup_25_0_(D, Instr, Next, P, St, Y).
+--------------------------------------------^-----------------------
+Warning: Variable Next only occurs once in file formulog.dl at line 874
+input_has_value_bbf_(Y, St) :- sup_25_0_(D, Instr, Next, P, St, Y).
+---------------------------------------------------^----------------
+Warning: Variable P only occurs once in file formulog.dl at line 874
+input_has_value_bbf_(Y, St) :- sup_25_0_(D, Instr, Next, P, St, Y).
+---------------------------------------------------------^----------
+Warning: Variable D only occurs once in file formulog.dl at line 875
+input_has_value_bbf_(Z, St) :- sup_29_1_(D, Instr, Next, P, St, V1, Z).
+-----------------------------------------^------------------------------
+Warning: Variable Instr only occurs once in file formulog.dl at line 875
+input_has_value_bbf_(Z, St) :- sup_29_1_(D, Instr, Next, P, St, V1, Z).
+--------------------------------------------^---------------------------
+Warning: Variable Next only occurs once in file formulog.dl at line 875
+input_has_value_bbf_(Z, St) :- sup_29_1_(D, Instr, Next, P, St, V1, Z).
+---------------------------------------------------^--------------------
+Warning: Variable P only occurs once in file formulog.dl at line 875
+input_has_value_bbf_(Z, St) :- sup_29_1_(D, Instr, Next, P, St, V1, Z).
+---------------------------------------------------------^--------------
+Warning: Variable V1 only occurs once in file formulog.dl at line 875
+input_has_value_bbf_(Z, St) :- sup_29_1_(D, Instr, Next, P, St, V1, Z).
+----------------------------------------------------------------^-------
+Warning: Variable Addr only occurs once in file formulog.dl at line 876
+input_has_value_bbf_(I, St) :- sup_17_1_(Addr, D, I, Instr, Next, Off, P, St).
+-----------------------------------------^-------------------------------------
+Warning: Variable D only occurs once in file formulog.dl at line 876
+input_has_value_bbf_(I, St) :- sup_17_1_(Addr, D, I, Instr, Next, Off, P, St).
+-----------------------------------------------^-------------------------------
+Warning: Variable Instr only occurs once in file formulog.dl at line 876
+input_has_value_bbf_(I, St) :- sup_17_1_(Addr, D, I, Instr, Next, Off, P, St).
+-----------------------------------------------------^-------------------------
+Warning: Variable Next only occurs once in file formulog.dl at line 876
+input_has_value_bbf_(I, St) :- sup_17_1_(Addr, D, I, Instr, Next, Off, P, St).
+------------------------------------------------------------^------------------
+Warning: Variable Off only occurs once in file formulog.dl at line 876
+input_has_value_bbf_(I, St) :- sup_17_1_(Addr, D, I, Instr, Next, Off, P, St).
+------------------------------------------------------------------^------------
+Warning: Variable P only occurs once in file formulog.dl at line 876
+input_has_value_bbf_(I, St) :- sup_17_1_(Addr, D, I, Instr, Next, Off, P, St).
+-----------------------------------------------------------------------^-------
+Warning: Variable D only occurs once in file formulog.dl at line 877
+input_has_value_bbf_(Z, St) :- sup_28_1_(D, Instr, Next, P, St, V1, Z).
+-----------------------------------------^------------------------------
+Warning: Variable Instr only occurs once in file formulog.dl at line 877
+input_has_value_bbf_(Z, St) :- sup_28_1_(D, Instr, Next, P, St, V1, Z).
+--------------------------------------------^---------------------------
+Warning: Variable Next only occurs once in file formulog.dl at line 877
+input_has_value_bbf_(Z, St) :- sup_28_1_(D, Instr, Next, P, St, V1, Z).
+---------------------------------------------------^--------------------
+Warning: Variable P only occurs once in file formulog.dl at line 877
+input_has_value_bbf_(Z, St) :- sup_28_1_(D, Instr, Next, P, St, V1, Z).
+---------------------------------------------------------^--------------
+Warning: Variable V1 only occurs once in file formulog.dl at line 877
+input_has_value_bbf_(Z, St) :- sup_28_1_(D, Instr, Next, P, St, V1, Z).
+----------------------------------------------------------------^-------
+Warning: Variable D only occurs once in file formulog.dl at line 878
+input_has_value_bbf_(Y, St) :- sup_5_0_(D, Instr, Next, P, St, Y, Z).
+----------------------------------------^-----------------------------
+Warning: Variable Instr only occurs once in file formulog.dl at line 878
+input_has_value_bbf_(Y, St) :- sup_5_0_(D, Instr, Next, P, St, Y, Z).
+-------------------------------------------^--------------------------
+Warning: Variable Next only occurs once in file formulog.dl at line 878
+input_has_value_bbf_(Y, St) :- sup_5_0_(D, Instr, Next, P, St, Y, Z).
+--------------------------------------------------^-------------------
+Warning: Variable P only occurs once in file formulog.dl at line 878
+input_has_value_bbf_(Y, St) :- sup_5_0_(D, Instr, Next, P, St, Y, Z).
+--------------------------------------------------------^-------------
+Warning: Variable Z only occurs once in file formulog.dl at line 878
+input_has_value_bbf_(Y, St) :- sup_5_0_(D, Instr, Next, P, St, Y, Z).
+------------------------------------------------------------------^---
+Warning: Variable D only occurs once in file formulog.dl at line 879
+input_has_value_bbf_(Z, St) :- sup_26_1_(D, Instr, Next, P, St, V1, Z).
+-----------------------------------------^------------------------------
+Warning: Variable Instr only occurs once in file formulog.dl at line 879
+input_has_value_bbf_(Z, St) :- sup_26_1_(D, Instr, Next, P, St, V1, Z).
+--------------------------------------------^---------------------------
+Warning: Variable Next only occurs once in file formulog.dl at line 879
+input_has_value_bbf_(Z, St) :- sup_26_1_(D, Instr, Next, P, St, V1, Z).
+---------------------------------------------------^--------------------
+Warning: Variable P only occurs once in file formulog.dl at line 879
+input_has_value_bbf_(Z, St) :- sup_26_1_(D, Instr, Next, P, St, V1, Z).
+---------------------------------------------------------^--------------
+Warning: Variable V1 only occurs once in file formulog.dl at line 879
+input_has_value_bbf_(Z, St) :- sup_26_1_(D, Instr, Next, P, St, V1, Z).
+----------------------------------------------------------------^-------
+Warning: Variable D only occurs once in file formulog.dl at line 880
+input_has_value_bbf_(Y, St) :- sup_8_0_(D, Instr, Next, P, St, Y, Z).
+----------------------------------------^-----------------------------
+Warning: Variable Instr only occurs once in file formulog.dl at line 880
+input_has_value_bbf_(Y, St) :- sup_8_0_(D, Instr, Next, P, St, Y, Z).
+-------------------------------------------^--------------------------
+Warning: Variable Next only occurs once in file formulog.dl at line 880
+input_has_value_bbf_(Y, St) :- sup_8_0_(D, Instr, Next, P, St, Y, Z).
+--------------------------------------------------^-------------------
+Warning: Variable P only occurs once in file formulog.dl at line 880
+input_has_value_bbf_(Y, St) :- sup_8_0_(D, Instr, Next, P, St, Y, Z).
+--------------------------------------------------------^-------------
+Warning: Variable Z only occurs once in file formulog.dl at line 880
+input_has_value_bbf_(Y, St) :- sup_8_0_(D, Instr, Next, P, St, Y, Z).
+------------------------------------------------------------------^---
+Warning: Variable D only occurs once in file formulog.dl at line 881
+input_has_value_bbf_(Z, St) :- sup_31_1_(D, Instr, Next, P, St, V1, Z).
+-----------------------------------------^------------------------------
+Warning: Variable Instr only occurs once in file formulog.dl at line 881
+input_has_value_bbf_(Z, St) :- sup_31_1_(D, Instr, Next, P, St, V1, Z).
+--------------------------------------------^---------------------------
+Warning: Variable Next only occurs once in file formulog.dl at line 881
+input_has_value_bbf_(Z, St) :- sup_31_1_(D, Instr, Next, P, St, V1, Z).
+---------------------------------------------------^--------------------
+Warning: Variable P only occurs once in file formulog.dl at line 881
+input_has_value_bbf_(Z, St) :- sup_31_1_(D, Instr, Next, P, St, V1, Z).
+---------------------------------------------------------^--------------
+Warning: Variable V1 only occurs once in file formulog.dl at line 881
+input_has_value_bbf_(Z, St) :- sup_31_1_(D, Instr, Next, P, St, V1, Z).
+----------------------------------------------------------------^-------
+Warning: Variable D only occurs once in file formulog.dl at line 882
+input_has_value_bbf_(Y, St) :- sup_10_0_(D, Instr, Next, P, St, Y, Z).
+-----------------------------------------^-----------------------------
+Warning: Variable Instr only occurs once in file formulog.dl at line 882
+input_has_value_bbf_(Y, St) :- sup_10_0_(D, Instr, Next, P, St, Y, Z).
+--------------------------------------------^--------------------------
+Warning: Variable Next only occurs once in file formulog.dl at line 882
+input_has_value_bbf_(Y, St) :- sup_10_0_(D, Instr, Next, P, St, Y, Z).
+---------------------------------------------------^-------------------
+Warning: Variable P only occurs once in file formulog.dl at line 882
+input_has_value_bbf_(Y, St) :- sup_10_0_(D, Instr, Next, P, St, Y, Z).
+---------------------------------------------------------^-------------
+Warning: Variable Z only occurs once in file formulog.dl at line 882
+input_has_value_bbf_(Y, St) :- sup_10_0_(D, Instr, Next, P, St, Y, Z).
+-------------------------------------------------------------------^---
+Warning: Variable P only occurs once in file formulog.dl at line 883
+input_has_value_bbf_(Y, St) :- sup_1_0_(P, St, Y).
+----------------------------------------^----------
+Warning: Variable D only occurs once in file formulog.dl at line 884
+input_has_value_bbf_(Z, St) :- sup_5_1_(D, Instr, Next, P, St, V1, Z).
+----------------------------------------^------------------------------
+Warning: Variable Instr only occurs once in file formulog.dl at line 884
+input_has_value_bbf_(Z, St) :- sup_5_1_(D, Instr, Next, P, St, V1, Z).
+-------------------------------------------^---------------------------
+Warning: Variable Next only occurs once in file formulog.dl at line 884
+input_has_value_bbf_(Z, St) :- sup_5_1_(D, Instr, Next, P, St, V1, Z).
+--------------------------------------------------^--------------------
+Warning: Variable P only occurs once in file formulog.dl at line 884
+input_has_value_bbf_(Z, St) :- sup_5_1_(D, Instr, Next, P, St, V1, Z).
+--------------------------------------------------------^--------------
+Warning: Variable V1 only occurs once in file formulog.dl at line 884
+input_has_value_bbf_(Z, St) :- sup_5_1_(D, Instr, Next, P, St, V1, Z).
+---------------------------------------------------------------^-------
+Warning: Variable D only occurs once in file formulog.dl at line 885
+input_has_value_bbf_(Z, St) :- sup_8_1_(D, Instr, Next, P, St, V1, Z).
+----------------------------------------^------------------------------
+Warning: Variable Instr only occurs once in file formulog.dl at line 885
+input_has_value_bbf_(Z, St) :- sup_8_1_(D, Instr, Next, P, St, V1, Z).
+-------------------------------------------^---------------------------
+Warning: Variable Next only occurs once in file formulog.dl at line 885
+input_has_value_bbf_(Z, St) :- sup_8_1_(D, Instr, Next, P, St, V1, Z).
+--------------------------------------------------^--------------------
+Warning: Variable P only occurs once in file formulog.dl at line 885
+input_has_value_bbf_(Z, St) :- sup_8_1_(D, Instr, Next, P, St, V1, Z).
+--------------------------------------------------------^--------------
+Warning: Variable V1 only occurs once in file formulog.dl at line 885
+input_has_value_bbf_(Z, St) :- sup_8_1_(D, Instr, Next, P, St, V1, Z).
+---------------------------------------------------------------^-------
+Warning: Variable Addr only occurs once in file formulog.dl at line 886
+input_has_value_bbf_(Y, St) :- sup_18_1_(Addr, D, Next, Off, P, St, Y).
+-----------------------------------------^------------------------------
+Warning: Variable D only occurs once in file formulog.dl at line 886
+input_has_value_bbf_(Y, St) :- sup_18_1_(Addr, D, Next, Off, P, St, Y).
+-----------------------------------------------^------------------------
+Warning: Variable Next only occurs once in file formulog.dl at line 886
+input_has_value_bbf_(Y, St) :- sup_18_1_(Addr, D, Next, Off, P, St, Y).
+--------------------------------------------------^---------------------
+Warning: Variable Off only occurs once in file formulog.dl at line 886
+input_has_value_bbf_(Y, St) :- sup_18_1_(Addr, D, Next, Off, P, St, Y).
+--------------------------------------------------------^---------------
+Warning: Variable P only occurs once in file formulog.dl at line 886
+input_has_value_bbf_(Y, St) :- sup_18_1_(Addr, D, Next, Off, P, St, Y).
+-------------------------------------------------------------^----------
+Warning: Variable Addr only occurs once in file formulog.dl at line 887
+input_has_value_bbf_(Y, St) :- sup_0_1_(Addr, Off, P, St, Y).
+----------------------------------------^---------------------
+Warning: Variable Off only occurs once in file formulog.dl at line 887
+input_has_value_bbf_(Y, St) :- sup_0_1_(Addr, Off, P, St, Y).
+----------------------------------------------^---------------
+Warning: Variable P only occurs once in file formulog.dl at line 887
+input_has_value_bbf_(Y, St) :- sup_0_1_(Addr, Off, P, St, Y).
+---------------------------------------------------^----------
+Warning: Variable D only occurs once in file formulog.dl at line 888
+input_has_value_bbf_(Z, St) :- sup_12_1_(D, Instr, Next, P, St, V1, Z).
+-----------------------------------------^------------------------------
+Warning: Variable Instr only occurs once in file formulog.dl at line 888
+input_has_value_bbf_(Z, St) :- sup_12_1_(D, Instr, Next, P, St, V1, Z).
+--------------------------------------------^---------------------------
+Warning: Variable Next only occurs once in file formulog.dl at line 888
+input_has_value_bbf_(Z, St) :- sup_12_1_(D, Instr, Next, P, St, V1, Z).
+---------------------------------------------------^--------------------
+Warning: Variable P only occurs once in file formulog.dl at line 888
+input_has_value_bbf_(Z, St) :- sup_12_1_(D, Instr, Next, P, St, V1, Z).
+---------------------------------------------------------^--------------
+Warning: Variable V1 only occurs once in file formulog.dl at line 888
+input_has_value_bbf_(Z, St) :- sup_12_1_(D, Instr, Next, P, St, V1, Z).
+----------------------------------------------------------------^-------
+Warning: Variable D only occurs once in file formulog.dl at line 889
+input_has_value_bbf_(Y, St) :- sup_11_0_(D, Instr, Next, P, St, Y).
+-----------------------------------------^--------------------------
+Warning: Variable Instr only occurs once in file formulog.dl at line 889
+input_has_value_bbf_(Y, St) :- sup_11_0_(D, Instr, Next, P, St, Y).
+--------------------------------------------^-----------------------
+Warning: Variable Next only occurs once in file formulog.dl at line 889
+input_has_value_bbf_(Y, St) :- sup_11_0_(D, Instr, Next, P, St, Y).
+---------------------------------------------------^----------------
+Warning: Variable P only occurs once in file formulog.dl at line 889
+input_has_value_bbf_(Y, St) :- sup_11_0_(D, Instr, Next, P, St, Y).
+---------------------------------------------------------^----------
+Warning: Variable D only occurs once in file formulog.dl at line 890
+input_has_value_bbf_(Z, St) :- sup_10_1_(D, Instr, Next, P, St, V1, Z).
+-----------------------------------------^------------------------------
+Warning: Variable Instr only occurs once in file formulog.dl at line 890
+input_has_value_bbf_(Z, St) :- sup_10_1_(D, Instr, Next, P, St, V1, Z).
+--------------------------------------------^---------------------------
+Warning: Variable Next only occurs once in file formulog.dl at line 890
+input_has_value_bbf_(Z, St) :- sup_10_1_(D, Instr, Next, P, St, V1, Z).
+---------------------------------------------------^--------------------
+Warning: Variable P only occurs once in file formulog.dl at line 890
+input_has_value_bbf_(Z, St) :- sup_10_1_(D, Instr, Next, P, St, V1, Z).
+---------------------------------------------------------^--------------
+Warning: Variable V1 only occurs once in file formulog.dl at line 890
+input_has_value_bbf_(Z, St) :- sup_10_1_(D, Instr, Next, P, St, V1, Z).
+----------------------------------------------------------------^-------
+Warning: Variable D only occurs once in file formulog.dl at line 891
+input_has_value_bbf_(Z, St) :- sup_15_1_(D, Instr, Next, P, St, V1, Z).
+-----------------------------------------^------------------------------
+Warning: Variable Instr only occurs once in file formulog.dl at line 891
+input_has_value_bbf_(Z, St) :- sup_15_1_(D, Instr, Next, P, St, V1, Z).
+--------------------------------------------^---------------------------
+Warning: Variable Next only occurs once in file formulog.dl at line 891
+input_has_value_bbf_(Z, St) :- sup_15_1_(D, Instr, Next, P, St, V1, Z).
+---------------------------------------------------^--------------------
+Warning: Variable P only occurs once in file formulog.dl at line 891
+input_has_value_bbf_(Z, St) :- sup_15_1_(D, Instr, Next, P, St, V1, Z).
+---------------------------------------------------------^--------------
+Warning: Variable V1 only occurs once in file formulog.dl at line 891
+input_has_value_bbf_(Z, St) :- sup_15_1_(D, Instr, Next, P, St, V1, Z).
+----------------------------------------------------------------^-------
+Warning: Variable D only occurs once in file formulog.dl at line 892
+input_has_value_bbf_(Y, St) :- sup_16_0_(D, Instr, Next, P, St, Y).
+-----------------------------------------^--------------------------
+Warning: Variable Instr only occurs once in file formulog.dl at line 892
+input_has_value_bbf_(Y, St) :- sup_16_0_(D, Instr, Next, P, St, Y).
+--------------------------------------------^-----------------------
+Warning: Variable Next only occurs once in file formulog.dl at line 892
+input_has_value_bbf_(Y, St) :- sup_16_0_(D, Instr, Next, P, St, Y).
+---------------------------------------------------^----------------
+Warning: Variable P only occurs once in file formulog.dl at line 892
+input_has_value_bbf_(Y, St) :- sup_16_0_(D, Instr, Next, P, St, Y).
+---------------------------------------------------------^----------
+Warning: Variable D only occurs once in file formulog.dl at line 915
+input_compute_select_bbbbff_(Vcond, V1, V2, St) :- sup_6_3_(D, Def, Next, P, St, V1, V2, Vcond).
+------------------------------------------------------------^------------------------------------
+Warning: Variable Def only occurs once in file formulog.dl at line 915
+input_compute_select_bbbbff_(Vcond, V1, V2, St) :- sup_6_3_(D, Def, Next, P, St, V1, V2, Vcond).
+---------------------------------------------------------------^---------------------------------
+Warning: Variable Next only occurs once in file formulog.dl at line 915
+input_compute_select_bbbbff_(Vcond, V1, V2, St) :- sup_6_3_(D, Def, Next, P, St, V1, V2, Vcond).
+--------------------------------------------------------------------^----------------------------
+Warning: Variable P only occurs once in file formulog.dl at line 915
+input_compute_select_bbbbff_(Vcond, V1, V2, St) :- sup_6_3_(D, Def, Next, P, St, V1, V2, Vcond).
+--------------------------------------------------------------------------^----------------------
+Warning: Variable x44 only occurs once in file formulog.dl at line 930
+	stepped_(Instr, St, x44, P).
+---------------------^--------
+Warning: Variable x32 only occurs once in file formulog.dl at line 933
+	stepped_(Instr, St, x32, P).
+---------------------^--------
+Warning: Variable x5 only occurs once in file formulog.dl at line 1014
+	stepped_(Instr, x5, x6, x7), 
+-----------------^-------------
+Warning: Variable x6 only occurs once in file formulog.dl at line 1014
+	stepped_(Instr, x5, x6, x7), 
+---------------------^---------
+Warning: Variable x7 only occurs once in file formulog.dl at line 1014
+	stepped_(Instr, x5, x6, x7), 
+-------------------------^-----
+Warning: Variable x42 only occurs once in file formulog.dl at line 1019
+	stepped_(Instr, St, x42, P).
+---------------------^--------
+Warning: Variable x47 only occurs once in file formulog.dl at line 1045
+broken_invariant_() :- failed_assume_(x47, x48).
+--------------------------------------^----------
+Warning: Variable x48 only occurs once in file formulog.dl at line 1045
+broken_invariant_() :- failed_assume_(x47, x48).
+-------------------------------------------^-----
+Warning: Variable x45 only occurs once in file formulog.dl at line 1046
+broken_invariant_() :- failed_assert_(x45, x46).
+--------------------------------------^----------
+Warning: Variable x46 only occurs once in file formulog.dl at line 1046
+broken_invariant_() :- failed_assert_(x45, x46).
+-------------------------------------------^-----
+Warning: Variable x1 only occurs once in file formulog.dl at line 1047
+CODEGEN_PROJECT_basicblock_preds_10(x0) :- basicblock_preds_(x0, x1).
+-----------------------------------------------------------------^----
+Warning: Variable x1 only occurs once in file formulog.dl at line 1048
+CODEGEN_PROJECT_stepped_1000(x0) :- stepped_(x0, x1, x2, x3).
+-------------------------------------------------^------------
+Warning: Variable x2 only occurs once in file formulog.dl at line 1048
+CODEGEN_PROJECT_stepped_1000(x0) :- stepped_(x0, x1, x2, x3).
+-----------------------------------------------------^--------
+Warning: Variable x3 only occurs once in file formulog.dl at line 1048
+CODEGEN_PROJECT_stepped_1000(x0) :- stepped_(x0, x1, x2, x3).
+---------------------------------------------------------^----
+[ 15%] Building CXX object CMakeFiles/flg.dir/src/functors.cpp.o
+[ 23%] Building CXX object CMakeFiles/flg.dir/src/main.cpp.o
+[ 38%] Building CXX object CMakeFiles/flg.dir/src/parser.cpp.o
+[ 38%] Building CXX object CMakeFiles/flg.dir/src/Symbol.cpp.o
+[ 46%] Building CXX object CMakeFiles/flg.dir/src/Term.cpp.o
+[ 53%] Building CXX object CMakeFiles/flg.dir/src/Type.cpp.o
+[ 61%] Building CXX object CMakeFiles/flg.dir/src/set.cpp.o
+[ 69%] Building CXX object CMakeFiles/flg.dir/src/smt_solver.cpp.o
+[ 76%] Building CXX object CMakeFiles/flg.dir/src/smt_shim.cpp.o
+[ 84%] Building CXX object CMakeFiles/flg.dir/src/smt_parser.cpp.o
+[ 92%] Building CXX object CMakeFiles/flg.dir/formulog.cpp.o
+[100%] Linking CXX executable flg
+[100%] Built target flg
+LOG:COMPILE;ELAPSED=66.93s;USER=128.37s;SYSTEM=4.42s;CPU=198%;MEM=1435232kb
+LOG:Execute command: timeout 1800 /usr/bin/time -f LOG:EXECUTE;ELAPSED=%es;USER=%Us;SYSTEM=%Ss;CPU=%P;MEM=%Mkb /home/ubuntu/benchmarks/symex/bms/interp-6/../../codegen/build/flg --dump-sizes --smt-stats --smt-solver-mode=check-sat-assuming -j 48 -D /home/ubuntu/benchmarks/symex/bms/interp-6/out -F /home/ubuntu/benchmarks/symex/bms/interp-6/facts --no-smt-double-check
+Parsing...
+Finished parsing (0.003s)
+Evaluating...
+Finished evaluating (13.032s)
+
+==================== SMT STATS ====================
+SMT calls: 23418
+SMT time (ms): 428459
+SMT wait time (ms): 72901.6
+SMT cache hits: 1366817
+SMT cache misses: 195621
+SMT cache clears: 1774
+SMT calls per solver: 291,425,410,483,507,378,408,513,557,459,393,495,551,526,539,598,521,414,544,553,439,552,641,696,509,608,473,379,313,432,507,573,581,440,509,432,311,362,618,488,578,431,511,559,548,371,464,528
+SMT time per solver (ms): 10351.5,8649.41,10138.9,8203.28,8934.75,10714.5,8612.77,9222.94,9031.02,7787.04,9638.71,10035,9500.44,7564.67,9108.43,6620.08,7952.22,7857.37,8219.27,9357.21,8479.29,8478.85,9115.98,7945.29,7838.13,9381.98,8730.49,9314.4,9953.72,9140.97,9009.91,8245.34,8857.26,8201.72,9448.83,8379.36,8534.62,9026.51,9054.11,9504.57,9889.97,9711.99,10029.7,8417.44,9021.08,10009.2,8472.17,8766.27
+
+==================== RELATION SIZES ====================
+alloca_nwords: 17
+assume_instruction: 0
+assert_instruction: 1
+has_same_bb_pred: 212
+bb_has_first_instruction: 79
+function_has_first_instruction: 1
+compute_select: 0
+has_value: 132112
+input_compute_select_bbbbff: 0
+input_has_value_bbf: 132112
+stepped: 112897
+stepping: 112897
+sup_0_0: 8308
+sup_0_1: 8308
+sup_10_0: 0
+sup_10_1: 0
+sup_11_0: 3274
+sup_12_0: 54
+sup_12_1: 54
+sup_13_0: 0
+sup_14_0: 17881
+sup_15_0: 0
+sup_15_1: 0
+sup_16_0: 2329
+sup_17_0: 3274
+sup_17_1: 3274
+sup_18_0: 8308
+sup_18_1: 8308
+sup_19_0: 0
+sup_19_1: 0
+sup_1_0: 30325
+sup_20_0: 0
+sup_21_0: 0
+sup_21_1: 0
+sup_23_0: 2203
+sup_25_0: 2
+sup_26_0: 0
+sup_26_1: 0
+sup_27_0: 2
+sup_28_0: 7318
+sup_28_1: 7318
+sup_29_0: 0
+sup_29_1: 0
+sup_2_0: 0
+sup_31_0: 0
+sup_31_1: 0
+sup_3_0: 30325
+sup_41_0: 0
+sup_4_0: 17881
+sup_5_0: 0
+sup_5_1: 0
+sup_6_0: 0
+sup_6_1: 0
+sup_6_2: 0
+sup_6_3: 0
+sup_8_0: 0
+sup_8_1: 0
+sup_9_0: 19094
+sup_9_1: 19094
+failed_assert: 0
+no_fall_thru: 1
+completed_path: 3433
+failed_assume: 0
+memory_access_error: 0
+broken_invariant: 0
+[WORK] 8129219
+LOG:EXECUTE;ELAPSED=13.17s;USER=534.67s;SYSTEM=7.32s;CPU=4114%;MEM=632064kb
+LOG:Success!

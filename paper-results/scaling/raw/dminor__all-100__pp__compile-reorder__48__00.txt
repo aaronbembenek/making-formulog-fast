@@ -1,0 +1,658 @@
+LOG:Benchmark directory: /home/ubuntu/benchmarks/dminor/bms/all-100
+LOG:Timeout: 1800
+fatal: not a git repository (or any of the parent directories): .git
+LOG:Eval repo commit:
+LOG:Formulog commit: 9ab17fd
+LOG:Z3 version: Z3 version 4.12.2 - 64 bit - build hashcode f7c9c9ef72fde0e00ef9409e6c24456effb8b930
+LOG:Java version start
+openjdk version "17.0.11" 2024-04-16
+OpenJDK Runtime Environment (build 17.0.11+9-Ubuntu-122.04.1)
+OpenJDK 64-Bit Server VM (build 17.0.11+9-Ubuntu-122.04.1, mixed mode, sharing)
+
+LOG:Java version end
+LOG:Mode: compile-reorder
+LOG:Solver mode: push-pop
+LOG:Parallelism: 48
+LOG:Souffle info start
+----------------------------------------------------------------------------
+Version: 290d63840
+Word size: 32 bits
+Options enabled: ffi openmp ncurses sqlite zlib
+----------------------------------------------------------------------------
+Copyright (c) 2016-22 The Souffle Developers.
+Copyright (c) 2013-16 Oracle and/or its affiliates.
+All rights reserved.
+============================================================================
+
+LOG:Souffle info end
+LOG:Transpile command: /usr/bin/time -f LOG:TRANSPILE;ELAPSED=%es;USER=%Us;SYSTEM=%Ss;CPU=%P;MEM=%Mkb java -Xmx180g -Xss256m -DsmtTaskSize=1 -DtaskSize=8 -DmemoizeThreshold=0 -DsmtDoubleCheckUnknowns=false -Doptimize=5 -jar /home/ubuntu/formulog/target/formulog-0.7.0-SNAPSHOT-jar-with-dependencies.jar bench.flg --dump-sizes --smt-stats --smt-solver-mode=push-pop -j 48 -D /home/ubuntu/benchmarks/dminor/bms/all-100/out -F /home/ubuntu/benchmarks/dminor/bms/all-100/facts -c --codegen-dir /home/ubuntu/benchmarks/dminor/bms/all-100/../../codegen
+LOG:TRANSPILE;ELAPSED=1.06s;USER=7.09s;SYSTEM=0.53s;CPU=715%;MEM=456888kb
+LOG:Compile command: /usr/bin/time -f LOG:COMPILE;ELAPSED=%es;USER=%Us;SYSTEM=%Ss;CPU=%P;MEM=%Mkb bash -c cmake -B /home/ubuntu/benchmarks/dminor/bms/all-100/../../codegen/build -S /home/ubuntu/benchmarks/dminor/bms/all-100/../../codegen -DCMAKE_BUILD_TYPE=Release      -DFLG_RECORD_WORK=On && cmake --build /home/ubuntu/benchmarks/dminor/bms/all-100/../../codegen/build -j
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found Boost: /usr/local/lib/cmake/Boost-1.81.0/BoostConfig.cmake (found suitable version "1.81.0", minimum required is "1.81") found components: filesystem system program_options 
+-- Found OpenMP_C: -fopenmp (found version "4.5") 
+-- Found OpenMP_CXX: -fopenmp (found version "4.5") 
+-- Found OpenMP: TRUE (found version "4.5")  
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/ubuntu/benchmarks/dminor/codegen/build
+[  7%] Generating formulog.cpp
+Warning: Variable x904 only occurs once in file formulog.dl at line 350
+	x904 = @nth(0, x906, x908), 
+-^----------------------------
+Warning: Variable x912 only occurs once in file formulog.dl at line 360
+	x912 = @nth(2, x915, x917), 
+-^----------------------------
+Warning: Variable x923 only occurs once in file formulog.dl at line 373
+	x923 = @nth(1, x925, x927), 
+-^----------------------------
+Warning: Variable x924 only occurs once in file formulog.dl at line 374
+	x924 = @nth(2, x925, x927).
+-^---------------------------
+Warning: Variable x929 only occurs once in file formulog.dl at line 381
+	x929 = @nth(0, x934, x936), 
+-^----------------------------
+Warning: Variable x930 only occurs once in file formulog.dl at line 382
+	x930 = @nth(1, x934, x936), 
+-^----------------------------
+Warning: Variable x931 only occurs once in file formulog.dl at line 383
+	x931 = @nth(2, x934, x936), 
+-^----------------------------
+Warning: Variable x933 only occurs once in file formulog.dl at line 385
+	x933 = @nth(4, x934, x936).
+-^---------------------------
+Warning: Variable x939 only occurs once in file formulog.dl at line 393
+	x939 = @nth(1, x940, x942).
+-^---------------------------
+Warning: Variable x952 only occurs once in file formulog.dl at line 410
+	x952 = @nth(0, x955, x957), 
+-^----------------------------
+Warning: Variable x954 only occurs once in file formulog.dl at line 412
+	x954 = @nth(2, x955, x957).
+-^---------------------------
+Warning: Variable x26 only occurs once in file formulog.dl at line 416
+	func_sig_(F, Params, x26, E).
+----------------------^--------
+Warning: Variable x960 only occurs once in file formulog.dl at line 424
+	x960 = @nth(1, x961, x963).
+-^---------------------------
+Warning: Variable x966 only occurs once in file formulog.dl at line 432
+	x966 = @nth(1, x968, x970), 
+-^----------------------------
+Warning: Variable x973 only occurs once in file formulog.dl at line 441
+	x973 = @nth(1, x977, x979), 
+-^----------------------------
+Warning: Variable x984 only occurs once in file formulog.dl at line 454
+	x984 = @nth(0, x989, x991), 
+-^----------------------------
+Warning: Variable x986 only occurs once in file formulog.dl at line 456
+	x986 = @nth(2, x989, x991), 
+-^----------------------------
+Warning: Variable x987 only occurs once in file formulog.dl at line 457
+	x987 = @nth(3, x989, x991), 
+-^----------------------------
+Warning: Variable x988 only occurs once in file formulog.dl at line 458
+	x988 = @nth(4, x989, x991).
+-^---------------------------
+Warning: Variable x993 only occurs once in file formulog.dl at line 465
+	x993 = @nth(0, x995, x997), 
+-^----------------------------
+Warning: Variable x999 only occurs once in file formulog.dl at line 473
+	x999 = @nth(0, x1002, x1004), 
+-^------------------------------
+Warning: Variable x1001 only occurs once in file formulog.dl at line 475
+	x1001 = @nth(2, x1002, x1004).
+-^------------------------------
+Warning: Variable x1007 only occurs once in file formulog.dl at line 483
+	x1007 = @nth(1, x1008, x1010).
+-^------------------------------
+Warning: Variable x1030 only occurs once in file formulog.dl at line 510
+	x1030 = @nth(1, x1031, x1033).
+-^------------------------------
+Warning: Variable x1035 only occurs once in file formulog.dl at line 517
+	x1035 = @nth(0, x1038, x1040), 
+-^-------------------------------
+Warning: Variable x1036 only occurs once in file formulog.dl at line 518
+	x1036 = @nth(1, x1038, x1040), 
+-^-------------------------------
+Warning: Variable x1043 only occurs once in file formulog.dl at line 527
+	x1043 = @nth(1, x1044, x1046).
+-^------------------------------
+Warning: Variable x1050 only occurs once in file formulog.dl at line 536
+	x1050 = @nth(2, x1057, x1059), 
+-^-------------------------------
+Warning: Variable x1051 only occurs once in file formulog.dl at line 537
+	x1051 = @nth(3, x1057, x1059), 
+-^-------------------------------
+Warning: Variable x1067 only occurs once in file formulog.dl at line 555
+	x1067 = @nth(0, x1069, x1071), 
+-^-------------------------------
+Warning: Variable x1074 only occurs once in file formulog.dl at line 564
+	x1074 = @nth(1, x1075, x1077).
+-^------------------------------
+Warning: Variable x1080 only occurs once in file formulog.dl at line 575
+	x1080 = @nth(0, x1085, x1087), 
+-^-------------------------------
+Warning: Variable x1089 only occurs once in file formulog.dl at line 583
+	x1089 = @nth(0, x1091, x1093), 
+-^-------------------------------
+Warning: Variable x1095 only occurs once in file formulog.dl at line 591
+	x1095 = @nth(0, x1097, x1099), 
+-^-------------------------------
+Warning: Variable x1107 only occurs once in file formulog.dl at line 607
+	x1107 = @nth(0, x1110, x1112), 
+-^-------------------------------
+Warning: Variable x1109 only occurs once in file formulog.dl at line 609
+	x1109 = @nth(2, x1110, x1112).
+-^------------------------------
+Warning: Variable x60 only occurs once in file formulog.dl at line 646
+	func_sig_(F, Params_and_types, x60, x61), 
+--------------------------------^-----------
+Warning: Variable x61 only occurs once in file formulog.dl at line 646
+	func_sig_(F, Params_and_types, x60, x61), 
+-------------------------------------^------
+Warning: Variable x1133 only occurs once in file formulog.dl at line 651
+	x1133 = @nth(1, x1137, x1139).
+-^------------------------------
+Warning: Variable E only occurs once in file formulog.dl at line 653
+input_synth_entity_helper_bbf_(Env, Rest) :- sup_81_1_(E, Env, L, Rest, T).
+-------------------------------------------------------^--------------------
+Warning: Variable L only occurs once in file formulog.dl at line 653
+input_synth_entity_helper_bbf_(Env, Rest) :- sup_81_1_(E, Env, L, Rest, T).
+---------------------------------------------------------------^------------
+Warning: Variable T only occurs once in file formulog.dl at line 653
+input_synth_entity_helper_bbf_(Env, Rest) :- sup_81_1_(E, Env, L, Rest, T).
+------------------------------------------------------------------------^---
+Warning: Variable x97 only occurs once in file formulog.dl at line 689
+	func_sig_(x1157, Sig, U, x97), 
+--------------------------^------
+Warning: Variable E only occurs once in file formulog.dl at line 696
+input_env_wf_b_(Env) :- sup_60_0_(E, Env, X).
+----------------------------------^-----------
+Warning: Variable X only occurs once in file formulog.dl at line 696
+input_env_wf_b_(Env) :- sup_60_0_(E, Env, X).
+------------------------------------------^---
+Warning: Variable E only occurs once in file formulog.dl at line 698
+input_env_wf_b_(Env) :- sup_64_0_(E, Env).
+----------------------------------^--------
+Warning: Variable Elts only occurs once in file formulog.dl at line 700
+input_env_wf_b_(Env) :- sup_70_1_(Elts, Env, T).
+----------------------------------^--------------
+Warning: Variable T only occurs once in file formulog.dl at line 700
+input_env_wf_b_(Env) :- sup_70_1_(Elts, Env, T).
+---------------------------------------------^---
+Warning: Variable E only occurs once in file formulog.dl at line 702
+input_env_wf_b_(Env) :- sup_52_0_(E, Env).
+----------------------------------^--------
+Warning: Variable E only occurs once in file formulog.dl at line 706
+input_env_wf_b_(Env) :- sup_54_0_(E, Env).
+----------------------------------^--------
+Warning: Variable E only occurs once in file formulog.dl at line 712
+input_env_wf_b_(Env) :- sup_55_0_(E, Env).
+----------------------------------^--------
+Warning: Variable Vs only occurs once in file formulog.dl at line 716
+input_env_wf_b_(Env) :- sup_57_0_(Env, Vs).
+---------------------------------------^----
+Warning: Variable x87 only occurs once in file formulog.dl at line 718
+input_env_wf_b_(Env) :- sup_75_0_(x87, Env).
+----------------------------------^----------
+Warning: Variable x1167 only occurs once in file formulog.dl at line 729
+	x1167 = @nth(0, x1168, x1170).
+-^------------------------------
+Warning: Variable x1219 only occurs once in file formulog.dl at line 846
+	x1219 = @nth(0, x1220, x1222).
+-^------------------------------
+Warning: Variable F only occurs once in file formulog.dl at line 861
+input_synth_app_helper_bbbbbf_(Env, Params, Es, Typs, @expr_3928()) :- sup_63_0_(Env, Es, F, Params, Typs, U).
+------------------------------------------------------------------------------------------^--------------------
+Warning: Variable U only occurs once in file formulog.dl at line 861
+input_synth_app_helper_bbbbbf_(Env, Params, Es, Typs, @expr_3928()) :- sup_63_0_(Env, Es, F, Params, Typs, U).
+-----------------------------------------------------------------------------------------------------------^---
+Warning: Variable T only occurs once in file formulog.dl at line 863
+input_synth_app_helper_bbbbbf_(Env, Xs, Es, Ts, @expr_3950(X, Sin, E)) :- sup_79_2_(E, Env, Es, Sin, T, Ts, X, Xs).
+-----------------------------------------------------------------------------------------------------^--------------
+Warning: Variable E only occurs once in file formulog.dl at line 884
+input_check_bbb_(Env, E1, T1) :- sup_66_0_(E, E1, E2, Env, T, T1, T2).
+-------------------------------------------^---------------------------
+Warning: Variable E2 only occurs once in file formulog.dl at line 884
+input_check_bbb_(Env, E1, T1) :- sup_66_0_(E, E1, E2, Env, T, T1, T2).
+--------------------------------------------------^--------------------
+Warning: Variable T only occurs once in file formulog.dl at line 884
+input_check_bbb_(Env, E1, T1) :- sup_66_0_(E, E1, E2, Env, T, T1, T2).
+-----------------------------------------------------------^-----------
+Warning: Variable T2 only occurs once in file formulog.dl at line 884
+input_check_bbb_(Env, E1, T1) :- sup_66_0_(E, E1, E2, Env, T, T1, T2).
+------------------------------------------------------------------^----
+Warning: Variable E only occurs once in file formulog.dl at line 886
+input_check_bbb_(Env, E1, @expr_3939()) :- sup_67_0_(E, E1, E2, E3, Env).
+-----------------------------------------------------^--------------------
+Warning: Variable E2 only occurs once in file formulog.dl at line 886
+input_check_bbb_(Env, E1, @expr_3939()) :- sup_67_0_(E, E1, E2, E3, Env).
+------------------------------------------------------------^-------------
+Warning: Variable E3 only occurs once in file formulog.dl at line 886
+input_check_bbb_(Env, E1, @expr_3939()) :- sup_67_0_(E, E1, E2, E3, Env).
+----------------------------------------------------------------^---------
+Warning: Variable E only occurs once in file formulog.dl at line 888
+input_check_bbb_(Env, E2, T2) :- sup_66_1_(E, E2, Env, T, T2).
+-------------------------------------------^-------------------
+Warning: Variable T only occurs once in file formulog.dl at line 888
+input_check_bbb_(Env, E2, T2) :- sup_66_1_(E, E2, Env, T, T2).
+-------------------------------------------------------^-------
+Warning: Variable E only occurs once in file formulog.dl at line 890
+input_check_bbb_(Env, E1, @expr_3932()) :- sup_69_0_(E, E1, Env, T).
+-----------------------------------------------------^---------------
+Warning: Variable T only occurs once in file formulog.dl at line 890
+input_check_bbb_(Env, E1, @expr_3932()) :- sup_69_0_(E, E1, Env, T).
+-----------------------------------------------------------------^---
+Warning: Variable E only occurs once in file formulog.dl at line 894
+input_check_bbb_(Env, E1, @expr_3939()) :- sup_43_0_(E, E1, E2, E3, Env, T).
+-----------------------------------------------------^-----------------------
+Warning: Variable E2 only occurs once in file formulog.dl at line 894
+input_check_bbb_(Env, E1, @expr_3939()) :- sup_43_0_(E, E1, E2, E3, Env, T).
+------------------------------------------------------------^----------------
+Warning: Variable E3 only occurs once in file formulog.dl at line 894
+input_check_bbb_(Env, E1, @expr_3939()) :- sup_43_0_(E, E1, E2, E3, Env, T).
+----------------------------------------------------------------^------------
+Warning: Variable T only occurs once in file formulog.dl at line 894
+input_check_bbb_(Env, E1, @expr_3939()) :- sup_43_0_(E, E1, E2, E3, Env, T).
+-------------------------------------------------------------------------^---
+Warning: Variable F only occurs once in file formulog.dl at line 896
+input_check_bbb_(Env, E, Ty) :- sup_23_0_(E, Env, F, Ty).
+--------------------------------------------------^-------
+Warning: Variable E only occurs once in file formulog.dl at line 900
+input_check_bbb_(@expr_3951(E1, Env), E2, T) :- sup_43_1_(E, E1, E2, E3, Env, T).
+----------------------------------------------------------^-----------------------
+Warning: Variable E3 only occurs once in file formulog.dl at line 900
+input_check_bbb_(@expr_3951(E1, Env), E2, T) :- sup_43_1_(E, E1, E2, E3, Env, T).
+---------------------------------------------------------------------^------------
+Warning: Variable E only occurs once in file formulog.dl at line 902
+input_check_bbb_(@expr_3935(E1, Env), E3, T) :- sup_43_2_(E, E1, E3, Env, T).
+----------------------------------------------------------^-------------------
+Warning: Variable E only occurs once in file formulog.dl at line 904
+input_check_bbb_(@expr_3934(X, T, Env), E2, U) :- sup_44_1_(E, E2, Env, T, U, X).
+------------------------------------------------------------^---------------------
+Warning: Variable Es only occurs once in file formulog.dl at line 906
+input_check_bbb_(Env, E, T2) :- sup_79_1_(E, Env, Es, Sin, T, T2, Ts, X, Xs).
+--------------------------------------------------^---------------------------
+Warning: Variable Sin only occurs once in file formulog.dl at line 906
+input_check_bbb_(Env, E, T2) :- sup_79_1_(E, Env, Es, Sin, T, T2, Ts, X, Xs).
+------------------------------------------------------^-----------------------
+Warning: Variable T only occurs once in file formulog.dl at line 906
+input_check_bbb_(Env, E, T2) :- sup_79_1_(E, Env, Es, Sin, T, T2, Ts, X, Xs).
+-----------------------------------------------------------^------------------
+Warning: Variable Ts only occurs once in file formulog.dl at line 906
+input_check_bbb_(Env, E, T2) :- sup_79_1_(E, Env, Es, Sin, T, T2, Ts, X, Xs).
+------------------------------------------------------------------^-----------
+Warning: Variable X only occurs once in file formulog.dl at line 906
+input_check_bbb_(Env, E, T2) :- sup_79_1_(E, Env, Es, Sin, T, T2, Ts, X, Xs).
+----------------------------------------------------------------------^-------
+Warning: Variable Xs only occurs once in file formulog.dl at line 906
+input_check_bbb_(Env, E, T2) :- sup_79_1_(E, Env, Es, Sin, T, T2, Ts, X, Xs).
+-------------------------------------------------------------------------^----
+Warning: Variable E1 only occurs once in file formulog.dl at line 908
+input_check_bbb_(@expr_3952(T2, X, Y, Env, Clean), E3, T2) :- sup_56_2_(Clean, E1, E2, E3, Env, T2, X, Y).
+-------------------------------------------------------------------------------^---------------------------
+Warning: Variable E2 only occurs once in file formulog.dl at line 908
+input_check_bbb_(@expr_3952(T2, X, Y, Env, Clean), E3, T2) :- sup_56_2_(Clean, E1, E2, E3, Env, T2, X, Y).
+-----------------------------------------------------------------------------------^-----------------------
+Warning: Variable E only occurs once in file formulog.dl at line 912
+input_check_bbb_(Env, E1, T1) :- sup_65_0_(E, E1, Env, T, T1).
+-------------------------------------------^-------------------
+Warning: Variable T only occurs once in file formulog.dl at line 912
+input_check_bbb_(Env, E1, T1) :- sup_65_0_(E, E1, Env, T, T1).
+-------------------------------------------------------^-------
+Warning: Variable E1 only occurs once in file formulog.dl at line 914
+input_synth_bbf_(Env, E2) :- sup_59_1_(E1, E2, Env, T1).
+---------------------------------------^-----------------
+Warning: Variable T1 only occurs once in file formulog.dl at line 914
+input_synth_bbf_(Env, E2) :- sup_59_1_(E1, E2, Env, T1).
+----------------------------------------------------^----
+Warning: Variable Vrest only occurs once in file formulog.dl at line 916
+input_synth_bbf_(Env, @expr_3938(V)) :- sup_76_0_(Env, V, Vrest).
+----------------------------------------------------------^-------
+Warning: Variable E2 only occurs once in file formulog.dl at line 918
+input_synth_bbf_(Env, E1) :- sup_56_0_(E1, E2, E3, Env, X, Y).
+-------------------------------------------^-------------------
+Warning: Variable E3 only occurs once in file formulog.dl at line 918
+input_synth_bbf_(Env, E1) :- sup_56_0_(E1, E2, E3, Env, X, Y).
+-----------------------------------------------^---------------
+Warning: Variable X only occurs once in file formulog.dl at line 918
+input_synth_bbf_(Env, E1) :- sup_56_0_(E1, E2, E3, Env, X, Y).
+--------------------------------------------------------^------
+Warning: Variable Y only occurs once in file formulog.dl at line 918
+input_synth_bbf_(Env, E1) :- sup_56_0_(E1, E2, E3, Env, X, Y).
+-----------------------------------------------------------^---
+Warning: Variable E only occurs once in file formulog.dl at line 920
+input_synth_bbf_(@expr_3935(E1, Env), E3) :- sup_67_2_(E, E1, E3, Env, T2).
+-------------------------------------------------------^--------------------
+Warning: Variable T2 only occurs once in file formulog.dl at line 920
+input_synth_bbf_(@expr_3935(E1, Env), E3) :- sup_67_2_(E, E1, E3, Env, T2).
+-----------------------------------------------------------------------^----
+Warning: Variable E only occurs once in file formulog.dl at line 922
+input_synth_bbf_(Env, E1) :- sup_58_0_(E, E1, E2, Env, X).
+---------------------------------------^-------------------
+Warning: Variable E2 only occurs once in file formulog.dl at line 922
+input_synth_bbf_(Env, E1) :- sup_58_0_(E, E1, E2, Env, X).
+----------------------------------------------^------------
+Warning: Variable X only occurs once in file formulog.dl at line 922
+input_synth_bbf_(Env, E1) :- sup_58_0_(E, E1, E2, Env, X).
+-------------------------------------------------------^---
+Warning: Variable L only occurs once in file formulog.dl at line 924
+input_synth_bbf_(Env, E) :- sup_68_0_(E, Env, L, Select).
+----------------------------------------------^-----------
+Warning: Variable Select only occurs once in file formulog.dl at line 924
+input_synth_bbf_(Env, E) :- sup_68_0_(E, Env, L, Select).
+-------------------------------------------------^--------
+Warning: Variable E2 only occurs once in file formulog.dl at line 926
+input_synth_bbf_(Env, E1) :- sup_59_0_(E1, E2, Env).
+-------------------------------------------^---------
+Warning: Variable E only occurs once in file formulog.dl at line 928
+input_synth_bbf_(Env, E1) :- sup_44_0_(E, E1, E2, Env, U, X).
+---------------------------------------^----------------------
+Warning: Variable E2 only occurs once in file formulog.dl at line 928
+input_synth_bbf_(Env, E1) :- sup_44_0_(E, E1, E2, Env, U, X).
+----------------------------------------------^---------------
+Warning: Variable U only occurs once in file formulog.dl at line 928
+input_synth_bbf_(Env, E1) :- sup_44_0_(E, E1, E2, Env, U, X).
+-------------------------------------------------------^------
+Warning: Variable X only occurs once in file formulog.dl at line 928
+input_synth_bbf_(Env, E1) :- sup_44_0_(E, E1, E2, Env, U, X).
+----------------------------------------------------------^---
+Warning: Variable E2 only occurs once in file formulog.dl at line 930
+input_synth_bbf_(Env, E1) :- sup_71_0_(E1, E2, E3, Env, X).
+-------------------------------------------^----------------
+Warning: Variable E3 only occurs once in file formulog.dl at line 930
+input_synth_bbf_(Env, E1) :- sup_71_0_(E1, E2, E3, Env, X).
+-----------------------------------------------^------------
+Warning: Variable X only occurs once in file formulog.dl at line 930
+input_synth_bbf_(Env, E1) :- sup_71_0_(E1, E2, E3, Env, X).
+--------------------------------------------------------^---
+Warning: Variable E only occurs once in file formulog.dl at line 932
+input_synth_bbf_(Env, E1) :- sup_53_0_(E, E1, E2, Env).
+---------------------------------------^----------------
+Warning: Variable E2 only occurs once in file formulog.dl at line 932
+input_synth_bbf_(Env, E1) :- sup_53_0_(E, E1, E2, Env).
+----------------------------------------------^---------
+Warning: Variable E1 only occurs once in file formulog.dl at line 934
+input_synth_bbf_(@expr_3953(U1, X, Env), Bind_body) :- sup_71_1_(Bind_body, E1, E2, E3, Env, U1, X).
+----------------------------------------------------------------------------^------------------------
+Warning: Variable E2 only occurs once in file formulog.dl at line 934
+input_synth_bbf_(@expr_3953(U1, X, Env), Bind_body) :- sup_71_1_(Bind_body, E1, E2, E3, Env, U1, X).
+--------------------------------------------------------------------------------^--------------------
+Warning: Variable E3 only occurs once in file formulog.dl at line 934
+input_synth_bbf_(@expr_3953(U1, X, Env), Bind_body) :- sup_71_1_(Bind_body, E1, E2, E3, Env, U1, X).
+------------------------------------------------------------------------------------^----------------
+Warning: Variable E only occurs once in file formulog.dl at line 936
+input_synth_bbf_(@expr_3946(X, T1, Env), E2) :- sup_58_1_(E, E1, E2, Env, T1, X).
+----------------------------------------------------------^-----------------------
+Warning: Variable E1 only occurs once in file formulog.dl at line 936
+input_synth_bbf_(@expr_3946(X, T1, Env), E2) :- sup_58_1_(E, E1, E2, Env, T1, X).
+-------------------------------------------------------------^--------------------
+Warning: Variable E only occurs once in file formulog.dl at line 938
+input_synth_bbf_(Env, E2) :- sup_53_1_(E, E2, Env, U1).
+---------------------------------------^----------------
+Warning: Variable U1 only occurs once in file formulog.dl at line 938
+input_synth_bbf_(Env, E2) :- sup_53_1_(E, E2, Env, U1).
+---------------------------------------------------^----
+Warning: Variable Clean only occurs once in file formulog.dl at line 940
+input_synth_bbf_(Env, E2) :- sup_56_1_(Clean, E1, E2, E3, Env, X, Y).
+---------------------------------------^------------------------------
+Warning: Variable E1 only occurs once in file formulog.dl at line 940
+input_synth_bbf_(Env, E2) :- sup_56_1_(Clean, E1, E2, E3, Env, X, Y).
+----------------------------------------------^-----------------------
+Warning: Variable E3 only occurs once in file formulog.dl at line 940
+input_synth_bbf_(Env, E2) :- sup_56_1_(Clean, E1, E2, E3, Env, X, Y).
+------------------------------------------------------^---------------
+Warning: Variable X only occurs once in file formulog.dl at line 940
+input_synth_bbf_(Env, E2) :- sup_56_1_(Clean, E1, E2, E3, Env, X, Y).
+---------------------------------------------------------------^------
+Warning: Variable Y only occurs once in file formulog.dl at line 940
+input_synth_bbf_(Env, E2) :- sup_56_1_(Clean, E1, E2, E3, Env, X, Y).
+------------------------------------------------------------------^---
+Warning: Variable E2 only occurs once in file formulog.dl at line 942
+input_synth_bbf_(Env, E1) :- sup_62_0_(E1, E2, E3, Env, X).
+-------------------------------------------^----------------
+Warning: Variable E3 only occurs once in file formulog.dl at line 942
+input_synth_bbf_(Env, E1) :- sup_62_0_(E1, E2, E3, Env, X).
+-----------------------------------------------^------------
+Warning: Variable X only occurs once in file formulog.dl at line 942
+input_synth_bbf_(Env, E1) :- sup_62_0_(E1, E2, E3, Env, X).
+--------------------------------------------------------^---
+Warning: Variable L only occurs once in file formulog.dl at line 944
+input_synth_bbf_(Env, E) :- sup_81_0_(E, Env, L, Rest).
+----------------------------------------------^---------
+Warning: Variable Rest only occurs once in file formulog.dl at line 944
+input_synth_bbf_(Env, E) :- sup_81_0_(E, Env, L, Rest).
+-------------------------------------------------^------
+Warning: Variable E only occurs once in file formulog.dl at line 946
+input_synth_bbf_(@expr_3951(E1, Env), E2) :- sup_67_1_(E, E1, E2, E3, Env).
+-------------------------------------------------------^--------------------
+Warning: Variable E3 only occurs once in file formulog.dl at line 946
+input_synth_bbf_(@expr_3951(E1, Env), E2) :- sup_67_1_(E, E1, E2, E3, Env).
+------------------------------------------------------------------^---------
+Warning: Variable E1 only occurs once in file formulog.dl at line 948
+input_synth_bbf_(@expr_3953(U1, X, Env), Bind_body) :- sup_62_1_(Bind_body, E1, E2, E3, Env, U1, X).
+----------------------------------------------------------------------------^------------------------
+Warning: Variable E2 only occurs once in file formulog.dl at line 948
+input_synth_bbf_(@expr_3953(U1, X, Env), Bind_body) :- sup_62_1_(Bind_body, E1, E2, E3, Env, U1, X).
+--------------------------------------------------------------------------------^--------------------
+Warning: Variable E3 only occurs once in file formulog.dl at line 948
+input_synth_bbf_(@expr_3953(U1, X, Env), Bind_body) :- sup_62_1_(Bind_body, E1, E2, E3, Env, U1, X).
+------------------------------------------------------------------------------------^----------------
+Warning: Variable U only occurs once in file formulog.dl at line 950
+input_synth_bbf_(Env, E) :- sup_42_0_(E, Env, U).
+----------------------------------------------^---
+Warning: Variable T only occurs once in file formulog.dl at line 1255
+input_synth_list_helper_bbf_(Env, Vrest) :- sup_76_1_(Env, T, V, Vrest).
+-----------------------------------------------------------^-------------
+Warning: Variable V only occurs once in file formulog.dl at line 1255
+input_synth_list_helper_bbf_(Env, Vrest) :- sup_76_1_(Env, T, V, Vrest).
+--------------------------------------------------------------^----------
+Warning: Variable x1376 only occurs once in file formulog.dl at line 1277
+	x1376 = @nth(0, x1377, x1379).
+-^------------------------------
+Warning: Variable Name only occurs once in file formulog.dl at line 1367
+input_type_wf_bb_(@expr_3928(), T) :- sup_39_0_(Name, T).
+------------------------------------------------^---------
+Warning: Variable T only occurs once in file formulog.dl at line 1369
+input_type_wf_bb_(Env, T1) :- sup_72_0_(Env, T, T1).
+---------------------------------------------^-------
+Warning: Variable E only occurs once in file formulog.dl at line 1371
+input_type_wf_bb_(Env, T) :- sup_69_1_(E, Env, T).
+---------------------------------------^-----------
+Warning: Variable x88 only occurs once in file formulog.dl at line 1373
+input_type_wf_bb_(Env, T) :- sup_47_0_(x88, Env, T).
+---------------------------------------^-------------
+Warning: Variable E1 only occurs once in file formulog.dl at line 1377
+input_type_wf_bb_(Env, U2) :- sup_62_2_(E1, E2, E3, Env, U2, X).
+----------------------------------------^------------------------
+Warning: Variable E2 only occurs once in file formulog.dl at line 1377
+input_type_wf_bb_(Env, U2) :- sup_62_2_(E1, E2, E3, Env, U2, X).
+--------------------------------------------^--------------------
+Warning: Variable E3 only occurs once in file formulog.dl at line 1377
+input_type_wf_bb_(Env, U2) :- sup_62_2_(E1, E2, E3, Env, U2, X).
+------------------------------------------------^----------------
+Warning: Variable X only occurs once in file formulog.dl at line 1377
+input_type_wf_bb_(Env, U2) :- sup_62_2_(E1, E2, E3, Env, U2, X).
+-------------------------------------------------------------^---
+Warning: Variable X only occurs once in file formulog.dl at line 1379
+input_type_wf_bb_(Env, T) :- sup_73_0_(Env, T, X).
+-----------------------------------------------^---
+Warning: Variable Es only occurs once in file formulog.dl at line 1381
+input_type_wf_bb_(Env, U2) :- sup_63_1_(Env, Es, F, U2).
+---------------------------------------------^-----------
+Warning: Variable F only occurs once in file formulog.dl at line 1381
+input_type_wf_bb_(Env, U2) :- sup_63_1_(Env, Es, F, U2).
+-------------------------------------------------^-------
+Warning: Variable E only occurs once in file formulog.dl at line 1383
+input_type_wf_bb_(Env, T2) :- sup_79_0_(E, Env, Es, Sin, T, T2, Ts, X, Xs).
+----------------------------------------^-----------------------------------
+Warning: Variable Es only occurs once in file formulog.dl at line 1383
+input_type_wf_bb_(Env, T2) :- sup_79_0_(E, Env, Es, Sin, T, T2, Ts, X, Xs).
+------------------------------------------------^---------------------------
+Warning: Variable Sin only occurs once in file formulog.dl at line 1383
+input_type_wf_bb_(Env, T2) :- sup_79_0_(E, Env, Es, Sin, T, T2, Ts, X, Xs).
+----------------------------------------------------^-----------------------
+Warning: Variable T only occurs once in file formulog.dl at line 1383
+input_type_wf_bb_(Env, T2) :- sup_79_0_(E, Env, Es, Sin, T, T2, Ts, X, Xs).
+---------------------------------------------------------^------------------
+Warning: Variable Ts only occurs once in file formulog.dl at line 1383
+input_type_wf_bb_(Env, T2) :- sup_79_0_(E, Env, Es, Sin, T, T2, Ts, X, Xs).
+----------------------------------------------------------------^-----------
+Warning: Variable X only occurs once in file formulog.dl at line 1383
+input_type_wf_bb_(Env, T2) :- sup_79_0_(E, Env, Es, Sin, T, T2, Ts, X, Xs).
+--------------------------------------------------------------------^-------
+Warning: Variable Xs only occurs once in file formulog.dl at line 1383
+input_type_wf_bb_(Env, T2) :- sup_79_0_(E, Env, Es, Sin, T, T2, Ts, X, Xs).
+-----------------------------------------------------------------------^----
+Warning: Variable E only occurs once in file formulog.dl at line 1385
+input_type_wf_bb_(Env, T) :- sup_58_2_(E, Env, T).
+---------------------------------------^-----------
+Warning: Variable x107 only occurs once in file formulog.dl at line 1419
+	func_sig_(F, x107, x108, E), 
+--------------^----------------
+Warning: Variable x108 only occurs once in file formulog.dl at line 1419
+	func_sig_(F, x107, x108, E), 
+--------------------^----------
+Warning: Variable x0 only occurs once in file formulog.dl at line 1426
+CODEGEN_PROJECT_func_not_ok_0() :- func_not_ok_(x0).
+------------------------------------------------^----
+Warning: Variable x0 only occurs once in file formulog.dl at line 1427
+CODEGEN_PROJECT_type_not_ok_0() :- type_not_ok_(x0).
+------------------------------------------------^----
+[ 15%] Building CXX object CMakeFiles/flg.dir/src/functors.cpp.o
+[ 23%] Building CXX object CMakeFiles/flg.dir/src/main.cpp.o
+[ 30%] Building CXX object CMakeFiles/flg.dir/src/parser.cpp.o
+[ 38%] Building CXX object CMakeFiles/flg.dir/src/Symbol.cpp.o
+[ 46%] Building CXX object CMakeFiles/flg.dir/src/Term.cpp.o
+[ 53%] Building CXX object CMakeFiles/flg.dir/src/Type.cpp.o
+[ 61%] Building CXX object CMakeFiles/flg.dir/src/set.cpp.o
+[ 69%] Building CXX object CMakeFiles/flg.dir/src/smt_solver.cpp.o
+[ 76%] Building CXX object CMakeFiles/flg.dir/src/smt_shim.cpp.o
+[ 84%] Building CXX object CMakeFiles/flg.dir/src/smt_parser.cpp.o
+[ 92%] Building CXX object CMakeFiles/flg.dir/formulog.cpp.o
+[100%] Linking CXX executable flg
+[100%] Built target flg
+LOG:COMPILE;ELAPSED=69.35s;USER=136.17s;SYSTEM=4.74s;CPU=203%;MEM=1740836kb
+LOG:Execute command: timeout 1800 /usr/bin/time -f LOG:EXECUTE;ELAPSED=%es;USER=%Us;SYSTEM=%Ss;CPU=%P;MEM=%Mkb /home/ubuntu/benchmarks/dminor/bms/all-100/../../codegen/build/flg --dump-sizes --smt-stats --smt-solver-mode=push-pop -j 48 -D /home/ubuntu/benchmarks/dminor/bms/all-100/out -F /home/ubuntu/benchmarks/dminor/bms/all-100/facts --no-smt-double-check
+Parsing...
+Finished parsing (0.066s)
+Evaluating...
+Finished evaluating (99.760s)
+
+==================== SMT STATS ====================
+SMT calls: 95749
+SMT time (ms): 3.72746e+06
+SMT wait time (ms): 0
+SMT cache hits: 229804
+SMT cache misses: 355690
+SMT cache clears: 0
+SMT calls per solver: 2104,2114,2049,2053,2017,2017,2017,2000,2002,2028,2057,1987,2019,1986,1969,1972,2010,1981,1963,1994,1975,1966,1972,2003,1993,2019,2020,1961,1977,1997,1972,1946,1967,2015,1966,1971,1977,1959,1967,1988,1986,1962,1966,1961,1939,1980,2015,1990
+SMT time per solver (ms): 76716.8,77088.1,76896.8,79219.4,76680.9,76620.4,76484.3,76815.8,77039.5,76586.1,76748.5,77077,79310.7,79422.8,76829.4,76771.6,76714.1,76800.6,76785.3,77020.8,76906.3,79358.2,79386.3,76515.1,76897.5,76868.4,79712.6,76463.9,76670.9,77142.7,76349,76856.6,84337.4,76988.5,76761.6,76851.5,76999.2,76638.6,76902.2,76756.9,76868,76568,84990.9,76640,76440.8,76594.3,87491.8,76873.8
+
+==================== RELATION SIZES ====================
+labeled_pure: 200
+type_indicator_func: 200
+func_sig: 2700
+type_alias: 1504
+explore_exp: 14000
+explore_exps: 2000
+explore_typ: 9800
+sup_23_0: 2700
+sup_39_0: 1504
+size_change_graph: 300
+check: 103147
+env_wf: 32413
+input_check_bbb: 105747
+input_env_wf_b: 32913
+input_subtype_bbb: 93549
+input_synth_app_helper_bbbbbf: 25001
+input_synth_bbf: 103059
+input_synth_entity_helper_bbf: 4701
+input_synth_list_helper_bbf: 1101
+input_type_wf_bb: 122640
+subtype: 93549
+sup_41_0: 6400
+sup_42_0: 96847
+sup_42_1: 94447
+sup_43_0: 1600
+sup_43_1: 1600
+sup_43_2: 1600
+sup_44_0: 900
+sup_44_1: 900
+sup_45_0: 5000
+sup_46_0: 24413
+sup_47_0: 22800
+sup_48_0: 6701
+sup_49_0: 27710
+sup_50_0: 12704
+sup_51_0: 23312
+sup_52_0: 3909
+sup_53_0: 100
+sup_53_1: 100
+sup_54_0: 5414
+sup_55_0: 202
+sup_56_0: 700
+sup_56_1: 700
+sup_56_2: 700
+sup_57_0: 1101
+sup_57_1: 1101
+sup_58_0: 0
+sup_58_1: 0
+sup_58_2: 0
+sup_59_0: 603
+sup_59_1: 603
+sup_60_0: 33810
+sup_61_0: 700
+sup_62_0: 500
+sup_62_1: 500
+sup_62_2: 500
+sup_63_0: 11100
+sup_63_1: 11100
+sup_64_0: 0
+sup_65_0: 700
+sup_66_0: 21016
+sup_66_1: 20216
+sup_67_0: 600
+sup_67_1: 600
+sup_67_2: 600
+sup_68_0: 300
+sup_69_0: 20704
+sup_69_1: 20704
+sup_70_0: 1600
+sup_70_1: 1600
+sup_71_0: 500
+sup_71_1: 500
+sup_72_0: 93549
+sup_73_0: 28512
+sup_75_0: 4400
+sup_76_0: 0
+sup_76_1: 0
+sup_79_0: 14100
+sup_79_1: 14100
+sup_79_2: 14100
+sup_81_0: 3800
+sup_81_1: 3800
+synth: 100659
+synth_app_helper: 25001
+synth_entity_helper: 4701
+synth_list_helper: 1101
+type_wf: 121340
+may_not_terminate: 0
+type_not_ok: 0
+func_not_ok: 0
+prog_ok: 1
+[WORK] 14167490
+LOG:EXECUTE;ELAPSED=100.18s;USER=4226.02s;SYSTEM=33.34s;CPU=4251%;MEM=1217424kb
+LOG:Success!
