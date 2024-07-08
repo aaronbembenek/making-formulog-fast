@@ -20,7 +20,9 @@ import seaborn as sns
 
 import __main__ as main
 
-if hasattr(main, "__file__"):
+running_as_script = hasattr(main, "__file__")
+
+if running_as_script:
     import sys
     if len(sys.argv) != 3:
         print(f"usage: {sys.argv[0]} CSV_FILE TIMEOUT")
@@ -346,7 +348,7 @@ sns.set_theme()
 
 tex_fonts = {
     # Use LaTeX to write all text
-    # "text.usetex": True,
+    "text.usetex": not running_as_script,
     "font.family": "sans-serif",
     # Use 9pt font in plots
     "axes.labelsize": 9,
@@ -521,7 +523,7 @@ sns.set_theme()
 
 tex_fonts = {
     # Use LaTeX to write all text
-    # "text.usetex": True,
+    "text.usetex": not running_as_script,
     "font.family": "sans-serif",
     # Use 9pt font in plots
     "axes.labelsize": 9,
