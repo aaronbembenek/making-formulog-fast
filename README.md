@@ -3,7 +3,7 @@
 This repository contains the material for the artifact for the OOPSLA'24 paper [Making Formulog Fast: An Argument for Unconventional Datalog Evaluation](https://dl.acm.org/doi/10.1145/3689754) by Aaron Bembenek, Michael Greenberg, and Stephen Chong.
 The [official artifact on Zenodo](https://zenodo.org/records/13372573) was reviewed as being "Reusable" and "Reproducible," and was recognized as a [Distinguished Artifact](https://2024.splashcon.org/track/splash-2024-oopsla-artifacts#distinguished-artifacts).
 
-The two primary purposes for open sourcing this repository are:
+The two primary reasons for open sourcing this repository are:
 
 1. the repository includes the experimental infrastructure, results, and analysis for the scaling experiments reported in Section 5.3.4, which are not present in the reviewed artifact (check out the `scaling` branch of this repository); and
 2. the GitHub UI makes it easy to skim the artifact's material without downloading the Docker images (for example, you can easily examine the case study implementations in the `benchmarks/` directory).
